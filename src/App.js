@@ -1,5 +1,5 @@
 import HomePage from "./Page/Home/HomePage";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NavBarLogin from "./Components/Uitily/NavBarLogin";
 import Footer from "./Components/Uitily/Footer";
 import LoginPage from './Page/Auth/LoginPage';
@@ -23,40 +23,40 @@ import UserAllAddressPage from './Page/User/UserAllAddressPage';
 import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
+
 function App() {
-  return (
-    <div className="font" >
-      <NavBarLogin />
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/allCategory" element={<AllCategoryPage />} />
-          <Route path="/allBrand" element={<AllBrandPage />} />
-          <Route path="/products" element={<ShopProductsPage />} />
-          <Route path="/products/:id" element={<ProductDetailsPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/order/payMethod" element={<ChoosePayMethodPage />} />
-          <Route path="/admin/allProducts" element={<AdminAllProductsPage />} />
-          <Route path="/admin/allOrders" element={<AdminAllOrdersPage />} />
-          <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage />} />
-          <Route path="/admin/addBrand" element={<AdminAddBrandPage />} />
-          <Route path="/admin/addCategory" element={<AdminAddCategoryPage />} />
-          <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage />} />
-          <Route path="/admin/addProduct" element={<AdminAddProductsPage />} />
-          <Route path="/user/allOrders" element={<UserAllOrdersPage />} />
-          <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage />} />
-          <Route path="/user/addresses" element={<UserAllAddressPage />} />
-          <Route path="/user/add-address" element={<UserAddAddressPage />} />
-          <Route path="/user/edit-address" element={<UserEditAddressPage />} />  
-          <Route path="/user/profile" element={<UserProfilePage />} />  
-          
-        </Routes>
-      </BrowserRouter>
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="font">
+            <NavBarLogin/>
+            <BrowserRouter>
+                <Routes>
+                    <Route index element={<HomePage/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
+                    <Route path="/allCategory" element={<AllCategoryPage/>}/>
+                    <Route path="/allBrands" element={<AllBrandPage/>}/>
+                    <Route path="/products" element={<ShopProductsPage/>}/>
+                    <Route path="/products/:id" element={<ProductDetailsPage/>}/>
+                    <Route path="/cart" element={<CartPage/>}/>
+                    <Route path="/order/payMethod" element={<ChoosePayMethodPage/>}/>
+                    <Route path="/admin/allProducts" element={<AdminAllProductsPage/>}/>
+                    <Route path="/admin/allOrders" element={<AdminAllOrdersPage/>}/>
+                    <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
+                    <Route path="/admin/addBrand" element={<AdminAddBrandPage/>}/>
+                    <Route path="/admin/addCategory" element={<AdminAddCategoryPage/>}/>
+                    <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
+                    <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
+                    <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
+                    <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
+                    <Route path="/user/addresses" element={<UserAllAddressPage/>}/>
+                    <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
+                    <Route path="/user/edit-address" element={<UserEditAddressPage/>}/>
+                    <Route path="/user/profile" element={<UserProfilePage/>}/>
+                </Routes>
+            </BrowserRouter>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;

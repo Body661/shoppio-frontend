@@ -3,7 +3,7 @@ import HomeCategory from '../../Components/Home/HomeCategory';
 import CardProductsContainer from '../../Components/Products/CardProductsContainer';
 import Slider from '../../Components/Home/Slider';
 import DiscountSection from '../../Components/Home/DiscountSection';
-import BrandFeatured from '../../Components/Brand/BrandFeatured';
+import HomeBrands from "../../Components/Home/HomeBrands";
 
 const HomePage = () => {
     return (
@@ -14,8 +14,7 @@ const HomePage = () => {
             <CardProductsContainer title="Best seller" btnTitle="More" pathText="/products"/>
             <DiscountSection/>
             <CardProductsContainer title="Newest clothes" btnTitle="More" pathText="/products"/>
-            <BrandFeatured title="Famous brands" btnTitle="More" pathText="/allBrand"/>
-
+            <HomeBrands title="Brands" btnTitle="More" path="/allBrands"/>
         </div>
     )
 }
