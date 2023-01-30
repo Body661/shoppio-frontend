@@ -1,4 +1,4 @@
-import {GET_ALL_BRANDS, CREATE_BRAND} from '../types'
+import {GET_ALL_BRANDS, CREATE_BRAND, GET_ONE_BRAND} from '../types'
 import useGetData from '../../customHooks/useGetData'
 import {useInsertDataWithImage} from '../../customHooks/useInsertData'
 
@@ -37,6 +37,22 @@ export const getAllBrandsPage = (page) => async (dispatch) => {
     }
 }
 
+export const getOneBrand = (id) => async (dispatch) => {
+    try {
+        const response = await useGetData(`/api/brands/${id}`);
+
+        dispatch({
+            type: GET_ONE_BRAND,
+            payload: {brand: response, error: null},
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ONE_BRAND,
+            payload: {brand: [], error: `Error: ${e}`},
+        })
+    }
+}
 
 //insert brand with pagination
 export const createBrand = (formData) => async (dispatch) => {
@@ -44,13 +60,13 @@ export const createBrand = (formData) => async (dispatch) => {
         const response = await useInsertDataWithImage(`/api/brands`, formData);
         dispatch({
             type: CREATE_BRAND,
-            payload: {brands: response, error: null},
+            payload: {brand: response, error: null},
         })
 
     } catch (e) {
         dispatch({
             type: CREATE_BRAND,
-            payload: {brands: [], error: `Error: ${e}`,},
+            payload: {brand: [], error: `Error: ${e}`,},
         })
     }
 }

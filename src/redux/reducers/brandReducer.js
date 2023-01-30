@@ -1,4 +1,4 @@
-import {GET_ALL_BRANDS, CREATE_BRAND} from '../types'
+import {GET_ALL_BRANDS, CREATE_BRAND, GET_ONE_BRAND} from '../types'
 
 const initState = {
     brands: [],
@@ -14,9 +14,15 @@ const brandReducer = (state = initState, action) => {
                 loading: false,
                 error: action.payload.error
             }
+        case GET_ONE_BRAND:
+            return {
+                brand: action.payload.brand,
+                loading: false,
+                error: action.payload.error
+            }
         case CREATE_BRAND:
             return {
-                brands: action.payload.brands,
+                brands: action.payload.brand,
                 loading: false,
                 error: action.payload.error
             }
