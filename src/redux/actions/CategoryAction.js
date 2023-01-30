@@ -1,4 +1,4 @@
-import {CREATE_CATEGORY, GET_ALL_CATEGORIES} from '../types'
+import {CREATE_CATEGORY, GET_ALL_CATEGORIES, GET_ONE_CATEGORY} from '../types'
 import useGetData from "../../customHooks/useGetData";
 import {useInsertDataWithImage} from "../../customHooks/useInsertData";
 
@@ -33,6 +33,24 @@ export const getAllCategoriesPage = (page) => async (dispatch) => {
         })
     }
 }
+
+export const getOneCategory = (id) => async (dispatch) => {
+    try {
+        const response = await useGetData(`/api/categories/${id}`);
+
+        dispatch({
+            type: GET_ONE_CATEGORY,
+            payload: {category: response, error: null},
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ONE_CATEGORY,
+            payload: {category: [], error: `Error: ${e}`},
+        })
+    }
+}
+
 
 export const createCategory = (data) => async (dispatch) => {
     try {

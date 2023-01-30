@@ -2,6 +2,7 @@ import {GET_ALL_BRANDS, CREATE_BRAND, GET_ONE_BRAND} from '../types'
 
 const initState = {
     brands: [],
+    brand: [],
     loading: true,
     error: false,
 }
