@@ -25,7 +25,7 @@ const HomeBrands = ({title, btnTitle, path}) => {
                 }
 
                 {
-                    !loading && error && !brands.data && <h4 className="error">Something went wrong</h4>
+                    !loading && error && !brands?.data && <h4 className="error">Something went wrong</h4>
                 }
             </Row>
         </Container>

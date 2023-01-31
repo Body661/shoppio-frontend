@@ -1,4 +1,3 @@
-import React from 'react'
 import {Col, Row, Spinner} from 'react-bootstrap'
 import AddCategoryHook from "../../hook/category/addCategoryHook";
 import {ToastContainer} from "react-toastify";

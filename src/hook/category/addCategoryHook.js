@@ -10,7 +10,7 @@ const AddCategoryHook = () => {
     const dispatch = useDispatch();
     const [img, setImg] = useState(avatar)
     const [name, setName] = useState('')
-    const [selectedFile, setSelectedFile] = useState(null)
+    const [selectedFile, setSelectedFile] = useState('')
     const [loading, setLoading] = useState(true)
     const [isPress, setIsPress] = useState(false)
 
@@ -32,16 +32,17 @@ const AddCategoryHook = () => {
     //save data in database
     const handelSubmit = async (event) => {
         event.preventDefault();
-        if (name.trim() === "" || selectedFile === null) {
+        if (name?.trim() === "" || selectedFile === null) {
             notify('Please fill in all required information', "warn");
             return;
         }
         const formData = new FormData();
         formData.append("name", name)
-        formData.append("image", selectedFile)
+        formData.append("img", selectedFile)
 
         setLoading(true)
         setIsPress(true)
+
 
         await dispatch(createCategory(formData))
         setLoading(false)

@@ -1,18 +1,23 @@
 import React from 'react'
 import {Container} from 'react-bootstrap'
 import CategoryHeader from '../../Components/Category/CategoryHeader'
-import CardProductsContainer from '../../Components/Products/CardProductsContainer'
 import ProductDetails from '../../Components/Products/ProductDetails'
 import RateContainer from '../../Components/Rate/RateContainer'
+import {useParams} from "react-router-dom";
+import ViewProductsDetailsHook from "../../hook/products/productDetailsHook";
+import ProductsContainer from "../../Components/Products/ProductsContainer";
 
 const ProductDetailsPage = () => {
+    const {id} = useParams();
+    const [, , products] = ViewProductsDetailsHook(id);
+
     return (
         <div style={{minHeight: '670px'}}>
             <CategoryHeader/>
             <Container>
                 <ProductDetails/>
                 <RateContainer/>
-                <CardProductsContainer title="Products you may like"/>
+                <ProductsContainer products={products} title="Products you may like"/>
             </Container>
         </div>
     )

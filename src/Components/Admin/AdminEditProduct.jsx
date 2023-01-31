@@ -1,23 +1,27 @@
-import React from 'react'
-import {Row, Col} from 'react-bootstrap'
+import {useParams} from 'react-router-dom';
+import {Row, Col} from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 import add from '../../images/add.png'
-import {ToastContainer} from "react-toastify";
-import {CompactPicker} from "react-color";
-import MultiImageInput from "react-multiple-image-input";
-import AdminAddProductsHook from "../../hook/products/addProductHook";
+import MultiImageInput from 'react-multiple-image-input';
 
-const AdminAddProducts = () => {
+import {CompactPicker} from 'react-color'
+import {ToastContainer} from 'react-toastify';
+import AdminEditProductsHook from './../../hook/products/editProductHook';
 
-    const [onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefore, onChangeProdName, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSelectCategory, handelSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] =
-        AdminAddProductsHook();
+const AdminEditProducts = () => {
+    const {id} = useParams();
 
+    const [CatID, BrandID, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefore, onChangeProdName, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSelectCategory, handelSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] =
+        AdminEditProductsHook(id);
+
+    console.log()
     return (
         <div>
             <Row className="justify-content-start ">
-                <div className="admin-content-text pb-4">Add new product</div>
+                <div className="admin-content-text pb-4"> Update product - {prodName}</div>
                 <Col sm="8">
                     <div className="text-form pb-2"> Product images</div>
+
 
                     <MultiImageInput
                         images={images}
@@ -65,13 +69,14 @@ const AdminAddProducts = () => {
                     />
                     <select
                         name="cat"
+                        value={CatID}
                         onChange={onSelectCategory}
                         className="select input-form-area mt-3 px-2 ">
                         <option value="0">Main category</option>
                         {
-                            category.data ? (category.data.map((item, index) => {
+                            category.data ? (category.data.map((item) => {
                                 return (
-                                    <option key={index} value={item._id}>{item.name}</option>
+                                    <option value={item._id}>{item.name}</option>
                                 )
                             })) : null
 
@@ -89,19 +94,20 @@ const AdminAddProducts = () => {
                     />
                     <select
                         name="brand"
+                        value={BrandID}
                         onChange={onSelectBrand}
                         className="select input-form-area mt-3 px-2 ">
-                        <option value="0">Choose brand</option>
+                        <option value="0">Select Brand</option>
                         {
-                            brand.data ? (brand.data.map((item, index) => {
+                            brand.data ? (brand.data.map((item) => {
                                 return (
-                                    <option key={index} value={item._id}>{item.name}</option>
+                                    <option value={item._id}>{item.name}</option>
                                 )
                             })) : null
 
                         }
                     </select>
-                    <div className="text-form mt-3 "> Available Colors</div>
+                    <div className="text-form mt-3 ">Available Colors</div>
                     <div className="mt-1 d-flex">
                         {
                             colors.length >= 1 ? (
@@ -128,7 +134,7 @@ const AdminAddProducts = () => {
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save</button>
+                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save Changes</button>
                 </Col>
             </Row>
             <ToastContainer/>
@@ -136,4 +142,4 @@ const AdminAddProducts = () => {
     )
 }
 
-export default AdminAddProducts
+export default AdminEditProducts

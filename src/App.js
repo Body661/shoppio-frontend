@@ -23,6 +23,8 @@ import UserAllAddressPage from './Page/User/UserAllAddressPage';
 import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
+import AdminEditProduct from "./Components/Admin/AdminEditProduct";
+import AdminEditProductsPage from "./Page/Admin/AdminEditProductPage";
 
 function App() {
     return (
@@ -46,6 +48,7 @@ function App() {
                     <Route path="/admin/addCategory" element={<AdminAddCategoryPage/>}/>
                     <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
                     <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
+                    <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
                     <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
                     <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
                     <Route path="/user/addresses" element={<UserAllAddressPage/>}/>

@@ -4,13 +4,13 @@ import SubTitle from '../Uitily/SubTitle'
 import CategoryCard from '../Category/CategoryCard';
 import HomeCategoryHook from "../../hook/category/homeCategoryHook";
 
-const HomeCategory = () => {
+const HomeCategory = ({title, btnTitle, path}) => {
 
     const [categories, loading, error] = HomeCategoryHook();
 
     return (
         <Container>
-            <SubTitle title="Categories" btnTitle="more" pathText="/allCategory"/>
+            <SubTitle title={title} btnTitle={btnTitle} pathText={path}/>
             <Row className='my-2 d-flex justify-content-between'>
                 {
                     loading && !error && !categories.data && <Spinner animation="border" variant="primary"/>

@@ -5,7 +5,6 @@ import {AllCategoriesHook} from "../../hook/category/allCategoriesHook";
 
 const AllCategoryPage = () => {
     const [categories, loading, pageCount, getPage, error] = AllCategoriesHook()
-    console.log(pageCount)
 
     return (
         <div style={{minHeight: '670px'}}>

@@ -1,16 +1,15 @@
 import baseURL from '../Api/axiosConfig'
 
-const useInsertDataWithImage = async (url, parmas) => {
+const useInsertDataWithImage = async (url, params) => {
     const config = {
         headers: {"Content-Type": "multipart/form-data"}
     }
-    const res = await baseURL.post(url, parmas, config);
-    return res;
+    return await baseURL.post(url, params, config);
 }
 
-const useInsertData = async (url, parmas) => {
-    const res = await baseURL.post(url, parmas);
-    return res;
+const useInsertData = async (url, params) => {
+    console.log(params)
+    return await baseURL.post(url, params);
 }
 
 export {useInsertData, useInsertDataWithImage};
