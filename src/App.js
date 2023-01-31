@@ -29,8 +29,8 @@ import AdminEditProductsPage from "./Page/Admin/AdminEditProductPage";
 function App() {
     return (
         <div className="font">
-            <NavBarLogin/>
             <BrowserRouter>
+                <NavBarLogin/>
                 <Routes>
                     <Route index element={<HomePage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>

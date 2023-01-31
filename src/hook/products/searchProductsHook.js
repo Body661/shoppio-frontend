@@ -1,28 +1,80 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProducts} from '../../redux/actions/ProductActions';
-import {getAllProductsPage} from '../../redux/actions/ProductActions';
+import {getAllProductsSearch} from '../../redux/actions/ProductActions';
 
 const ViewSearchProductsHook = () => {
-
+    let limit = 8;
+    let items = [];
+    let pagination = [];
+    let results = 0;
     const dispatch = useDispatch();
+    let word = "", queryCat = "", brandCat = "", priceTo = "", priceFrom = "";
+    let sortType = "", sort;
+
+    const getStorage = () => {
+        if (sessionStorage.getItem("searchWord") != null) word = sessionStorage.getItem("searchWord")
+        if (sessionStorage.getItem("catChecked") != null) queryCat = sessionStorage.getItem("catChecked")
+        if (sessionStorage.getItem("brandChecked") != null) brandCat = sessionStorage.getItem("brandChecked")
+        if (sessionStorage.getItem("priceTo") != null) priceTo = sessionStorage.getItem("priceTo")
+        if (sessionStorage.getItem("priceFrom") != null) priceFrom = sessionStorage.getItem("priceFrom")
+
+        if (priceFrom === "" || priceFrom <= 0) {
+            priceFromString = ""
+        } else {
+            priceFromString = `&price[gt]=${priceFrom}`
+        }
+
+        if (priceTo === "" || priceTo <= 0) {
+            priceToString = ""
+        } else {
+            priceToString = `&price[lte]=${priceTo}`
+        }
+    }
+
+    const getProduct = async () => {
+        getStorage();
+        sortData();
+
+        await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&keyword=${word}&${queryCat}&${brandCat}${priceFromString}${priceToString}`))
+    }
     useEffect(() => {
-        dispatch(getAllProducts(12))
+        getProduct()
     }, [])
 
     const allProducts = useSelector((state) => state.allProducts.allProducts)
 
-    let items = [];
-    if (allProducts.data) items = allProducts.data;
 
-    let pagination = [];
-    if (allProducts.paginationRes) pagination = allProducts.paginationRes.pages;
+    if (allProducts?.data) items = allProducts?.data;
+    if (allProducts?.paginationRes) pagination = allProducts.paginationRes.pages;
+    if (allProducts?.results) results = allProducts?.results;
 
+    let priceFromString = "", priceToString = ""
+
+    //when click pagination
     const onPress = async (page) => {
-        await dispatch(getAllProductsPage(page, 12))
+        getStorage();
+        sortData();
+        await dispatch(getAllProductsSearch(`sort=${sort}&limit=${limit}&page=${page}&keyword=${word}&${queryCat}&${brandCat}${priceFromString}${priceToString}`))
     }
 
-    return [items, pagination, onPress]
+    ///when user choose sort type
+    const sortData = () => {
+        if (localStorage.getItem("sortType") !== null) sortType = localStorage.getItem("sortType")
+
+        if (sortType === "السعر من الاقل للاعلي")
+            sort = "+price"
+        else if (sortType === "السعر من الاعلي للاقل")
+            sort = "-price"
+        else if (sortType === "")
+            sort = ""
+        else if (sortType === "الاكثر مبيعا")
+            sort = "-sold"
+        else if (sortType === "الاعلي تقييما")
+            sort = "-quantity"
+    }
+
+
+    return [items, pagination, onPress, getProduct, results]
 
 }
 

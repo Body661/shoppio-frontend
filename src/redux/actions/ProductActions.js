@@ -47,6 +47,22 @@ export const getAllProducts = (limit) => async (dispatch) => {
     }
 }
 
+export const getAllProductsSearch = (queryString) => async (dispatch) => {
+    try {
+        const response = await useGetData(`/api/products?${queryString}`);
+        dispatch({
+            type: GET_ALL_PRODUCTS,
+            payload: {allProducts: response, error: null},
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_ALL_PRODUCTS,
+            payload: {allProducts: [], error: `Error: ${e}`}
+        })
+    }
+}
+
 
 //get all products with pagination with pages number
 export const getAllProductsPage = (page, limit) => async (dispatch) => {
