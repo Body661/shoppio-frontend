@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 const ProductCard = ({item}) => {
 
     return (
-        <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
+        <Col sm="6" md="4" lg="3" className="d-flex">
 
             <Card
                 className="my-2"

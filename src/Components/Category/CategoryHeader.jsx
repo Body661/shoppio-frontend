@@ -1,21 +1,22 @@
 import React from 'react'
-import { Container,Row ,Col} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap'
+import HomeCategoryHook from "../../hook/category/homeCategoryHook";
 
 const CategoryHeader = () => {
+    const [categories] = HomeCategoryHook();
     return (
         <div className="cat-header">
-      <Container>
-        <Row>
-          <Col className="d-flex justify-content-start py-2 flex-wrap">
-            <div className="cat-text-header ">All</div>
-            <div className="cat-text-header">Electronics</div>
-            <div className="cat-text-header">Clothes</div>
-            <div className="cat-text-header">On sale</div>
-            <div className="cat-text-header">More</div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+            <Container>
+                <Row>
+                    <Col className="d-flex justify-content-start py-2 flex-wrap">
+                        <div className="cat-text-header ">All</div>
+                        {
+                            categories?.data?.map(category => <div className="cat-text-header">{category.name}</div>)
+                        }
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     )
 }
 

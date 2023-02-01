@@ -9,7 +9,8 @@ import ViewSearchProductsHook from "../../hook/products/searchProductsHook";
 
 const ShopProductsPage = () => {
 
-    const [items, pagination, onPress] = ViewSearchProductsHook();
+    const [items, pagination, onPress, getProduct] = ViewSearchProductsHook();
+    console.log(pagination)
     let pageCount
     if (pagination) pageCount = pagination;
 
@@ -17,7 +18,7 @@ const ShopProductsPage = () => {
         <div style={{minHeight: '670px'}}>
             <CategoryHeader/>
             <Container>
-                <SearchCountResult title={` ${items.length} Search result`}/>
+                <SearchCountResult onClick={getProduct} title={` ${items.length} Search result`}/>
                 <Row className='d-flex flex-row'>
                     <Col sm="2" xs="2" md="1" className='d-flex'>
                         <SideFilter/>

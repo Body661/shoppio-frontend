@@ -5,7 +5,7 @@ import {getAllProductsSearch} from '../../redux/actions/ProductActions';
 const ViewSearchProductsHook = () => {
     let limit = 8;
     let items = [];
-    let pagination = [];
+    let pagination = 0;
     let results = 0;
     const dispatch = useDispatch();
     let word = "", queryCat = "", brandCat = "", priceTo = "", priceFrom = "";
@@ -61,16 +61,16 @@ const ViewSearchProductsHook = () => {
     const sortData = () => {
         if (localStorage.getItem("sortType") !== null) sortType = localStorage.getItem("sortType")
 
-        if (sortType === "السعر من الاقل للاعلي")
+        if (sortType === "Price from low to high")
             sort = "+price"
-        else if (sortType === "السعر من الاعلي للاقل")
+        else if (sortType === "Price from high to low")
             sort = "-price"
         else if (sortType === "")
             sort = ""
-        else if (sortType === "الاكثر مبيعا")
+        else if (sortType === "Best seller")
             sort = "-sold"
-        else if (sortType === "الاعلي تقييما")
-            sort = "-quantity"
+        else if (sortType === "Most rated")
+            sort = "-ratingsQuantity"
     }
 
 

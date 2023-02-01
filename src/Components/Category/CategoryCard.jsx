@@ -2,7 +2,7 @@ import React from 'react'
 import {Col} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
-const CategoryCard = ({img, title}) => {
+const CategoryCard = ({img, title, id}) => {
     return (
         <Col
             xs="6"
@@ -11,7 +11,7 @@ const CategoryCard = ({img, title}) => {
             lg="2"
             className="my-4 d-flex justify-content-around ">
             <div className="allCard mb-3 ">
-                <Link to={`/products/category}`} style={{textDecoration: 'none'}}>
+                <Link to={`/products/category/${id}`} style={{textDecoration: 'none'}}>
                     <div
                         className="category-card "
                         style={{backgroundImage: `URL(${img})`}}></div>
