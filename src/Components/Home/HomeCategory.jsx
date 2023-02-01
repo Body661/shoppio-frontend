@@ -11,7 +11,7 @@ const HomeCategory = ({title, btnTitle, path}) => {
     return (
         <Container>
             <SubTitle title={title} btnTitle={btnTitle} pathText={path}/>
-            <Row className='my-2 d-flex justify-content-between'>
+            <Row className='my-2 d-flex justify-content-center'>
                 {
                     loading && !error && !categories.data && <Spinner animation="border" variant="primary"/>
                 }

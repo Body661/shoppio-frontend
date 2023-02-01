@@ -11,13 +11,12 @@ const ProductGallery = () => {
     const [, images] = ViewProductsDetailsHook(id);
 
     return (
-        <div className="product-gallery-card d-flex justify-content-center  align-items-center
-        pt-2">
+        <div className="product-gallery-card d-flex justify-content-center  align-items-center pt-2">
             <ImageGallery items={images}
-                          showFullscreenButton={false}
-                          isRTL={true}
+                          showFullscreenButton={true}
+                          isRTL={false}
                           showPlayButton={false}
-                          showThumbnails={false}
+                          showThumbnails={true}
                           renderRightNav={RightButton}
                           renderLeftNav={LeftButton}
             />

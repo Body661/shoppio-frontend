@@ -10,7 +10,7 @@ const HomeBrands = ({title, btnTitle, path}) => {
     return (
         <Container>
             <SubTitle title={title} btnTitle={btnTitle} pathText={path}/>
-            <Row className='my-1 d-flex justify-content-between'>
+            <Row className='my-1 d-flex justify-content-center'>
                 {
                     loading && !error && !brands?.data && <Spinner animation="border" variant="primary"/>
                 }

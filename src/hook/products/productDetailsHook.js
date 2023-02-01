@@ -19,7 +19,8 @@ const ViewProductsDetailsHook = (prodID) => {
 
     //to view images gallery
     let images = []
-    if (product?.data?.images) images = product.data.images.map((img) => ({original: img}))
+    if (product?.data?.images) images = product.data.images.push(product.data.cover)
+    if (product?.data?.images) images = product?.data?.images?.map((img) => ({original: img}))
 
     let products = []
     if (productsByCategory) products = productsByCategory?.data;

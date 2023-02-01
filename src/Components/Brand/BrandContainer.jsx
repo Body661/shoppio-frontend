@@ -6,7 +6,7 @@ const BrandContainer = (data) => {
     return (
         <Container>
             <div className="admin-content-text mt-2 ">All brands</div>
-            <Row className='my-1 d-flex justify-content-between'>
+            <Row className='my-1 d-flex'>
                 {
                     data && data?.data?.length > 0 && data?.data?.map((item) => (
                         <BrandCard img={item.img}/>

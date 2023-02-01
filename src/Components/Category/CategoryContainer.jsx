@@ -9,7 +9,7 @@ const CategoryContainer = () => {
     return (
         <Container>
             <div className="admin-content-text mt-2 ">All categories</div>
-            <Row className='my-2 d-flex justify-content-between'>
+            <Row className='my-2 d-flex'>
                 {
                     loading && !error && !categories.data && <Spinner animation="border" variant="primary"/>
                 }
