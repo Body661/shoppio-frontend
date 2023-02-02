@@ -1,39 +1,64 @@
 import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import {ToastContainer} from "react-toastify";
+import RegisterHook from "../../hook/auth/registerHook";
 
 const RegisterPage = () => {
+    const [name, email, phone, password, confirmPassword, , onChangeName, onChangeEmail, onChangePhone, onChangePassword, onChangeConfirmPassword, OnSubmit] = RegisterHook();
+
     return (
         <Container style={{minHeight: "680px"}}>
             <Row className="py-5 d-flex justify-content-center height-search">
                 <Col sm="12" className="d-flex flex-column ">
                     <label className="mx-auto title-login">Register</label>
                     <input
+                        value={name}
+                        onChange={onChangeName}
                         placeholder="Name..."
                         type="text"
                         className="user-input mt-3 text-center mx-auto"
                     />
                     <input
-                        placeholder="email..."
+                        value={email}
+                        onChange={onChangeEmail}
+                        placeholder="Email..."
                         type="email"
                         className="user-input my-3 text-center mx-auto"
                     />
                     <input
-                        placeholder="password..."
-                        type="password"
-                        className="user-input text-center mx-auto"
+                        value={phone}
+                        onChange={onChangePhone}
+                        placeholder="Phone number..."
+                        type="phone"
+                        className="user-input  text-center mx-auto"
                     />
-                    <button className="btn-login mx-auto mt-4">Create account</button>
+                    <input
+                        value={password}
+                        onChange={onChangePassword}
+                        placeholder="Password..."
+                        type="password"
+                        className="user-input text-center mt-3 mx-auto"
+                    />
+                    <input
+                        value={confirmPassword}
+                        onChange={onChangeConfirmPassword}
+                        placeholder="Confirm password..."
+                        type="password"
+                        className="user-input text-center mt-3 mx-auto"
+                    />
+                    <button onClick={OnSubmit} className="btn-login mx-auto mt-4">Create account</button>
                     <label className="mx-auto my-4">
                         Already have an account?{" "}
                         <Link to="/login" style={{textDecoration: "none"}}>
-                <span style={{cursor: "pointer"}} className="text-danger">
-                  Login
-                </span>
+              <span style={{cursor: "pointer"}} className="text-danger">
+                Login
+              </span>
                         </Link>
                     </label>
                 </Col>
             </Row>
+            <ToastContainer/>
         </Container>
     )
 }

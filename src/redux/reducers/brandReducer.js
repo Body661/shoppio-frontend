@@ -17,6 +17,7 @@ const brandReducer = (state = initState, action) => {
             }
         case GET_ONE_BRAND:
             return {
+                ...state,
                 brand: action.payload.brand,
                 loading: false,
                 error: action.payload.error

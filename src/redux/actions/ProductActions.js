@@ -7,7 +7,7 @@ import {
     GET_ALL_PRODUCTS, GET_PRODUCTS_BY_CATEGORY,
 
 } from '../types'
-import useGetData from './../../customHooks/useGetData';
+import {useGetData} from '../../customHooks/useGetData';
 import useDeleteData from './../../customHooks/useDeleteData';
 import {useUpdateDataWithImage} from '../../customHooks/useUpdateData';
 

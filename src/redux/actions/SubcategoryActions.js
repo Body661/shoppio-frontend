@@ -1,6 +1,6 @@
 import {useInsertData} from "../../customHooks/useInsertData";
 import {CREATE_SUBCATEGORY, GET_SUBCATEGORY} from "../types";
-import useGetData from "../../customHooks/useGetData";
+import {useGetData} from "../../customHooks/useGetData";
 
 export const createSubcategory = (data) => async (dispatch) => {
     try {

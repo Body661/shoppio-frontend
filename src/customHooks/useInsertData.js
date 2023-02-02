@@ -8,7 +8,6 @@ const useInsertDataWithImage = async (url, params) => {
 }
 
 const useInsertData = async (url, params) => {
-    console.log(params)
     return await baseURL.post(url, params);
 }
 

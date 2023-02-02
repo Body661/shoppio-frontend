@@ -23,8 +23,10 @@ import UserAllAddressPage from './Page/User/UserAllAddressPage';
 import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
-import AdminEditProduct from "./Components/Admin/AdminEditProduct";
 import AdminEditProductsPage from "./Page/Admin/AdminEditProductPage";
+import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
+import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
+import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
 
 function App() {
     return (
@@ -55,6 +57,9 @@ function App() {
                     <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
                     <Route path="/user/edit-address" element={<UserEditAddressPage/>}/>
                     <Route path="/user/profile" element={<UserProfilePage/>}/>
+                    <Route path="/user/forget-password" element={<ForgetPasswordPage/>}/>
+                    <Route path="/user/verify-code" element={<VerifyPasswordPage/>}/>
+                    <Route path="/user/reset-password" element={<ResetPasswordPage/>}/>
                 </Routes>
             </BrowserRouter>
             <Footer/>

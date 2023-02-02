@@ -25,6 +25,7 @@ const categoryReducer = (state = initState, action) => {
             }
         case CREATE_CATEGORY:
             return {
+                ...state,
                 categories: action.payload.categories,
                 loading: false
             }
