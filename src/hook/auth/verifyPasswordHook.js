@@ -33,11 +33,7 @@ const VerifyPasswordHook = () => {
 
     useEffect(() => {
         if (loading === false) {
-            console.log(res)
-            console.log(error)
-
             if (res) {
-                console.log(res)
                 if (res.status === 200) {
                     notify("Code is correct", "success")
                     setTimeout(() => {

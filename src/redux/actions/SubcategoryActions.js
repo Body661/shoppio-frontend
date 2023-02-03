@@ -12,7 +12,7 @@ export const createSubcategory = (data) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_SUBCATEGORY,
-            payload: {subcategory: [], error: `ERROR: ${e}`},
+            payload: {subcategory: [], error: e.response},
         })
     }
 }
@@ -29,7 +29,7 @@ export const getSubcategory = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_SUBCATEGORY,
-            payload: {subcategory: null, error: `ERROR: ${e}`},
+            payload: {subcategory: null, error: e.response},
         })
     }
 }

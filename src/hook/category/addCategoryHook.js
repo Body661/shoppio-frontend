@@ -28,6 +28,7 @@ const AddCategoryHook = () => {
         }
     }
     const res = useSelector(state => state.allCategories.categories)
+    const error = useSelector(state => state.allCategories.error)
 
     //save data in database
     const handelSubmit = async (event) => {
@@ -56,10 +57,20 @@ const AddCategoryHook = () => {
             setLoading(true)
             setTimeout(() => setIsPress(false), 1000)
 
-            if (res.status === 201) {
-                notify('Category added successfully', "success");
-            } else {
-                notify('Error while adding category', "error");
+            if (res) {
+                if (res.status === 201) {
+                    notify('Category added successfully', "success");
+                }
+            }
+
+            if (error) {
+                if (error.status === 401) {
+                    notify('You are not legged please login', "error");
+                } else if (error.status === 400) {
+                    notify("Category name already exists", "error");
+                } else {
+                    notify("Error while adding the new category", "error")
+                }
             }
         }
     }, [loading])

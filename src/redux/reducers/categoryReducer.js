@@ -27,7 +27,8 @@ const categoryReducer = (state = initState, action) => {
             return {
                 ...state,
                 categories: action.payload.categories,
-                loading: false
+                loading: false,
+                error: action.payload.error
             }
         default: {
             return state

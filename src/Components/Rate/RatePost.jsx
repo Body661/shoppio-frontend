@@ -1,8 +1,16 @@
 import React from 'react'
 import {Col, Row} from 'react-bootstrap';
 import ReactStars from "react-rating-stars-component";
+import AddReviewHook from '../../hook/review/addReviewHook';
+import {ToastContainer} from 'react-toastify';
+import {useParams} from 'react-router-dom';
 
 const RatePost = () => {
+    const {id} = useParams();
+    const [OnChangeRateText, OnChangeRateValue, rateText, , user, onSubmit] = AddReviewHook(id)
+
+    let name = ""
+    if (user) name = user.name
 
     const setting = {
         size: 20,
@@ -16,30 +24,35 @@ const RatePost = () => {
         halfIcon: <i className="fa fa-star-half-alt"/>,
         filledIcon: <i className="fa fa-star"/>,
         onChange: newValue => {
-            console.log(`Example 2: new value is ${newValue}`);
+            OnChangeRateValue(newValue);
         }
     };
     return (
         <div>
             <Row className="mt-3 ">
                 <Col sm="12" className="me-5  d-flex">
-                    <div className="rate-name  d-inline ms-3 mt-1 ">Abdolrahman</div>
+                    <div className="rate-name  d-inline ms-3 mt-1 ">{name}</div>
                     <ReactStars {...setting} />
                 </Col>
             </Row>
             <Row className="border-bottom mx-2">
                 <Col className="d-flex me-4 pb-2">
-            <textarea
-                className="input-form-area p-2 mt-3"
-                rows="2"
-                cols="20"
-                placeholder="Write your review"
-            />
-                    <div className="d-flex justify-content-center align-items-center">
-                        <div className="product-cart-add px-3  py-2 text-center d-inline">Submit review</div>
+          <textarea
+              value={rateText}
+              onChange={OnChangeRateText}
+              className="input-form-area p-2 mt-3"
+              rows="2"
+              cols="20"
+              placeholder="Write your review...."
+          />
+                    <div className=" d-flex justify-content-end al">
+                        <div onClick={onSubmit} className="product-cart-add px-3  py-2 text-center d-inline">Submit
+                        </div>
                     </div>
                 </Col>
             </Row>
+            <ToastContainer/>
+
         </div>
     )
 }

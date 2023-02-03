@@ -13,7 +13,7 @@ export const getAllCategories = (limit) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_CATEGORIES,
-            payload: {categories: [], error: `ERROR: ${e}`},
+            payload: {categories: [], error: e.response},
         })
     }
 }
@@ -29,7 +29,7 @@ export const getAllCategoriesPage = (page) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_CATEGORIES,
-            payload: {categories: [], error: `ERROR: ${e}`},
+            payload: {categories: [], error: e.response},
         })
     }
 }
@@ -46,7 +46,7 @@ export const getOneCategory = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ONE_CATEGORY,
-            payload: {category: [], error: `Error: ${e}`},
+            payload: {category: [], error: e.response},
         })
     }
 }
@@ -62,7 +62,7 @@ export const createCategory = (data) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_CATEGORY,
-            payload: {categories: [], error: `ERROR: ${e}`},
+            payload: {categories: [], error: e.response},
         })
     }
 }

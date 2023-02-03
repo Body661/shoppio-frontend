@@ -22,6 +22,7 @@ const AddSubcategoryHook = () => {
     const category = useSelector(state => state.allCategories.categories)
 
     const subcategory = useSelector(state => state.subcategory.subcategory)
+    const error = useSelector(state => state.subcategory.error)
 
     //on change dropdown menu
     const handelChange = (e) => {
@@ -63,12 +64,20 @@ const AddSubcategoryHook = () => {
             setName("")
             setID(0)
 
-            if (subcategory.status === 201) {
-                notify("Subcategory added successfully", "success")
-            } else if (subcategory === "Error Error: Request failed with status code 400") {
-                notify("Subcategory name already exists", "error")
-            } else {
-                notify("Error while adding the new category", "error")
+            if (subcategory) {
+                if (subcategory.status === 201) {
+                    notify('Subcategory added successfully', "success");
+                }
+            }
+
+            if (error) {
+                if (error.status === 401) {
+                    notify('You are not legged please login', "error");
+                } else if (error.status === 400) {
+                    notify("Subcategory name already exists", "error");
+                } else {
+                    notify("Error while adding the new Subcategory", "error")
+                }
             }
 
             setLoading(true)

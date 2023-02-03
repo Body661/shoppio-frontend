@@ -206,8 +206,8 @@ const AdminEditProductsHook = (id) => {
 
     }
 
-    //get create message
     const product = useSelector(state => state.allProducts.updateProduct)
+    const error = useSelector(state => state.allProducts.error)
 
     useEffect(() => {
 
@@ -225,10 +225,16 @@ const AdminEditProductsHook = (id) => {
             setTimeout(() => setLoading(true), 1500)
 
             if (product) {
-                if (product.status === 200) {
-                    notify("Product updated successfully", "success")
+                if (product.status === 201) {
+                    notify('Product updated successfully', "success");
+                }
+            }
+
+            if (error) {
+                if (error.status === 401) {
+                    notify('You are not legged please login', "error");
                 } else {
-                    notify("Error while updating product", "error")
+                    notify("Error while updating product", "error");
                 }
             }
         }

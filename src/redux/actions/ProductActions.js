@@ -25,7 +25,7 @@ export const createProduct = (formatData) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_PRODUCT,
-            payload: {createdProduct: [], error: `Error: ${e}`},
+            payload: {createdProduct: [], error: e.response},
         })
     }
 }
@@ -42,7 +42,7 @@ export const getAllProducts = (limit) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: `Error: ${e}`}
+            payload: {allProducts: [], error: e.response}
         })
     }
 }
@@ -58,7 +58,7 @@ export const getAllProductsSearch = (queryString) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: `Error: ${e}`}
+            payload: {allProducts: [], error: e.response}
         })
     }
 }
@@ -76,7 +76,7 @@ export const getAllProductsPage = (page, limit) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: `Error: ${e}`}
+            payload: {allProducts: [], error: e.response}
         })
     }
 }
@@ -93,7 +93,7 @@ export const getOneProduct = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_PRODUCT_DETAILS,
-            payload: {product: [], error: `Error: ${e}`},
+            payload: {product: [], error: e.response},
         })
     }
 }
@@ -110,7 +110,7 @@ export const getProductsByCategory = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_PRODUCTS_BY_CATEGORY,
-            payload: {productsByCategory: [], error: `Error ${e}`},
+            payload: {productsByCategory: [], error: e.response},
         })
     }
 }
@@ -128,7 +128,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: DELETE_PRODUCT,
-            payload: {deleteProduct: [], error: `Error: ${e}`},
+            payload: {deleteProduct: [], error: e.response},
         })
     }
 }
@@ -145,7 +145,7 @@ export const updateProduct = (id, data) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: UPDATE_PRODUCT,
-            payload: {updateProduct: [], error: `Error: ${e}`},
+            payload: {updateProduct: [], error: e.response},
         })
     }
 }

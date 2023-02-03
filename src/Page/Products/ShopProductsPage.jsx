@@ -10,7 +10,6 @@ import ViewSearchProductsHook from "../../hook/products/searchProductsHook";
 const ShopProductsPage = () => {
 
     const [items, pagination, onPress, getProduct] = ViewSearchProductsHook();
-    console.log(pagination)
     let pageCount
     if (pagination) pageCount = pagination;
 

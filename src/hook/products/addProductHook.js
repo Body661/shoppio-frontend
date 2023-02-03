@@ -160,6 +160,7 @@ const AdminAddProductsHook = () => {
     }
 
     const product = useSelector(state => state.allProducts.allProducts)
+    const error = useSelector(state => state.allProducts.error)
 
     useEffect(() => {
 
@@ -178,9 +179,15 @@ const AdminAddProductsHook = () => {
 
             if (product) {
                 if (product.status === 201) {
-                    notify("Product added successfully", "success")
+                    notify('Product added successfully', "success");
+                }
+            }
+
+            if (error) {
+                if (error.status === 401) {
+                    notify('You are not legged please login', "error");
                 } else {
-                    notify("Error while adding product", "error")
+                    notify("Error while adding product", "error");
                 }
             }
         }

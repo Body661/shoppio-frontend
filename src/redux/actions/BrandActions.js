@@ -15,7 +15,7 @@ export const getAllBrands = (limit) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: [], error: `Error: ${e}`,},
+            payload: {brands: [], error: e.response,},
         })
     }
 }
@@ -32,7 +32,7 @@ export const getAllBrandsPage = (page) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: [], error: `Error: ${e}`,},
+            payload: {brands: [], error: e.response,},
         })
     }
 }
@@ -49,7 +49,7 @@ export const getOneBrand = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: GET_ONE_BRAND,
-            payload: {brand: [], error: `Error: ${e}`},
+            payload: {brand: [], error: e.response},
         })
     }
 }
@@ -66,7 +66,7 @@ export const createBrand = (formData) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_BRAND,
-            payload: {brand: [], error: `Error: ${e}`,},
+            payload: {brand: [], error: e.response,},
         })
     }
 }

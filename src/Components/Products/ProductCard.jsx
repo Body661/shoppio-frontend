@@ -2,11 +2,9 @@ import React from 'react'
 import {Card, Col} from 'react-bootstrap'
 import rate from "../../images/rate.png";
 import favor from "../../images/fav-off.png";
-
 import {Link} from 'react-router-dom';
 
 const ProductCard = ({item}) => {
-
     return (
         <Col sm="6" md="4" lg="3" className="d-flex">
 

@@ -16,7 +16,6 @@ const ForgetPasswordHook = () => {
     }
 
     const onSubmit = async () => {
-        console.log(email)
         if (!validator.isEmail(email)) {
             notify("Please enter a valid email", "error")
             return
@@ -34,8 +33,6 @@ const ForgetPasswordHook = () => {
 
     useEffect(() => {
         if (loading === false) {
-            console.log(res)
-            console.log(error)
 
             if (res) {
                 if (res.status === 200) {

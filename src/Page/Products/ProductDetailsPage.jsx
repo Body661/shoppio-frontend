@@ -9,14 +9,22 @@ import ProductsContainer from "../../Components/Products/ProductsContainer";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
-    const [, , products] = ViewProductsDetailsHook(id);
+    const [item, , products] = ViewProductsDetailsHook(id);
+
+    let rateAvg;
+    let rateQty;
+
+    if (item) {
+        rateAvg = item.ratingsAvg
+        rateQty = item.ratingsQuantity
+    }
 
     return (
         <div style={{minHeight: '670px'}}>
             <CategoryHeader/>
             <Container>
                 <ProductDetails/>
-                <RateContainer/>
+                <RateContainer rateAvg={rateAvg} rateQty={rateQty}/>
                 <ProductsContainer products={products} title="Products you may like"/>
             </Container>
         </div>

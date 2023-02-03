@@ -27,6 +27,7 @@ const AddBrandHook = () => {
         }
     }
     const res = useSelector(state => state.allBrands.brands)
+    const error = useSelector(state => state.allBrands.error)
 
     //save data in database
     const handelSubmit = async (event) => {
@@ -54,10 +55,18 @@ const AddBrandHook = () => {
             setLoading(true)
             setTimeout(() => setIsPress(false), 1000)
 
-            if (res.status === 201) {
-                notify('Brand added successfully', "success");
-            } else {
-                notify('Error while adding brand', "error");
+            if (res) {
+                if (res.status === 201) {
+                    notify('Brand added successfully', "success");
+                }
+            }
+
+            if (error) {
+                if (error.status === 401) {
+                    notify('You are not legged please login', "error");
+                } else {
+                    notify("Error while adding the brand", "error");
+                }
             }
         }
     }, [loading])
