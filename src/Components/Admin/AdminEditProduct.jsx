@@ -14,7 +14,6 @@ const AdminEditProducts = () => {
     const [CatID, BrandID, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefore, onChangeProdName, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSelectCategory, handelSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] =
         AdminEditProductsHook(id);
 
-    console.log()
     return (
         <div>
             <Row className="justify-content-start ">
