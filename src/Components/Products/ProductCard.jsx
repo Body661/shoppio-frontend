@@ -3,6 +3,7 @@ import {Card, Col} from 'react-bootstrap'
 import rate from "../../images/rate.png";
 import {Link} from 'react-router-dom';
 import ProductWishlistHook from "../../hook/products/productWishlistHook";
+import {ToastContainer} from "react-toastify";
 
 const ProductCard = ({item, favProd}) => {
     const [, , handelFav, favImg] = ProductWishlistHook(item, favProd)
@@ -20,8 +21,8 @@ const ProductCard = ({item, favProd}) => {
                     backgroundColor: "#FFFFFF",
                     boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
                 }}>
-                <Link to={`/products/${item._id}`} style={{textDecoration: 'none'}}>
-                    <Card.Img style={{height: "228px", width: "100%"}} src={item.cover}/>
+                <Link to={`/products/${item?._id}`} style={{textDecoration: 'none'}}>
+                    <Card.Img style={{height: "228px", width: "100%"}} src={item?.cover}/>
                 </Link>
                 <div className="d-flex justify-content-end mx-2">
                     <img
@@ -38,7 +39,7 @@ const ProductCard = ({item, favProd}) => {
                 <Card.Body>
                     <Card.Title>
                         <div className="card-title">
-                            {item.title}
+                            {item?.title}
                         </div>
                     </Card.Title>
                     <Card.Text>
@@ -51,16 +52,17 @@ const ProductCard = ({item, favProd}) => {
                                     height="16px"
                                     width="16px"
                                 />
-                                <div className="card-rate mx-2">{item.ratingsAvg || 0}</div>
+                                <div className="card-rate mx-2">{item?.ratingsAvg || 0}</div>
                             </div>
                             <div className="d-flex">
-                                <div className="card-price">{item.price}</div>
+                                <div className="card-price">{item?.price}</div>
                                 <div className="card-currency mx-1">euro</div>
                             </div>
                         </div>
                     </Card.Text>
                 </Card.Body>
             </Card>
+            <ToastContainer/>
         </Col>
     )
 }

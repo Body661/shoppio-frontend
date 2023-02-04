@@ -20,7 +20,6 @@ const ProductWishlistHook = (item, favProd) => {
     const addToWishList = async () => {
         setIsFav(true)
         setFavImg(favOn)
-        setLoadingAdd(true)
         await dispatch(addProductToWishList({
             productId: item._id,
         }))
@@ -31,7 +30,6 @@ const ProductWishlistHook = (item, favProd) => {
     const removeFromWishlist = async () => {
         setIsFav(false)
         setFavImg(favOff)
-        setLoadingRemove(true)
         await dispatch(removeProductFromWishList(item._id))
         setLoadingRemove(false)
     }
@@ -39,7 +37,7 @@ const ProductWishlistHook = (item, favProd) => {
         if (isFav) {
             await removeFromWishlist();
         } else {
-           await addToWishList()
+            await addToWishList()
         }
     }
 
@@ -50,7 +48,6 @@ const ProductWishlistHook = (item, favProd) => {
         } else {
             setFavImg(favOff)
         }
-
     }, [isFav])
 
     const resAdd = useSelector(state => state.wishlistReducer.addToWishList)
@@ -67,6 +64,9 @@ const ProductWishlistHook = (item, favProd) => {
                 notify("You are not logged in!", "error")
             }
         }
+
+        return function cleanup() {
+        };
     }, [loadingAdd])
 
     useEffect(() => {
@@ -79,6 +79,7 @@ const ProductWishlistHook = (item, favProd) => {
                 notify("You are not logged in!", "error")
             }
         }
+
     }, [loadingRemove])
 
 

@@ -1,16 +1,16 @@
 import React from 'react'
-import { Container, Row } from 'react-bootstrap'
+import {Container, Row} from 'react-bootstrap'
 import SubTitle from '../Uitily/SubTitle'
 import ProductCard from './ProductCard'
 
-const ProductsContainer = ({ title, btnTitle, pathText, products }) => {
+const ProductsContainer = ({title, btnTitle, pathText, products}) => {
     return (
         <Container>
-            {products ? (<SubTitle title={title} btntitle={btnTitle} pathText={pathText} />) : null}
-            <Row className='my-2 d-flex justify-content-between'>
+            {products ? (<SubTitle title={title} btntitle={btnTitle} pathText={pathText}/>) : null}
+            <Row className='my-2 d-flex '>
                 {
                     products ? (
-                        products.map((item, index) => <ProductCard key={index} item={item} />)
+                        products.map((item, index) => <ProductCard key={index} item={item}/>)
                     ) : null
                 }
 

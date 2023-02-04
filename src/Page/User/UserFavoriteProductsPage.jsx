@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import UserSideBar from '../../Components/User/UserSideBar'
-import UserFavoriteProduct from '../../Components/User/UserFavoriteProduct'
+import UserFavouriteProduct from '../../Components/User/UserFavouriteProduct'
 const UserFavoriteProductsPage = () => {
     return (
         <Container >
@@ -11,7 +11,7 @@ const UserFavoriteProductsPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                    <UserFavoriteProduct />
+                    <UserFavouriteProduct />
                 </Col>
             </Row>
         </Container>
