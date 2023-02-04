@@ -1,10 +1,12 @@
 import React from 'react'
 import {Card, Col} from 'react-bootstrap'
 import rate from "../../images/rate.png";
-import favor from "../../images/fav-off.png";
 import {Link} from 'react-router-dom';
+import ProductWishlistHook from "../../hook/products/productWishlistHook";
 
-const ProductCard = ({item}) => {
+const ProductCard = ({item, favProd}) => {
+    const [, , handelFav, favImg] = ProductWishlistHook(item, favProd)
+
     return (
         <Col sm="6" md="4" lg="3" className="d-flex">
 
@@ -23,7 +25,8 @@ const ProductCard = ({item}) => {
                 </Link>
                 <div className="d-flex justify-content-end mx-2">
                     <img
-                        src={favor}
+                        src={favImg}
+                        onClick={handelFav}
                         alt=""
                         className="text-center"
                         style={{
@@ -48,7 +51,7 @@ const ProductCard = ({item}) => {
                                     height="16px"
                                     width="16px"
                                 />
-                                <div className="card-rate mx-2">{item.ratingsQuantity}</div>
+                                <div className="card-rate mx-2">{item.ratingsAvg || 0}</div>
                             </div>
                             <div className="d-flex">
                                 <div className="card-price">{item.price}</div>
