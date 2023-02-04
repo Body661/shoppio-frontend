@@ -2,9 +2,11 @@ import React from 'react'
 import {Container, Row, Spinner} from 'react-bootstrap'
 import SubTitle from '../Uitily/SubTitle'
 import ProductCard from '../Products/ProductCard'
+import ProductContainerHook from "../../hook/products/productsContainerHook";
 
 const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => {
 
+    const [favProd] = ProductContainerHook()
 
     return (
         <Container>
@@ -16,7 +18,7 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                 {
                     !loading && !error && (
                         products ? (
-                            products?.map((item, index) => (<ProductCard key={index} item={item}/>))
+                            products?.map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
                         ) : <h4 className="notFound">No Products found</h4>
                     )
                 }
