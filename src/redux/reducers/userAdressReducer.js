@@ -3,7 +3,7 @@ import {
     EDIT_USER_ADDRESS,
     GET_ONE_USER_ADDRESS,
     DELETE_USER_ADDRESS,
-    GET_ALL_USER_ADDRESS
+    GET_ALL_USER_ADDRESSES
 } from '../types'
 
 const initState = {
@@ -22,7 +22,7 @@ const userAddressesReducer = (state = initState, action) => {
                 addUserAddress: action.payload.address,
                 error: action.payload.error
             }
-        case GET_ALL_USER_ADDRESS:
+        case GET_ALL_USER_ADDRESSES:
             return {
                 ...state,
                 allAddresses: action.payload.allAddresses,
@@ -37,13 +37,13 @@ const userAddressesReducer = (state = initState, action) => {
         case GET_ONE_USER_ADDRESS:
             return {
                 ...state,
-                oneAddress: action.payload.oneAddress,
+                oneAddress: action.payload.address,
                 error: action.payload.error
             }
         case EDIT_USER_ADDRESS:
             return {
                 ...state,
-                editAddress: action.payload.editAddress,
+                editAddress: action.payload.address,
                 error: action.payload.error
             }
         default:
