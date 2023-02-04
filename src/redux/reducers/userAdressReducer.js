@@ -19,27 +19,32 @@ const userAddressesReducer = (state = initState, action) => {
         case ADD_USER_ADDRESS:
             return {
                 ...state,
-                addUserAddress: action.payload,
+                addUserAddress: action.payload.address,
+                error: action.payload.error
             }
         case GET_ALL_USER_ADDRESS:
             return {
                 ...state,
-                allAddresses: action.payload,
+                allAddresses: action.payload.allAddresses,
+                error: action.payload.error
             }
         case DELETE_USER_ADDRESS:
             return {
                 ...state,
-                deleteAddress: action.payload,
+                deleteAddress: action.payload.address,
+                error: action.payload.error
             }
         case GET_ONE_USER_ADDRESS:
             return {
                 ...state,
-                oneAddress: action.payload,
+                oneAddress: action.payload.oneAddress,
+                error: action.payload.error
             }
         case EDIT_USER_ADDRESS:
             return {
                 ...state,
-                editAddress: action.payload,
+                editAddress: action.payload.editAddress,
+                error: action.payload.error
             }
         default:
             return state;
