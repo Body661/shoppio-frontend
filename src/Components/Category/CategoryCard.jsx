@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const CategoryCard = ({img, title, id}) => {
     return (
         <Col
+            key={id}
             xs="6"
             sm="6"
             md="4"

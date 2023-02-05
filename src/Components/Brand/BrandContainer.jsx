@@ -9,7 +9,7 @@ const BrandContainer = (data) => {
             <Row className='my-1 d-flex'>
                 {
                     data && data?.data?.length > 0 && data?.data?.map((item) => (
-                        <BrandCard img={item.img}/>
+                        <BrandCard img={item.img} key={item?._id}/>
                     ))
                 }
 

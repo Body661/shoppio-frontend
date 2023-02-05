@@ -1,29 +1,50 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap';
+import {Row, Col, Modal, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import deleteIcon from '../../images/delete.png'
-const UserAddressCard = () => {
+import DeleteAddressHook from "../../hook/user/deleteAddressHook";
+const UserAddressCard = ({ item }) => {
+
+    const [show, handleClose, handleShow, handelDelete] = DeleteAddressHook(item?._id)
+
     return (
         <div className="user-address-card my-3 px-2">
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header >
+                    <Modal.Title> <div className='font'>Confirm delete</div></Modal.Title>
+                </Modal.Header>
+                <Modal.Body><div className='font'>Are you sure you want to delete this address?</div></Modal.Body>
+                <Modal.Footer>
+                    <Button className='font' variant="success" onClick={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button className='font' variant="dark" onClick={handelDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <Row className="d-flex justify-content-between  ">
-                <Col xs="1">
-                    <div className="p-2">Home</div>
+                <Col xs="6">
+                    <div className="p-2">{item?.alias}</div>
                 </Col>
-                <Col xs="4" className="d-flex d-flex justify-content-end">
+                <Col xs="6" className="d-flex d-flex justify-content-end">
                     <div className="d-flex p-2">
-                        <div className="d-flex mx-2">
-                            <img
-                                alt=""
-                                className="ms-1 mt-2"
-                                src={deleteIcon}
-                                height="17px"
-                                width="15px"
-                            />
-                            <Link to="/user/edit-address" style={{ textDecoration: "none" }}>
-                                <p className="item-delete-edit"> Edit</p>
-                            </Link>
-                        </div>
-                        <div className="d-flex ">
+                        <Link to={`/user/edit-address/${item?._id}`} style={{ textDecoration: 'none' }}>
+                            <div className="d-flex mx-2">
+                                <img
+                                    alt=""
+                                    className="ms-1 mt-2"
+                                    src={deleteIcon}
+                                    height="17px"
+                                    width="15px"
+                                />
+                                <p className="item-delete-edit">Edit</p>
+
+                            </div>
+                        </Link>
+                        <div onClick={handleShow} className="d-flex ">
                             <img
                                 alt=""
                                 className="ms-1 mt-2"
@@ -42,9 +63,10 @@ const UserAddressCard = () => {
                     <div
                         style={{
                             color: "#555550",
+                            fontFamily: "Almarai",
                             fontSize: "14px",
                         }}>
-                        M H Street 24 - 1
+                        {item?.details}
                     </div>
                 </Col>
             </Row>
@@ -54,6 +76,7 @@ const UserAddressCard = () => {
                     <div
                         style={{
                             color: "#555550",
+                            fontFamily: "Almarai",
                             fontSize: "16px",
                         }}>
                         Phone Number:
@@ -62,10 +85,11 @@ const UserAddressCard = () => {
                     <div
                         style={{
                             color: "#979797",
+                            fontFamily: "Almarai",
                             fontSize: "16px",
                         }}
                         className="mx-2">
-                        0021313432423
+                        {item?.phone}
                     </div>
                 </Col>
             </Row>

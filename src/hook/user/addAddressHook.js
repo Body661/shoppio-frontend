@@ -35,8 +35,8 @@ const AddAddressHook = () => {
     const onChangePhone = (event) => {
         event.persist();
         setPhone(event.target.value)
-
     }
+
     const onChangeCity = (event) => {
         event.persist();
         setCity(event.target.value)
@@ -47,7 +47,6 @@ const AddAddressHook = () => {
         setCountry(event.target.value)
     }
 
-    console.log(postalCode)
     const onSubmit = async () => {
         if (alias.trim() === "" || street.trim() === "" || !validator.isPostalCode(postalCode, "NL") || !validator.isMobilePhone(phone || city.trim() === "" || country.trim() === "")) {
             notify("Please fill in all information", "warn")
@@ -77,10 +76,12 @@ const AddAddressHook = () => {
                 }, 1000);
             }
 
-            if (error && error.status === 401) {
-                notify("you are not logged in!", "error")
-            } else {
-                notify("Error while adding new address", "error")
+            if (error) {
+                if (error.status === 401) {
+                    notify("you are not logged in!", "error")
+                } else {
+                    notify("Error while adding new address", "error")
+                }
             }
         }
 

@@ -16,8 +16,8 @@ const AdminEditProductsHook = (id) => {
     //values state
     const [prodName, setProdName] = useState('');
     const [prodDescription, setProdDescription] = useState('');
-    const [priceBefore, setPriceBefore] = useState('Price before discount');
-    const [priceAfter, setPriceAfter] = useState('Price after discount');
+    const [priceBefore, setPriceBefore] = useState('');
+    const [priceAfter, setPriceAfter] = useState('');
     const [qty, setQty] = useState('');
     const [CatID, setCatID] = useState('0');
     const [BrandID, SetBrandID] = useState('0');
@@ -54,14 +54,15 @@ const AdminEditProductsHook = (id) => {
 
     useEffect(() => {
         if (item.data) {
-            setImages(item.data.images)
-            setProdName(item.data.title)
-            setProdDescription(item.data.description)
-            setPriceBefore(item.data.price)
-            setQty(item.data.quantity)
-            setCatID(item.data.category)
-            SetBrandID(item.data.brand)
-            setColors(item.data.colors)
+            setImages(item.data?.images)
+            setProdName(item.data?.title)
+            setProdDescription(item.data?.description)
+            setPriceBefore(item.data?.price)
+            setPriceAfter(item.data?.priceAfterDiscount)
+            setQty(item.data?.quantity)
+            setCatID(item.data?.category?._id)
+            SetBrandID(item.data?.brand?._id)
+            setColors(item.data?.colors)
         }
     }, [item])
 
@@ -186,17 +187,17 @@ const AdminEditProductsHook = (id) => {
         formData.append("description", prodDescription);
         formData.append("quantity", qty);
         formData.append("price", priceBefore);
-
         formData.append("category", CatID);
         formData.append("brand", BrandID);
+        formData.append("priceAfterDiscount", priceAfter)
 
         setTimeout(() => {
-            formData.append("imageCover", imgCover);
+            formData.append("cover", imgCover);
             itemImages.map((item) => formData.append("images", item))
         }, 1000);
 
 
-        colors.map((color) => formData.append("availableColors", color))
+        colors.map((color) => formData.append("colors", color))
         selectedSubID.map((item) => formData.append("subcategory", item._id))
         setTimeout(async () => {
             setLoading(true)
@@ -212,25 +213,26 @@ const AdminEditProductsHook = (id) => {
     useEffect(() => {
 
         if (loading === false) {
-            setCatID(0)
+            setCatID('')
             setColors([])
             setImages([])
             setProdName('')
             setProdDescription('')
-            setPriceBefore('Price before discount')
-            setPriceAfter('Price after discount')
-            setQty('Available quantity ')
-            SetBrandID(0)
+            setPriceBefore('')
+            setPriceAfter('')
+            setQty('')
+            SetBrandID('')
             setSelectedSubID([])
             setTimeout(() => setLoading(true), 1500)
 
             if (product) {
-                if (product.status === 201) {
+                if (product.status === 200) {
                     notify('Product updated successfully', "success");
                 }
             }
 
             if (error) {
+                console.log(error)
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
                 } else {

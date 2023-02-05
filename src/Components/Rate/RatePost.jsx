@@ -37,14 +37,14 @@ const RatePost = () => {
             </Row>
             <Row className="border-bottom mx-2">
                 <Col className="d-flex me-4 pb-2">
-          <textarea
-              value={rateText}
-              onChange={OnChangeRateText}
-              className="input-form-area p-2 mt-3"
-              rows="2"
-              cols="20"
-              placeholder="Write your review...."
-          />
+                    <textarea
+                        value={rateText}
+                        onChange={OnChangeRateText}
+                        className="input-form-area p-2 mt-3"
+                        rows="2"
+                        cols="20"
+                        placeholder="Write your review...."
+                    />
                     <div className=" d-flex justify-content-end al">
                         <div onClick={onSubmit} className="product-cart-add px-3  py-2 text-center d-inline">Submit
                         </div>
@@ -52,7 +52,6 @@ const RatePost = () => {
                 </Col>
             </Row>
             <ToastContainer/>
-
         </div>
     )
 }

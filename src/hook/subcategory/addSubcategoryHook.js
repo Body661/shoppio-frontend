@@ -15,7 +15,7 @@ const AddSubcategoryHook = () => {
         dispatch(getAllCategories());
     }, [])
 
-    const [id, setID] = useState(0)
+    const [id, setID] = useState('')
     const [name, setName] = useState('')
     const [loading, setLoading] = useState(true)
 
@@ -53,7 +53,7 @@ const AddSubcategoryHook = () => {
         setLoading(true)
         await dispatch(createSubcategory({
             name,
-            category: id
+            categoryId: id
         }))
         setLoading(false)
 
@@ -71,12 +71,17 @@ const AddSubcategoryHook = () => {
             }
 
             if (error) {
+                console.log(error)
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
-                } else if (error.status === 400) {
+                } else if (error?.data?.errors[0].msg === "Subcategory must be belong to a category") {
+                    notify("Subcategory must be belong to a category", "error");
+                } else if (error?.data?.errors[0].msg === "Subcategory name already exists") {
                     notify("Subcategory name already exists", "error");
+                } else if (error?.data?.errors[0].msg === "Category ID is not valid") {
+                    notify("Category ID is not valid", "error")
                 } else {
-                    notify("Error while adding the new Subcategory", "error")
+                    notify("Error while adding subcategory", "error")
                 }
             }
 

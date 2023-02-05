@@ -9,7 +9,7 @@ const ProductCard = ({item, favProd}) => {
     const [, , handelFav, favImg] = ProductWishlistHook(item, favProd)
 
     return (
-        <Col sm="6" md="4" lg="3" className="d-flex">
+        <Col sm="6" md="4" lg="3" className="d-flex" key={item?._id}>
 
             <Card
                 className="my-2"

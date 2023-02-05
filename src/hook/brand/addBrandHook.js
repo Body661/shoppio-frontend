@@ -9,7 +9,7 @@ const AddBrandHook = () => {
     const dispatch = useDispatch();
     const [img, setImg] = useState(avatar)
     const [name, setName] = useState('')
-    const [selectedFile, setSelectedFile] = useState(null)
+    const [selectedFile, setSelectedFile] = useState('')
     const [loading, setLoading] = useState(true)
     const [isPress, setIsPress] = useState(false)
 
@@ -32,7 +32,7 @@ const AddBrandHook = () => {
     //save data in database
     const handelSubmit = async (event) => {
         event.preventDefault();
-        if (name === "" || selectedFile === null) {
+        if (name?.trim() === "" || selectedFile === null) {
             notify('Please fill in all required information', "warn");
             return;
         }
@@ -62,6 +62,7 @@ const AddBrandHook = () => {
             }
 
             if (error) {
+                console.log(error)
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
                 } else {

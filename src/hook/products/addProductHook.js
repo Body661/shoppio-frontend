@@ -15,7 +15,7 @@ const AdminAddProductsHook = () => {
     //values state
     const [prodName, setProdName] = useState('');
     const [prodDescription, setProdDescription] = useState('');
-    const [priceBefore, setPriceBefore] = useState(0);
+    const [priceBefore, setPriceBefore] = useState('');
     const [priceAfter, setPriceAfter] = useState(0);
     const [qty, setQty] = useState(0);
     const [CatID, setCatID] = useState('');
@@ -144,13 +144,13 @@ const AdminAddProductsHook = () => {
         formData.append("description", prodDescription);
         formData.append("quantity", qty);
         formData.append("price", priceBefore);
-        formData.append("imageCover", imgCover);
+        formData.append("cover", imgCover);
         formData.append("category", CatID);
         formData.append("brand", BrandID);
         itemImages.map((item) => formData.append("images", item))
 
 
-        colors.map((color) => formData.append("availableColors", color))
+        colors.map((color) => formData.append("colors", color))
         selectedSubID.map((item) => formData.append("subcategory", item._id))
 
 
@@ -184,6 +184,7 @@ const AdminAddProductsHook = () => {
             }
 
             if (error) {
+                console.log(error)
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
                 } else {
