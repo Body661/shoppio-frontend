@@ -27,6 +27,8 @@ import AdminEditProductsPage from "./Page/Admin/AdminEditProductPage";
 import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
 import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
+import AdminAddCouponPage from "./Page/Admin/AdminAddCouponPage";
+import AdminEditCouponPage from "./Page/Admin/AdminEditCouponPage";
 
 function App() {
     return (
@@ -51,6 +53,8 @@ function App() {
                     <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
                     <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
                     <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
+                    <Route path="/admin/addCoupon" element={<AdminAddCouponPage />} />
+                    <Route path="/admin/editCoupon/:id" element={<AdminEditCouponPage />} />
                     <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
                     <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
                     <Route path="/user/addresses" element={<UserAllAddressPage/>}/>

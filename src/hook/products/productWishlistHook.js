@@ -72,13 +72,12 @@ const ProductWishlistHook = (item, favProd) => {
                 }
             }
         }
-        return function cleanup() {
-        };
     }, [loadingAdd])
 
     useEffect(() => {
         if (loadingRemove === false) {
-            if (resRemove?.status === 200) {
+            if (resRemove && resRemove?.status === 200) {
+                console.log(resRemove)
                 notify("Product is removed from your wishlist!", "warn")
             }
 
@@ -92,7 +91,6 @@ const ProductWishlistHook = (item, favProd) => {
                 }
             }
         }
-
     }, [loadingRemove])
 
 

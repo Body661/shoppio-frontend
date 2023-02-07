@@ -43,7 +43,7 @@ export const USER_WISHLIST = "USER_WISHLIST"
 
 // Coupon
 export const ADD_COUPON = "ADD_COUPON"
-export const GET_ALL_COUPON = "GET_ALL_COUPON"
+export const GET_ALL_COUPONS = "GET_ALL_COUPONS"
 export const DELETE_COUPON = "DELETE_COUPON"
 export const GET_ONE_COUPON = "GET_ONE_COUPON"
 export const EDIT_COUPON = "EDIT_COUPON"
