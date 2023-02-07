@@ -48,9 +48,11 @@ const RegisterHook = () => {
         }
         if (!validator.isStrongPassword(password)) {
             notify("Password is not strong enough", "error")
+            return;
         }
         if (password.trim() !== confirmPassword.trim()) {
             notify("Password and confirm password are not the same", "error")
+            return;
         }
 
         setValidate(true)
@@ -87,19 +89,12 @@ const RegisterHook = () => {
             }
 
             if (error) {
-                if (error.data.errors) {
-                    if (error.data.errors[0]?.msg === "Email address is already in use") notify("Email already exists", "error")
-                }
-                if (error.data.errors) {
-                    if (error.data.errors[0]?.msg === "Phone number is not valid") notify("Phone number is not valid", "error")
-                }
-
-                if (error.data.errors) {
-                    if (error.data.errors[0]?.msg === "Password is not strong enough") notify("Password must be at least 7 characters and contains letters, numbers and special characters", "error")
-                }
-
-                if (error.status === 400) {
+                if (error?.data?.errors) {
+                    notify(error?.data?.errors[0].msg, "error")
+                } else if (error.status === 400) {
                     notify("Bad request, please check if all information are correct", "error")
+                } else {
+                    notify("Error while creating account", "warn")
                 }
             }
         }

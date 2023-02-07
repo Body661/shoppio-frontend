@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getAllUserAddresses} from '../../redux/actions/userAddressActions';
 
 const ViewAddressesHook = () => {
-    const disptach = useDispatch()
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const get = async () => {
             setLoading(true)
-            await disptach(getAllUserAddresses());
+            await dispatch(getAllUserAddresses());
             setLoading(false)
         }
         get();

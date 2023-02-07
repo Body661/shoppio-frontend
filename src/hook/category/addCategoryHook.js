@@ -66,8 +66,8 @@ const AddCategoryHook = () => {
             if (error) {
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
-                } else if (error.status === 400) {
-                    notify("Category name already exists", "error");
+                } else if (error?.data?.errors) {
+                    notify(error?.data?.errors[0]?.msg, "error");
                 } else {
                     notify("Error while adding the new category", "error")
                 }

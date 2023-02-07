@@ -38,7 +38,7 @@ const AddBrandHook = () => {
         }
         const formData = new FormData();
         formData.append("name", name)
-        formData.append("image", selectedFile)
+        formData.append("img", selectedFile)
 
         setLoading(true)
         setIsPress(true)
@@ -62,9 +62,8 @@ const AddBrandHook = () => {
             }
 
             if (error) {
-                console.log(error)
-                if (error.status === 401) {
-                    notify('You are not legged please login', "error");
+                if (error?.data?.errors) {
+                    notify(error?.data?.errors[0].msg, "error");
                 } else {
                     notify("Error while adding the brand", "error");
                 }

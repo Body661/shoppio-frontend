@@ -56,15 +56,22 @@ const ProductWishlistHook = (item, favProd) => {
 
     useEffect(() => {
         if (loadingAdd === false) {
-            if (resAdd?.status === 200) {
+            if (resAdd && resAdd?.status === 200) {
                 notify("Product added to your wishlist", "success")
             }
 
-            if (error?.status === 401) {
-                notify("You are not logged in!", "error")
+            if (error) {
+                if (error?.status === 401) {
+                    notify("You are not logged in!", "error")
+                } else if (error?.data?.errors) {
+                    notify(error?.data?.errors[0]?.msg, "error");
+                } else if (error?.status === 403) {
+                    notify("Admins are not allowed to add product to wishlist", "error")
+                } else {
+                    notify("Error while adding product to wishlist", "error")
+                }
             }
         }
-
         return function cleanup() {
         };
     }, [loadingAdd])
@@ -75,8 +82,14 @@ const ProductWishlistHook = (item, favProd) => {
                 notify("Product is removed from your wishlist!", "warn")
             }
 
-            if (error?.status === 401) {
-                notify("You are not logged in!", "error")
+            if (error) {
+                if (error?.status === 401) {
+                    notify("You are not logged in!", "error")
+                } else if (error?.data?.errors) {
+                    notify(error?.data?.errors[0]?.msg, "error");
+                } else {
+                    notify("Error while removing product from wishlist", "error")
+                }
             }
         }
 

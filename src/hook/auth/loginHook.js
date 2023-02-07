@@ -53,12 +53,12 @@ const LoginHook = () => {
                     localStorage.removeItem("token")
                     localStorage.removeItem("user")
                     notify("Email or password is wrong", "error")
-                }
-
-                if (error.status === 400) {
+                } else if (error?.data?.errors) {
                     localStorage.removeItem("token")
                     localStorage.removeItem("user")
-                    notify("Bad request, please check if all information are correct", "error")
+                    notify(error?.data?.errors[0].msg, "error")
+                } else {
+                    notify("Error while logging in!", "warn")
                 }
             }
         }

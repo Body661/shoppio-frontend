@@ -184,9 +184,10 @@ const AdminAddProductsHook = () => {
             }
 
             if (error) {
-                console.log(error)
                 if (error.status === 401) {
                     notify('You are not legged please login', "error");
+                } else if (error?.data?.errors) {
+                    notify(error?.data?.errors[0]?.msg, "error");
                 } else {
                     notify("Error while adding product", "error");
                 }

@@ -43,7 +43,11 @@ const EditReviewHook = (review) => {
             }
 
             if (error) {
-                notify("Error while updating review", "error")
+                if (error?.data?.errors) {
+                    notify(error?.data?.errors[0].msg, "error");
+                } else {
+                    notify("Error while updating review", "error")
+                }
             }
 
         }

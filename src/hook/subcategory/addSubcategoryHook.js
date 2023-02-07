@@ -64,24 +64,19 @@ const AddSubcategoryHook = () => {
             setName("")
             setID(0)
 
-            if (subcategory) {
-                if (subcategory.status === 201) {
-                    notify('Subcategory added successfully', "success");
-                }
+            if (subcategory && subcategory.status === 201) {
+                notify('Subcategory added successfully', "success");
             }
 
             if (error) {
-                console.log(error)
                 if (error.status === 401) {
-                    notify('You are not legged please login', "error");
-                } else if (error?.data?.errors[0].msg === "Subcategory must be belong to a category") {
-                    notify("Subcategory must be belong to a category", "error");
-                } else if (error?.data?.errors[0].msg === "Subcategory name already exists") {
-                    notify("Subcategory name already exists", "error");
-                } else if (error?.data?.errors[0].msg === "Category ID is not valid") {
-                    notify("Category ID is not valid", "error")
+                    notify("You are not logged in, please log in!", "error");
+                } else if (error.status === 403) {
+                    notify("You are not allowed to do this operation", "error");
+                } else if (error?.data?.errors) {
+                    notify(error?.data.errors[0].msg, "error");
                 } else {
-                    notify("Error while adding subcategory", "error")
+                    notify("Error while adding subcategory", "error");
                 }
             }
 

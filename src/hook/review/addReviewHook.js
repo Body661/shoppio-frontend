@@ -46,14 +46,12 @@ const AddReviewHook = (id) => {
             }
 
             if (error) {
-                console.log(error)
-                if (error.status && error.status === 403) {
+                if (error.status === 403) {
                     notify("Admins are not allowed to add reviews", "error")
-                } else if (error.data?.errors && error.data?.errors[0].msg === "You have already reviewed") {
-                    notify("You have already reviewed", "error")
-                }
-                if (error.status === 401) {
-                    notify("Please login in to review", "error")
+                } else if (error?.data?.errors) {
+                    notify(error?.data?.errors[0].msg, "error");
+                } else {
+                    notify("Error while adding the review", "error");
                 }
             }
         }
