@@ -18,7 +18,7 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                 {
                     !loading && !error && (
                         products ? (
-                            products?.map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
+                            products?.slice(0,5).map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
                         ) : <h4 className="notFound">No Products found</h4>
                     )
                 }

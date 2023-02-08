@@ -60,7 +60,7 @@ const AddCouponHook = () => {
                 } else if (error?.data?.errors) {
                     notify(error?.data?.errors[0]?.msg, "error");
                 } else {
-                    notify("Error while removing product from wishlist", "error")
+                    notify("Error while adding coupon", "error")
                 }
             }
 
