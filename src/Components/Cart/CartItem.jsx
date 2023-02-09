@@ -1,17 +1,38 @@
 import React from 'react'
-import {Col, Row} from 'react-bootstrap'
-import mobile from '../../images/mobile.png'
+import {Button, Col, Modal, Row} from 'react-bootstrap'
 import deleteIcon from '../../images/delete.png'
+import DeleteCartHook from "../../hook/cart/deleteCartHook";
 
-const CartItem = () => {
+const CartItem = ({item}) => {
+    const [, show, handleClose, handleShow, handelDeleteItem, itemCount, onChangeCount, handleUpdateCart] = DeleteCartHook(item)
     return (
         <Col xs="12" className="cart-item-body my-2 d-flex px-2">
-            <img width="160px" height="197px" src={mobile} alt=""/>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                    <Modal.Title>
+                        <div className='font'>Confirm delete</div>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='font'>Are you sure you want to delete this product from your cart?</div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className='font' variant="success" onClick={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button className='font' variant="dark" onClick={handelDeleteItem}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <img width="160px" height="197px" src={item?.product?.cover} alt={item?.product?.title}/>
             <div className="w-100">
                 <Row className="justify-content-between">
                     <Col sm="12" className=" d-flex flex-row justify-content-between">
-                        <div className="d-inline pt-2 cat-text">Electronics</div>
-                        <div className="d-flex pt-2 " style={{cursor: "pointer"}}>
+                        <div className="d-inline pt-2 cat-text">{item?.product?.category?.name || "No category"}</div>
+                        <div onClick={handleShow} className="d-flex pt-2 " style={{cursor: "pointer"}}>
                             <img src={deleteIcon} alt="" width="20px" height="24px"/>
                             <div className="cat-text d-inline me-2">Delete</div>
                         </div>
@@ -20,37 +41,43 @@ const CartItem = () => {
                 <Row className="justify-content-center mt-2">
                     <Col sm="12" className=" d-flex flex-row justify-content-start">
                         <div className="d-inline pt-2 cat-title">
-                            Iphone XR 124GB red
+                            {item?.product?.title || "Product title not available"}
 
                         </div>
-                        <div className="d-inline pt-2 cat-rate me-2">4.5</div>
+                        <div className="d-inline pt-2 cat-rate me-2">{item?.product?.ratingsAvg || "No rating"}</div>
                     </Col>
                 </Row>
                 <Row>
                     <Col sm="12" className="mt-1">
                         <div className="cat-text d-inline">Brand :</div>
-                        <div className="barnd-text d-inline mx-1">Apple</div>
+                        <div className="brand-text d-inline mx-1">{item?.product?.brand?.name || "Unknown"} </div>
                     </Col>
                 </Row>
                 <Row>
                     <Col sm="12" className="mt-1 d-flex">
-                        <div
-                            className="color ms-2 border"
-                            style={{backgroundColor: "#E52C2C"}}></div>
+                        {
+                            item?.color && (<div
+                                className="color ms-2 border"
+                                style={{backgroundColor: `${item?.color}`}}></div>)
+                        }
+
                     </Col>
                 </Row>
 
                 <Row className="justify-content-between">
                     <Col sm="12" className=" d-flex flex-row justify-content-between">
                         <div className="d-inline pt-2 d-flex">
-                            <div className="cat-text  d-inline">Quantity</div>
+                            <div className="cat-text mt-2  d-inline">Quantity:</div>
                             <input
-                                className="mx-2 "
+                                value={itemCount}
+                                onChange={onChangeCount}
+                                className="mx-2 text-center"
                                 type="number"
-                                style={{width: "40px", height: "25px"}}
+                                style={{width: "60px", height: "40px"}}
                             />
+                            <Button onClick={handleUpdateCart} className='btn btn-dark'>Apply</Button>
                         </div>
-                        <div className="d-inline pt-2 barnd-text">500 EUR</div>
+                        <div className="d-inline pt-2 brand-text">{item?.product?.price || 0} Euro</div>
                     </Col>
                 </Row>
             </div>
