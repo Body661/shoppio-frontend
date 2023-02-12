@@ -69,8 +69,12 @@ const AdminAllProductsCard = ({item}) => {
                             <div className="d-flex justify-content-between">
                                 <div className="card-rate">{item?.ratingsQuantity}</div>
                                 <div className="d-flex">
+                                    <div className="card-price">{item.priceAfterDiscount >= 1 ?
+                                        (<div><span
+                                            style={{textDecorationLine: 'line-through'}}>{item.price}</span> {item.priceAfterDiscount}
+                                        </div>)
+                                        : item.price}</div>
                                     <div className="card-currency mx-1">Euro</div>
-                                    <div className="card-price">{item?.price}</div>
                                 </div>
                             </div>
                         </Card.Text>

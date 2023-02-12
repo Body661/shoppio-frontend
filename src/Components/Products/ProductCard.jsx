@@ -55,7 +55,11 @@ const ProductCard = ({item, favProd}) => {
                                 <div className="card-rate mx-2">{item?.ratingsAvg || 0}</div>
                             </div>
                             <div className="d-flex">
-                                <div className="card-price">{item?.price}</div>
+                                <div className="card-price">
+                                    {item.priceAfterDiscount >= 1 ?
+                                        (<div><span style={{ textDecorationLine: 'line-through' }}>{item.price}</span> {item.priceAfterDiscount}</div>)
+                                        : item.price}
+                                </div>
                                 <div className="card-currency mx-1">euro</div>
                             </div>
                         </div>

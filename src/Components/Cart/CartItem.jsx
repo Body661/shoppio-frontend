@@ -77,7 +77,10 @@ const CartItem = ({item}) => {
                             />
                             <Button onClick={handleUpdateCart} className='btn btn-dark'>Apply</Button>
                         </div>
-                        <div className="d-inline pt-2 brand-text">{item?.product?.price || 0} Euro</div>
+                        <div className="d-inline pt-2 brand-text">
+                            {item?.product?.priceAfterDiscount >= 1 ? (<><span
+                                style={{textDecorationLine: 'line-through'}}>{item?.product?.price}</span> {item?.product?.priceAfterDiscount}</>) : item?.product?.price} Euro
+                        </div>
                     </Col>
                 </Row>
             </div>

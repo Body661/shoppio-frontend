@@ -44,6 +44,7 @@ const ProductText = () => {
                         })) : null
                     }
 
+                    <div className="cat-text d-inline">Available quantity : {product?.quantity} </div>
 
                 </Col>
             </Row>
@@ -60,7 +61,7 @@ const ProductText = () => {
             </Row>
             <Row className="mt-4">
                 <Col md="12">
-                    <div className="product-price d-inline px-3 py-3 border">{product?.price} Euro</div>
+                    {product?.priceAfterDiscount >= 1 ? (<><span style={{ textDecorationLine: 'line-through' }}>{product?.price}</span> {product?.priceAfterDiscount}</>) : product?.price} Euro
                     <div onClick={addToCartHandel} className="product-cart-add px-3 py-3 d-inline mx-3">Add to cart
                     </div>
                 </Col>
