@@ -6,7 +6,8 @@ import cart from '../../images/cart.png'
 import NavbarSearchHook from "../../hook/search/navbarSearchHook";
 import {Link} from "react-router-dom";
 
-const NavBarLogin = () => {
+const NavBarLogin = ({isUser}) => {
+    console.log(isUser)
 
     const [OnKeyPressSearch, OnChangeSearch] = NavbarSearchHook()
     let word = "";
@@ -73,12 +74,14 @@ const NavBarLogin = () => {
                                 </Nav.Link>)
                         }
 
-                        <Nav.Link href='/cart' style={{color: "white"}}>
-                            <Link to='cart' className="nav-text d-flex mt-3 justify-content-center">
-                                <img src={cart} className="login-img" alt="Cart"/>
-                                <p style={{color: "black"}}>Cart</p>
-                            </Link>
-                        </Nav.Link>
+                        {isUser &&
+                            <Nav.Link href='/cart' style={{color: "white"}}>
+                                <Link to='cart' className="nav-text d-flex mt-3 justify-content-center">
+                                    <img src={cart} className="login-img" alt="Cart"/>
+                                    <p style={{color: "black"}}>Cart</p>
+                                </Link>
+                            </Nav.Link>
+                        }
                     </Nav>
                 </Navbar.Collapse> </Container>
         </Navbar>

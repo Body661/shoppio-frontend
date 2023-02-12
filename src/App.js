@@ -29,41 +29,86 @@ import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
 import AdminAddCouponPage from "./Page/Admin/AdminAddCouponPage";
 import AdminEditCouponPage from "./Page/Admin/AdminEditCouponPage";
+import React, {useEffect, useState} from "react";
+import {useJwt} from "react-jwt";
+import NotFoundPage from "./Components/Uitily/NotFoundPage";
 
 function App() {
+    const [isUser, setIsUser] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const {decodedToken, isExpired} = useJwt(localStorage.getItem("token"));
+
+    useEffect(() => {
+        if (decodedToken && !isExpired) {
+            if (decodedToken?.role === "admin") {
+                setIsAdmin(true)
+                setIsUser(false)
+            } else if (decodedToken?.role === "user") {
+                setIsAdmin(false)
+                setIsUser(true)
+            } else {
+                setIsAdmin(false)
+                setIsUser(false)
+            }
+        } else if (localStorage.getItem("token") && isExpired) {
+            localStorage.removeItem("token")
+            localStorage.removeItem("user")
+            window.location.reload();
+        }
+    }, [decodedToken, isExpired])
+
     return (
         <div className="font">
             <BrowserRouter>
-                <NavBarLogin/>
+                <NavBarLogin isUser={isUser}/>
+
                 <Routes>
                     <Route index element={<HomePage/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/register" element={<RegisterPage/>}/>
                     <Route path="/allCategory" element={<AllCategoryPage/>}/>
                     <Route path="/allBrands" element={<AllBrandPage/>}/>
                     <Route path="/products" element={<ShopProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductDetailsPage/>}/>
-                    <Route path="/cart" element={<CartPage/>}/>
-                    <Route path="/order/payMethod" element={<ChoosePayMethodPage/>}/>
-                    <Route path="/admin/allProducts" element={<AdminAllProductsPage/>}/>
-                    <Route path="/admin/allOrders" element={<AdminAllOrdersPage/>}/>
-                    <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
-                    <Route path="/admin/addBrand" element={<AdminAddBrandPage/>}/>
-                    <Route path="/admin/addCategory" element={<AdminAddCategoryPage/>}/>
-                    <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
-                    <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
-                    <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
-                    <Route path="/admin/addCoupon" element={<AdminAddCouponPage />} />
-                    <Route path="/admin/editCoupon/:id" element={<AdminEditCouponPage />} />
-                    <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
-                    <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
-                    <Route path="/user/addresses" element={<UserAllAddressPage/>}/>
-                    <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
-                    <Route path="/user/edit-address/:id" element={<UserEditAddressPage/>}/>
-                    <Route path="/user/profile" element={<UserProfilePage/>}/>
-                    <Route path="/user/forget-password" element={<ForgetPasswordPage/>}/>
-                    <Route path="/user/verify-code" element={<VerifyPasswordPage/>}/>
-                    <Route path="/user/reset-password" element={<ResetPasswordPage/>}/>
+
+                    {!isUser && !isAdmin && (
+                        <Route>
+                            <Route path="/register" element={<RegisterPage/>}/>
+                            <Route path="/login" element={<LoginPage/>}/>
+                            <Route path="/user/forget-password" element={<ForgetPasswordPage/>}/>
+                            <Route path="/user/verify-code" element={<VerifyPasswordPage/>}/>
+                            <Route path="/user/reset-password" element={<ResetPasswordPage/>}/>
+                        </Route>
+                    )}
+
+                    {isAdmin && (
+                        <Route>
+                            <Route path="/admin/allProducts" element={<AdminAllProductsPage/>}/>
+                            <Route path="/admin/allOrders" element={<AdminAllOrdersPage/>}/>
+                            <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
+                            <Route path="/admin/addBrand" element={<AdminAddBrandPage/>}/>
+                            <Route path="/admin/addCategory" element={<AdminAddCategoryPage/>}/>
+                            <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
+                            <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
+                            <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
+                            <Route path="/admin/addCoupon" element={<AdminAddCouponPage/>}/>
+                            <Route path="/admin/editCoupon/:id" element={<AdminEditCouponPage/>}/>
+                        </Route>
+                    )}
+
+                    {isUser && (
+                        <Route>
+                            <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
+                            <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
+                            <Route path="/user/addresses" element={<UserAllAddressPage/>}/>
+                            <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
+                            <Route path="/user/edit-address/:id" element={<UserEditAddressPage/>}/>
+                            <Route path="/user/profile" element={<UserProfilePage/>}/>
+                            <Route path="/cart" element={<CartPage/>}/>
+                            <Route path="/order/payMethod" element={<ChoosePayMethodPage/>}/>
+                        </Route>
+                    )}
+
+
+                    <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </BrowserRouter>
             <Footer/>
