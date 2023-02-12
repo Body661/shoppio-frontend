@@ -7,8 +7,6 @@ import NavbarSearchHook from "../../hook/search/navbarSearchHook";
 import {Link} from "react-router-dom";
 
 const NavBarLogin = ({isUser}) => {
-    console.log(isUser)
-
     const [OnKeyPressSearch, OnChangeSearch] = NavbarSearchHook()
     let word = "";
     if (sessionStorage.getItem("searchWord") !== null) word = sessionStorage.getItem("searchWord")
