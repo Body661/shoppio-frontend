@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProducts} from '../../redux/actions/ProductActions';
-import {getAllProductsPage} from '../../redux/actions/ProductActions';
+import {getAllProducts} from '../../redux/actions/productActions';
+import {getAllProductsPage} from '../../redux/actions/productActions';
 
 const ViewProductAdminHook = () => {
 

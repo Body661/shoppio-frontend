@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Col, Card, Row, Modal, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import {deleteProduct} from "../../redux/actions/ProductActions";
+import {deleteProduct} from "../../redux/actions/productActions";
 import {useDispatch} from "react-redux";
 
 const AdminAllProductsCard = ({item}) => {

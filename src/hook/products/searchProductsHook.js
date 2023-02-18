@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProductsSearch} from '../../redux/actions/ProductActions';
+import {getAllProductsSearch} from '../../redux/actions/productActions';
 
 const ViewSearchProductsHook = () => {
     let limit = 8;

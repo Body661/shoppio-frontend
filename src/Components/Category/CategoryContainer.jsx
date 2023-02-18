@@ -17,7 +17,7 @@ const CategoryContainer = () => {
                     !loading && !error && (
                         categories?.data ? (
                             categories?.data?.map((item, index) => {
-                                return (<CategoryCard key={index} title={item?.name} img={item?.img}/>)
+                                return (<CategoryCard key={index} id={item._id} title={item?.name} img={item?.img}/>)
                             })
                         ) : <h4 className="notFound">No categories found</h4>
                     )

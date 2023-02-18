@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {createProduct} from '../../redux/actions/ProductActions';
+import {createProduct} from '../../redux/actions/productActions';
 import notify from '../useNotification';
 import {useSelector, useDispatch} from 'react-redux'
 import {getAllCategories} from '../../redux/actions/CategoryAction'

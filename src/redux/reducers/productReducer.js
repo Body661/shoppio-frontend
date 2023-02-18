@@ -4,7 +4,7 @@ import {
     CREATE_PRODUCT,
     GET_PRODUCTS_BY_CATEGORY,
     GET_PRODUCT_DETAILS,
-    GET_ALL_PRODUCTS,
+    GET_ALL_PRODUCTS, GET_PRODUCTS_BY_BRAND, GET_PRODUCTS_BY_CATEGORY_HOME
 
 } from '../types'
 
@@ -13,6 +13,8 @@ const initState = {
     allProducts: [],
     product: [],
     productsByCategory: [],
+    productsByCategoryHome: [],
+    productsByBrand: [],
     deleteProduct: [],
     updateProduct: [],
     loading: true,
@@ -44,6 +46,20 @@ const productReducer = (state = initState, action) => {
             return {
                 ...state,
                 productsByCategory: action.payload.productsByCategory,
+                loading: false,
+                error: action.payload.error
+            }
+        case GET_PRODUCTS_BY_CATEGORY_HOME:
+            return {
+                ...state,
+                productsByCategoryHome: action.payload.productsByCategoryHome,
+                loading: false,
+                error: action.payload.error
+            }
+        case GET_PRODUCTS_BY_BRAND:
+            return {
+                ...state,
+                productsByBrand: action.payload.productsByBrand,
                 loading: false,
                 error: action.payload.error
             }

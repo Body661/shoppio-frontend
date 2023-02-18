@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react'
-import {getOneProduct} from '../../redux/actions/ProductActions';
+import {getOneProduct} from '../../redux/actions/productActions';
 import notify from './../useNotification';
 import {useSelector, useDispatch} from 'react-redux'
 import {getAllCategories} from '../../redux/actions/CategoryAction'
 import {getAllBrands} from '../../redux/actions/BrandActions';
-import {updateProduct} from '../../redux/actions/ProductActions';
+import {updateProduct} from '../../redux/actions/productActions';
 import {getSubcategory} from "../../redux/actions/SubcategoryActions";
 
 const AdminEditProductsHook = (id) => {

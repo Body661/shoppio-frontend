@@ -1,5 +1,6 @@
 import React from 'react'
 import {Col, Card} from 'react-bootstrap'
+import {Link} from "react-router-dom";
 
 const BrandCard = ({img, id}) => {
     return (
@@ -10,16 +11,9 @@ const BrandCard = ({img, id}) => {
             lg="2"
             key={id}
             className="my-2 d-flex justify-content-center">
-            <div
-                className="my-1 brand-card"
-                style={{
-                    width: "100%",
-                    height: "151px",
-                    borderRadius: "8px",
-                    border: "none",
-                }}>
+            <Link to={`/brands/${id}`} style={{ textDecoration: 'none' }} className="my-1 brand-card">
                 <Card.Img src={img}/>
-            </div>
+            </Link>
         </Col>
     )
 }

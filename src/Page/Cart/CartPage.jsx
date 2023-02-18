@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 import CartCheckout from '../../Components/Cart/CartCheckout'
 import CartItem from '../../Components/Cart/CartItem'
 import GetUserCartHook from "../../hook/cart/getUserCartHook";
-import {getOneProduct} from "../../redux/actions/ProductActions";
+import {getOneProduct} from "../../redux/actions/productActions";
 
 const CartPage = () => {
     const [, cartItems, totalCartPrice, couponNameRes, totalCartPriceAfterDiscount] = GetUserCartHook()

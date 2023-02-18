@@ -18,7 +18,7 @@ const HomeBrands = ({title, btnTitle, path}) => {
                     !loading && !error && (
                         brands?.data ? (
                             brands?.data?.map((item, index) => {
-                                return (<BrandCard key={index} img={item?.img}/>)
+                                return (<BrandCard key={index} img={item?.img} id={item._id}/>)
                             })
                         ) : <h4 className="notFound">No brands found</h4>
                     )

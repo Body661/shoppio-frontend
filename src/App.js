@@ -32,6 +32,8 @@ import AdminEditCouponPage from "./Page/Admin/AdminEditCouponPage";
 import React, {useEffect, useState} from "react";
 import {useJwt} from "react-jwt";
 import NotFoundPage from "./Components/Uitily/NotFoundPage";
+import ProductsByCategoryPage from "./Page/Products/ProductsByCategoryPage";
+import ProductsByBrandPage from "./Page/Products/ProductsByBrandPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -68,6 +70,8 @@ function App() {
                     <Route path="/allBrands" element={<AllBrandPage/>}/>
                     <Route path="/products" element={<ShopProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductDetailsPage/>}/>
+                    <Route path="/category/:id" element={<ProductsByCategoryPage/>}/>
+                    <Route path="/brands/:id" element={<ProductsByBrandPage/>}/>
 
                     {!isUser && !isAdmin && (
                         <Route>

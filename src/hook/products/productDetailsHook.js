@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {getOneProduct, getProductsByCategory} from '../../redux/actions/ProductActions';
+import {getOneProduct, getProductsByCategory} from '../../redux/actions/productActions';
 
 const ViewProductsDetailsHook = (prodID) => {
 
@@ -13,7 +13,7 @@ const ViewProductsDetailsHook = (prodID) => {
     const productsByCategory = useSelector((state) => state.allProducts.productsByCategory)
 
     useEffect(() => {
-        if (product?.data?.category) dispatch(getProductsByCategory(product?.data?.category?._id))
+        if (product?.data?.category) dispatch(getProductsByCategory("", "", product?.data?.category?._id))
 
     }, [product])
 

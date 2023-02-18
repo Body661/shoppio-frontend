@@ -4,7 +4,7 @@ import {
     UPDATE_PRODUCT,
     CREATE_PRODUCT,
     GET_PRODUCT_DETAILS,
-    GET_ALL_PRODUCTS, GET_PRODUCTS_BY_CATEGORY,
+    GET_ALL_PRODUCTS, GET_PRODUCTS_BY_CATEGORY, GET_PRODUCTS_BY_BRAND,GET_PRODUCTS_BY_CATEGORY_HOME
 
 } from '../types'
 import {useGetData} from '../../customHooks/useGetData';
@@ -98,10 +98,25 @@ export const getOneProduct = (id) => async (dispatch) => {
     }
 }
 
-//get one product with id
-export const getProductsByCategory = (id) => async (dispatch) => {
+export const getProductsByCategoryHome = (categoryID) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?category=${id}`);
+        const response = await useGetData(`/api/products?limit=4&category=${categoryID}`);
+        dispatch({
+            type: GET_PRODUCTS_BY_CATEGORY_HOME,
+            payload: {productsByCategoryHome: response, error: null},
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_PRODUCTS_BY_CATEGORY_HOME,
+            payload: {productsByCategoryHome: [], error: e.response},
+        })
+    }
+}
+
+export const getProductsByCategory = (page, limit, categoryID) => async (dispatch) => {
+    try {
+        const response = await useGetData(`/api/products?limit=${limit}&category=${categoryID}&page=${page}`);
         dispatch({
             type: GET_PRODUCTS_BY_CATEGORY,
             payload: {productsByCategory: response, error: null},
@@ -111,6 +126,22 @@ export const getProductsByCategory = (id) => async (dispatch) => {
         dispatch({
             type: GET_PRODUCTS_BY_CATEGORY,
             payload: {productsByCategory: [], error: e.response},
+        })
+    }
+}
+
+export const getProductsByBrand = (page, limit, brandID) => async (dispatch) => {
+    try {
+        const response = await useGetData(`/api/products?limit=${limit}&brand=${brandID}&page=${page}`);
+        dispatch({
+            type: GET_PRODUCTS_BY_BRAND,
+            payload: {productsByBrand: response, error: null},
+        })
+
+    } catch (e) {
+        dispatch({
+            type: GET_PRODUCTS_BY_BRAND,
+            payload: {productsByBrand: [], error: e.response},
         })
     }
 }

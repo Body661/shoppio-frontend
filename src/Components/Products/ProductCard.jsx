@@ -57,7 +57,9 @@ const ProductCard = ({item, favProd}) => {
                             <div className="d-flex">
                                 <div className="card-price">
                                     {item.priceAfterDiscount >= 1 ?
-                                        (<div><span style={{ textDecorationLine: 'line-through' }}>{item.price}</span> {item.priceAfterDiscount}</div>)
+                                        (<div><span
+                                            style={{textDecorationLine: 'line-through'}}>{item.price}</span> {item.priceAfterDiscount}
+                                        </div>)
                                         : item.price}
                                 </div>
                                 <div className="card-currency mx-1">euro</div>

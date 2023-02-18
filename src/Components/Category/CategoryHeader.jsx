@@ -10,11 +10,9 @@ const CategoryHeader = () => {
             <Container>
                 <Row>
                     <Col className="d-flex justify-content-start py-2 flex-wrap">
-                        <div className="cat-text-header ">All</div>
+                        <Link to={`/products`} className="cat-text-header">All</Link>
                         {
-                            categories?.data?.map(category => <Link to={`/products/category/:${category?._id}`}
-                                                                    key={category._id}
-                                                                    className="cat-text-header">{category.name}</Link>)
+                            categories?.data?.map(category => <Link to={`/category/${category?._id}`} key={category._id} className="cat-text-header">{category.name}</Link>)
                         }
                     </Col>
                 </Row>
