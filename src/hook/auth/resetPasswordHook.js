@@ -37,24 +37,20 @@ const ResetPasswordHook = () => {
     }
 
     const res = useSelector(state => state.authReducer.verifyPassword)
-    const error = useSelector(state => state.authReducer.error)
 
     useEffect(() => {
         if (loading === false) {
-            if (res) {
-                if (res.status === 200) {
-                    notify("Password reset successfully", "success")
-                    setTimeout(() => {
-                        navigate("/login")
-                    }, 1500);
-                }
+            if (res && res?.status === 200) {
+                notify("Password reset successfully", "success")
+                setTimeout(() => {
+                    navigate("/login")
+                }, 1500);
+            } else if (res?.status === 429) {
+                notify("Too many requests, try again after 1 hour", "error")
+            } else if (res?.status !== 200 && res?.status !== 429) {
+                notify("Something went wrong, please request a new code", "error")
             }
 
-            if (error) {
-                if (error.status !== 200) {
-                    notify("Something went wrong, please request a new code", "error")
-                }
-            }
         }
     }, [loading])
 

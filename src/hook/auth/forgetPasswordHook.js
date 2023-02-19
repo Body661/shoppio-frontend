@@ -29,26 +29,26 @@ const ForgetPasswordHook = () => {
     }
 
     const res = useSelector(state => state.authReducer.forgetPassword)
-    const error = useSelector(state => state.authReducer.error)
 
     useEffect(() => {
         if (loading === false) {
 
-            if (res) {
-                if (res.status === 200) {
-                    notify("Reset password code sent to your email successfully", "success")
-                    setTimeout(() => {
-                        navigate("/user/verify-code")
-                    }, 1000);
-                }
+            if (res?.status === 200) {
+                notify("Reset password code sent to your email successfully", "success")
+                setTimeout(() => {
+                    navigate("/user/verify-code")
+                }, 1000);
+            } else if (res?.data?.errors) {
+                notify(res?.data?.errors[0]?.msg, "error")
+            } else if (res?.status === 400) {
+                notify("Email not exists", "error")
+                localStorage.removeItem("user-email")
+            } else if (res?.status === 429 ) {
+                notify("Too many requests, try again after 1 hour", "error")
+            } else {
+                notify("Something went wrong, try again later", "error")
             }
 
-            if (error) {
-                if (error.status === 400) {
-                    notify("Email not exists", "error")
-                    localStorage.removeItem("user-email")
-                }
-            }
         }
     }, [loading])
 

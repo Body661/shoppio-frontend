@@ -33,19 +33,15 @@ const VerifyPasswordHook = () => {
 
     useEffect(() => {
         if (loading === false) {
-            if (res) {
-                if (res.status === 200) {
-                    notify("Code is correct", "success")
-                    setTimeout(() => {
-                        navigate("/user/reset-password")
-                    }, 1500);
-                }
-            }
-
-            if (error) {
-                if (error.status === 400) {
-                    notify("Code is wrong or expired", "error")
-                }
+            if (res && res.status === 200) {
+                notify("Code is correct", "success")
+                setTimeout(() => {
+                    navigate("/user/reset-password")
+                }, 1500);
+            } else if (error?.status === 400) {
+                notify("Code is wrong or expired", "error")
+            }else {
+                notify("Something went wrong, try again later", "error")
             }
         }
     }, [loading])

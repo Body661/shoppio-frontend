@@ -17,65 +17,49 @@ const initState = {
     resetPassword: [],
     userProfile: [],
     userChangePassword: [],
-    loading: true,
-    error: null
 }
 const authReducer = (state = initState, action) => {
     switch (action.type) {
         case CREATE_NEW_USER:
             return {
                 ...state,
-                createUser: action.payload.user,
-                loading: false,
-                error: action.payload.error
+                createUser: action.payload,
             }
         case LOGIN_USER:
             return {
                 ...state,
-                loginUser: action.payload.user,
-                loading: false,
-                error: action.payload.error
+                loginUser: action.payload,
             }
         case GET_CURRENT_USER:
             return {
                 ...state,
-                currentUser: action.payload.user,
-                loading: false,
-                error: action.payload.error
+                currentUser: action.payload,
             }
         case FORGET_PASSWORD:
             return {
                 ...state,
-                forgetPassword: action.payload.forgetPassword,
-                loading: false,
-                error: action.payload.error
+                forgetPassword: action.payload,
             }
         case VERIFY_PASSWORD:
             return {
                 ...state,
-                verifyPassword: action.payload.verifyPassword,
-                loading: false,
-                error: action.payload.error
+                verifyPassword: action.payload,
             }
         case RESET_PASSWORD:
             return {
                 ...state,
                 currentUser: [],
-                resetPassword: action.payload.resetPassword,
-                loading: false,
-                error: action.payload.error
+                resetPassword: action.payload,
             }
         case UPDATE_USER_PROFILE:
             return {
                 ...state,
-                userProfile: action.payload.profile,
-                error: action.payload.error
+                userProfile: action.payload,
             }
         case UPDATE_USER_PASSWORD:
             return {
                 ...state,
-                userChangePassword: action.payload.password,
-                error: action.payload.error
+                userChangePassword: action.payload,
             }
         default:
             return state;

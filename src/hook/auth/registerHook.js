@@ -35,31 +35,27 @@ const RegisterHook = () => {
 
     const validationValues = () => {
         if (name.trim() === "") {
-            notify("Please enter your name", "error")
-            return;
+            return notify("Please enter your name", "error")
+            ;
         }
         if (!validator.isEmail(email)) {
-            notify("Please enter a valid email address", "error")
-            return;
+            return notify("Please enter a valid email address", "error")
         }
         if (phone.length <= 10) {
-            notify("Please enter a valid phone number", "error")
-            return;
+            return notify("Please enter a valid phone number", "error")
         }
         if (!validator.isStrongPassword(password)) {
-            notify("Password is not strong enough", "error")
-            return;
+            return notify("Password is not strong enough", "error")
         }
         if (password.trim() !== confirmPassword.trim()) {
-            notify("Password and confirm password are not the same", "error")
-            return;
+            return notify("Password and confirm password are not the same", "error")
         }
 
         setValidate(true)
     }
 
     const res = useSelector(state => state.authReducer.createUser)
-    const error = useSelector(state => state.authReducer.error)
+
     //save data
     const OnSubmit = async () => {
         validationValues();
@@ -78,7 +74,7 @@ const RegisterHook = () => {
 
     useEffect(() => {
         if (loading === false) {
-            if (res) {
+            if (res && res?.status === 201) {
                 if (res.data?.token) {
                     localStorage.setItem("token", res.data.token)
                     notify("Account registered successfully", "success")
@@ -86,16 +82,14 @@ const RegisterHook = () => {
                         navigate('/login')
                     }, 2000);
                 }
-            }
-
-            if (error) {
-                if (error?.data?.errors) {
-                    notify(error?.data?.errors[0].msg, "error")
-                } else if (error.status === 400) {
-                    notify("Bad request, please check if all information are correct", "error")
-                } else {
-                    notify("Error while creating account", "warn")
-                }
+            } else if (res?.data?.errors) {
+                notify(res?.data?.errors[0]?.msg, "error")
+            } else if (res.status === 400) {
+                notify("Bad request, please check if all information are correct", "error")
+            } else if (res?.status === 429 ) {
+                notify("Too many requests, try again after 3 hours", "error")
+            } else {
+                notify("Error while creating account", "warn")
             }
         }
 

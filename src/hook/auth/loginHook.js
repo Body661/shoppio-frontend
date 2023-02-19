@@ -30,10 +30,10 @@ const LoginHook = () => {
         setIsPress(false)
     }
     const res = useSelector(state => state.authReducer.loginUser)
-    const error = useSelector(state => state.authReducer.error)
+
     useEffect(() => {
         if (loading === false) {
-            if (res) {
+            if (res && res?.status === 200) {
                 if (res.data?.token) {
                     localStorage.setItem("token", res.data.token)
                     localStorage.setItem("user", JSON.stringify(res.data.data))
@@ -46,20 +46,18 @@ const LoginHook = () => {
                     localStorage.removeItem("user")
                 }
                 setLoading(true)
-            }
-
-            if (error) {
-                if (error.status === 401) {
-                    localStorage.removeItem("token")
-                    localStorage.removeItem("user")
-                    notify("Email or password is wrong", "error")
-                } else if (error?.data?.errors) {
-                    localStorage.removeItem("token")
-                    localStorage.removeItem("user")
-                    notify(error?.data?.errors[0].msg, "error")
-                } else {
-                    notify("Error while logging in!", "warn")
-                }
+            } else if (res && res?.status === 401) {
+                localStorage.removeItem("token")
+                localStorage.removeItem("user")
+                notify("Email or password is wrong", "error")
+            } else if (res?.data?.errors) {
+                localStorage.removeItem("token")
+                localStorage.removeItem("user")
+                notify(res?.data?.errors[0].msg, "error")
+            } else if (res?.status === 429) {
+                notify("Too many requests, try again after 3 hours", "error")
+            } else {
+                notify("Error while logging in!", "warn")
             }
         }
     }, [loading])
