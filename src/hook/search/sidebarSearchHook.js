@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import ViewSearchProductsHook from "../products/searchProductsHook";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllCategories} from "../../redux/actions/CategoryAction";
+import {getAllCategories} from "../../redux/actions/CategoryActions";
 import {getAllBrands} from "../../redux/actions/BrandActions";
 
 const SidebarSearchHook = () => {

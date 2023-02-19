@@ -9,7 +9,7 @@ const AllBrand = () => {
     return (
         <div style={{minHeight: '670px'}}>
             <div style={{minHeight: '670px'}}>
-                <BrandContainer data={brands.data} loading={loading}/>
+                <BrandContainer data={brands?.data} loading={loading}/>
                 <Pagination pageCount={pageCount} onPress={getPage}/>
             </div>
         </div>

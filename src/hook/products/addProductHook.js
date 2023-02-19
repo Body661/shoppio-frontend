@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {createProduct} from '../../redux/actions/productActions';
 import notify from '../useNotification';
 import {useSelector, useDispatch} from 'react-redux'
-import {getAllCategories} from '../../redux/actions/CategoryAction'
+import {getAllCategories} from '../../redux/actions/CategoryActions'
 import {getAllBrands} from '../../redux/actions/BrandActions';
 import {getSubcategory} from "../../redux/actions/SubcategoryActions";
 

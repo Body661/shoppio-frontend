@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {createSubcategory} from '../../redux/actions/SubcategoryActions'
 import {useSelector, useDispatch} from 'react-redux'
 import notify from '../../hook/useNotification'
-import {getAllCategories} from '../../redux/actions/CategoryAction'
+import {getAllCategories} from '../../redux/actions/CategoryActions'
 
 const AddSubcategoryHook = () => {
 
