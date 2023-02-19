@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getAllCategories, getAllCategoriesPage} from "../../redux/actions/CategoryAction";
+import {getAllCategories, getAllCategoriesPage} from "../../redux/actions/CategoryActions";
 
 export const AllCategoriesHook = () => {
     const dispatch = useDispatch();

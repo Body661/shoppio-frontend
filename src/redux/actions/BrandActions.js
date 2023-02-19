@@ -9,13 +9,13 @@ export const getAllBrands = (limit) => async (dispatch) => {
 
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: response, error: null},
+            payload: response
         })
 
     } catch (e) {
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: [], error: e.response,},
+            payload: e.response
         })
     }
 }
@@ -26,13 +26,13 @@ export const getAllBrandsPage = (page) => async (dispatch) => {
         const response = await useGetData(`/api/v1/brands?limit=4&page=${page}`);
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: response, error: null},
+            payload: response
         })
 
     } catch (e) {
         dispatch({
             type: GET_ALL_BRANDS,
-            payload: {brands: [], error: e.response,},
+            payload: e.response
         })
     }
 }
@@ -43,13 +43,13 @@ export const getOneBrand = (id) => async (dispatch) => {
 
         dispatch({
             type: GET_ONE_BRAND,
-            payload: {brand: response, error: null},
+            payload: response
         })
 
     } catch (e) {
         dispatch({
             type: GET_ONE_BRAND,
-            payload: {brand: [], error: e.response},
+            payload: e.response
         })
     }
 }
@@ -60,13 +60,13 @@ export const createBrand = (formData) => async (dispatch) => {
         const response = await useInsertDataWithImage(`/api/brands`, formData);
         dispatch({
             type: CREATE_BRAND,
-            payload: {brand: response, error: null},
+            payload: response
         })
 
     } catch (e) {
         dispatch({
             type: CREATE_BRAND,
-            payload: {brand: [], error: e.response,},
+            payload: e.response
         })
     }
 }

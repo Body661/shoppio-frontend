@@ -27,12 +27,11 @@ const AddBrandHook = () => {
         }
     }
     const res = useSelector(state => state.allBrands.brands)
-    const error = useSelector(state => state.allBrands.error)
 
     //save data in database
     const handelSubmit = async (event) => {
         event.preventDefault();
-        if (name?.trim() === "" || selectedFile === null) {
+        if (name?.trim() === "" || !selectedFile) {
             notify('Please fill in all required information', "warn");
             return;
         }
@@ -55,19 +54,14 @@ const AddBrandHook = () => {
             setLoading(true)
             setTimeout(() => setIsPress(false), 1000)
 
-            if (res) {
-                if (res.status === 201) {
-                    notify('Brand added successfully', "success");
-                }
+            if (res && res.status === 201) {
+                notify('Brand added successfully', "success");
+            } else if (res?.data?.errors) {
+                notify(res?.data?.errors[0].msg, "error");
+            } else {
+                notify("Error while adding the brand", "error");
             }
 
-            if (error) {
-                if (error?.data?.errors) {
-                    notify(error?.data?.errors[0].msg, "error");
-                } else {
-                    notify("Error while adding the brand", "error");
-                }
-            }
         }
     }, [loading])
 
