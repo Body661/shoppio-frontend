@@ -1,12 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Row, Col} from 'react-bootstrap'
 import ViewAddressesHook from "../../hook/user/viewAddressesHook";
 import CashOrderHook from "../../hook/checkout/cashOrderHook";
 import {ToastContainer} from "react-toastify";
+import GetUserCartHook from "../../hook/cart/getUserCartHook";
+import OrderPayOnlineHook from "../../hook/checkout/onlineOrderHook";
+import notify from "../../hook/useNotification";
 
 const ChoosePayMethod = () => {
     const [res] = ViewAddressesHook()
-    const [handelChooseAddress, , handelCreateOrderCash] = CashOrderHook()
+    const [type, setType] = useState('')
+    const [handelChooseAddress, addressDetails, handelCreateOrderCash] = CashOrderHook()
+    const [handelCreateOrderOnline] = OrderPayOnlineHook(addressDetails)
+    const [, , totalCartPrice, , totalCartPriceAfterDiscount,] = GetUserCartHook()
+
+    const changeMethod = (e) => {
+        setType(e.target.value)
+    }
+
+    const handelPay = () => {
+        if (type === "online") {
+            handelCreateOrderOnline()
+        } else if (type === "cash") {
+            handelCreateOrderCash();
+        } else {
+            notify("Please select pay method", "warn")
+        }
+    }
 
     return (
         <div>
@@ -15,15 +35,16 @@ const ChoosePayMethod = () => {
                 <Row className="d-flex justify-content-between ">
                     <Col xs="12" className="my-2">
                         <input
+                            onChange={changeMethod}
                             style={{ cursor: 'pointer' }}
-                            name="group"
-                            id="group1"
+                            name="pay"
+                            id="pay1"
                             type="radio"
-                            value="card"
+                            value="online"
                             className="mt-2"
                         />
-                        <label style={{ cursor: 'pointer' }} className="mx-2" for="group1">
-                            Pay with cart or back
+                        <label style={{ cursor: 'pointer' }} className="mx-2" htmlFor="pay1">
+                            Online pay
                         </label>
                     </Col>
                 </Row>
@@ -31,13 +52,14 @@ const ChoosePayMethod = () => {
                 <Row className="mt-2">
                     <Col xs="12" className="d-flex">
                         <input style={{ cursor: 'pointer' }}
-                               name="group"
-                               id="group2"
+                               onChange={changeMethod}
+                               name="pay"
+                               id="pay2"
                                type="radio"
                                value="cash"
                                className="mt-2"
                         />
-                        <label style={{ cursor: 'pointer' }} className="mx-2" for="group2">
+                        <label style={{ cursor: 'pointer' }} className="mx-2" htmlFor="pay2">
                             Cash
                         </label>
                     </Col>
@@ -58,14 +80,19 @@ const ChoosePayMethod = () => {
                     </Col>
                 </Row>
 
-
-
             </div>
-
             <Row>
                 <Col xs="12" className="d-flex justify-content-end">
-                    <div className="product-price d-inline border">34000 Euro</div>
-                    <div onClick={handelCreateOrderCash} className="product-cart-add px-3 pt-2 d-inline me-2">Complete order</div>
+                    <div className="product-price d-inline   border">
+
+                        {
+                            totalCartPriceAfterDiscount >= 1 ?
+                                `${totalCartPrice} Euro ... After discount ${totalCartPriceAfterDiscount} ` :
+                                `${totalCartPrice} Euro`
+                        }
+
+                    </div>
+                    <div onClick={handelPay} className="product-cart-add px-3 pt-2 d-inline me-2">Complete order</div>
                 </Col>
             </Row>
             <ToastContainer />
@@ -74,3 +101,5 @@ const ChoosePayMethod = () => {
 }
 
 export default ChoosePayMethod
+
+
