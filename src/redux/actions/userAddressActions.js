@@ -70,7 +70,7 @@ export const deleteUserAddress = (id) => async (dispatch) => {
 export const getOneUserAddress = (id) => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/api/addresses/${id}`);
-
+        console.log(response)
         dispatch({
             type: GET_ONE_USER_ADDRESS,
             payload: {address: response, error: null},

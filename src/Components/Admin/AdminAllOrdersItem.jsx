@@ -1,57 +1,55 @@
 import React from 'react'
 import {Col, Row} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import mobile from '../../images/mobile.png'
 
-const AdminAllOrdersItem = () => {
+const AdminAllOrdersItem = ({ orderItem }) => {
+
     return (
         <Col sm="12">
-            <Link
-                to="/admin/orders/23"
-                className="cart-item-body my-2 px-1 d-flex"
-                style={{textDecoration: "none"}}>
-                <img width="160px" height="197px" src={mobile} alt=""/>
+            <Link to={`/admin/orders/${orderItem?._id}`}
+                  className="cart-item-body-admin my-2 px-1 d-flex px-2"
+                  style={{ textDecoration: "none" }}>
                 <div className="w-100">
                     <Row className="justify-content-between">
                         <Col sm="12" className=" d-flex flex-row justify-content-between">
-                            <div className="d-inline pt-2 cat-text">Order number: #2321</div>
-                            <div className="d-inline pt-2 cat-text">Delete</div>
+                            <div className="d-inline pt-2 cat-text"> Order id: {orderItem?._id}</div>
                         </Col>
                     </Row>
                     <Row className="justify-content-center mt-2">
                         <Col sm="12" className=" d-flex flex-row justify-content-start">
                             <div className="d-inline pt-2 cat-title">
-                                Iphone XR 124GB red color
+                                order from: {orderItem?.user?.name || ''}
                             </div>
-                            <div className="d-inline pt-2 cat-rate me-2">4.5</div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="12" className=" d-flex">
-                            <div className="mt-2  cat-text d-inline">Brand :</div>
-                            <div className="mt-1 brand-text d-inline mx-1">Apple</div>
-                            <div
-                                className="color  me-1 border"
-                                style={{backgroundColor: "#E52C2C"}}></div>
+                            <div style={{ color: 'black' }} className="d-inline pt-2 cat-rate me-2">  {orderItem?.user?.email || ''}</div>
                         </Col>
                     </Row>
 
-                    <Row className="justify-content-between">
-                        <Col sm="12" className=" d-flex flex-row justify-content-between">
-                            <div className="d-inline pt-2 d-flex">
-                                <div className="cat-text pt-1 d-inline">Quantity</div>
-                                <input
-                                    className="mx-2 mt-1"
-                                    type="number"
-                                    style={{width: "40px", height: "25px"}}
-                                />
+                    <Row className="d-flex justify-content-between">
+                        <Col className="d-flex">
+                            <div>
+                                <div style={{ color: 'black' }} className="d-inline"> Delivery status</div>
+                                <div className="d-inline mx-2 stat">{orderItem?.isDelivered === true ? 'Delivered' : 'Not delivered'}</div>
                             </div>
-                            <div className="d-inline pt-2 brand-text">500 EUR</div>
+                            <div>
+                                <div style={{ color: 'black' }} className="d-inline"> Payment status</div>
+                                <div className="d-inline mx-2 stat">{orderItem?.isPaid === true ? 'Paid' : 'Not paid'}</div>
+                            </div>
+
+                            <div>
+                                <div style={{ color: 'black' }} className="d-inline">Payment method</div>
+                                <div className="d-inline mx-2 stat">{orderItem?.paymentMethodType === 'cash' ? 'cash' : 'online'}</div>
+                            </div>
+                        </Col>
+                        <Col xs="6" className="d-flex justify-content-end">
+                            <div>
+                                <div className="brand-text">{orderItem?.totalOrderPrice || 0} euro</div>
+                            </div>
                         </Col>
                     </Row>
+
                 </div>
             </Link>
-        </Col>
+        </Col >
     )
 }
 
