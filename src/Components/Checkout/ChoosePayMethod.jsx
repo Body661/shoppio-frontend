@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap'
 import ViewAddressesHook from "../../hook/user/viewAddressesHook";
 import CashOrderHook from "../../hook/checkout/cashOrderHook";
 import {ToastContainer} from "react-toastify";
-import GetUserCartHook from "../../hook/cart/getUserCartHook";
+import GetUserCartHook from "../../hook/cart/useUserCart";
 import OrderPayOnlineHook from "../../hook/checkout/onlineOrderHook";
 import notify from "../../hook/useNotification";
 

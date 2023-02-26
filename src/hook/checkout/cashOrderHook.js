@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createOrderCash } from '../../redux/actions/checkOutActions';
 import { getOneUserAddress } from '../../redux/actions/userAddressActions';
 import notify from '../useNotification';
-import GetAllUserCartHook from './../cart/getUserCartHook';
+import GetAllUserCartHook from '../cart/useUserCart';
 
 const CashOrderHook = () => {
     const [loading, setLoading] = useState(true);

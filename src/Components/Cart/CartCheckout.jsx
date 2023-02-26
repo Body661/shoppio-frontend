@@ -1,52 +1,52 @@
-import React, {useEffect} from 'react'
-import {Row, Col} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import DeleteCartHook from "../../hook/cart/deleteCartHook";
-import ApplyCouponHook from "../../hook/cart/applyCartCoupon";
-import {ToastContainer} from "react-toastify";
+import React, {useEffect} from 'react';
+import {Row, Col} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import ApplyCouponHook from '../../hook/cart/useApplyCoupon';
+import {ToastContainer} from 'react-toastify';
+import useDeleteCart from "../../hook/cart/useDeleteCart";
 
-const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRes}) => {
-    const [handelDeleteCart] = DeleteCartHook()
-
-    const [couponName, onChangeCoupon, handelSubmitCoupon] = ApplyCouponHook();
+const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRes, items}) => {
+    const {handleClearCart} = useDeleteCart();
+    const {couponName, onChangeCoupon, handleSubmitCoupon} = ApplyCouponHook();
 
     useEffect(() => {
         if (couponNameRes) {
-            onChangeCoupon(couponNameRes)
+            onChangeCoupon(couponNameRes);
         }
-    }, [couponNameRes])
+    }, [couponNameRes]);
 
-    return (
-        <Row className="my-1 d-flex justify-content-center cart-checkout pt-3">
-            <Col xs="12" className="d-flex  flex-column  ">
-                <div className="d-flex  ">
+    if (items > 0) return (
+        <Row className='my-1 d-flex justify-content-center cart-checkout pt-4 pb-4'>
+            <Col xs='12' className='d-flex flex-column'>
+                <div className='d-flex'>
                     <input
                         value={couponName}
                         onChange={(e) => onChangeCoupon(e.target.value)}
-                        className="coupon-input d-inline text-center "
-                        placeholder="Coupon Name"
+                        className='coupon-input d-inline text-center '
+                        placeholder='Coupon Name'
                     />
-                    <button onClick={handelSubmitCoupon} className="coupon-btn d-inline ">apply</button>
+                    <button onClick={handleSubmitCoupon} className='coupon-btn d-inline '>
+                        Apply
+                    </button>
                 </div>
-                <div className="product-price d-inline w-100 my-3  border">
-                    {
-                        totalCartPriceAfterDiscount >= 1 ?
-                            `${totalCartPrice} Euro ... After discount: ${totalCartPriceAfterDiscount} ` :
-                            `${totalCartPrice} Euro`
-                    }
+                <div className='product-price d-inline w-100 my-3  border'>
+                    {totalCartPriceAfterDiscount >= 1
+                        ? `${totalCartPrice} Euro ... After discount: ${totalCartPriceAfterDiscount}`
+                        : `${totalCartPrice} Euro`}
                 </div>
-                <Link
-                    to="/order/payMethod"
-                    style={{textDecoration: "none"}}
-                    className="product-cart-add  d-inline ">
-
-                    <button className="product-cart-add w-100 px-2">Complete order</button>
+                <Link to='/order/payMethod' style={{textDecoration: 'none'}} className='product-cart-add  d-inline '>
+                    <button className='product-cart-add w-100 px-2'>Complete order</button>
                 </Link>
-                <button onClick={handelDeleteCart} className="product-cart-add w-100 px-2 my-1">Clear cart</button>
+
+                <button onClick={handleClearCart} className='product-cart-add w-100 px-2 my-1'>
+                    Clear cart
+                </button>
             </Col>
             <ToastContainer/>
         </Row>
-    )
-}
+    );
 
-export default CartCheckout
+    return null;
+};
+
+export default CartCheckout;

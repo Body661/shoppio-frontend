@@ -1,13 +1,13 @@
-import React from 'react'
-import {Row, Col} from 'react-bootstrap'
-import ViewProductsDetailsHook from "../../hook/products/productDetailsHook";
-import {useParams} from "react-router-dom";
-import AddToCartHook from "../../hook/cart/addToCartHook";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import ViewProductsDetailsHook from '../../hook/products/productDetailsHook';
+import UseAddToCart from '../../hook/cart/useAddToCart';
 
 const ProductText = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [product] = ViewProductsDetailsHook(id);
-    const [colorClick, indexColor, addToCartHandel] = AddToCartHook(id, product)
+    const { colorClick, indexColor, addToCartHandle } = UseAddToCart(id, product);
 
     return (
         <div>
@@ -25,30 +25,30 @@ const ProductText = () => {
             <Row>
                 <Col md="8" className="mt-4">
                     <div className="cat-text d-inline">Brand :</div>
-                    <div
-                        className="brand-text d-inline mx-1">{product?.brand?.name ? product?.brand?.name : "unknown"} </div>
+                    <div className="brand-text d-inline mx-1">
+                        {product?.brand?.name ?? 'unknown'}
+                    </div>
                 </Col>
             </Row>
             <Row>
                 <Col md="8" className="mt-1 d-flex">
-                    {
-                        product?.colors ? (product?.colors.map((color, index) => {
-                            return (<div
+                    {product?.colors &&
+                        product.colors.map((color, index) => (
+                            <div
                                 key={index}
                                 onClick={() => colorClick(index, color)}
                                 className="color ms-2 border"
                                 style={{
                                     backgroundColor: color,
-                                    border: indexColor === index ? '3px solid black' : 'none'
-                                }}></div>)
-                        })) : null
-                    }
-
-                    <div className="cat-text d-inline">Available quantity : {product?.quantity} </div>
-
+                                    border: indexColor === index ? '3px solid black' : 'none',
+                                }}
+                            ></div>
+                        ))}
+                    <div className="cat-text d-inline">
+                        Available quantity : {product?.quantity}
+                    </div>
                 </Col>
             </Row>
-
             <Row className="mt-4">
                 <div className="cat-text">Description :</div>
             </Row>
@@ -61,13 +61,27 @@ const ProductText = () => {
             </Row>
             <Row className="mt-4">
                 <Col md="12">
-                    {product?.priceAfterDiscount >= 1 ? (<><span style={{ textDecorationLine: 'line-through' }}>{product?.price}</span> {product?.priceAfterDiscount}</>) : product?.price} Euro
-                    <div onClick={addToCartHandel} className="product-cart-add px-3 py-3 d-inline mx-3">Add to cart
+                    {product?.priceAfterDiscount >= 1 ? (
+                        <>
+              <span style={{ textDecorationLine: 'line-through' }}>
+                {product?.price}
+              </span>{' '}
+                            {product?.priceAfterDiscount}
+                        </>
+                    ) : (
+                        product?.price
+                    )}{' '}
+                    Euro
+                    <div
+                        onClick={addToCartHandle}
+                        className="product-cart-add px-3 py-3 d-inline mx-3"
+                    >
+                        Add to cart
                     </div>
                 </Col>
             </Row>
         </div>
-    )
-}
+    );
+};
 
-export default ProductText
+export default ProductText;

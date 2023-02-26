@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import {createOrderOnline} from '../../redux/actions/checkOutActions';
 import notify from '../useNotification';
-import GetAllUserCartHook from './../cart/getUserCartHook';
+import GetAllUserCartHook from '../cart/useUserCart';
 
 
 const OrderPayOnlineHook = (addressDetails) => {

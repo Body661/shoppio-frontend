@@ -8,51 +8,44 @@ import {
 } from '../types'
 
 const initState = {
-    addToCart: [],
-    userCart: [],
-    clearCart: [],
-    deleteItem: [],
-    updateItem: [],
-    applyCoupon: [],
-    error: null
+    addToCart: null,
+    userCart: null,
+    clearCart: null,
+    deleteItem: null,
+    updateItem: null,
+    applyCoupon: null,
 }
 const cartReducer = (state = initState, action) => {
     switch (action.type) {
         case ADD_TO_CART:
             return {
                 ...state,
-                addToCart: action.payload.response,
-                error: action.payload.error
+                addToCart: action.payload,
             }
         case GET_USER_CART:
             return {
                 ...state,
-                userCart: action.payload.response,
-                error: action.payload.error
+                userCart: action.payload,
             }
         case CLEAR_USER_CART:
             return {
                 ...state,
-                clearCart: action.payload.response,
-                error: action.payload.error
+                clearCart: action.payload,
             }
         case DELETE_ITEM_FROM_CART:
             return {
                 ...state,
-                deleteItem: action.payload.response,
-                error: action.payload.error
+                deleteItem: action.payload,
             }
         case UPDATE_ITEM_IN_CART:
             return {
                 ...state,
-                updateItem: action.payload.response,
-                error: action.payload.error
+                updateItem: action.payload,
             }
         case APPLY_CART_COUPON:
             return {
                 ...state,
-                applyCoupon: action.payload.response,
-                error: action.payload.error
+                applyCoupon: action.payload,
             }
         default:
             return state;

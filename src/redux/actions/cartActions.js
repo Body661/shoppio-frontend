@@ -17,13 +17,13 @@ export const addProductToCart = (body) => async (dispatch) => {
         const response = await useInsertData(`/api/cart`, body);
         dispatch({
             type: ADD_TO_CART,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: ADD_TO_CART,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -35,13 +35,13 @@ export const getAllUserCartItems = () => async (dispatch) => {
         const response = await useGetDataToken(`/api/cart`);
         dispatch({
             type: GET_USER_CART,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: GET_USER_CART,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -52,13 +52,13 @@ export const clearAllCartItem = () => async (dispatch) => {
         const response = await useDeleteData(`/api/cart`);
         dispatch({
             type: CLEAR_USER_CART,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: CLEAR_USER_CART,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -69,13 +69,13 @@ export const deleteCartItem = (id) => async (dispatch) => {
 
         dispatch({
             type: DELETE_ITEM_FROM_CART,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: DELETE_ITEM_FROM_CART,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -86,13 +86,13 @@ export const updateCartItem = (id, body) => async (dispatch) => {
         const response = await useInsUpdateData(`/api/cart/${id}`, body);
         dispatch({
             type: UPDATE_ITEM_IN_CART,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: UPDATE_ITEM_IN_CART,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -104,13 +104,13 @@ export const applyCartCoupon = (body) => async (dispatch) => {
         const response = await useInsertData(`/api/cart/coupon`, body);
         dispatch({
             type: APPLY_CART_COUPON,
-            payload: {response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: APPLY_CART_COUPON,
-            payload: {response: null, error: e.response},
+            payload: e.response,
         })
     }
 }
