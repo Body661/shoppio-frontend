@@ -1,11 +1,18 @@
 import React from 'react'
 import {Row, Col, Spinner} from 'react-bootstrap'
-import addBrandHook from "../../hook/brand/addBrandHook";
 import {ToastContainer} from "react-toastify";
+import useAddBrand from "../../hook/brand/useAddBrand";
 
 const AdminAddBrand = () => {
-
-    const [img, name, loading, isPress, handelSubmit, onImageChange, onChangeName] = addBrandHook();
+    const {
+        img,
+        name,
+        loading,
+        isPress,
+        handleNameChange,
+        handleImageChange,
+        handleSubmit,
+    } = useAddBrand();
 
 
     return (
@@ -28,7 +35,7 @@ const AdminAddBrand = () => {
                             style={{display: "none"}}
                             type="file"
                             name="photo"
-                            onChange={onImageChange}
+                            onChange={handleImageChange}
                             id="upload-photo"
                         />
                     </div>
@@ -37,23 +44,34 @@ const AdminAddBrand = () => {
                         value={name}
                         className="input-form d-block mt-3 px-3"
                         placeholder="Brand name"
-                        onChange={onChangeName}
+                        onChange={handleNameChange}
                     />
                 </Col>
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save changes</button>
+                    <button
+                        onClick={handleSubmit}
+                        className="btn-save d-inline mt-2"
+                        disabled={!img || !name || loading}
+                    >
+                        Save changes
+                    </button>
                 </Col>
             </Row>
 
-            {
-                isPress ? loading ? <Spinner animation="border" variant="primary"/> :
-                    <h4>Brand added successfully</h4> : null
-            }
+            {isPress && (
+                <div className="mt-2">
+                    {loading ? (
+                        <Spinner animation="border" variant="primary"/>
+                    ) : (
+                        <h4>Brand added successfully</h4>
+                    )}
+                </div>
+            )}
             <ToastContainer/>
         </div>
-    )
+    );
 }
 
 export default AdminAddBrand

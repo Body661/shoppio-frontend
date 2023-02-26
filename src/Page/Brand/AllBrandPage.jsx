@@ -1,15 +1,15 @@
 import React from 'react'
 import BrandContainer from '../../Components/Brand/BrandContainer'
 import Pagination from '../../Components/Uitily/Pagination'
-import {AllBrandsHook} from "../../hook/brand/allBrandsHook";
+import {useAllBrands} from "../../hook/brand/useAllBrands";
 
 const AllBrand = () => {
-    const [brands, loading, pageCount, getPage] = AllBrandsHook();
+    const {brands, loading, error, pageCount, getPage} = useAllBrands();
 
     return (
         <div style={{minHeight: '670px'}}>
             <div style={{minHeight: '670px'}}>
-                <BrandContainer data={brands?.data?.data} loading={loading}/>
+                <BrandContainer brands={brands} loading={loading} error={error}/>
                 {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
             </div>
         </div>
