@@ -21,8 +21,8 @@ const ViewProductAdminHook = () => {
     const loading = useSelector((state) => state.allProducts.loading)
     const error = useSelector((state) => state.allProducts.error)
 
-    if (allProducts?.data) items = allProducts?.data;
-    if (allProducts?.paginationRes) pagination = allProducts?.paginationRes?.pages;
+    if (allProducts?.data?.data) items = allProducts?.data;
+    if (allProducts?.data?.paginationRes) pagination = allProducts?.data.paginationRes?.pages;
 
     return [items, pagination, onPress, loading, error]
 

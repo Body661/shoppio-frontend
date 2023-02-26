@@ -19,8 +19,8 @@ const AdminAddSubCategory = () => {
                     />
                     <select name="category" id="cat" className="select mt-3 px-2 " onChange={handelChange}>
                         <option value="0">Select main category</option>
-                        {
-                            category.data ? (category?.data.map(item => {
+                    {
+                            category?.data?.data ? (category?.data?.data?.map(item => {
                                 return (<option key={item?._id} value={item?._id}>{item?.name}</option>)
                             })) : null
                         }

@@ -77,8 +77,7 @@ const ProductWishlistHook = (item, favProd) => {
     useEffect(() => {
         if (loadingRemove === false) {
             if (resRemove && resRemove?.status === 200) {
-                console.log(resRemove)
-                notify("Product is removed from your wishlist!", "warn")
+                notify("Product is removed from your wishlist!", "success")
             }
 
             if (error) {

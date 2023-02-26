@@ -74,7 +74,7 @@ const AddSubcategoryHook = () => {
                 } else if (error.status === 403) {
                     notify("You are not allowed to do this operation", "error");
                 } else if (error?.data?.errors) {
-                    notify(error?.data.errors[0].msg, "error");
+                    notify(error?.data?.errors[0].msg, "error");
                 } else {
                     notify("Error while adding subcategory", "error");
                 }

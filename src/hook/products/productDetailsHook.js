@@ -13,19 +13,19 @@ const ViewProductsDetailsHook = (prodID) => {
     const productsByCategory = useSelector((state) => state.allProducts.productsByCategory)
 
     useEffect(() => {
-        if (product?.data?.category) dispatch(getProductsByCategory("", "", product?.data?.category?._id))
+        if (product?.data?.data?.category) dispatch(getProductsByCategory("", "", product?.data?.data?.category?._id))
 
     }, [product])
 
     //to view images gallery
     let images = []
-    if (product?.data?.images) images = product.data.images.push(product.data.cover)
-    if (product?.data?.images) images = product?.data?.images?.map((img) => ({original: img}))
+    if (product?.data?.data?.images) images = product?.data?.data?.images?.push(product?.data?.data?.cover)
+    if (product?.data?.data?.images) images = product?.data?.data?.images?.map((img) => ({original: img}))
 
     let products = []
-    if (productsByCategory) products = productsByCategory?.data;
+    if (productsByCategory?.data?.data) products = productsByCategory?.data?.data;
 
-    return [product.data, images, products]
+    return [product?.data?.data, images, products]
 }
 
 export default ViewProductsDetailsHook

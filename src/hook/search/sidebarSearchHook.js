@@ -23,12 +23,12 @@ const SidebarSearchHook = () => {
 
     //to get category
     let category = [];
-    if (allCategories.data)
-        category = allCategories.data
+    if (allCategories?.data?.data)
+        category = allCategories?.data?.data
 
     //to get category
     let brand = [];
-    if (allBrands.data) brand = allBrands.data
+    if (allBrands?.data?.data) brand = allBrands?.data?.data
 
     let queryCat = "", queryBrand = "";
 

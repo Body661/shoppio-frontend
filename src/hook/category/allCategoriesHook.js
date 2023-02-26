@@ -16,7 +16,7 @@ export const AllCategoriesHook = () => {
 
     //to get page count
     let pageCount = 0;
-    if (categories.paginationRes) pageCount = categories.paginationRes.pages
+    if (categories?.data?.paginationRes) pageCount = categories?.paginationRes?.pages
 
     //when press pagination
     const getPage = (page) => {

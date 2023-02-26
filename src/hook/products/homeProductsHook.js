@@ -16,10 +16,10 @@ const ViewHomeProductsHook = () => {
     const error = useSelector((state) => state.allProducts.error)
 
     let products = [];
-    if (allProducts?.data && allProducts?.data.length > 0) products = allProducts?.data;
+    if (allProducts?.data?.data && allProducts?.data?.data?.length > 0) products = allProducts?.data?.data;
 
     let categoryProducts = [];
-    if (allProductsByCategory?.data && allProductsByCategory?.data.length > 0) categoryProducts = allProductsByCategory?.data;
+    if (allProductsByCategory?.data?.data && allProductsByCategory?.data?.data?.length > 0) categoryProducts = allProductsByCategory?.data?.data;
 
     return [products, categoryProducts, loading, error]
 }

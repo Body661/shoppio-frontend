@@ -15,7 +15,7 @@ const DeleteReviewHook = (review) => {
     let user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(() => {
-        if (review.user._id === user._id) {
+        if (review?.user?._id === user?._id) {
             setIsUser(true);
         }
     }, [])
@@ -23,7 +23,7 @@ const DeleteReviewHook = (review) => {
 
     const handelDelete = async () => {
         setLoading(true)
-        await dispatch(deleteReviewOnProduct(review._id))
+        await dispatch(deleteReviewOnProduct(review?.product, review?._id))
         setLoading(false)
         handleClose();
     }
@@ -32,7 +32,7 @@ const DeleteReviewHook = (review) => {
 
     useEffect(() => {
         if (loading === false) {
-            if (res.status === 201) {
+            if (res && res.status === 200) {
                 notify("Review deleted successfully", "success")
                 setTimeout(() => {
                     window.location.reload()
@@ -46,7 +46,6 @@ const DeleteReviewHook = (review) => {
     }, [loading])
 
     return [isUser, handelDelete, handleShow, handleClose, showDelete]
-
 }
 
 export default DeleteReviewHook

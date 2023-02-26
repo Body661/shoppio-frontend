@@ -11,19 +11,19 @@ const CategoryContainer = () => {
             <div className="admin-content-text mt-2 ">All categories</div>
             <Row className='my-2 d-flex'>
                 {
-                    loading && !error && !categories.data && <Spinner animation="border" variant="primary"/>
+                    loading && !error && !categories?.data?.data && <Spinner animation="border" variant="primary"/>
                 }
                 {
                     !loading && !error && (
-                        categories?.data ? (
-                            categories?.data?.map((item, index) => {
-                                return (<CategoryCard key={index} id={item._id} title={item?.name} img={item?.img}/>)
+                        categories?.data?.data ? (
+                            categories?.data?.data?.map((item, index) => {
+                                return (<CategoryCard key={index} id={item?._id} title={item?.name} img={item?.img}/>)
                             })
                         ) : <h4 className="notFound">No categories found</h4>
                     )
                 }
                 {
-                    !loading && error && !categories.data && <h4 className="error">Something went wrong</h4>
+                    !loading && error && !categories?.data?.data && <h4 className="error">Something went wrong</h4>
                 }
             </Row>
         </Container>

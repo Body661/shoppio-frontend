@@ -8,7 +8,6 @@ import {useInsUpdateData} from '../../customHooks/useUpdateData';
 export const addCoupon = (body) => async (dispatch) => {
     try {
         const response = await useInsertData(`/api/coupons`, body);
-        console.log(response)
         dispatch({
             type: ADD_COUPON,
             payload: {coupon: response, error: null},

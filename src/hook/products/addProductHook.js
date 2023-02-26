@@ -99,8 +99,8 @@ const AdminAddProductsHook = () => {
 
     useEffect(() => {
         if (CatID || CatID.trim() !== "") {
-            if (subcategory.data) {
-                setOptions(subcategory.data)
+            if (subcategory?.data?.data) {
+                setOptions(subcategory?.data?.data)
             }
         }
     }, [CatID])

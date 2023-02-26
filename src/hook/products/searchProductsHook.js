@@ -44,7 +44,7 @@ const ViewSearchProductsHook = () => {
     const allProducts = useSelector((state) => state.allProducts.allProducts)
 
 
-    if (allProducts?.data) items = allProducts?.data;
+    if (allProducts?.data?.data) items = allProducts?.data?.data;
     if (allProducts?.paginationRes) pagination = allProducts.paginationRes.pages;
     if (allProducts?.results) results = allProducts?.results;
 

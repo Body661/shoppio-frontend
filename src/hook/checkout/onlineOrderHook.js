@@ -38,10 +38,8 @@ const OrderPayOnlineHook = (addressDetails) => {
     const order = useSelector(state => state.checkoutReducer.createOrderOnline)
     useEffect(() => {
         if (loading === false) {
-            if (order && order.session) {
-                if (order.session.url) {
-                    window.open(order.session.url, "_self")
-                }
+            if (order && order?.data?.session) {
+                window.open(order.data?.session?.url, "_self")
             } else if (order?.data?.errors) {
                 notify(order?.data?.errors[0]?.msg, "error")
             } else {

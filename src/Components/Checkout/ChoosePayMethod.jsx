@@ -71,8 +71,8 @@ const ChoosePayMethod = () => {
                         <select name="address" id="address" className="select mt-1 px-2 " onChange={handelChooseAddress} >
                             <option value="0">Please select delivery address</option>
                             {
-                                res?.data ? (res?.data?.map((item, index) => {
-                                    return <option key={item?._id} value={item?._id}>{item.alias}</option>
+                                res?.data?.data ? (res?.data?.data?.map((item, index) => {
+                                    return <option key={item?._id} value={item?._id}>{item?.alias}</option>
                                 })) : <option key={0} value={0}>No addresses added</option>
                             }
 

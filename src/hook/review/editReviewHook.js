@@ -7,25 +7,41 @@ const EditReviewHook = (review) => {
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true)
-
-    const [newRateText, setNewRateText] = useState(review.review);
-    const [newRateValue, setNewRateValue] = useState(review.rating);
+    const [newReview, setNewReview] = useState(review?.description)
+    const [newReviewTitle, setNewReviewTitle] = useState(review?.title)
+    const [newRateValue, setNewRateValue] = useState(review?.ratings)
 
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
 
-    const onChangeRateText = (e) => {
-        setNewRateText(e.target.value)
+    const onChangeReviewTitle = (e) => {
+        setNewReviewTitle(e.target.value)
+    }
+
+    const onChangeReview = (e) => {
+        setNewReview(e.target.value)
     }
     const OnChangeRateValue = (val) => {
         setNewRateValue(val)
     }
 
     const handelEdit = async () => {
-        setLoading(true)
-        await dispatch(updateReviewOnProduct(review._id, {
-            review: newRateText, rating: newRateValue
+        if (newReviewTitle.trim() === "") {
+            notify("Please write your review title", "error")
+            return
+        }
+
+        if (newReview.trim() === "") {
+            notify("Please write your review", "error")
+            return
+        }
+
+
+        await dispatch(updateReviewOnProduct(review?.product, review?._id, {
+            title: newReviewTitle,
+            description: newReview,
+            ratings: newRateValue
         }))
         setLoading(false)
         handleCloseEdit();
@@ -51,9 +67,11 @@ const EditReviewHook = (review) => {
             }
 
         }
+
+        return function cleanup() {};
     }, [loading])
 
-    return [showEdit, handleCloseEdit, handleShowEdit, handelEdit, onChangeRateText, newRateText, OnChangeRateValue, newRateValue]
+    return [showEdit, handleCloseEdit, handleShowEdit, handelEdit, onChangeReview, newReview, newReviewTitle, onChangeReviewTitle, OnChangeRateValue, newRateValue]
 
 }
 

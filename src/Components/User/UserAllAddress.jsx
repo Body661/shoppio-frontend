@@ -12,7 +12,7 @@ const UserAllAddress = () => {
             <div className="admin-content-text pb-4">Addresses</div>
 
             {
-                res.data ? (res.data.map((item, index) => {
+                res?.data?.data ? (res?.data?.data?.map((item, index) => {
                     return <UserAddressCard key={index} item={item} />
                 })) : <h6>No addresses</h6>
             }

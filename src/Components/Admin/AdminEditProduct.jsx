@@ -73,9 +73,9 @@ const AdminEditProducts = () => {
                         className="select input-form-area mt-3 px-2 ">
                         <option value="0">Main category</option>
                         {
-                            category.data ? (category.data.map((item) => {
+                            category?.data?.data ? (category?.data?.data?.map((item) => {
                                 return (
-                                    <option value={item._id}>{item.name}</option>
+                                    <option value={item?._id}>{item?.name}</option>
                                 )
                             })) : null
 
@@ -98,9 +98,9 @@ const AdminEditProducts = () => {
                         className="select input-form-area mt-3 px-2 ">
                         <option value="0">Select Brand</option>
                         {
-                            brand.data ? (brand.data.map((item) => {
+                            brand?.data?.data ? (brand?.data?.data?.map((item) => {
                                 return (
-                                    <option value={item._id}>{item.name}</option>
+                                    <option value={item?._id}>{item?.name}</option>
                                 )
                             })) : null
 

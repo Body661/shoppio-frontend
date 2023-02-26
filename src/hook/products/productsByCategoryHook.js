@@ -24,9 +24,8 @@ const ProductsByCategoryHook = (catID) => {
     let items = [];
     let pagination = [];
 
-    if (products?.data) items = products?.data;
-    if (products?.paginationRes) pagination = products?.pages;
-
+    if (products?.data?.data) items = products?.data?.data;
+    if (products?.data?.paginationRes) pagination = products?.pages;
 
     return [items, pagination, onPress]
 }

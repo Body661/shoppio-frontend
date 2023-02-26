@@ -23,16 +23,16 @@ const RateContainer = ({rateAvg, rateQty}) => {
 
         <RatePost/>
 
-        {!allReview.data && loading && !error && <Spinner animation={"border"} variant={"primary"}/>}
+        {!allReview?.data?.data && loading && !error && <Spinner animation={"border"} variant={"primary"}/>}
 
-        {allReview.data?.length > 0 && !loading && !error ? (allReview.data?.map((review, index) => {
+        {allReview.data?.data?.length > 0 && !loading && !error ? (allReview.data?.data?.map((review, index) => {
             return (<RateItem key={index} review={review}/>)
         })) : <h6>No reviews yet</h6>}
 
         {!allReview.data && !loading && error && <h6 className="error">something went wrong</h6>}
 
-        {allReview.paginationResult && allReview.paginationResult.numberOfPages >= 2 ? (
-            <Pagination pageCount={allReview.paginationResult ? allReview.paginationResult.numberOfPages : 0}
+        {allReview?.paginationResult && allReview?.paginationResult?.numberOfPages >= 2 ? (
+            <Pagination pageCount={allReview.paginationResult ? allReview?.paginationResult?.numberOfPages : 0}
                         onPress={onPress}/>) : null}
     </Container>)
 }

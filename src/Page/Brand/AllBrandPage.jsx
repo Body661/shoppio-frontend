@@ -9,8 +9,8 @@ const AllBrand = () => {
     return (
         <div style={{minHeight: '670px'}}>
             <div style={{minHeight: '670px'}}>
-                <BrandContainer data={brands?.data} loading={loading}/>
-                <Pagination pageCount={pageCount} onPress={getPage}/>
+                <BrandContainer data={brands?.data?.data} loading={loading}/>
+                {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
             </div>
         </div>
     )

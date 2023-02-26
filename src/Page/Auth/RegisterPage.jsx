@@ -1,14 +1,26 @@
 import React from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import {ToastContainer} from "react-toastify";
-import RegisterHook from "../../hook/auth/registerHook";
+import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { ToastContainer } from "react-toastify";
+import UseRegister from "../../hook/auth/useRegister";
 
 const RegisterPage = () => {
-    const [name, email, phone, password, confirmPassword, , onChangeName, onChangeEmail, onChangePhone, onChangePassword, onChangeConfirmPassword, OnSubmit] = RegisterHook();
+    const {
+        name,
+        email,
+        phone,
+        password,
+        confirmPassword,
+        onChangeName,
+        onChangeEmail,
+        onChangePhone,
+        onChangePassword,
+        onChangeConfirmPassword,
+        onSubmit,
+    } = UseRegister();
 
     return (
-        <Container style={{minHeight: "680px"}}>
+        <Container style={{ minHeight: "680px" }}>
             <Row className="py-5 d-flex justify-content-center height-search">
                 <Col sm="12" className="d-flex flex-column ">
                     <label className="mx-auto title-login">Register</label>
@@ -47,18 +59,16 @@ const RegisterPage = () => {
                         type="password"
                         className="user-input text-center mt-3 mx-auto"
                     />
-                    <button onClick={OnSubmit} className="btn-login mx-auto mt-4">Create account</button>
+                    <button onClick={onSubmit} className="btn-login mx-auto mt-4">Create account</button>
                     <label className="mx-auto my-4">
                         Already have an account?{" "}
-                        <Link to="/login" style={{textDecoration: "none"}}>
-              <span style={{cursor: "pointer"}} className="text-danger">
-                Login
-              </span>
+                        <Link to="/login" style={{ textDecoration: "none", cursor: "pointer", color: "red" }}>
+                            Login
                         </Link>
                     </label>
                 </Col>
             </Row>
-            <ToastContainer/>
+            <ToastContainer />
         </Container>
     )
 }

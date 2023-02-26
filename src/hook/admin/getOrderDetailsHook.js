@@ -22,10 +22,10 @@ const GetOrderDetailsHook = (id) => {
     const order = useSelector(state => state.orderReducer.getOneOrder)
     useEffect(() => {
         if (loading === false) {
-            if (order?.data)
-                setOrderData(order?.data)
-            if (order?.data?.cartItems)
-                setCartItems(order?.data?.cartItems)
+            if (order?.data?.data)
+                setOrderData(order?.data?.data)
+            if (order?.data?.data?.cartItems)
+                setCartItems(order?.data?.data?.cartItems)
         }
     }, [loading])
 

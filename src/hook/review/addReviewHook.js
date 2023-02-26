@@ -5,28 +5,39 @@ import {createReview} from '../../redux/actions/reviewActions';
 
 const AddReviewHook = (id) => {
     const dispatch = useDispatch();
-    const [rateText, setRateText] = useState('')
-    const [rateValue, setRateValue] = useState(0)
+    const [review, setReview] = useState('')
+    const [reviewTitle, setReviewTitle] = useState('')
+    const [rateValue, setRateValue] = useState(5)
     const [loading, setLoading] = useState(true)
 
-    const OnChangeRateText = (e) => {
-        setRateText(e.target.value)
+    const OnChangeReview = (e) => {
+        setReview(e.target.value)
+    }
+    const OnChangeReviewTitle = (e) => {
+        setReviewTitle(e.target.value)
     }
     const OnChangeRateValue = (val) => {
         setRateValue(val)
     }
-    let user = ""
+    let user = null
     if (localStorage.getItem("user") != null) user = JSON.parse(localStorage.getItem("user"))
 
     const onSubmit = async () => {
-        if (rateText.trim() === "") {
+        if (reviewTitle.trim() === "") {
+            notify("Please write your review title", "error")
+            return
+        }
+
+        if (review.trim() === "") {
             notify("Please write your review", "error")
             return
         }
+
         setLoading(true)
         await dispatch(createReview(id, {
-            review: rateText,
-            rating: rateValue
+            title: reviewTitle,
+            description: review,
+            ratings: rateValue
         }))
         setLoading(false)
     }
@@ -55,9 +66,11 @@ const AddReviewHook = (id) => {
                 }
             }
         }
+
+        return function cleanup() {};
     }, [loading])
 
-    return [OnChangeRateText, OnChangeRateValue, rateText, rateValue, user, onSubmit]
+    return [OnChangeReview, OnChangeRateValue, review, reviewTitle, OnChangeReviewTitle, rateValue, user, onSubmit]
 }
 
 export default AddReviewHook

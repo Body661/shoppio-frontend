@@ -63,12 +63,12 @@ const EditAddressHook = (id) => {
     useEffect(() => {
         if (loading === false) {
             if (resAddress && resAddress.status === 200) {
-                setAlias(resAddress.data?.alias)
-                setStreet(resAddress.data?.street)
-                setPostalCode(resAddress.data?.postalCode)
-                setPhone(resAddress.data?.phone)
-                setCity(resAddress.data?.city)
-                setCountry(resAddress.data?.country)
+                setAlias(resAddress.data?.data.alias)
+                setStreet(resAddress.data?.data.street)
+                setPostalCode(resAddress.data?.data.postalCode)
+                setPhone(resAddress.data?.data.phone)
+                setCity(resAddress.data.data?.city)
+                setCountry(resAddress.data?.data.country)
             }
         }
     }, [loading])
@@ -105,7 +105,7 @@ const EditAddressHook = (id) => {
                 } else if (error.status === 403) {
                     notify("You are not allowed to do this operation", "error");
                 } else if (error?.data?.errors) {
-                    notify(error?.data.errors[0].msg, "error");
+                    notify(error?.data?.errors[0].msg, "error");
                 } else {
                     notify("Error while updating address", "error")
                 }

@@ -27,8 +27,8 @@ const CashOrderHook = () => {
     const resAddress = useSelector(state => state.userAddressesReducer.oneAddress)
     useEffect(() => {
         if (loading === false) {
-            if (resAddress && resAddress?.data) {
-                setAddressDetails(resAddress?.data)
+            if (resAddress && resAddress?.data?.data) {
+                setAddressDetails(resAddress?.data?.data)
             }
         }
     }, [loading])

@@ -17,7 +17,7 @@ export const AllBrandsHook = () => {
 
     //to get page count
     let pageCount = 0;
-    if (brands.paginationRes) pageCount = brands.paginationRes.pages
+    if (brands?.data?.paginationRes) pageCount = brands?.data?.paginationRes?.pages
 
     //when press pagination
     const getPage = (page) => {

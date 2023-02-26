@@ -24,8 +24,8 @@ const ProductContainerHook = () => {
     useEffect(() => {
 
         if (loading === false) {
-            if (res.data?.length >= 1) {
-                setFavProd(res.data?.map(item => item._id))
+            if (res.data?.data?.length >= 1) {
+                setFavProd(res.data?.data?.map(item => item._id))
             } else setFavProd([])
         }
 

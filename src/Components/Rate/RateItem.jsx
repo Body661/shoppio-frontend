@@ -2,16 +2,15 @@ import {Row, Col, Modal, Button} from 'react-bootstrap'
 import rate from '../../images/rate.png'
 import {ToastContainer} from 'react-toastify';
 import deleteIcon from '../../images/delete.png'
-import editIcon from '../../images/delete.png'
+import editIcon from '../../images/edit.png'
 import DeleteReviewHook from '../../hook/review/deleteReviewHook'
 import EditReviewHook from '../../hook/review/editReviewHook'
 import ReactStars from 'react-rating-stars-component'
+import React from "react";
 
 const RateItem = ({review}) => {
-
-
     const [isUser, handelDelete, handleShow, handleClose, showDelete] = DeleteReviewHook(review);
-    const [showEdit, handleCloseEdit, handleShowEdit, handelEdit, onChangeRateText, newRateText, OnChangeRateValue, newRateValue] = EditReviewHook(review)
+    const [showEdit, handleCloseEdit, handleShowEdit, handelEdit, onChangeReview, newReview, newReviewTitle, onChangeReviewTitle, OnChangeRateValue, newRateValue] = EditReviewHook(review)
 
     const setting = {
         size: 20,
@@ -61,12 +60,21 @@ const RateItem = ({review}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <ReactStars {...setting} />
+
                     <input
-                        onChange={onChangeRateText}
-                        value={newRateText}
-                        type="text"
-                        className='font w-100'
-                        style={{border: 'none'}}
+                        value={newReviewTitle}
+                        onChange={onChangeReviewTitle}
+                        className="input-form p-2 mt-3"
+                        placeholder="Write your review title...."
+                    />
+
+                    <textarea
+                        value={newReview}
+                        onChange={onChangeReview}
+                        className="input-form-area p-2 mt-3"
+                        rows="2"
+                        cols="20"
+                        placeholder="Write your review...."
                     />
                 </Modal.Body>
                 <Modal.Footer>
@@ -81,26 +89,27 @@ const RateItem = ({review}) => {
 
             <Row className="mt-3">
                 <Col className="d-flex me-5">
-                    <div className="rate-name  d-inline ms-2">{review.user.name}</div>
-                    <img className="" src={rate} alt="" height="16px" width="16px"/>
-                    <div className="cat-rate  d-inline  p-1 pt-2">{review.rating}</div>
+                    <div className="rate-name  d-inline">{review?.user?.name}</div>
+                    <div className="cat-rate  d-inline p-0 ps-2">{review?.ratings}</div>
+                    <img src={rate} className="ms-2" alt="stars" height="16px" width="16px"/>
                 </Col>
             </Row>
             <Row className="border-bottom mx-2">
-                <Col className="d-flex me-4 pb-2">
-                    <div className="rate-description  d-inline ms-2">
-                        {review.description}
+                <Col className="d-flex me-4 pb-2 flex-column">
+                    <div className="ms-2">
+                      <b>{review?.title}</b>
                     </div>
-                    {
-                        isUser === true ? (<div className='d-inline d-flex justify-content-end'>
-                            <img src={deleteIcon} onClick={handleShow} width="20px" height="20px"
-                                 style={{cursor: "pointer"}} alt="delete"/>
-
-                            <img src={editIcon} onClick={handleShowEdit} width="20px" height="20px"
-                                 style={{cursor: "pointer"}} alt="delete"/>
-
-                        </div>) : null
-                    }
+                    <div className="rate-description ms-2">
+                        {review?.description}
+                        {
+                            isUser === true ? (<div className='d-inline d-flex justify-content-end'>
+                                <img src={editIcon} onClick={handleShowEdit} width="30px" height="30px"
+                                     style={{cursor: "pointer"}} alt="edit"/>
+                                <img src={deleteIcon} onClick={handleShow} width="30px" height="30px"
+                                     style={{cursor: "pointer"}} alt="delete"/>
+                            </div>) : null
+                        }
+                    </div>
 
                 </Col>
             </Row>

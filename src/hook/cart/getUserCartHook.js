@@ -26,19 +26,19 @@ const GetUserCartHook = () => {
 
     useEffect(() => {
         if (loading === false) {
-            if (res && res.data) {
-                setItemsNum(res?.data?.cartItems?.length)
-                setCartItems(res?.data?.cartItems)
-                setTotalCartPrice(res?.data?.totalCartPrice)
-                setCartID(res?.data?._id)
+            if (res && res?.data?.data) {
+                setItemsNum(res?.data?.data?.cartItems?.length)
+                setCartItems(res?.data?.data?.cartItems)
+                setTotalCartPrice(res?.data?.data?.totalCartPrice)
+                setCartID(res?.data?.data?._id)
 
-                if (res?.data?.coupon) {
-                    setCouponName(res?.data?.coupon)
+                if (res?.data?.data?.coupon) {
+                    setCouponName(res?.data?.data?.coupon)
                 } else {
                     setCouponName('')
                 }
-                if (res?.data?.totalPriceAfterDiscount) {
-                    setTotalCartPriceAfterDiscount(res?.data?.totalPriceAfterDiscount)
+                if (res?.data?.data?.totalPriceAfterDiscount) {
+                    setTotalCartPriceAfterDiscount(res?.data?.data?.totalPriceAfterDiscount)
                 } else {
                     setTotalCartPriceAfterDiscount(0)
                 }

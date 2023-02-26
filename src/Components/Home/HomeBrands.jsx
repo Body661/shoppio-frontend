@@ -12,13 +12,13 @@ const HomeBrands = ({title, btnTitle, path}) => {
             <SubTitle title={title} btnTitle={btnTitle} pathText={path}/>
             <Row className='my-1 d-flex justify-content-center'>
                 {
-                    loading && !error && !brands?.data && <Spinner animation="border" variant="primary"/>
+                    loading && !error && !brands?.data?.data && <Spinner animation="border" variant="primary"/>
                 }
                 {
                     !loading && !error && (
-                        brands?.data ? (
-                            brands?.data?.map((item, index) => {
-                                return (<BrandCard key={index} img={item?.img} id={item._id}/>)
+                        brands?.data?.data ? (
+                            brands?.data?.data?.map((item, index) => {
+                                return (<BrandCard key={index} img={item?.img} id={item?._id}/>)
                             })
                         ) : <h4 className="notFound">No brands found</h4>
                     )

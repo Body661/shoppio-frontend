@@ -31,12 +31,11 @@ const UserGetAllOrdersHook = () => {
     }
 
     const orders = useSelector(state => state.orderReducer.getAllOrders)
-
     useEffect(() => {
         if (loading === false) {
-            if (orders?.results) setResult(orders?.amount)
-            if (orders?.paginationRes) setPaginate(orders?.paginationRes)
-            if (orders?.data) setOrderData(orders?.data)
+            if (orders?.data?.amount) setResult(orders?.data?.amount)
+            if (orders?.data?.paginationRes) setPaginate(orders?.data?.paginationRes)
+            if (orders?.data?.data) setOrderData(orders?.data?.data)
         }
     }, [loading])
 

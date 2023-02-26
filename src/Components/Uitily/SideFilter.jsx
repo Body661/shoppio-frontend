@@ -16,7 +16,7 @@ const SideFilter = () => {
                         <div className="filter-sub me-2 ">All</div>
                     </div>
                     {
-                        category ? (category.map((item, index) => {
+                        category ? (category?.map((item, index) => {
                             return (
                                 <div key={index} className="d-flex mt-3">
                                     <input onChange={clickCategory} type="checkbox" value={item._id}/>

@@ -24,8 +24,8 @@ const ProductsByBrandHook = (brandID) => {
     let items = [];
     let pagination = [];
 
-    if (products.data) items = products?.data;
-    if (products?.paginationRes) pagination = products?.pages;
+    if (products?.data?.data) items = products?.data?.data;
+    if (products?.data?.paginationRes) pagination = products?.data?.pages;
 
 
     return [items, pagination, onPress]

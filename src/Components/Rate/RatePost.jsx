@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom';
 
 const RatePost = () => {
     const {id} = useParams();
-    const [OnChangeRateText, OnChangeRateValue, rateText, , user, onSubmit] = AddReviewHook(id)
+    const  [OnChangeReview, OnChangeRateValue, review, reviewTitle, OnChangeReviewTitle, rateValue, user, onSubmit] = AddReviewHook(id)
 
     let name = ""
     if (user) name = user.name
@@ -17,7 +17,7 @@ const RatePost = () => {
         count: 5,
         color: "#979797",
         activeColor: "#ffc107",
-        value: 7.5,
+        value: 5,
         a11y: true,
         isHalf: true,
         emptyIcon: <i className="far fa-star"/>,
@@ -36,16 +36,23 @@ const RatePost = () => {
                 </Col>
             </Row>
             <Row className="border-bottom mx-2">
-                <Col className="d-flex me-4 pb-2">
+                <Col className="d-flex me-4 pb-2 flex-column">
+                    <input
+                        value={reviewTitle}
+                        onChange={OnChangeReviewTitle}
+                        className="input-form p-2 mt-3"
+                        placeholder="Write your review title...."
+                    />
+
                     <textarea
-                        value={rateText}
-                        onChange={OnChangeRateText}
+                        value={review}
+                        onChange={OnChangeReview}
                         className="input-form-area p-2 mt-3"
                         rows="2"
                         cols="20"
                         placeholder="Write your review...."
                     />
-                    <div className=" d-flex justify-content-end al">
+                    <div className="d-flex justify-content-end mt-3">
                         <div onClick={onSubmit} className="product-cart-add px-3  py-2 text-center d-inline">Submit
                         </div>
                     </div>

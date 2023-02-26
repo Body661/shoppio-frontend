@@ -53,16 +53,16 @@ const AdminEditProductsHook = (id) => {
 
 
     useEffect(() => {
-        if (item.data) {
-            setImages(item.data?.images)
-            setProdName(item.data?.title)
-            setProdDescription(item.data?.description)
-            setPriceBefore(item.data?.price)
-            setPriceAfter(item.data?.priceAfterDiscount)
-            setQty(item.data?.quantity)
-            setCatID(item.data?.category?._id)
-            SetBrandID(item.data?.brand?._id)
-            setColors(item.data?.colors)
+        if (item.data.data) {
+            setImages(item.data?.data.images)
+            setProdName(item.data?.data.title)
+            setProdDescription(item.data?.data.description)
+            setPriceBefore(item.data?.data.price)
+            setPriceAfter(item.data?.data.priceAfterDiscount)
+            setQty(item.data?.data.quantity)
+            setCatID(item.data?.data.category?._id)
+            SetBrandID(item.data?.data.brand?._id)
+            setColors(item.data?.data.colors)
         }
     }, [item])
 
@@ -126,7 +126,7 @@ const AdminEditProductsHook = (id) => {
 
     useEffect(() => {
         if (CatID) {
-            setOptions(subCat?.data)
+            setOptions(subCat?.data.data)
         }
     }, [subCat])
 
@@ -232,8 +232,8 @@ const AdminEditProductsHook = (id) => {
             }
 
             if (error) {
-                if (error?.data.errors) {
-                    notify(error?.data.errors[0].msg, "error");
+                if (error?.data?.errors) {
+                    notify(error?.data?.errors[0].msg, "error");
                 } else {
                     notify("Error while updating the product", "error");
                 }

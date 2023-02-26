@@ -43,9 +43,9 @@ export const allReviewProduct = (prodID, page, limit) => async (dispatch) => {
 
 
 //delete review to one product
-export const deleteReviewOnProduct = (id) => async (dispatch) => {
+export const deleteReviewOnProduct = (productId, id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/reviews/${id}`);
+        const response = await useDeleteData(`/api/products/${productId}/reviews/${id}`);
 
         dispatch({
             type: DELETE_REVIEW,
@@ -61,9 +61,9 @@ export const deleteReviewOnProduct = (id) => async (dispatch) => {
 }
 
 //update review to one product
-export const updateReviewOnProduct = (id, body) => async (dispatch) => {
+export const updateReviewOnProduct = (productId, id, body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/reviews/${id}`, body);
+        const response = await useInsUpdateData(`/api/products/${productId}/reviews/${id}`, body);
 
         dispatch({
             type: UPDATE_REVIEW,

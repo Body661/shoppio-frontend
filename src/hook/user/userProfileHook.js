@@ -23,9 +23,9 @@ const UserProfileHook = () => {
     const user = useSelector(state => state.authReducer.currentUser)
 
     useEffect(() => {
-        setName(user?.data?.name)
-        setEmail(user?.data?.email)
-        setPhone(user?.data?.phone)
+        setName(user?.data?.data.name)
+        setEmail(user?.data?.data.email)
+        setPhone(user?.data?.data.phone)
     }, [user])
 
     const [show, setShow] = useState(false);
@@ -49,7 +49,7 @@ const UserProfileHook = () => {
     const handelSubmit = async () => {
 
         let body = {}
-        if (user?.data?.email !== email) {
+        if (user?.data?.data.email !== email) {
             body = {name, email, phone}
         } else {
             body = {name, phone}
@@ -68,7 +68,7 @@ const UserProfileHook = () => {
             if (res && res.status === 200) {
                 notify("Profile updated successfully", "success")
 
-                localStorage.setItem("user", JSON.stringify(res?.data))
+                localStorage.setItem("user", JSON.stringify(res?.data.data))
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
@@ -143,7 +143,7 @@ const UserProfileHook = () => {
         }
     }, [loadingPass])
 
-    return [user?.data, show, handleClose, handleShow, handelSubmit, name, email, phone, onChangeName, onChangeEmail, onChangePhone, changePassword, oldPassword, newPassword, confirmNewPassword, onChangeOldPass, onChangeNewPass, onChangeConfirmPass]
+    return [user?.data?.data, show, handleClose, handleShow, handelSubmit, name, email, phone, onChangeName, onChangeEmail, onChangePhone, changePassword, oldPassword, newPassword, confirmNewPassword, onChangeOldPass, onChangeNewPass, onChangeConfirmPass]
 }
 
 export default UserProfileHook

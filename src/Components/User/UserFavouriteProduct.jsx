@@ -26,7 +26,7 @@ const UserFavouriteProduct = () => {
 
     useEffect(() => {
         if (loading === false) {
-            if (res) setItems(res.data)
+            if (res) setItems(res?.data?.data)
         }
     }, [loading])
 

@@ -1,68 +1,37 @@
-import {
-    CREATE_NEW_USER,
-    RESET_PASSWORD,
-    VERIFY_PASSWORD,
-    FORGET_PASSWORD,
-    LOGIN_USER,
-    GET_CURRENT_USER,
-    UPDATE_USER_PROFILE, UPDATE_USER_PASSWORD
-} from '../types'
+import * as types from '../types';
 
-const initState = {
-    createUser: [],
-    loginUser: [],
-    currentUser: [],
-    forgetPassword: [],
-    verifyPassword: [],
-    resetPassword: [],
-    userProfile: [],
-    userChangePassword: [],
-}
-const authReducer = (state = initState, action) => {
+const initialState = {
+    createUser: null,
+    loginUser: null,
+    currentUser: null,
+    forgetPassword: null,
+    verifyPassword: null,
+    resetPassword: null,
+    userProfile: null,
+    userChangePassword: null,
+};
+
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_NEW_USER:
-            return {
-                ...state,
-                createUser: action.payload,
-            }
-        case LOGIN_USER:
-            return {
-                ...state,
-                loginUser: action.payload,
-            }
-        case GET_CURRENT_USER:
-            return {
-                ...state,
-                currentUser: action.payload,
-            }
-        case FORGET_PASSWORD:
-            return {
-                ...state,
-                forgetPassword: action.payload,
-            }
-        case VERIFY_PASSWORD:
-            return {
-                ...state,
-                verifyPassword: action.payload,
-            }
-        case RESET_PASSWORD:
-            return {
-                ...state,
-                currentUser: [],
-                resetPassword: action.payload,
-            }
-        case UPDATE_USER_PROFILE:
-            return {
-                ...state,
-                userProfile: action.payload,
-            }
-        case UPDATE_USER_PASSWORD:
-            return {
-                ...state,
-                userChangePassword: action.payload,
-            }
+        case types.CREATE_NEW_USER:
+            return { ...state, createUser: action.payload };
+        case types.LOGIN_USER:
+            return { ...state, loginUser: action.payload };
+        case types.GET_CURRENT_USER:
+            return { ...state, currentUser: action.payload };
+        case types.FORGET_PASSWORD:
+            return { ...state, forgetPassword: action.payload };
+        case types.VERIFY_PASSWORD:
+            return { ...state, verifyPassword: action.payload };
+        case types.RESET_PASSWORD:
+            return { ...state, resetPassword: action.payload };
+        case types.UPDATE_USER_PROFILE:
+            return { ...state, userProfile: action.payload };
+        case types.UPDATE_USER_PASSWORD:
+            return { ...state, userChangePassword: action.payload };
         default:
             return state;
     }
-}
-export default authReducer
+};
+
+export default authReducer;

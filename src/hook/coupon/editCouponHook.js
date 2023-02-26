@@ -31,10 +31,10 @@ const EditCouponHook = (id) => {
 
     useEffect(() => {
         if (loadingData === false) {
-            if (oneCoupon?.data) {
-                setCouponName(oneCoupon?.data?.name)
-                setCouponDate(formatDate(oneCoupon?.data?.expire))
-                setCouponValue(oneCoupon?.data?.discount)
+            if (oneCoupon?.data?.data) {
+                setCouponName(oneCoupon?.data?.data?.name)
+                setCouponDate(formatDate(oneCoupon?.data?.data?.expire))
+                setCouponValue(oneCoupon?.data?.data?.discount)
             }
         }
     }, [loadingData])
