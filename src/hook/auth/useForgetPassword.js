@@ -28,7 +28,6 @@ const useForgetPassword = () => {
 
     useEffect(() => {
         if (!loading) {
-            console.log(res)
             if (res.status === 200) {
                 notify('Reset password code sent to your email successfully', 'success');
                 setTimeout(() => {

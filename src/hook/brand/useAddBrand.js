@@ -26,7 +26,6 @@ const useAddBrand = () => {
     };
 
     const handleSubmit = async () => {
-        console.log(432434)
         if (!name.trim() || !selectedFile) {
             notify('Please fill in all required information', 'warn');
             return;

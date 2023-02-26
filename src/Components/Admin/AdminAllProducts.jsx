@@ -3,8 +3,6 @@ import {Row} from 'react-bootstrap'
 import AdminAllProductsCard from './AdminAllProductsCard'
 
 const AdminAllProducts = ({products}) => {
-
-    console.log(products)
     return (
         <div>
             <div className='admin-content-text'>Manage products</div>
