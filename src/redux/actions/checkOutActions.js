@@ -17,8 +17,6 @@ export const createOrderCash = (id, body) => async (dispatch) => {
         })
     }
 }
-
-//create order by card for user
 export const createOrderOnline = (id, body) => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/api/order/checkout/${id}`, body);
