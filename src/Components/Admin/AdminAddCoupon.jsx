@@ -1,12 +1,21 @@
-import {useRef} from 'react'
-import {Row, Col} from 'react-bootstrap'
-import {ToastContainer} from 'react-toastify';
-import AddCouponHook from '../../hook/coupon/addCouponHook';
+import { useRef } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
+import useAddCoupon from '../../hook/coupon/useAddCoupon';
 import AdminCouponCard from './AdminCouponCard';
 
 const AdminAddCoupon = () => {
     const dateRef = useRef();
-    const [couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, coupons] = AddCouponHook()
+    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, coupons} = useAddCoupon();
+
+    const handleDateFocus = () => {
+        dateRef.current.type = 'date';
+    };
+
+    const handleDateBlur = () => {
+        dateRef.current.type = 'text';
+    };
+
     return (
         <div>
             <Row className="justify-content-start ">
@@ -18,7 +27,6 @@ const AdminAddCoupon = () => {
                         type="text"
                         className="input-form d-block mt-3 px-3"
                         placeholder="Coupon name"
-
                     />
                     <input
                         ref={dateRef}
@@ -27,8 +35,8 @@ const AdminAddCoupon = () => {
                         placeholder="Expiration date"
                         onChange={onChangeDate}
                         value={couponDate}
-                        onFocus={() => dateRef.current.type = "date"}
-                        onBlur={() => dateRef.current.type = "text"}
+                        onFocus={handleDateFocus}
+                        onBlur={handleDateBlur}
                     />
                     <input
                         value={couponValue}
@@ -36,30 +44,30 @@ const AdminAddCoupon = () => {
                         type="number"
                         className="input-form d-block mt-3 px-3"
                         placeholder="Discount"
-
                     />
                 </Col>
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={onSubmit} className="btn-save d-inline mt-2 ">Add coupon</button>
+                    <button onClick={onSubmit} className="btn-save d-inline mt-2 ">
+                        Add coupon
+                    </button>
                 </Col>
             </Row>
 
             <Row>
                 <Col sm="8" className="">
-                    {
-                        coupons ? (coupons.map((item, index) => {
-                            return <AdminCouponCard key={index} coupon={item}/>
-                        })) : <h6>No coupons found</h6>
-                    }
-
+                    {coupons.length > 0 ? (
+                        coupons.map((item, index) => <AdminCouponCard key={index} coupon={item} />)
+                    ) : (
+                        <h6>No coupons found</h6>
+                    )}
                 </Col>
             </Row>
 
-            <ToastContainer/>
+            <ToastContainer />
         </div>
-    )
-}
+    );
+};
 
-export default AdminAddCoupon
+export default AdminAddCoupon;

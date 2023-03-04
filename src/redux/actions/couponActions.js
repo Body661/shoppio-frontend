@@ -10,13 +10,13 @@ export const addCoupon = (body) => async (dispatch) => {
         const response = await useInsertData(`/api/coupons`, body);
         dispatch({
             type: ADD_COUPON,
-            payload: {coupon: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: ADD_COUPON,
-            payload: {coupon: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -26,13 +26,13 @@ export const getAllCoupon = () => async (dispatch) => {
         const response = await useGetDataToken(`/api/coupons`);
         dispatch({
             type: GET_ALL_COUPONS,
-            payload: {coupons: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: GET_ALL_COUPONS,
-            payload: {coupons: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -43,13 +43,13 @@ export const getOneCoupon = (id) => async (dispatch) => {
         const response = await useGetDataToken(`/api/coupons/${id}`);
         dispatch({
             type: GET_ONE_COUPON,
-            payload: {coupon: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: GET_ONE_COUPON,
-            payload: {coupon: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -60,13 +60,13 @@ export const deleteCoupon = (id) => async (dispatch) => {
         const response = await useDeleteData(`/api/coupons/${id}`);
         dispatch({
             type: DELETE_COUPON,
-            payload: {coupon: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: DELETE_COUPON,
-            payload: {coupon: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -78,13 +78,13 @@ export const editCoupon = (id, body) => async (dispatch) => {
 
         dispatch({
             type: EDIT_COUPON,
-            payload: {coupon: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: EDIT_COUPON,
-            payload: {coupon: [], error: e.response},
+            payload: e.response,
         })
     }
 }

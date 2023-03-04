@@ -1,12 +1,12 @@
 import {Row, Col} from 'react-bootstrap';
 import {ToastContainer} from 'react-toastify';
-import EditCouponHook from '../../hook/coupon/editCouponHook';
+import EditCouponHook from '../../hook/coupon/useEditCoupon';
 import {useParams} from 'react-router-dom';
 
 const AdminEditCoupon = () => {
 
     const {id} = useParams();
-    const [couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit] = EditCouponHook(id)
+    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit} = EditCouponHook(id)
 
     return (
         <div>
