@@ -1,10 +1,10 @@
 import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
-import HomeCategoryHook from "../../hook/category/homeCategoryHook";
+import UseHomeCategories from "../../hook/category/useHomeCategories";
 import {Link} from "react-router-dom";
 
 const CategoryHeader = () => {
-    const [categories] = HomeCategoryHook();
+    const [categories] = UseHomeCategories();
     return (
         <div className="cat-header">
             <Container>

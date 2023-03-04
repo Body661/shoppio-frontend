@@ -1,34 +1,21 @@
-import {CREATE_CATEGORY, GET_ALL_CATEGORIES, GET_ONE_CATEGORY} from "../types";
+import * as types from '../types';
 
 const initState = {
-    categories: [],
-    category: [],
-    loading: true,
-    error: null
+    categories: null,
+    createCategory: null
 }
 const categoryReducer = (state = initState, action) => {
 
     switch (action.type) {
-        case GET_ALL_CATEGORIES:
+        case types.GET_ALL_CATEGORIES:
             return {
                 ...state,
-                categories: action.payload.categories,
-                loading: false,
-                error: action.payload.error
+                categories: action.payload,
             }
-        case GET_ONE_CATEGORY:
+        case types.CREATE_CATEGORY:
             return {
                 ...state,
-                category: action.payload.category,
-                loading: false,
-                error: action.payload.error
-            }
-        case CREATE_CATEGORY:
-            return {
-                ...state,
-                categories: action.payload.categories,
-                loading: false,
-                error: action.payload.error
+                createCategory: action.payload,
             }
         default: {
             return state

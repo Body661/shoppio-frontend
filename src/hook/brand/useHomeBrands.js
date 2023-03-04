@@ -12,16 +12,11 @@ export const useHomeBrands = () => {
     }, [dispatch]);
 
     const brands = useSelector((state) => state.allBrands.brands);
-    const pageCount = brands?.data?.paginationRes?.pages || 0;
 
     useEffect(() => {
         if (brands && brands?.status !== 200) setError(true)
         setLoading(false);
     }, [brands])
 
-    const getPage = (page) => {
-        dispatch(getAllBrandsPage(page));
-    };
-
-    return {brands: brands?.data?.data, loading, error, pageCount, getPage};
+    return {brands: brands?.data?.data, loading, error};
 };

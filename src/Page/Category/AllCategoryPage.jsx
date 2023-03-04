@@ -1,14 +1,14 @@
 import React from 'react'
 import CategoryContainer from '../../Components/Category/CategoryContainer'
 import Pagination from '../../Components/Uitily/Pagination'
-import {AllCategoriesHook} from "../../hook/category/allCategoriesHook";
+import {useAllCategories} from "../../hook/category/useAllCategories";
 
 const AllCategoryPage = () => {
-    const [categories, loading, pageCount, getPage, error] = AllCategoriesHook()
+    const {categories, loading, pageCount, getPage, error} = useAllCategories()
 
     return (
         <div style={{minHeight: '670px'}}>
-            <CategoryContainer data={categories?.data} loading={loading} error={error}/>
+            <CategoryContainer categories={categories} loading={loading} error={error}/>
             {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
         </div>
     )

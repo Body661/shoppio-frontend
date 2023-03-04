@@ -25,11 +25,14 @@ const useAddBrand = () => {
         }
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
         if (!name.trim() || !selectedFile) {
             notify('Please fill in all required information', 'warn');
             return;
         }
+
         const formData = new FormData();
         formData.append('name', name);
         formData.append('img', selectedFile);
@@ -40,7 +43,7 @@ const useAddBrand = () => {
         setLoading(false);
     };
 
-    const brands = useSelector((state) => state.allBrands.createBrand);
+    const addBranRes = useSelector((state) => state.allBrands.createBrand);
 
     useEffect(() => {
         if (loading === false && isPress) {
@@ -49,10 +52,10 @@ const useAddBrand = () => {
             setSelectedFile(null);
             setIsPress(false);
 
-            if (brands && brands.status === 201) {
+            if (addBranRes && addBranRes.status === 201) {
                 notify('Brand added successfully', 'success');
-            } else if (brands?.data?.errors) {
-                notify(brands?.data?.errors[0].msg, 'error');
+            } else if (addBranRes?.data?.errors) {
+                notify(addBranRes?.data?.errors[0].msg, 'error');
             } else {
                 notify('Error while adding the brand', 'error');
             }

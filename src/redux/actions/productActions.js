@@ -100,7 +100,7 @@ export const getOneProduct = (id) => async (dispatch) => {
 
 export const getProductsByCategoryHome = (categoryID) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?limit=4&category=${categoryID}`);
+        const response = await useGetData(`/api/products?limit=4&category=${categoryID}&sort=-sold&sort=-createdAt`);
         dispatch({
             type: GET_PRODUCTS_BY_CATEGORY_HOME,
             payload: {productsByCategoryHome: response, error: null},

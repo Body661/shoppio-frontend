@@ -1,33 +1,32 @@
-import React from 'react'
-import {Container, Row, Spinner} from 'react-bootstrap'
+import React from 'react';
+import { Container, Row, Spinner } from 'react-bootstrap';
 import CategoryCard from './CategoryCard';
-import HomeCategoryHook from "../../hook/category/homeCategoryHook";
 
-const CategoryContainer = () => {
-    const [categories, loading, error] = HomeCategoryHook();
+const CategoryContainer = ({ categories, loading, error }) => {
+
+    let content = null;
+
+    if (loading && !categories && !error) {
+        content = <Spinner animation="border" variant="primary" />;
+
+    } else if (!loading && categories?.length) {
+        content = categories.map((category) => (
+            <CategoryCard key={category._id} id={category._id} title={category.name} img={category.img} />
+        ));
+
+    } else if (!loading && !error && !categories) {
+        content = <h4 className="notFound">No categories found</h4>;
+
+    } else {
+        content = <h4 className="error">Something went wrong</h4>;
+    }
 
     return (
         <Container>
-            <div className="admin-content-text mt-2 ">All categories</div>
-            <Row className='my-2 d-flex'>
-                {
-                    loading && !error && !categories?.data?.data && <Spinner animation="border" variant="primary"/>
-                }
-                {
-                    !loading && !error && (
-                        categories?.data?.data ? (
-                            categories?.data?.data?.map((item, index) => {
-                                return (<CategoryCard key={index} id={item?._id} title={item?.name} img={item?.img}/>)
-                            })
-                        ) : <h4 className="notFound">No categories found</h4>
-                    )
-                }
-                {
-                    !loading && error && !categories?.data?.data && <h4 className="error">Something went wrong</h4>
-                }
-            </Row>
+            <div className="admin-content-text mt-2">All categories</div>
+            <Row className="my-2 d-flex">{content}</Row>
         </Container>
-    )
-}
+    );
+};
 
-export default CategoryContainer
+export default CategoryContainer;

@@ -60,13 +60,10 @@ const AdminAddBrand = () => {
                 </Col>
             </Row>
 
+
             {isPress && (
-                <div className="mt-2">
-                    {loading ? (
-                        <Spinner animation="border" variant="primary"/>
-                    ) : (
-                        <h4>Brand added successfully</h4>
-                    )}
+                <div className="mt-3">
+                    {loading ? <Spinner animation="border" variant="primary"/> : null}
                 </div>
             )}
             <ToastContainer/>

@@ -1,10 +1,18 @@
-import {Col, Row, Spinner} from 'react-bootstrap'
-import AddCategoryHook from "../../hook/category/addCategoryHook";
+import {Col, Row, Spinner} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
+import useAddCategory from "../../hook/category/useAddCategory";
+import React from "react";
 
 const AdminAddCategory = () => {
-
-    const [img, name, loading, isPress, handelSubmit, onImageChange, onChangeName] = AddCategoryHook();
+    const {
+        img,
+        name,
+        loading,
+        isPress,
+        handleNameChange,
+        handleImageChange,
+        handleSubmit
+    } = useAddCategory();
 
     return (
         <div>
@@ -14,25 +22,14 @@ const AdminAddCategory = () => {
                     <div className="text-form pb-2">Category image</div>
                     <div>
                         <label htmlFor="upload-photo">
-                            <img
-                                src={img}
-                                alt="category image"
-                                height="100px"
-                                width="120px"
-                                style={{cursor: "pointer"}}
-                            />
+                            <img src={img} alt="category" height="100px" width="120px" style={{cursor: "pointer"}}/>
                         </label>
-                        <input
-                            style={{display: "none"}}
-                            type="file"
-                            name="photo"
-                            onChange={onImageChange}
-                            id="upload-photo"
-                        />
+                        <input style={{display: "none"}} type="file" name="photo" onChange={handleImageChange}
+                               id="upload-photo"/>
                     </div>
 
                     <input
-                        onChange={onChangeName}
+                        onChange={handleNameChange}
                         value={name}
                         type="text"
                         className="input-form d-block mt-3 px-3"
@@ -42,16 +39,24 @@ const AdminAddCategory = () => {
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save changes</button>
+                    <button
+                        onClick={handleSubmit}
+                        className="btn-save d-inline mt-2"
+                        disabled={!img || !name || loading}
+                    >
+                        Save changes
+                    </button>
                 </Col>
             </Row>
 
-            {
-                isPress ? loading ? <Spinner animation="border" variant="primary"/> : <h4>Added successfully</h4> : null
-            }
+            {isPress && (
+                <div className="mt-3">
+                    {loading ? <Spinner animation="border" variant="primary"/> : null}
+                </div>
+            )}
             <ToastContainer/>
         </div>
-    )
-}
+    );
+};
 
-export default AdminAddCategory
+export default AdminAddCategory;

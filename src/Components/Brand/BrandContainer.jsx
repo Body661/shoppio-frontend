@@ -3,23 +3,30 @@ import BrandCard from './BrandCard'
 import {Container, Row, Spinner} from 'react-bootstrap';
 
 const BrandContainer = ({brands, loading, error}) => {
+
+    let content = null;
+
+    if (loading && !brands && !error) {
+        content = <Spinner animation="border" variant="primary" />;
+
+    } else if (!loading && brands?.length) {
+        content = brands.map((brand) => (
+            <BrandCard key={brand._id} img={brand.img} id={brand._id}/>
+        ));
+
+    } else if (!loading && !error && !brands) {
+        content = <h4 className="notFound">No brands found</h4>;
+
+    } else {
+        content = <h4 className="error">Something went wrong</h4>;
+    }
+
     return (
         <Container>
-            <div className="admin-content-text mt-2 ">All brands</div>
-            <Row className='my-1 d-flex'>
-                {loading && !brands && !error && <Spinner animation='border' variant='primary'/>}
-                {!loading && !error && (
-                    brands?.length > 0 ? (
-                        brands?.map((item) => (
-                            <BrandCard key={item._id} img={item.img} id={item._id}/>
-                        ))
-                    ) : <h4 className='notFound'>No brands found</h4>
-                )}
-                {!loading && !brands && error && <h4 className='error'>Something went wrong</h4>}
-
-            </Row>
+            <div className="admin-content-text mt-2">All brands</div>
+            <Row className="my-2 d-flex">{content}</Row>
         </Container>
-    )
+    );
 }
 
 export default BrandContainer
