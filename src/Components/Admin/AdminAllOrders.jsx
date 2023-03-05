@@ -1,22 +1,29 @@
-import React from 'react'
-import {Row} from 'react-bootstrap'
+import {Row, Spinner} from 'react-bootstrap'
 import AdminAllOrdersItem from './AdminAllOrdersItem'
 import UserGetAllOrdersHook from "../../hook/user/userGetAllOrdersHook";
 import Pagination from "../Uitily/Pagination";
 
 const AdminAllOrders = () => {
-    const [,, paginate, orderData, onPress] = UserGetAllOrdersHook()
+    const {paginate, orders, onPress, loading, error} = UserGetAllOrdersHook()
+
+    const renderOrderItems = () => {
+        if (!loading && !error && orders?.length >= 1) return (orders?.map((orderItem, index) => {
+            return <AdminAllOrdersItem key={index} orderItem={orderItem}/>
+        }))
+
+        if (loading && !error && orders?.length < 1) return <Spinner animation="border" variant="primary"/>
+
+        if (!loading && error && orders?.length < 1) return <h4 className="error">Something went wrong</h4>
+
+        return <h6>No orders yet</h6>;
+    };
 
     return (
         <div>
             <div className='admin-content-text'>Manage All orders</div>
             <Row className='justify-content-start'>
 
-                {
-                    orderData?.length >= 1 ? (orderData?.map((orderItem, index) => {
-                        return <AdminAllOrdersItem key={index} orderItem={orderItem}/>
-                    })) : <h6>No orders yet</h6>
-                }
+                {renderOrderItems()}
 
                 {
                     paginate.pages >= 2 ? (

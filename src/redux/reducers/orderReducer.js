@@ -1,12 +1,10 @@
 import {GET_ALL_ORDERS, UPDATE_ORDER_DELIVER, UPDATE_ORDER_PAY, GET_ONE_ORDER} from '../types'
 
 const init = {
-    getAllOrders: [],
-    getOneOrder: [],
-    changePay: [],
-    deliveryStatus: [],
-    error: null,
-    loading: true
+    getAllOrders: null,
+    getOneOrder: null,
+    changePay: null,
+    deliveryStatus: null,
 }
 const orderReducer = (state = init, action) => {
     switch (action.type) {
@@ -14,25 +12,21 @@ const orderReducer = (state = init, action) => {
             return {
                 ...state,
                 getAllOrders: action.payload,
-                loading: false
             }
         case GET_ONE_ORDER:
             return {
                 ...state,
                 getOneOrder: action.payload,
-                loading: false
             }
         case UPDATE_ORDER_PAY:
             return {
                 ...state,
                 changePay: action.payload,
-                loading: false
             }
         case UPDATE_ORDER_DELIVER:
             return {
                 ...state,
                 deliveryStatus: action.payload,
-                loading: false
             }
         default:
             return state;

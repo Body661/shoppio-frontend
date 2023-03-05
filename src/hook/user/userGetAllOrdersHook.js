@@ -4,9 +4,10 @@ import {getAllOrders} from '../../redux/actions/orderActions';
 
 const UserGetAllOrdersHook = () => {
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [results, setResult] = useState(0);
     const [paginate, setPaginate] = useState({});
-    const [orderData, setOrderData] = useState([]);
+    const [ordersData, setOrdersData] = useState([]);
     const dispatch = useDispatch()
 
     const user = JSON.parse(localStorage.getItem('user'))
@@ -31,16 +32,19 @@ const UserGetAllOrdersHook = () => {
     }
 
     const orders = useSelector(state => state.orderReducer.getAllOrders)
+
+    if(orders?.status !== 200 && !loading) setError(true);
+
     useEffect(() => {
         if (loading === false) {
             if (orders?.data?.amount) setResult(orders?.data?.amount)
             if (orders?.data?.paginationRes) setPaginate(orders?.data?.paginationRes)
-            if (orders?.data?.data) setOrderData(orders?.data?.data)
+            if (orders?.data?.data) setOrdersData(orders?.data?.data)
         }
-    }, [loading])
+    }, [loading, orders])
 
 
-    return [userName, results, paginate, orderData, onPress]
+    return {userName, results, paginate, orders: ordersData, onPress, loading, error}
 }
 
 export default UserGetAllOrdersHook

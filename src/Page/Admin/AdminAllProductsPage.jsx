@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 import AdminSideBar from '../../Components/Admin/AdminSideBar'
 import AdminAllProducts from '../../Components/Admin/AdminAllProducts'
 import Pagination from '../../Components/Uitily/Pagination'
-import ViewProductsAdminHook from "../../hook/admin/viewProductsAdminHook";
+import ViewProductsAdminHook from "../../hook/admin/useAdminGetProducts";
 
 const AdminAllProductsPage = () => {
     const [items, pagination, onPress] = ViewProductsAdminHook();
