@@ -1,33 +1,25 @@
-import {CREATE_SUBCATEGORY, GET_SUBCATEGORY, GET_ALL_SUBCATEGORIES} from '../types'
+import * as types from '../types';
 
 const initState = {
-    subcategories: [],
-    subcategory: [],
-    loading: true,
-    error: null
+    subcategories: null,
+    subcategory: null,
 }
 const subcategoryReducer = (state = initState, action) => {
     switch (action.type) {
-        case CREATE_SUBCATEGORY:
+        case types.CREATE_SUBCATEGORY:
             return {
                 ...state,
-                subcategory: action.payload.subcategory,
-                loading: false,
-                error: action.payload.error
+                subcategory: action.payload,
             }
-        case GET_SUBCATEGORY:
+        case types.GET_SUBCATEGORY:
             return {
                 ...state,
-                subcategory: action.payload.subcategory,
-                loading: false,
-                error: action.payload.error
+                subcategory: action.payload,
             }
-        case GET_ALL_SUBCATEGORIES:
+        case types.GET_ALL_SUBCATEGORIES:
             return {
                 ...state,
-                subcategories: action.payload.subcategories,
-                loading: false,
-                error: action.payload.error
+                subcategories: action.payload,
             }
         default:
             return state;

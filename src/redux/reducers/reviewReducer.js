@@ -1,42 +1,32 @@
-import {CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW, ALL_REVIEW_PRODUCT} from '../types'
+import * as types from '../types';
 
 const initState = {
-    createReview: [],
-    allReviewProduct: [],
-    deleteReview: [],
-    updateReview: [],
-    loading: true,
-    error: null
+    createReview: null,
+    allReviewProduct: null,
+    deleteReview: null,
+    updateReview: null,
 }
 const reviewReducer = (state = initState, action) => {
     switch (action.type) {
-        case CREATE_REVIEW:
+        case types.CREATE_REVIEW:
             return {
                 ...state,
-                createReview: action.payload.createReview,
-                error: action.payload.error,
-                loading: false,
+                createReview: action.payload,
             }
-        case ALL_REVIEW_PRODUCT:
+        case types.ALL_REVIEW_PRODUCT:
             return {
                 ...state,
-                allReviewProduct: action.payload.allReviewProduct,
-                loading: false,
-                error: action.payload.error,
+                allReviewProduct: action.payload,
             }
-        case DELETE_REVIEW:
+        case types.DELETE_REVIEW:
             return {
                 ...state,
-                deleteReview: action.payload.deleteReview,
-                error: action.payload.error,
-                loading: false,
+                deleteReview: action.payload,
             }
-        case UPDATE_REVIEW:
+        case types.UPDATE_REVIEW:
             return {
                 ...state,
-                updateReview: action.payload.updateReview,
-                error: action.payload.error,
-                loading: false,
+                updateReview: action.payload,
             }
         default:
             return state;

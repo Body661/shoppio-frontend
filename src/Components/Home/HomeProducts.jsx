@@ -1,12 +1,12 @@
 import React from 'react'
 import {Container, Row, Spinner} from 'react-bootstrap'
-import SubTitle from '../Uitily/SubTitle'
+import SubTitle from '../Utility/SubTitle'
 import ProductCard from '../Products/ProductCard'
-import ProductContainerHook from "../../hook/products/productsContainerHook";
+import useProductsContainer from "../../hook/products/useProductsContainer";
 
 const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => {
 
-    const [favProd] = ProductContainerHook()
+    const {favProd} = useProductsContainer()
 
     return (
         <Container>
@@ -18,12 +18,12 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                 {
                     !loading && !error && (
                         products ? (
-                            products?.slice(0,5).map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
+                            products?.map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
                         ) : <h4 className="notFound">No Products found</h4>
                     )
                 }
                 {
-                    !loading && error && products.length < 1 && <h4 className="error">Something went wrong</h4>
+                    !loading && error && products?.length < 1 && <h4 className="error">Something went wrong</h4>
                 }
             </Row>
 

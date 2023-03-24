@@ -1,13 +1,13 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
-import notify from '../useNotification';
 import {applyCartCoupon} from '../../redux/actions/cartActions';
+import {toast} from "react-toastify";
 
 const UseApplyCoupon = () => {
     const dispatch = useDispatch();
     const [couponName, setCouponName] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const onChangeCoupon = (coupon) => {
         setCouponName(coupon);
@@ -15,7 +15,7 @@ const UseApplyCoupon = () => {
 
     const handleSubmitCoupon = async () => {
         if (couponName.trim() === '') {
-            notify('Please enter coupon name', 'warn');
+            toast('Please enter coupon code', {type: 'error'})
             return;
         }
 
@@ -27,27 +27,21 @@ const UseApplyCoupon = () => {
 
     useEffect(() => {
         if (!loading) {
-
-            if (res && res.status === 200) {
-                notify('Coupon applied successfully', 'success');
+            if (res?.status === 200) {
+                toast('Coupon applied successfully', {type: 'success'})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            } else if (res) {
-                if (res.status === 401) {
-                    notify('you are not logged in!', 'error');
-                } else if (res.status === 403) {
-                    notify('You are not allowed to do this operation', 'error');
-                } else if (res.status === 404) {
-                    notify('Coupon not found or expired', 'error');
-                } else if (res?.data?.errors) {
-                    notify(res?.data?.errors[0].msg, 'error');
-                } else {
-                    notify('Error while applying coupon to cart', 'error');
-                }
+            } else if (res?.status === 404) {
+                toast('Coupon not found or expired', {type: 'error', toastId: 'couponNotFound'})
+            } else {
+                toast(res?.data?.errors ? res?.data?.errors[0].msg : 'Error while applying coupon to cart', {
+                    type: 'error',
+                    toastId: 'applyCouponError'
+                })
             }
         }
-    }, [loading]);
+    }, [loading, res]);
 
     return {couponName, onChangeCoupon, handleSubmitCoupon, loading};
 };

@@ -1,12 +1,30 @@
-import React from 'react'
-import {Row, Col, Modal, Button} from 'react-bootstrap'
-import deleteIcon from '../../images/delete.png'
-import {ToastContainer} from "react-toastify";
-import UserProfileHook from "../../hook/user/userProfileHook";
+import React from 'react';
+import {Row, Col, Modal, Button} from 'react-bootstrap';
+import deleteIcon from '../../images/delete.png';
+import useUserProfile from '../../hook/user/useUserProfile';
 
 const UserProfile = () => {
-    const [user, show, handleClose, handleShow, handelSubmit, name, email, phone, onChangeName, onChangeEmail, onChangePhone, changePassword, oldPassword, newPassword, confirmNewPassword, onChangeOldPass, onChangeNewPass, onChangeConfirmPass] = UserProfileHook()
-    
+    const {
+        userData,
+        show,
+        handleClose,
+        handleShow,
+        handleSubmit,
+        name,
+        email,
+        phone,
+        onChangeName,
+        onChangeEmail,
+        onChangePhone,
+        changePassword,
+        oldPassword,
+        newPassword,
+        confirmNewPassword,
+        onChangeOldPass,
+        onChangeNewPass,
+        onChangeConfirmPass,
+    } = useUserProfile();
+
     return (
         <div>
             <div className="admin-content-text">Profile</div>
@@ -14,7 +32,7 @@ const UserProfile = () => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className='font'></div>
+                        <div className="font"></div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -41,20 +59,20 @@ const UserProfile = () => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className='font' variant="success" onClick={handleClose}>
+                    <Button className="font" variant="success" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button className='font' variant="dark" onClick={handelSubmit}>
+                    <Button className="font" variant="dark" onClick={handleSubmit}>
                         Save changes
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <div className="user-address-card my-3 px-2">
+            <div className="my-3 px-2">
                 <Row className="d-flex justify-content-between pt-2">
                     <Col xs="6" className="d-flex">
                         <div className="p-2">Name:</div>
-                        <div className="p-1 item-delete-edit">{user?.name}</div>
+                        <div className="p-1 item-delete-edit">{userData?.name}</div>
                     </Col>
                     <Col xs="6" className="d-flex justify-content-end">
                         <div onClick={handleShow} className="d-flex mx-2">
@@ -73,13 +91,13 @@ const UserProfile = () => {
                 <Row className="">
                     <Col xs="12" className="d-flex">
                         <div className="p-2">Phone:</div>
-                        <div className="p-1 item-delete-edit">{user?.phone}</div>
+                        <div className="p-1 item-delete-edit">{userData?.phone}</div>
                     </Col>
                 </Row>
                 <Row className="">
                     <Col xs="12" className="d-flex">
                         <div className="p-2">Email:</div>
-                        <div className="p-1 item-delete-edit">{user?.email}</div>
+                        <div className="p-1 item-delete-edit">{userData?.email}</div>
                     </Col>
                 </Row>
                 <Row className="mt-5">
@@ -115,9 +133,8 @@ const UserProfile = () => {
                     </Col>
                 </Row>
             </div>
-            <ToastContainer/>
         </div>
-    )
-}
+    );
+};
 
-export default UserProfile
+export default UserProfile;

@@ -2,13 +2,13 @@ import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {editCoupon, getOneCoupon} from '../../redux/actions/couponActions';
-import notify from '../useNotification';
+import {toast} from "react-toastify";
 
 const useEditCoupon = (id) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [loadingUpdate, setLoadingUpdate] = useState(true);
     const [couponName, setCouponName] = useState('');
     const [couponDate, setCouponDate] = useState('');
@@ -56,11 +56,15 @@ const useEditCoupon = (id) => {
 
     const onSubmit = async () => {
         if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
-            notify('Please fill in all information!', 'warn');
+            toast('Please fill in all information!', {type: 'error'});
             return;
         }
         setLoadingUpdate(true);
-        await dispatch(editCoupon(id, {name: couponName, expire: couponDate.split('-').reverse().join('-'), discount: couponValue}));
+        await dispatch(editCoupon(id, {
+            name: couponName,
+            expire: couponDate.split('-').reverse().join('-'),
+            discount: couponValue
+        }));
         setLoadingUpdate(false);
     };
 
@@ -68,18 +72,15 @@ const useEditCoupon = (id) => {
     useEffect(() => {
         if (!loadingUpdate && res) {
             if (res?.status === 200) {
-                notify('Coupon updated successfully', 'success');
+                toast('Coupon updated successfully', {type: 'success'});
                 setTimeout(() => {
                     navigate('/admin/addCoupon');
                 }, 1000);
-            } else if (res?.status === 401) {
-                notify('You are not logged in!', 'error');
-            } else if (res?.status === 403) {
-                notify('You are not allowed to do this operation', 'error');
-            } else if (res?.data?.errors) {
-                notify(res?.data?.errors[0]?.msg, 'error');
             } else {
-                notify('Error while updating coupon', 'error');
+                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while updating coupon', {
+                    type: 'error',
+                    toastId: 'updateCouponError'
+                });
             }
         }
 

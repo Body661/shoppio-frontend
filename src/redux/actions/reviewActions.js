@@ -11,13 +11,13 @@ export const createReview = (prodID, body) => async (dispatch) => {
 
         dispatch({
             type: CREATE_REVIEW,
-            payload: {createReview: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: CREATE_REVIEW,
-            payload: {createReview: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -30,13 +30,13 @@ export const allReviewProduct = (prodID, page, limit) => async (dispatch) => {
 
         dispatch({
             type: ALL_REVIEW_PRODUCT,
-            payload: {allReviewProduct: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: ALL_REVIEW_PRODUCT,
-            payload: {allReviewProduct: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -49,13 +49,13 @@ export const deleteReviewOnProduct = (productId, id) => async (dispatch) => {
 
         dispatch({
             type: DELETE_REVIEW,
-            payload: {deleteReview: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: DELETE_REVIEW,
-            payload: {deleteReview: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -67,13 +67,13 @@ export const updateReviewOnProduct = (productId, id, body) => async (dispatch) =
 
         dispatch({
             type: UPDATE_REVIEW,
-            payload: {updateReview: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: UPDATE_REVIEW,
-            payload: {updateReview: [], error: e.response},
+            payload: e.response,
         })
     }
 }

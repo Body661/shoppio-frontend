@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {resetPassword} from '../../redux/actions/authActions';
 import {useNavigate} from 'react-router-dom';
-import notify from '../useNotification';
 import validator from 'validator/es';
+import {toast} from "react-toastify";
 
 const useResetPassword = () => {
     const dispatch = useDispatch();
@@ -23,12 +23,12 @@ const useResetPassword = () => {
 
     const onSubmit = async () => {
         if (!validator.isStrongPassword(password)) {
-            notify('Please enter a strong password', 'error');
+            toast("Please enter a strong password", {type: 'error'})
             return;
         }
 
         if (password !== confirmPassword) {
-            notify('Password and confirm password do not match', 'error');
+            toast("Password and confirm password do not match", {type: 'error'})
             return;
         }
 
@@ -41,14 +41,17 @@ const useResetPassword = () => {
     useEffect(() => {
         if (!loading) {
             if (res?.status === 200) {
-                notify('Password reset successfully', 'success');
+                toast("Password reset successfully", {type: 'success'})
                 setTimeout(() => {
                     navigate('/login');
                 }, 1500);
             } else if (res?.status === 429) {
-                notify('Too many requests, try again after 1 hour', 'error');
+                toast("Too many requests, try again after 1 hour", {type: 'error', toastId: 'resetPassManyReqs'})
             } else {
-                notify('Something went wrong, please request a new code', 'error');
+                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : "Something went wrong, please request a new code", {
+                    type: 'error',
+                    toastId: 'resetPassAnother'
+                })
             }
         }
         setLoading(true);

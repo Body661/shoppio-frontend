@@ -5,13 +5,40 @@ import add from '../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
 import {CompactPicker} from 'react-color'
-import {ToastContainer} from 'react-toastify';
-import AdminEditProductsHook from './../../hook/products/editProductHook';
+import AdminEditProductsHook from '../../hook/products/useEditProduct';
 
 const AdminEditProducts = () => {
     const {id} = useParams();
 
-    const [CatID, BrandID, onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefore, onChangeProdName, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSelectCategory, handelSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] =
+    const {
+        CatID,
+        BrandID,
+        onChangeDesName,
+        onChangeQty,
+        onChangeColor,
+        onChangePriceAfter,
+        onChangePriceBefore,
+        onChangeProdName,
+        showColor,
+        category,
+        brand,
+        priceAfter,
+        images,
+        setImages,
+        onSelect,
+        onRemove,
+        options,
+        handelChangeComplete,
+        removeColor,
+        onSelectCategory,
+        handleSubmit,
+        onSelectBrand,
+        colors,
+        priceBefore,
+        qty,
+        prodDescription,
+        prodName
+    } =
         AdminEditProductsHook(id);
 
     return (
@@ -71,7 +98,7 @@ const AdminEditProducts = () => {
                         value={CatID}
                         onChange={onSelectCategory}
                         className="select input-form-area mt-3 px-2 ">
-                        <option value="0">Main category</option>
+                        <option value="0">Select category</option>
                         {
                             category?.data?.data ? (category?.data?.data?.map((item) => {
                                 return (
@@ -133,10 +160,9 @@ const AdminEditProducts = () => {
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save Changes</button>
+                    <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">Save Changes</button>
                 </Col>
             </Row>
-            <ToastContainer/>
         </div>
     )
 }

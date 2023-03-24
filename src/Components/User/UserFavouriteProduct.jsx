@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {Row, Spinner} from 'react-bootstrap';
-import Pagination from '../Uitily/Pagination'
+import Pagination from '../Utility/Pagination'
 import {getWishlist} from "../../redux/actions/wishlistActions";
 import {useDispatch, useSelector} from "react-redux";
-import ProductContainerHook from "../../hook/products/productsContainerHook";
+import useProductsContainer from "../../hook/products/useProductsContainer";
 import ProductCard from "../Products/ProductCard";
 
 const UserFavouriteProduct = () => {
@@ -11,7 +11,7 @@ const UserFavouriteProduct = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
-    const [favProd] = ProductContainerHook()
+    const {favProd} = useProductsContainer()
 
     useEffect(() => {
         const get = async () => {

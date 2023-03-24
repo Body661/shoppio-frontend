@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import ApplyCouponHook from '../../hook/cart/useApplyCoupon';
-import {ToastContainer} from 'react-toastify';
 import useDeleteCart from "../../hook/cart/useDeleteCart";
 
 const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRes, items}) => {
@@ -42,7 +41,6 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRe
                     Clear cart
                 </button>
             </Col>
-            <ToastContainer/>
         </Row>
     );
 

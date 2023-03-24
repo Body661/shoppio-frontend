@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { verifyPassword } from '../../redux/actions/authActions';
-import { useNavigate } from 'react-router-dom';
-import notify from '../useNotification';
+import {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {verifyPassword} from '../../redux/actions/authActions';
+import {useNavigate} from 'react-router-dom';
 import validator from 'validator/es';
+import {toast} from "react-toastify";
 
 const useVerifyPassword = () => {
     const dispatch = useDispatch();
@@ -17,19 +17,13 @@ const useVerifyPassword = () => {
 
     const onSubmit = async () => {
         if (!validator.isNumeric(code)) {
-            notify('Please enter a valid code', 'error');
+            toast("Please enter a valid code", {type: 'error'})
             return;
         }
 
         setLoading(true);
-
-        try {
-            await dispatch(verifyPassword({ code }));
-            setLoading(false);
-        } catch (error) {
-            setLoading(false);
-            notify('Something went wrong, try again later', 'error');
-        }
+        await dispatch(verifyPassword({code}));
+        setLoading(false);
     };
 
     const res = useSelector((state) => state.authReducer.verifyPassword);
@@ -37,17 +31,20 @@ const useVerifyPassword = () => {
     useEffect(() => {
         if (loading === false) {
             if (res && res.status === 200) {
-                notify('Code is correct', 'success');
+                toast('Code is correct', {type: 'success'})
                 setTimeout(() => {
                     navigate('/user/reset-password');
                 }, 1500);
             } else if (res?.status === 400) {
-                notify('Code is wrong or expired', 'error');
+                toast('Code is wrong or expired', {type: 'error', toastId: 'verifyWrongCode'})
             } else {
-                notify('Something went wrong, try again later', 'error');
+                toast(res?.data?.errors ? res?.data?.errors[0].msg : 'Something went wrong, please try again later.', {
+                    type: 'error',
+                    toastId: 'verifyAnother'
+                })
             }
         }
-    }, [loading]);
+    }, [loading, res]);
 
     return {code, onChangeCode, onSubmit};
 };

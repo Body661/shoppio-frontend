@@ -4,7 +4,7 @@ import UseHomeCategories from "../../hook/category/useHomeCategories";
 import {Link} from "react-router-dom";
 
 const CategoryHeader = () => {
-    const [categories] = UseHomeCategories();
+    const {categories} = UseHomeCategories();
     return (
         <div className="cat-header">
             <Container>

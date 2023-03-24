@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
-import notify from '../useNotification';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginUser} from '../../redux/actions/authActions';
+import {toast} from "react-toastify";
 
 const useLogin = () => {
     const dispatch = useDispatch();
@@ -29,26 +29,23 @@ const useLogin = () => {
                 if (token) {
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', JSON.stringify(data));
-                    notify('Logged in successfully', 'success');
+                    toast("Logged in successfully", {type: 'success'})
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 1500);
                 } else {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
+                    toast("Not able to login, please try again later", {type: 'error', toastId: 'loginToken'})
                 }
+
             } else if (auth.status === 401) {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                notify('Email or password is wrong', 'error');
-            } else if (auth.data?.errors) {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                notify(auth.data.errors[0].msg, 'error');
+                toast("Email or password is wrong", {type: 'error', toastId: 'loginWrongData'})
             } else if (auth.status === 429) {
-                notify('Too many requests, try again after 3 hours', 'error');
+                toast("Too many requests, try again after 3 hours", {type: 'error', toastId: 'loginTooManyReqs'})
             } else {
-                notify('Error while logging in!', 'warn');
+                toast(auth.data?.errors ? auth?.data?.errors[0]?.msg : "Error while logging in", {
+                    type: 'error',
+                    toastId: 'loginAnother'
+                })
             }
         }
     }, [loading, auth]);

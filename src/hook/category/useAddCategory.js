@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createCategory} from '../../redux/actions/CategoryActions';
 import 'react-toastify/dist/ReactToastify.css';
-import notify from '../../hook/useNotification';
 import avatar from '../../images/avatar.png';
+import {toast} from "react-toastify";
 
 const useAddCategory = () => {
     const dispatch = useDispatch();
@@ -26,10 +26,9 @@ const useAddCategory = () => {
         event.preventDefault();
 
         if (!name.trim() || !selectedFile) {
-            notify('Please fill in all required information', 'warn');
+            toast('Please fill in all required information', {type: 'error'})
             return;
         }
-
 
         const formData = new FormData();
         formData.append('name', name);
@@ -47,16 +46,15 @@ const useAddCategory = () => {
     useEffect(() => {
         if (addCategoryRes && !loading) {
             if (addCategoryRes.status === 201) {
-                notify('Category added successfully', 'success');
+                toast('Category added successfully', {type: 'success', toastId: 'addCategorySuccess'});
                 setImg(avatar);
                 setName('');
                 setSelectedFile(null);
-            } else if (addCategoryRes.status === 401) {
-                notify('You are not logged in. Please login', 'error');
-            } else if (addCategoryRes?.data?.errors) {
-                notify(addCategoryRes?.data?.errors[0]?.msg, 'error');
             } else {
-                notify('Error while adding the new category', 'error');
+                toast(addCategoryRes?.data?.errors ? addCategoryRes?.data?.errors[0]?.msg : 'Error while adding the new category', {
+                    type: 'error',
+                    toastId: 'addCategoryError'
+                });
             }
         }
     }, [addCategoryRes, loading]);

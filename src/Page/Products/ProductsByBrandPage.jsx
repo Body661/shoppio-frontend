@@ -1,13 +1,13 @@
 import React from 'react'
 import {Container, Col, Row} from 'react-bootstrap';
-import Pagination from '../../Components/Uitily/Pagination';
+import Pagination from '../../Components/Utility/Pagination';
 import CardProductsContainer from './../../Components/Products/ProductsContainer';
 import {useParams} from 'react-router-dom';
-import ProductsByBrandHook from "../../hook/products/productsByBrandHook";
+import UseProductsByBrand from "../../hook/products/useProductsByBrand";
 
 const ProductsByBrandPage = () => {
     const {id} = useParams()
-    const [items, pagination, onPress] = ProductsByBrandHook(id)
+    const {items, pagination, onPress} = UseProductsByBrand(id)
 
     let pageCount = 0;
     if (pagination) pageCount = pagination

@@ -1,4 +1,4 @@
-import {ADD_COUPON, EDIT_COUPON, GET_ALL_COUPONS, GET_ONE_COUPON, DELETE_COUPON} from '../types'
+import * as types from '../types';
 
 const initState = {
     addCoupon: null,
@@ -9,27 +9,27 @@ const initState = {
 }
 const couponReducer = (state = initState, action) => {
     switch (action.type) {
-        case ADD_COUPON:
+        case types.ADD_COUPON:
             return {
                 ...state,
                 addCoupon: action.payload,
             }
-        case GET_ALL_COUPONS:
+        case types.GET_ALL_COUPONS:
             return {
                 ...state,
                 allCoupons: action.payload,
             }
-        case DELETE_COUPON:
+        case types.DELETE_COUPON:
             return {
                 ...state,
                 deleteCoupon: action.payload,
             }
-        case GET_ONE_COUPON:
+        case types.GET_ONE_COUPON:
             return {
                 ...state,
                 oneCoupon: action.payload,
             }
-        case EDIT_COUPON:
+        case types.EDIT_COUPON:
             return {
                 ...state,
                 editCoupon: action.payload,

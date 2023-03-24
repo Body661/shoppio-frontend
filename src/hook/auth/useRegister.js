@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react';
-import notify from '../useNotification';
 import {useDispatch, useSelector} from 'react-redux';
 import {createNewUser} from '../../redux/actions/authActions';
 import {useNavigate} from 'react-router-dom';
 import validator from 'validator/es';
+import {toast} from "react-toastify";
 
 const useRegister = () => {
     const dispatch = useDispatch();
@@ -34,23 +34,23 @@ const useRegister = () => {
 
     const validationValues = () => {
         if (name.trim() === '') {
-            notify('Please enter your name', 'error');
+            toast("Please enter your name", {type: 'error'})
             return false;
         }
         if (!validator.isEmail(email)) {
-            notify('Please enter a valid email address', 'error');
+            toast("Please enter a valid email address", {type: 'error'})
             return false;
         }
-        if (phone.length <= 10) {
-            notify('Please enter a valid phone number', 'error');
+        if (!validator.isMobilePhone(phone)) {
+            toast("Please enter a valid phone number", {type: 'error'})
             return false;
         }
         if (!validator.isStrongPassword(password)) {
-            notify('Password is not strong enough', 'error');
+            toast("Password is not strong enough", {type: 'error'})
             return false;
         }
         if (password.trim() !== confirmPassword.trim()) {
-            notify('Password and confirm password are not the same', 'error');
+            toast("Password and confirm password are not the same", {type: 'error'})
             return false;
         }
 
@@ -78,26 +78,19 @@ const useRegister = () => {
     useEffect(() => {
         if (loading === false) {
             if (res && res.status === 201) {
-                if (res.data?.data?.token) {
-                    localStorage.setItem('token', res.data.data.token);
-                    notify('Account registered successfully', 'success');
-                    setTimeout(() => {
-                        navigate('/login');
-                    }, 2000);
-                }
-            } else if (res?.data?.errors) {
-                notify(res.data.errors[0].msg, 'error');
-            } else if (res?.status === 400) {
-                notify(
-                    'Bad request, please check if all information are correct',
-                    'error'
-                );
+                toast("Account created successfully", {type: 'success'})
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
             } else if (res?.status === 429) {
-                notify('Too many requests, try again after 3 hours', 'error');
+                toast('Too many requests, try again after 3 hours', {type: 'error', toastId: 'registerTooManyReqs'})
             } else {
-                notify('Error while creating account', 'warn');
+                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while creating account', {
+                    type: 'error',
+                    toastId: 'registerAnother'
+                })
             }
-        }
+    }
 
         setLoading(true);
     }, [loading]);

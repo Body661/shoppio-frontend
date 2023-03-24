@@ -1,7 +1,7 @@
 import {Row, Spinner} from 'react-bootstrap'
 import AdminAllOrdersItem from './AdminAllOrdersItem'
-import UserGetAllOrdersHook from "../../hook/user/userGetAllOrdersHook";
-import Pagination from "../Uitily/Pagination";
+import UserGetAllOrdersHook from "../../hook/user/useUserGetAllOrders";
+import Pagination from "../Utility/Pagination";
 
 const AdminAllOrders = () => {
     const {paginate, orders, onPress, loading, error} = UserGetAllOrdersHook()

@@ -1,6 +1,6 @@
 import React from 'react'
 import CategoryContainer from '../../Components/Category/CategoryContainer'
-import Pagination from '../../Components/Uitily/Pagination'
+import Pagination from '../../Components/Utility/Pagination'
 import {useAllCategories} from "../../hook/category/useAllCategories";
 
 const AllCategoryPage = () => {

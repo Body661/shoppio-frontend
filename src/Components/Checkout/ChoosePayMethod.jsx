@@ -1,19 +1,22 @@
 import React, {useState} from 'react';
 import {Row, Col} from 'react-bootstrap';
-import ViewAddressesHook from '../../hook/user/viewAddressesHook';
+import ViewAddressesHook from '../../hook/user/useViewAddresses';
 import useCashOrder from '../../hook/checkout/useCashOrder';
-import {ToastContainer} from 'react-toastify';
 import GetUserCartHook from '../../hook/cart/useUserCart';
 import OrderPayOnlineHook from '../../hook/checkout/useOnlinePay';
-import notify from '../../hook/useNotification';
+import {toast} from "react-toastify";
 
 const ChoosePayMethod = () => {
-    const [res] = ViewAddressesHook();
+    const { addresses } = ViewAddressesHook();
     const [type, setType] = useState('');
 
-    const [handleChooseAddress, addressDetails, handleCreateOrderCash] = useCashOrder();
+    const {
+        handleChooseAddress,
+        addressDetails,
+        handleCreateOrderCash,
+    } = useCashOrder();
 
-    const [handelCreateOrderOnline] = OrderPayOnlineHook(addressDetails);
+    const {handelCreateOrderOnline} = OrderPayOnlineHook(addressDetails);
 
     const {
         totalCartPrice,
@@ -30,14 +33,14 @@ const ChoosePayMethod = () => {
         } else if (type === 'cash') {
             handleCreateOrderCash();
         } else {
-            notify('Please select pay method', 'warn');
+            toast("Please select pay method", {type: 'error'})
         }
     };
 
     return (
         <div>
             <div className='admin-content-text pt-5'>Choose pay method</div>
-            <div className='user-address-card my-3 px-3'>
+            <div className='choose-pay-card my-3 px-3'>
                 <Row className='d-flex justify-content-between '>
                     <Col xs='12' className='my-2'>
                         <input
@@ -80,9 +83,12 @@ const ChoosePayMethod = () => {
                             className='select mt-1 px-2 '
                             onChange={handleChooseAddress}
                         >
-                            <option value=''>Please select delivery address</option>
-                            {res ? (
-                                res?.data?.data?.map((item, index) => {
+                            <option key={0} value=''>
+                                Select address
+                            </option>
+
+                            {addresses?.data?.data?.length > 0 ? (
+                                addresses?.data?.data?.map((item) => {
                                     return (
                                         <option key={item?._id} value={item?._id}>
                                             {item?.alias}
@@ -90,7 +96,7 @@ const ChoosePayMethod = () => {
                                     );
                                 })
                             ) : (
-                                <option key={0} value={0}>
+                                <option key={0} value=''>
                                     No addresses added
                                 </option>
                             )}
@@ -112,7 +118,6 @@ const ChoosePayMethod = () => {
                     <div onClick={handelPay} className="product-cart-add px-3 pt-2 d-inline me-2">Complete order</div>
                 </Col>
             </Row>
-            <ToastContainer/>
         </div>
     )
 }

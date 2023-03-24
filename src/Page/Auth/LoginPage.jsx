@@ -1,7 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Spinner} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
 import useLogin from '../../hook/auth/useLogin';
 
 const LoginPage = () => {
@@ -51,7 +50,6 @@ const LoginPage = () => {
                     )}
                 </Col>
             </Row>
-            <ToastContainer/>
         </Container>
     );
 };

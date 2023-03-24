@@ -6,33 +6,38 @@ import {getAllProductsPage} from '../../redux/actions/productActions';
 const useAdminGetProducts = () => {
 
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        setLoading(true)
-        dispatch(getAllProducts(8))
-        setLoading(false)
+        const fetchData = async () => {
+            setLoading(true)
+            await dispatch(getAllProducts(50))
+        }
+
+        fetchData()
     }, [])
 
 
     const onPress = async (page) => {
         setLoading(true)
-        await dispatch(getAllProductsPage(page, 8))
-        setLoading(false)
+        await dispatch(getAllProductsPage(page, 50))
     }
 
-    let items = [];
-    let pagination = [];
+
     const allProducts = useSelector((state) => state.allProducts.allProducts)
 
-    if(allProducts?.status !== 200) setError(true)
+    useEffect(() => {
+        if (!loading && allProducts?.status !== 200) {
+            setError(true)
+        } else {
+            setError(false)
+        }
 
-    if (allProducts?.data?.data) items = allProducts?.data;
-    if (allProducts?.data?.paginationRes) pagination = allProducts?.data.paginationRes?.pages;
+        setLoading(false);
+    }, [allProducts, loading])
 
-    return {items, pagination, onPress, loading, error}
-
+    return {products: allProducts?.data?.data, pagination: allProducts?.data.paginationRes?.pages, onPress, loading, error}
 }
 
 export default useAdminGetProducts

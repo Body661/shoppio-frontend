@@ -2,15 +2,39 @@ import React from 'react'
 import {Row, Col} from 'react-bootstrap'
 import Multiselect from 'multiselect-react-dropdown';
 import add from '../../images/add.png'
-import {ToastContainer} from "react-toastify";
 import {CompactPicker} from "react-color";
 import MultiImageInput from "react-multiple-image-input";
-import AdminAddProductsHook from "../../hook/products/addProductHook";
+import AdminAddProductsHook from "../../hook/products/useAddProduct";
 
 const AdminAddProducts = () => {
 
-    const [onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefore, onChangeProdName, showColor, category, brand, priceAfter, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSelectCategory, handelSubmit, onSelectBrand, colors, priceBefore, qty, prodDescription, prodName] =
-        AdminAddProductsHook();
+    const {
+        onChangeDescription,
+        onChangeQty,
+        onChangeColor,
+        onChangePriceAfter,
+        onChangePriceBefore,
+        onChangeProdName,
+        showColor,
+        category,
+        brand,
+        priceAfter,
+        images,
+        setImages,
+        onSelect,
+        onRemove,
+        options,
+        handelChangeComplete,
+        removeColor,
+        onSelectCategory,
+        handleSubmit,
+        onSelectBrand,
+        colors,
+        priceBefore,
+        qty,
+        prodDescription,
+        prodName
+    } = AdminAddProductsHook();
 
     return (
         <div>
@@ -40,7 +64,7 @@ const AdminAddProducts = () => {
                         cols="50"
                         placeholder="Product description"
                         value={prodDescription}
-                        onChange={onChangeDesName}
+                        onChange={onChangeDescription}
                     />
                     <input
                         type="number"
@@ -128,10 +152,9 @@ const AdminAddProducts = () => {
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">Save</button>
+                    <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">Save</button>
                 </Col>
             </Row>
-            <ToastContainer/>
         </div>
     )
 }

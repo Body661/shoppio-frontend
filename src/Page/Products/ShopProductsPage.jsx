@@ -2,14 +2,14 @@ import React from 'react'
 import {Col, Container, Row} from 'react-bootstrap'
 import CategoryHeader from '../../Components/Category/CategoryHeader'
 import HomeProducts from '../../Components/Home/HomeProducts'
-import Pagination from '../../Components/Uitily/Pagination'
-import SearchCountResult from '../../Components/Uitily/SearchCountResult'
-import SideFilter from '../../Components/Uitily/SideFilter'
-import ViewSearchProductsHook from "../../hook/products/searchProductsHook";
+import Pagination from '../../Components/Utility/Pagination'
+import SearchCountResult from '../../Components/Utility/SearchCountResult'
+import SideFilter from '../../Components/Utility/SideFilter'
+import useSearch from "../../hook/products/useSearch";
 
 const ShopProductsPage = () => {
 
-    const [items, pagination, onPress, getProduct] = ViewSearchProductsHook();
+    const {items, pagination, onPress, getProduct} = useSearch();
     let pageCount
     if (pagination) pageCount = pagination;
 
@@ -18,8 +18,8 @@ const ShopProductsPage = () => {
             <CategoryHeader/>
             <Container>
                 <SearchCountResult onClick={getProduct} title={` ${items.length} Search result`}/>
-                <Row className='d-flex flex-row'>
-                    <Col sm="2" xs="2" md="1" className='d-flex'>
+                <Row className='d-flex flex-row search-result-container'>
+                    <Col sm="2" xs="2" md="1" className='d-flex search-filter'>
                         <SideFilter/>
                     </Col>
                     <Col sm="10" xs="10" md="11">

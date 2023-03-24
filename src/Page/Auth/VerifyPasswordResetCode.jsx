@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
 import useVerifyPassword from '../../hook/auth/useVerifyPassword';
 
 const VerifyPasswordPage = () => {
@@ -24,7 +23,6 @@ const VerifyPasswordPage = () => {
                     </button>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
     );
 };

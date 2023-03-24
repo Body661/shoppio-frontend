@@ -2,11 +2,10 @@ import React from 'react'
 import {Card, Col} from 'react-bootstrap'
 import rate from "../../images/rate.png";
 import {Link} from 'react-router-dom';
-import ProductWishlistHook from "../../hook/products/productWishlistHook";
-import {ToastContainer} from "react-toastify";
+import UseWishlist from "../../hook/products/useWishlist";
 
 const ProductCard = ({item, favProd}) => {
-    const [, , handelFav, favImg] = ProductWishlistHook(item, favProd)
+    const {favImg, handleFav} = UseWishlist(item, favProd)
 
     return (
         <Col sm="6" md="4" lg="3" className="d-flex" key={item?._id}>
@@ -27,7 +26,7 @@ const ProductCard = ({item, favProd}) => {
                 <div className="d-flex justify-content-end mx-2">
                     <img
                         src={favImg}
-                        onClick={handelFav}
+                        onClick={handleFav}
                         alt=""
                         className="text-center"
                         style={{
@@ -68,7 +67,6 @@ const ProductCard = ({item, favProd}) => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <ToastContainer/>
         </Col>
     )
 }

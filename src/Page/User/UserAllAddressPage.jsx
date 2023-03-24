@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import UserAllAddress from '../../Components/User/UserAllAddress'
+import UserAllAddresses from '../../Components/User/UserAllAddresses'
 import UserSideBar from '../../Components/User/UserSideBar'
 const UserAllAddressPage = () => {
     return (
@@ -11,7 +11,7 @@ const UserAllAddressPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                  <UserAllAddress />
+                  <UserAllAddresses />
                 </Col>
             </Row>
         </Container>

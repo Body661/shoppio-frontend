@@ -1,6 +1,5 @@
 import React from 'react'
 import {Row, Col, Spinner} from 'react-bootstrap'
-import {ToastContainer} from "react-toastify";
 import useAddBrand from "../../hook/brand/useAddBrand";
 
 const AdminAddBrand = () => {
@@ -66,7 +65,6 @@ const AdminAddBrand = () => {
                     {loading ? <Spinner animation="border" variant="primary"/> : null}
                 </div>
             )}
-            <ToastContainer/>
         </div>
     );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import ViewProductsDetailsHook from '../../hook/products/productDetailsHook';
+import useProductDetails from '../../hook/products/useProductDetails';
 import UseAddToCart from '../../hook/cart/useAddToCart';
 
 const ProductText = () => {
     const { id } = useParams();
-    const [product] = ViewProductsDetailsHook(id);
+    const {product} = useProductDetails(id);
     const { colorClick, indexColor, addToCartHandle } = UseAddToCart(id, product);
 
     return (

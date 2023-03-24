@@ -1,12 +1,12 @@
 import React from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, Spinner} from 'react-bootstrap'
 import AdminSideBar from '../../Components/Admin/AdminSideBar'
-import AdminAllProducts from '../../Components/Admin/AdminAllProducts'
-import Pagination from '../../Components/Uitily/Pagination'
+import Pagination from '../../Components/Utility/Pagination'
 import ViewProductsAdminHook from "../../hook/admin/useAdminGetProducts";
+import AdminAllProductsCard from "../../Components/Admin/AdminAllProductsCard";
 
 const AdminAllProductsPage = () => {
-    const [items, pagination, onPress] = ViewProductsAdminHook();
+    const {products, pagination, onPress, loading, error} = ViewProductsAdminHook();
 
     let pageCount
     if (pagination) pageCount = pagination;
@@ -19,7 +19,23 @@ const AdminAllProductsPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                    <AdminAllProducts products={items}/>
+                    <div className='admin-content-text'>Manage products</div>
+
+                    {
+                        loading && !error && !products && <Spinner animation="border" variant="primary"/>
+                    }
+                    {
+                        !loading && !error && products?.length > 0 ?
+                            <Row className='justify-content-start'>
+                                {
+                                    products?.map((item, index) => <AdminAllProductsCard key={index} item={item}/>)
+                                }
+                            </Row> : <h4 className="notFound">No Products found</h4>
+                    }
+                    {
+                        !loading && error && !products && <h4 className="error">Something went wrong</h4>
+                    }
+
                     {
                         pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={onPress}/>) : null
                     }

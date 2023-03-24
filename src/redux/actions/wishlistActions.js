@@ -11,13 +11,13 @@ export const addProductToWishList = (body) => async (dispatch) => {
 
         dispatch({
             type: ADD_TO_WISHLIST,
-            payload: {product: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: ADD_TO_WISHLIST,
-            payload: {product: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -28,13 +28,13 @@ export const removeProductFromWishList = (prodID) => async (dispatch) => {
         const response = await useDeleteData(`/api/wishlist/${prodID}`);
         dispatch({
             type: REMOVE_FROM_WISHLIST,
-            payload: {product: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: REMOVE_FROM_WISHLIST,
-            payload: {product: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -45,13 +45,13 @@ export const getWishlist = () => async (dispatch) => {
         const response = await useGetDataToken(`/api/wishlist`);
         dispatch({
             type: USER_WISHLIST,
-            payload: {products: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: USER_WISHLIST,
-            payload: {products: [], error: e.response},
+            payload: e.response,
         })
     }
 }

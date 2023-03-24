@@ -1,81 +1,55 @@
-import {
-    DELETE_PRODUCT,
-    UPDATE_PRODUCT,
-    CREATE_PRODUCT,
-    GET_PRODUCTS_BY_CATEGORY,
-    GET_PRODUCT_DETAILS,
-    GET_ALL_PRODUCTS, GET_PRODUCTS_BY_BRAND, GET_PRODUCTS_BY_CATEGORY_HOME
-
-} from '../types'
+import * as types from '../types';
 
 const initState = {
-    createdProduct: [],
-    allProducts: [],
-    product: [],
-    productsByCategory: [],
-    productsByCategoryHome: [],
-    productsByBrand: [],
-    deleteProduct: [],
-    updateProduct: [],
-    loading: true,
-    error: null,
+    createdProduct: null,
+    allProducts: null,
+    product: null,
+    productsByCategory: null,
+    productsByCategoryHome: null,
+    productsByBrand: null,
+    deleteProduct: null,
+    updateProduct: null,
 }
 const productReducer = (state = initState, action) => {
     switch (action.type) {
-        case CREATE_PRODUCT:
+        case types.CREATE_PRODUCT:
             return {
                 ...state,
-                createdProduct: action.payload.createdProduct,
-                loading: false,
-                error: action.payload.error
+                createdProduct: action.payload,
             }
-        case GET_ALL_PRODUCTS:
+        case types.GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload.allProducts,
-                loading: false,
-                error: action.payload.error
+                allProducts: action.payload,
             }
-        case GET_PRODUCT_DETAILS:
+        case types.GET_PRODUCT_DETAILS:
             return {
-                product: action.payload.product,
-                loading: false,
-                error: action.payload.error
+                product: action.payload,
             }
-        case GET_PRODUCTS_BY_CATEGORY:
+        case types.GET_PRODUCTS_BY_CATEGORY:
             return {
                 ...state,
-                productsByCategory: action.payload.productsByCategory,
-                loading: false,
-                error: action.payload.error
+                productsByCategory: action.payload,
             }
-        case GET_PRODUCTS_BY_CATEGORY_HOME:
+        case types.GET_PRODUCTS_BY_CATEGORY_HOME:
             return {
                 ...state,
-                productsByCategoryHome: action.payload.productsByCategoryHome,
-                loading: false,
-                error: action.payload.error
+                productsByCategoryHome: action.payload,
             }
-        case GET_PRODUCTS_BY_BRAND:
+        case types.GET_PRODUCTS_BY_BRAND:
             return {
                 ...state,
-                productsByBrand: action.payload.productsByBrand,
-                loading: false,
-                error: action.payload.error
+                productsByBrand: action.payload,
             }
-        case DELETE_PRODUCT:
+        case types.DELETE_PRODUCT:
             return {
                 ...state,
-                deleteProduct: action.payload.deleteProduct,
-                loading: false,
-                error: action.payload.error
+                deleteProduct: action.payload,
             }
-        case UPDATE_PRODUCT:
+        case types.UPDATE_PRODUCT:
             return {
                 ...state,
-                updateProduct: action.payload.updateProduct,
-                loading: false,
-                error: action.payload.error
+                updateProduct: action.payload,
             }
         default:
             return state;

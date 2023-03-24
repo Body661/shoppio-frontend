@@ -1,50 +1,38 @@
-import {
-    ADD_USER_ADDRESS,
-    EDIT_USER_ADDRESS,
-    GET_ONE_USER_ADDRESS,
-    DELETE_USER_ADDRESS,
-    GET_ALL_USER_ADDRESSES
-} from '../types'
+import * as types from '../types';
 
 const initState = {
-    addUserAddress: [],
-    allAddresses: [],
-    deleteAddress: [],
-    oneAddress: [],
-    editAddress: [],
-    error: null
+    addUserAddress: null,
+    allAddresses: null,
+    deleteAddress: null,
+    oneAddress: null,
+    editAddress: null,
 }
 const userAddressesReducer = (state = initState, action) => {
     switch (action.type) {
-        case ADD_USER_ADDRESS:
+        case types.ADD_USER_ADDRESS:
             return {
                 ...state,
-                addUserAddress: action.payload.address,
-                error: action.payload.error
+                addUserAddress: action.payload,
             }
-        case GET_ALL_USER_ADDRESSES:
+        case types.GET_ALL_USER_ADDRESSES:
             return {
                 ...state,
-                allAddresses: action.payload.allAddresses,
-                error: action.payload.error
+                allAddresses: action.payload,
             }
-        case DELETE_USER_ADDRESS:
+        case types.DELETE_USER_ADDRESS:
             return {
                 ...state,
-                deleteAddress: action.payload.address,
-                error: action.payload.error
+                deleteAddress: action.payload,
             }
-        case GET_ONE_USER_ADDRESS:
+        case types.GET_ONE_USER_ADDRESS:
             return {
                 ...state,
-                oneAddress: action.payload.address,
-                error: action.payload.error
+                oneAddress: action.payload,
             }
-        case EDIT_USER_ADDRESS:
+        case types.EDIT_USER_ADDRESS:
             return {
                 ...state,
-                editAddress: action.payload.address,
-                error: action.payload.error
+                editAddress: action.payload,
             }
         default:
             return state;

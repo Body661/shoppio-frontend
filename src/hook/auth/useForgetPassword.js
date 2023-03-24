@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {forgetPassword} from '../../redux/actions/authActions';
 import {useNavigate} from 'react-router-dom';
-import notify from '../useNotification';
 import validator from 'validator/es';
+import {toast} from "react-toastify";
 
 const useForgetPassword = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const useForgetPassword = () => {
 
     const onSubmit = async () => {
         if (!validator.isEmail(email)) {
-            notify('Please enter a valid email', 'error');
+            toast("Please enter a valid email", {type: 'error'})
             return;
         }
 
@@ -29,17 +29,20 @@ const useForgetPassword = () => {
     useEffect(() => {
         if (!loading) {
             if (res.status === 200) {
-                notify('Reset password code sent to your email successfully', 'success');
+                toast("Reset password code sent to your email successfully", {type: 'success'})
                 setTimeout(() => {
                     navigate('/user/verify-code');
                 }, 1000);
             } else if (res.status === 400) {
-                notify('Email not exists', 'error');
+                toast("Email doesn't exist", {type: 'error', toastId: 'forgetEmailNotExist'})
                 localStorage.removeItem('user-email');
             } else if (res.status === 429) {
-                notify('Too many requests, try again after 1 hour', 'error');
+                toast("Too many requests, try again after 1 hour", {type: 'error', toastId: 'forgetManyReqs'})
             } else {
-                notify(res?.data?.errors?.[0]?.msg || 'Something went wrong, try again later', 'error');
+                toast(res?.data?.errors ? res?.data?.errors?.[0]?.msg : 'Something went wrong, try again later', {
+                    type: 'error',
+                    toastId: 'forgetAnother'
+                })
             }
         }
     }, [loading, res]);

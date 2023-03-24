@@ -1,25 +1,29 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {getProductsByCategory} from "../../redux/actions/productActions";
 
-const ProductsByCategoryHook = (catID) => {
-
-    let limit = 8;
+const useProductsByCategory = (catID) => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(true)
 
     const getProduct = async () => {
-        await dispatch(getProductsByCategory('', limit, catID))
+        setLoading(true)
+        await dispatch(getProductsByCategory('', 50, catID))
+        setLoading(false)
     }
+
     useEffect(() => {
         getProduct()
     }, [])
 
     //when click pagination
     const onPress = async (page) => {
-        await dispatch(getProductsByCategory(page, limit, catID))
+        await dispatch(getProductsByCategory(page, 50, catID))
     }
 
     const products = useSelector((state) => state.allProducts.productsByCategory)
+    if (products?.status !== 200 && !loading) setError(true);
 
     let items = [];
     let pagination = [];
@@ -27,7 +31,7 @@ const ProductsByCategoryHook = (catID) => {
     if (products?.data?.data) items = products?.data?.data;
     if (products?.data?.paginationRes) pagination = products?.pages;
 
-    return [items, pagination, onPress]
+    return {items, pagination, onPress, loading, error}
 }
 
-export default ProductsByCategoryHook
+export default useProductsByCategory

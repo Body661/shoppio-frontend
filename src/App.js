@@ -1,7 +1,7 @@
 import HomePage from "./Page/Home/HomePage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import NavBarLogin from "./Components/Uitily/NavBarLogin";
-import Footer from "./Components/Uitily/Footer";
+import NavBarLogin from "./Components/Utility/NavBarLogin";
+import Footer from "./Components/Utility/Footer";
 import LoginPage from './Page/Auth/LoginPage';
 import RegisterPage from "./Page/Auth/RegisterPage";
 import AllCategoryPage from "./Page/Category/AllCategoryPage";
@@ -31,9 +31,10 @@ import AdminAddCouponPage from "./Page/Admin/AdminAddCouponPage";
 import AdminEditCouponPage from "./Page/Admin/AdminEditCouponPage";
 import React, {useEffect, useState} from "react";
 import {useJwt} from "react-jwt";
-import NotFoundPage from "./Components/Uitily/NotFoundPage";
+import NotFoundPage from "./Components/Utility/NotFoundPage";
 import ProductsByCategoryPage from "./Page/Products/ProductsByCategoryPage";
 import ProductsByBrandPage from "./Page/Products/ProductsByBrandPage";
+import {ToastContainer} from "react-toastify";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -110,12 +111,11 @@ function App() {
                             <Route path="/order/payMethod" element={<ChoosePayMethodPage/>}/>
                         </Route>
                     )}
-
-
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </BrowserRouter>
             <Footer/>
+            <ToastContainer/>
         </div>
     );
 }

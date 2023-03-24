@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
-import notify from '../useNotification';
 import {
     clearAllCartItem,
     deleteCartItem,
     updateCartItem,
 } from '../../redux/actions/cartActions';
+import {toast} from "react-toastify";
 
 const useDeleteCart = (item) => {
     const dispatch = useDispatch();
@@ -32,11 +32,15 @@ const useDeleteCart = (item) => {
     const clearCartResponse = useSelector((state) => state.cartReducer.clearCart);
 
     useEffect(() => {
-        if (loading === false && clearCartResponse) {
-            notify('Cart deleted successfully', 'success');
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+        if (!loading) {
+            if (clearCartResponse?.status === 204) {
+                toast('Cart deleted successfully', {type: 'success'})
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else if (clearCartResponse?.status !== 204) {
+                toast('Error while deleting cart', {type: 'error', toastId: 'deleteCartError'})
+            }
         }
     }, [loading, clearCartResponse]);
 

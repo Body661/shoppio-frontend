@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
 import useAddCoupon from '../../hook/coupon/useAddCoupon';
 import AdminCouponCard from './AdminCouponCard';
 
@@ -64,8 +63,6 @@ const AdminAddCoupon = () => {
                     )}
                 </Col>
             </Row>
-
-            <ToastContainer />
         </div>
     );
 };

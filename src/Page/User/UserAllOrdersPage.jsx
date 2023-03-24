@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import UserSideBar from '../../Components/User/UserSideBar'
-import UserAllOrder from '../../Components/User/UserAllOrder'
+import UserAllOrders from '../../Components/User/UserAllOrders'
 const UserAllOrdersPage = () => {
     return (
         <Container >
@@ -11,7 +11,7 @@ const UserAllOrdersPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                  <UserAllOrder />
+                  <UserAllOrders />
                 </Col>
             </Row>
         </Container>

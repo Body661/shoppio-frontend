@@ -4,12 +4,12 @@ import CategoryHeader from '../../Components/Category/CategoryHeader'
 import ProductDetails from '../../Components/Products/ProductDetails'
 import RateContainer from '../../Components/Rate/RateContainer'
 import {useParams} from "react-router-dom";
-import ViewProductsDetailsHook from "../../hook/products/productDetailsHook";
+import useProductDetails from "../../hook/products/useProductDetails";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
-    const [item, , products] = ViewProductsDetailsHook(id);
+    const {item, products} = useProductDetails(id);
 
     let rateAvg;
     let rateQty;

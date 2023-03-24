@@ -1,5 +1,5 @@
 import { Container, Row, Spinner } from 'react-bootstrap';
-import SubTitle from '../Uitily/SubTitle';
+import SubTitle from '../Utility/SubTitle';
 import BrandCard from '../Brand/BrandCard';
 import {useHomeBrands} from '../../hook/brand/useHomeBrands';
 

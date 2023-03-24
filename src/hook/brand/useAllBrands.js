@@ -8,7 +8,7 @@ export const useAllBrands = () => {
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        dispatch(getAllBrands(4));
+        dispatch(getAllBrands(50));
     }, [dispatch]);
 
     const brands = useSelector((state) => state.allBrands.brands);

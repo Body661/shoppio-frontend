@@ -1,30 +1,26 @@
-import {ADD_TO_WISHLIST, USER_WISHLIST, REMOVE_FROM_WISHLIST} from '../types'
+import * as types from '../types';
 
 const initState = {
-    addToWishList: [],
-    removeFromWishList: [],
-    allWishList: [],
-    error: null
+    allWishList: null,
+    addToWishList: null,
+    removeFromWishList: null,
 }
 const addToWishListReducer = (state = initState, action) => {
     switch (action.type) {
-        case ADD_TO_WISHLIST:
+        case types.ADD_TO_WISHLIST:
             return {
                 ...state,
-                addToWishList: action.payload.product,
-                error: action.payload.error
+                addToWishList: action.payload,
             }
-        case REMOVE_FROM_WISHLIST:
+        case types.REMOVE_FROM_WISHLIST:
             return {
                 ...state,
-                removeFromWishList: action.payload.product,
-                error: action.payload.error
+                removeFromWishList: action.payload,
             }
-        case USER_WISHLIST:
+        case types.USER_WISHLIST:
             return {
                 ...state,
-                allWishList: action.payload.products,
-                error: action.payload.error
+                allWishList: action.payload,
             }
         default:
             return state;

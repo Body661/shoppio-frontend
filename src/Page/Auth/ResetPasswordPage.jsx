@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
 import useResetPassword from '../../hook/auth/useResetPassword';
 
 const ResetPasswordPage = () => {
@@ -30,7 +29,6 @@ const ResetPasswordPage = () => {
                     </button>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
     );
 };

@@ -1,12 +1,5 @@
 import {useInsertDataWithImage} from '../../customHooks/useInsertData';
-import {
-    DELETE_PRODUCT,
-    UPDATE_PRODUCT,
-    CREATE_PRODUCT,
-    GET_PRODUCT_DETAILS,
-    GET_ALL_PRODUCTS, GET_PRODUCTS_BY_CATEGORY, GET_PRODUCTS_BY_BRAND,GET_PRODUCTS_BY_CATEGORY_HOME
-
-} from '../types'
+import * as types from '../types';
 import {useGetData} from '../../customHooks/useGetData';
 import useDeleteData from './../../customHooks/useDeleteData';
 import {useUpdateDataWithImage} from '../../customHooks/useUpdateData';
@@ -17,15 +10,15 @@ export const createProduct = (formatData) => async (dispatch) => {
     try {
         const response = await useInsertDataWithImage("/api/products", formatData);
         dispatch({
-            type: CREATE_PRODUCT,
-            payload: {createdProduct: response, error: null},
+            type: types.CREATE_PRODUCT,
+            payload: response,
             loading: true
         })
 
     } catch (e) {
         dispatch({
-            type: CREATE_PRODUCT,
-            payload: {createdProduct: [], error: e.response},
+            type: types.CREATE_PRODUCT,
+            payload: e.response,
         })
     }
 }
@@ -35,14 +28,14 @@ export const getAllProducts = (limit) => async (dispatch) => {
     try {
         const response = await useGetData(`/api/products?limit=${limit}`);
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: response, error: null},
+            type: types.GET_ALL_PRODUCTS,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: e.response}
+            type: types.GET_ALL_PRODUCTS,
+            payload: e.response,
         })
     }
 }
@@ -51,14 +44,14 @@ export const getAllProductsSearch = (queryString) => async (dispatch) => {
     try {
         const response = await useGetData(`/api/products?${queryString}`);
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: response, error: null},
+            type: types.GET_ALL_PRODUCTS,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: e.response}
+            type: types.GET_ALL_PRODUCTS,
+            payload: e.response,
         })
     }
 }
@@ -69,14 +62,14 @@ export const getAllProductsPage = (page, limit) => async (dispatch) => {
     try {
         const response = await useGetData(`/api/products?page=${page}&limit=${limit}`);
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: response, error: null},
+            type: types.GET_ALL_PRODUCTS,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: {allProducts: [], error: e.response}
+            type: types.GET_ALL_PRODUCTS,
+            payload: e.response,
         })
     }
 }
@@ -86,14 +79,14 @@ export const getOneProduct = (id) => async (dispatch) => {
     try {
         const response = await useGetData(`/api/products/${id}`);
         dispatch({
-            type: GET_PRODUCT_DETAILS,
-            payload: {product: response, error: null},
+            type: types.GET_PRODUCT_DETAILS,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_PRODUCT_DETAILS,
-            payload: {product: [], error: e.response},
+            type: types.GET_PRODUCT_DETAILS,
+            payload: e.response,
         })
     }
 }
@@ -102,14 +95,14 @@ export const getProductsByCategoryHome = (categoryID) => async (dispatch) => {
     try {
         const response = await useGetData(`/api/products?limit=4&category=${categoryID}&sort=-sold&sort=-createdAt`);
         dispatch({
-            type: GET_PRODUCTS_BY_CATEGORY_HOME,
-            payload: {productsByCategoryHome: response, error: null},
+            type: types.GET_PRODUCTS_BY_CATEGORY_HOME,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_PRODUCTS_BY_CATEGORY_HOME,
-            payload: {productsByCategoryHome: [], error: e.response},
+            type: types.GET_PRODUCTS_BY_CATEGORY_HOME,
+            payload: e.response,
         })
     }
 }
@@ -118,14 +111,14 @@ export const getProductsByCategory = (page, limit, categoryID) => async (dispatc
     try {
         const response = await useGetData(`/api/products?limit=${limit}&category=${categoryID}&page=${page}`);
         dispatch({
-            type: GET_PRODUCTS_BY_CATEGORY,
-            payload: {productsByCategory: response, error: null},
+            type: types.GET_PRODUCTS_BY_CATEGORY,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_PRODUCTS_BY_CATEGORY,
-            payload: {productsByCategory: [], error: e.response},
+            type: types.GET_PRODUCTS_BY_CATEGORY,
+            payload: e.response,
         })
     }
 }
@@ -134,14 +127,14 @@ export const getProductsByBrand = (page, limit, brandID) => async (dispatch) => 
     try {
         const response = await useGetData(`/api/products?limit=${limit}&brand=${brandID}&page=${page}`);
         dispatch({
-            type: GET_PRODUCTS_BY_BRAND,
-            payload: {productsByBrand: response, error: null},
+            type: types.GET_PRODUCTS_BY_BRAND,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: GET_PRODUCTS_BY_BRAND,
-            payload: {productsByBrand: [], error: e.response},
+            type: types.GET_PRODUCTS_BY_BRAND,
+            payload: e.response,
         })
     }
 }
@@ -152,14 +145,14 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         const response = await useDeleteData(`/api/products/${id}`);
         dispatch({
-            type: DELETE_PRODUCT,
-            payload: {deleteProduct: response, error: null},
+            type: types.DELETE_PRODUCT,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: DELETE_PRODUCT,
-            payload: {deleteProduct: [], error: e.response},
+            type: types.DELETE_PRODUCT,
+            payload: e.response,
         })
     }
 }
@@ -169,14 +162,14 @@ export const updateProduct = (id, data) => async (dispatch) => {
     try {
         const response = await useUpdateDataWithImage(`/api/products/${id}`, data);
         dispatch({
-            type: UPDATE_PRODUCT,
-            payload: {updateProduct: response, error: null},
+            type: types.UPDATE_PRODUCT,
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
-            type: UPDATE_PRODUCT,
-            payload: {updateProduct: [], error: e.response},
+            type: types.UPDATE_PRODUCT,
+            payload: e.response,
         })
     }
 }

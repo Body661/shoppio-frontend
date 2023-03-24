@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
-import notify from '../useNotification';
 import {addProductToCart} from '../../redux/actions/cartActions';
+import {toast} from "react-toastify";
 
 const UseAddToCart = (productId, item) => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const UseAddToCart = (productId, item) => {
 
     const addToCartHandle = async () => {
         if (item?.colors?.length >= 1 && colorText === '') {
-            notify('Please select the color', 'warn');
+            toast('Please select the color', {type: 'warning'})
             return;
         }
         setLoading(true);
@@ -33,19 +33,21 @@ const UseAddToCart = (productId, item) => {
 
     useEffect(() => {
         if (loading === false && res) {
-            if (res && res?.status === 200) {
-                notify('Product added to cart successfully', 'success');
+            if (res?.status === 200) {
+                toast('Product added to cart successfully', {type: 'success'})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            } else if (res?.status === 401) {
-                notify('you are not logged in!', 'error');
-            } else if (res?.status === 403) {
-                notify('You are not allowed to do this operation', 'error');
-            } else if (res?.data?.errors) {
-                notify(res?.data?.errors[0].msg, 'error');
+            } else if(res?.data?.error?.name === 'JsonWebTokenError'){
+                toast("You are not logged in, please login first", {
+                    type: 'error',
+                    toastId: 'addToCartLogin',
+                });
             } else {
-                notify('Error while adding product to cart', 'error');
+                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while adding product to cart', {
+                    type: 'error',
+                    toastId: 'addToCartAnother'
+                })
             }
         }
     }, [loading, res]);

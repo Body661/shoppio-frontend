@@ -8,7 +8,7 @@ export const useAllCategories = () => {
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        dispatch(getAllCategories(6));
+        dispatch(getAllCategories(50));
     }, [dispatch])
 
     const categories = useSelector(state => state.allCategories.categories)

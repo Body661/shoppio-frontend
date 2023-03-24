@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createBrand} from '../../redux/actions/BrandActions';
 import 'react-toastify/dist/ReactToastify.css';
-import notify from '../../hook/useNotification';
 import avatar from '../../images/avatar.png';
+import {toast} from "react-toastify";
 
 const useAddBrand = () => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const useAddBrand = () => {
         event.preventDefault();
 
         if (!name.trim() || !selectedFile) {
-            notify('Please fill in all required information', 'warn');
+            toast('Please fill in all required information', {type: 'error'})
             return;
         }
 
@@ -52,15 +52,16 @@ const useAddBrand = () => {
             setSelectedFile(null);
             setIsPress(false);
 
-            if (addBranRes && addBranRes.status === 201) {
-                notify('Brand added successfully', 'success');
-            } else if (addBranRes?.data?.errors) {
-                notify(addBranRes?.data?.errors[0].msg, 'error');
+            if (addBranRes?.status === 201) {
+                toast('Brand added successfully', {type: 'success', toastId: 'brandAdded'})
             } else {
-                notify('Error while adding the brand', 'error');
+                toast(addBranRes?.data?.errors ? addBranRes?.data?.errors[0]?.msg : 'Error while adding the brand', {
+                    type: 'error',
+                    toastId: 'addBrandAnother'
+                })
             }
         }
-    }, [loading]);
+    }, [loading, addBranRes, isPress]);
 
     return {
         img,

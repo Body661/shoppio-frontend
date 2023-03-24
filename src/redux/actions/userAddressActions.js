@@ -17,13 +17,13 @@ export const addUserAddress = (body) => async (dispatch) => {
         const response = await useInsertData("/api/addresses", body);
         dispatch({
             type: ADD_USER_ADDRESS,
-            payload: {address: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: ADD_USER_ADDRESS,
-            payload: {address: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -35,13 +35,13 @@ export const getAllUserAddresses = () => async (dispatch) => {
 
         dispatch({
             type: GET_ALL_USER_ADDRESSES,
-            payload: {allAddresses: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: GET_ALL_USER_ADDRESSES,
-            payload: {allAddresses: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -54,13 +54,13 @@ export const deleteUserAddress = (id) => async (dispatch) => {
 
         dispatch({
             type: DELETE_USER_ADDRESS,
-            payload: {address: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: DELETE_USER_ADDRESS,
-            payload: {address: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -72,13 +72,13 @@ export const getOneUserAddress = (id) => async (dispatch) => {
         const response = await useGetDataToken(`/api/addresses/${id}`);
         dispatch({
             type: GET_ONE_USER_ADDRESS,
-            payload: {address: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: GET_ONE_USER_ADDRESS,
-            payload: {address: [], error: e.response},
+            payload: e.response,
         })
     }
 }
@@ -91,13 +91,13 @@ export const editUserAddress = (id, body) => async (dispatch) => {
 
         dispatch({
             type: EDIT_USER_ADDRESS,
-            payload: {address: response, error: null},
+            payload: response,
         })
 
     } catch (e) {
         dispatch({
             type: EDIT_USER_ADDRESS,
-            payload: {address: [], error: e.response},
+            payload: e.response,
         })
     }
 }

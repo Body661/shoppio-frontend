@@ -1,5 +1,4 @@
 import {Row, Col} from 'react-bootstrap';
-import {ToastContainer} from 'react-toastify';
 import EditCouponHook from '../../hook/coupon/useEditCoupon';
 import {useParams} from 'react-router-dom';
 
@@ -43,9 +42,6 @@ const AdminEditCoupon = () => {
                     <button onClick={onSubmit} className="btn-save d-inline mt-2 ">Save changes</button>
                 </Col>
             </Row>
-
-
-            <ToastContainer/>
         </div>
     )
 }

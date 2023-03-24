@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {createOrderCash} from '../../redux/actions/checkOutActions';
 import {getOneUserAddress} from '../../redux/actions/userAddressActions';
-import notify from '../useNotification';
 import useUserCart from '../cart/useUserCart';
+import {toast} from "react-toastify";
 
 const useCashOrder = () => {
     const [loading, setLoading] = useState(true);
-    const [loadingCreate, setLoadingCreate] = useState(false);
+    const [loadingCreate, setLoadingCreate] = useState(true);
     const [addressDetails, setAddressDetails] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,13 +31,14 @@ const useCashOrder = () => {
         }
     }, [loading]);
 
+    console.log(resAddress)
     const handleCreateOrderCash = async () => {
         if (!cartID.trim()) {
-            notify('Please add products to cart', 'warn');
+            toast('Please add products to cart', {type: 'error'});
             return;
         }
         if (!addressDetails?._id) {
-            notify('Please select an address', 'warn');
+            toast('Please select shipping address', {type: 'error'});
             return;
         }
         setLoadingCreate(true);
@@ -57,27 +58,28 @@ const useCashOrder = () => {
     const order = useSelector((state) => state.checkoutReducer.createOrderCash);
 
     useEffect(() => {
-        if (loadingCreate === false && order) {
+        if (!loadingCreate && order) {
             if (order?.status === 201) {
-                notify('Order added successfully', 'success');
+                toast('Order added successfully', {type: 'success'});
                 setTimeout(() => {
                     navigate('/user/allOrders');
                 }, 1500);
-            } else if (order?.data?.errors) {
-                notify(order?.data?.errors[0].msg, 'error');
             } else {
-                notify('Error while adding order, please try again', 'error');
+                toast(order?.data?.errors ? order?.data?.errors[0]?.msg : 'Error while adding order, please try again', {
+                    type: 'error',
+                    toastId: "cashOrderError"
+                });
             }
         }
     }, [loadingCreate, order]);
 
-    return [
+    return {
         handleChooseAddress,
         addressDetails,
         handleCreateOrderCash,
         loading,
         loadingCreate,
-    ];
+    };
 };
 
 export default useCashOrder;

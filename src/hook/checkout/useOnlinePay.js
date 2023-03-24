@@ -1,24 +1,23 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {createOrderOnline} from '../../redux/actions/checkOutActions';
-import notify from '../useNotification';
-import GetAllUserCartHook from '../cart/useUserCart';
 import useUserCart from "../cart/useUserCart";
+import {toast} from "react-toastify";
 
 const useOnlinePay = (addressDetails) => {
     const dispatch = useDispatch();
     const {cartID} = useUserCart();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     //when user clicks
     const handelCreateOrderOnline = async () => {
-        if (cartID?.trim() === '') {
-            notify('Please add products to cart', 'warn');
+        if (!cartID.trim()) {
+            toast('Please add products to cart', {type: 'error'});
             return;
         }
         if (!addressDetails?._id) {
-            notify('Please select an address', 'warn');
+            toast('Please select shipping address', {type: 'error'});
             return;
         }
         setLoading(true);
@@ -35,22 +34,22 @@ const useOnlinePay = (addressDetails) => {
         setLoading(false);
     };
 
-    //get response for create order card
-    const order = useSelector(
-        (state) => state.checkoutReducer.createOrderOnline
-    );
-    console.log(order);
+    const order = useSelector((state) => state.checkoutReducer.createOrderOnline);
+
     useEffect(() => {
-        if (loading === false && order) {
+        if (!loading && order) {
             if (order && order?.data?.session && order?.status === 200) {
                 window.open(order.data?.session?.url, '_self');
-            } else if (order?.data?.errors) {
-                notify(order?.data?.errors[0]?.msg, 'error');
+            } else {
+                toast(order?.data?.errors ? order?.data?.errors[0]?.msg : 'Error while adding order, please try again', {
+                    type: 'error',
+                    toastId: "onlineOrderError"
+                });
             }
         }
     }, [loading, order]);
 
-    return [handelCreateOrderOnline];
+    return {handelCreateOrderOnline};
 };
 
 export default useOnlinePay;

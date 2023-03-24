@@ -3,12 +3,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getWishlist} from '../../redux/actions/wishlistActions';
 
 
-const ProductContainerHook = () => {
-
+const useProductContainer = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [favProd, setFavProd] = useState([])
-    const res = useSelector(state => state.wishlistReducer.allWishList)
 
     useEffect(() => {
         const get = async () => {
@@ -20,19 +18,17 @@ const ProductContainerHook = () => {
         get();
     }, [])
 
+    const res = useSelector(state => state.wishlistReducer.allWishList)
 
     useEffect(() => {
 
-        if (loading === false) {
-            if (res.data?.data?.length >= 1) {
-                setFavProd(res.data?.data?.map(item => item._id))
-            } else setFavProd([])
-        }
+        if (loading === false && res?.data?.data?.length >= 1) {
+            setFavProd(res?.data?.data?.map(item => item._id))
+        } else setFavProd([])
 
-    }, [loading])
+    }, [loading, res?.data?.data])
 
-    return [favProd]
-
+    return {favProd, loading}
 }
 
-export default ProductContainerHook
+export default useProductContainer

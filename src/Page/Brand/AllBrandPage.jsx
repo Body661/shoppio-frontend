@@ -1,6 +1,6 @@
 import React from 'react'
 import BrandContainer from '../../Components/Brand/BrandContainer'
-import Pagination from '../../Components/Uitily/Pagination'
+import Pagination from '../../Components/Utility/Pagination'
 import {useAllBrands} from "../../hook/brand/useAllBrands";
 
 const AllBrand = () => {

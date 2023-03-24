@@ -1,5 +1,4 @@
 import {Col, Row, Spinner} from "react-bootstrap";
-import {ToastContainer} from "react-toastify";
 import useAddCategory from "../../hook/category/useAddCategory";
 import React from "react";
 
@@ -54,7 +53,6 @@ const AdminAddCategory = () => {
                     {loading ? <Spinner animation="border" variant="primary"/> : null}
                 </div>
             )}
-            <ToastContainer/>
         </div>
     );
 };

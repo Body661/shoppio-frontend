@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { ToastContainer } from "react-toastify";
 import UseRegister from "../../hook/auth/useRegister";
 
 const RegisterPage = () => {
@@ -68,7 +67,6 @@ const RegisterPage = () => {
                     </label>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Container, Row, Spinner} from 'react-bootstrap';
-import SubTitle from '../Uitily/SubTitle'
+import SubTitle from '../Utility/SubTitle'
 import UseHomeCategories from "../../hook/category/useHomeCategories";
 import CategoryCard from "../Category/CategoryCard";
 

@@ -4,20 +4,29 @@ import HomeProducts from '../../Components/Home/HomeProducts';
 import Slider from '../../Components/Home/Slider';
 import DiscountSection from '../../Components/Home/DiscountSection';
 import HomeBrands from "../../Components/Home/HomeBrands";
-import ViewHomeProductsHook from "../../hook/products/homeProductsHook";
+import useHomeProducts from "../../hook/products/useHomeProducts";
 
 const HomePage = () => {
-    const [products, allProductsByCategory, loading, error] = ViewHomeProductsHook();
+    const {
+        bestSeller,
+        categoryProducts,
+        loadingAllProducts,
+        errorAllProducts,
+        loadingCatProducts,
+        errorCatProducts
+    } = useHomeProducts();
 
     return (
         <div className='font' style={{minHeight: '670px'}}>
 
             <Slider/>
             <HomeCategory title="Categories" btnTitle="More" path="/allCategory"/>
-            <HomeProducts products={products} loading={loading} error={error} title="Best seller" btnTitle="More"
+            <HomeProducts products={bestSeller} loading={loadingAllProducts} error={errorAllProducts} title="Best seller"
+                          btnTitle="More"
                           pathText="/products"/>
             <DiscountSection/>
-            <HomeProducts products={allProductsByCategory} loading={loading} error={error} title="Newest clothes"
+            <HomeProducts products={categoryProducts} loading={loadingCatProducts} error={errorCatProducts}
+                          title="Newest clothes"
                           btnTitle="More" pathText="/products"/>
             <HomeBrands title="Brands" btnTitle="More" path="/allBrands"/>
         </div>

@@ -1,6 +1,7 @@
 import {Container, Row} from 'react-bootstrap'
-import SubTitle from '../Uitily/SubTitle'
+import SubTitle from '../Utility/SubTitle'
 import ProductCard from './ProductCard'
+import React from "react";
 
 const ProductsContainer = ({title, btnTitle, pathText, products}) => {
     return (
@@ -12,7 +13,6 @@ const ProductsContainer = ({title, btnTitle, pathText, products}) => {
                         products?.map((item, index) => <ProductCard key={index} item={item}/>)
                     ) : <p>No products found</p>
                 }
-
             </Row>
         </Container>
     )

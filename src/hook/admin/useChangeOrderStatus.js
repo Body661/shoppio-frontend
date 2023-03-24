@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeOrderDelivery, changeOrderPay} from '../../redux/actions/orderActions';
-import notify from '../useNotification';
+import {toast} from "react-toastify";
 
 const useChangeOrderStatus = (id) => {
     const [loadingPay, setLoadingPay] = useState(true);
@@ -31,7 +31,7 @@ const useChangeOrderStatus = (id) => {
             await dispatch(changeOrderPay(id));
             setLoadingPay(false);
         } else {
-            notify('Please select pay status');
+            toast("Please select pay status", {type: 'error'})
         }
     };
 
@@ -41,7 +41,7 @@ const useChangeOrderStatus = (id) => {
             await dispatch(changeOrderDelivery(id));
             setLoadingDelivery(false);
         } else {
-            notify('Please select the delivery status', 'warn');
+            toast("Please select the delivery status", {type: 'error'})
         }
     };
 
@@ -51,16 +51,15 @@ const useChangeOrderStatus = (id) => {
     useEffect(() => {
         if (!loadingPay && changePayRes) {
             if (changePayRes.status === 200) {
-                notify('Order pay status changed successfully', 'success');
+                toast("Order pay status changed successfully", {type: 'success'})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            } else if (changePayRes?.data?.errors) {
-                notify(changePayRes?.data?.errors[0].msg, 'error');
-            } else if (changePayRes.status === 400) {
-                notify('Bad request, please check if all information are correct', 'error');
-            } else {
-                notify('Error while updating pay status', 'warn');
+            }  else {
+                toast(changePayRes?.data?.errors ? changePayRes?.data?.errors[0]?.msg : "Error while updating pay status", {
+                    type: 'error',
+                    toastId: 'changePayError'
+                })
             }
         }
     }, [loadingPay, changePayRes]);
@@ -70,16 +69,15 @@ const useChangeOrderStatus = (id) => {
     useEffect(() => {
         if (!loadingDelivery && deliveryStatus) {
             if (deliveryStatus.status === 200) {
-                notify('Delivery status changed successfully', 'success');
+                toast("Delivery status changed successfully", {type: 'success'})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            } else if (deliveryStatus?.data?.errors) {
-                notify(deliveryStatus?.data?.errors[0].msg, 'error');
-            } else if (deliveryStatus.status === 400) {
-                notify('Bad request, please check if all information are correct', 'error');
-            } else {
-                notify('Error while updating delivery status', 'warn');
+            }  else {
+                toast(deliveryStatus?.data?.errors ? deliveryStatus?.data?.errors[0]?.msg : "Error while updating delivery status", {
+                    type: 'error',
+                    toastId: 'changeDeliveryAnother'
+                })
             }
         }
     }, [loadingDelivery, deliveryStatus]);

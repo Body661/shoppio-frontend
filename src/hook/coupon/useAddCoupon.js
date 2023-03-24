@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addCoupon, getAllCoupon} from '../../redux/actions/couponActions';
-import notify from '../useNotification';
+import {toast} from "react-toastify";
 
 const useAddCoupon = () => {
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const useAddCoupon = () => {
 
     const onSubmit = async () => {
         if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
-            notify('Please fill in all information!', 'warn');
+            toast('Please fill in all information!', {type: 'error'});
             return;
         }
 
@@ -42,18 +42,15 @@ const useAddCoupon = () => {
     useEffect(() => {
         if (loading === false && addCouponRes) {
             if (addCouponRes && addCouponRes.status === 201) {
-                notify("Coupon added successfully", "success")
+                toast("Coupon added successfully", {type: 'success'});
                 setTimeout(() => {
                     window.location.reload()
                 }, 1000)
-            } else if (addCouponRes?.status === 401) {
-                notify("You are not logged in!", "error")
-            } else if (addCouponRes?.status === 403) {
-                notify("You are not allowed to do this operation", "error");
-            } else if (addCouponRes?.data?.errors) {
-                notify(addCouponRes?.data?.errors[0]?.msg, "error");
             } else {
-                notify("Error while adding coupon", "error")
+                toast(addCouponRes?.data?.errors ? addCouponRes?.data?.errors[0]?.msg : 'Error while adding coupon', {
+                    type: 'error',
+                    toastId: 'addCouponError'
+                });
             }
         }
 

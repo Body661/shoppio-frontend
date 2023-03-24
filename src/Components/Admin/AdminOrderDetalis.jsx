@@ -1,7 +1,6 @@
 import {useMemo} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
 import ChangeOrderStatusHook from '../../hook/admin/useChangeOrderStatus';
 import GetOrderDetailsHook from '../../hook/admin/useGetOrderDetails';
 import UserAllOrderItem from '../User/UserAllOrderItem';
@@ -75,8 +74,6 @@ const AdminOrderDetails = () => {
                     </div>
                 </div>
             </Row>
-
-            <ToastContainer/>
         </div>
     );
 };

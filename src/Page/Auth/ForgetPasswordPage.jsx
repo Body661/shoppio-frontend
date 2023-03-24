@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
 import useForgetPassword from "../../hook/auth/useForgetPassword";
 
 const ForgetPasswordPage = () => {
@@ -23,7 +22,6 @@ const ForgetPasswordPage = () => {
                     </button>
                 </Col>
             </Row>
-            <ToastContainer />
         </Container>
     );
 };
