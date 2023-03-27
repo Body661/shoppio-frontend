@@ -1,11 +1,12 @@
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col, Spinner} from 'react-bootstrap';
 import useEditCoupon from '../../../hook/admin/Coupon/useEditCoupon';
 import {useParams} from 'react-router-dom';
+import React from "react";
 
 const EditCoupon = () => {
 
     const {id} = useParams();
-    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit} = useEditCoupon(id)
+    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, loadingUpdate, isPress} = useEditCoupon(id)
 
     return (
         <div>
@@ -41,6 +42,10 @@ const EditCoupon = () => {
                 <Col sm="8" className="d-flex justify-content-end ">
                     <button onClick={onSubmit} className="btn-save d-inline mt-2 ">Save changes</button>
                 </Col>
+
+                {isPress && <div>
+                    {loadingUpdate && <Spinner animation="border" role="status"/>}
+                </div>}
             </Row>
         </div>
     )

@@ -1,11 +1,22 @@
-import { useRef } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import React, {useRef} from 'react';
+import {Row, Col, Spinner} from 'react-bootstrap';
 import useAddCoupon from '../../../hook/admin/Coupon/useAddCoupon';
 import AdminCouponCard from '../AdminCouponCard';
 
 const AddCoupon = () => {
     const dateRef = useRef();
-    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, coupons} = useAddCoupon();
+    const {
+        couponName,
+        couponDate,
+        couponValue,
+        onChangeName,
+        onChangeDate,
+        onChangeValue,
+        onSubmit,
+        coupons,
+        loading,
+        isPress
+    } = useAddCoupon();
 
     const handleDateFocus = () => {
         dateRef.current.type = 'date';
@@ -52,12 +63,16 @@ const AddCoupon = () => {
                         Add coupon
                     </button>
                 </Col>
+
+                {isPress && <div>
+                    {loading && <Spinner animation="border" role="status"/>}
+                </div>}
             </Row>
 
             <Row>
                 <Col sm="8" className="">
                     {coupons.length > 0 ? (
-                        coupons.map((item, index) => <AdminCouponCard key={index} coupon={item} />)
+                        coupons.map((item, index) => <AdminCouponCard key={index} coupon={item}/>)
                     ) : (
                         <h6>No coupons found</h6>
                     )}

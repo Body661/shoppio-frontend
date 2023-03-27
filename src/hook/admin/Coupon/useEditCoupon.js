@@ -10,6 +10,7 @@ const useEditCoupon = (id) => {
 
     const [loading, setLoading] = useState(true);
     const [loadingUpdate, setLoadingUpdate] = useState(true);
+    const [isPress, setIsPress] = useState(false);
     const [couponName, setCouponName] = useState('');
     const [couponDate, setCouponDate] = useState('');
     const [couponValue, setCouponValue] = useState('');
@@ -60,12 +61,14 @@ const useEditCoupon = (id) => {
             return;
         }
         setLoadingUpdate(true);
+        setIsPress(true)
         await dispatch(editCoupon(id, {
             name: couponName,
             expire: couponDate.split('-').reverse().join('-'),
             discount: couponValue
         }));
         setLoadingUpdate(false);
+        setIsPress(false)
     };
 
     const res = useSelector(state => state.couponReducer.editCoupon)
@@ -86,7 +89,7 @@ const useEditCoupon = (id) => {
 
     }, [loadingUpdate, res])
 
-    return {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, loadingUpdate};
+    return {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, loadingUpdate, isPress};
 };
 
 export default useEditCoupon;

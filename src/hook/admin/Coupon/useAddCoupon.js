@@ -9,6 +9,7 @@ const useAddCoupon = () => {
     const [couponDate, setCouponDate] = useState('');
     const [couponValue, setCouponValue] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isPress, setIsPress] = useState(false);
 
     const onChangeName = (event) => {
         setCouponName(event.target.value);
@@ -28,12 +29,13 @@ const useAddCoupon = () => {
             return;
         }
 
-        setLoading(true);
+        setIsPress(true)
         await dispatch(addCoupon({
             name: couponName,
             expire: couponDate,
             discount: couponValue,
         }));
+        setIsPress(false)
         setLoading(false);
     };
 
@@ -79,6 +81,7 @@ const useAddCoupon = () => {
         onSubmit,
         coupons,
         loading,
+        isPress
     };
 };
 
