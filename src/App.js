@@ -4,31 +4,31 @@ import NavBarLogin from "./Components/Utility/NavBarLogin";
 import Footer from "./Components/Utility/Footer";
 import LoginPage from './Page/Auth/LoginPage';
 import RegisterPage from "./Page/Auth/RegisterPage";
-import AllCategoryPage from "./Page/Category/AllCategoryPage";
-import AllBrandPage from "./Page/Brand/AllBrandPage";
-import ShopProductsPage from "./Page/Products/ShopProductsPage";
+import CategoriesPage from "./Page/Category/CategoriesPage";
+import AllBrandPage from "./Page/Brand/BrandsPage";
+import ProductsPage from "./Page/Products/ProductsPage";
 import ProductDetailsPage from "./Page/Products/ProductDetailsPage";
-import CartPage from "./Page/Cart/CartPage";
-import ChoosePayMethodPage from "./Page/Checkout/ChoosePayMethodPage";
-import AdminAllProductsPage from "./Page/Admin/AdminAllProductsPage";
-import AdminAllOrdersPage from "./Page/Admin/AdminAllOrdersPage";
-import AdminOrderDetailsPage from "./Page/Admin/AdminOrderDetailsPage";
-import AdminAddBrandPage from "./Page/Admin/AdminAddBrandPage";
-import AdminAddCategoryPage from "./Page/Admin/AdminAddCategoryPage";
-import AdminAddSubCategoryPage from "./Page/Admin/AdminAddSubCategoryPage";
-import AdminAddProductsPage from "./Page/Admin/AdminAddProductsPage";
-import UserAllOrdersPage from "./Page/User/UserAllOrdersPage";
+import CartPage from "./Page/User/Cart/CartPage";
+import ChoosePayMethodPage from "./Page/User/Cart/ChoosePayMethodPage";
+import AdminProductsPage from "./Page/Admin/Product/AdminProductsPage";
+import AdminOrdersPage from "./Page/Admin/Order/AdminOrdersPage";
+import AdminOrderDetailsPage from "./Page/Admin/Order/AdminOrderDetailsPage";
+import AddBrandPage from "./Page/Admin/Brand/AddBrandPage";
+import AddCategoryPage from "./Page/Admin/Category/AddCategoryPage";
+import AddSubCategoryPage from "./Page/Admin/Subcategory/AddSubCategoryPage";
+import AddProductPage from "./Page/Admin/Product/AddProductPage";
+import UserOrdersPage from "./Page/User/Order/UserOrdersPage";
 import UserWishListPage from "./Page/User/UserWishListPage";
-import UserAllAddressesPage from './Page/User/UserAllAddressesPage';
-import UserAddAddressPage from './Page/User/UserAddAddressPage';
-import UserEditAddressPage from './Page/User/UserEditAddressPage';
+import UserAllAddressesPage from './Page/User/Address/UserAllAddressesPage';
+import UserAddAddressPage from './Page/User/Address/UserAddAddressPage';
+import UserEditAddressPage from './Page/User/Address/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
-import AdminEditProductsPage from "./Page/Admin/AdminEditProductPage";
+import AdminEditProductsPage from "./Page/Admin/Product/EditProductPage";
 import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
 import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
-import AdminAddCouponPage from "./Page/Admin/AdminAddCouponPage";
-import AdminEditCouponPage from "./Page/Admin/AdminEditCouponPage";
+import AddCouponPage from "./Page/Admin/Coupon/AddCouponPage";
+import EditCouponPage from "./Page/Admin/Coupon/EditCouponPage";
 import React, {useEffect, useState} from "react";
 import {useJwt} from "react-jwt";
 import NotFoundPage from "./Components/Utility/NotFoundPage";
@@ -67,9 +67,9 @@ function App() {
 
                 <Routes>
                     <Route index element={<HomePage/>}/>
-                    <Route path="/allCategory" element={<AllCategoryPage/>}/>
+                    <Route path="/allCategory" element={<CategoriesPage/>}/>
                     <Route path="/allBrands" element={<AllBrandPage/>}/>
-                    <Route path="/products" element={<ShopProductsPage/>}/>
+                    <Route path="/products" element={<ProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductDetailsPage/>}/>
                     <Route path="/category/:id" element={<ProductsByCategoryPage/>}/>
                     <Route path="/brands/:id" element={<ProductsByBrandPage/>}/>
@@ -86,22 +86,22 @@ function App() {
 
                     {isAdmin && (
                         <Route>
-                            <Route path="/admin/allProducts" element={<AdminAllProductsPage/>}/>
-                            <Route path="/admin/allOrders" element={<AdminAllOrdersPage/>}/>
+                            <Route path="/admin/allProducts" element={<AdminProductsPage/>}/>
+                            <Route path="/admin/allOrders" element={<AdminOrdersPage/>}/>
                             <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
-                            <Route path="/admin/addBrand" element={<AdminAddBrandPage/>}/>
-                            <Route path="/admin/addCategory" element={<AdminAddCategoryPage/>}/>
-                            <Route path="/admin/addSubcategory" element={<AdminAddSubCategoryPage/>}/>
-                            <Route path="/admin/addProduct" element={<AdminAddProductsPage/>}/>
+                            <Route path="/admin/addBrand" element={<AddBrandPage/>}/>
+                            <Route path="/admin/addCategory" element={<AddCategoryPage/>}/>
+                            <Route path="/admin/addSubcategory" element={<AddSubCategoryPage/>}/>
+                            <Route path="/admin/addProduct" element={<AddProductPage/>}/>
                             <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
-                            <Route path="/admin/addCoupon" element={<AdminAddCouponPage/>}/>
-                            <Route path="/admin/editCoupon/:id" element={<AdminEditCouponPage/>}/>
+                            <Route path="/admin/addCoupon" element={<AddCouponPage/>}/>
+                            <Route path="/admin/editCoupon/:id" element={<EditCouponPage/>}/>
                         </Route>
                     )}
 
                     {isUser && (
                         <Route>
-                            <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
+                            <Route path="/user/allOrders" element={<UserOrdersPage/>}/>
                             <Route path="/user/favoriteProducts" element={<UserWishListPage/>}/>
                             <Route path="/user/addresses" element={<UserAllAddressesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>

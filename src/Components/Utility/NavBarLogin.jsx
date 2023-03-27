@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import logo from '../../images/logo.png';
 import login from '../../images/login.png';
 import cart from '../../images/cart.png';
-import useNavbarSearch from '../../hook/search/useNavbarSearch';
+import useNavbarSearch from '../../hook/products/search/useNavbarSearch';
 
 const NavBarLogin = ({isUser}) => {
     const {handleKeyPressSearch, handleChangeSearch, searchWord} = useNavbarSearch();

@@ -1,5 +1,5 @@
 import {Row} from 'react-bootstrap';
-import useSidebarSearch from '../../hook/search/useSidebarSearch';
+import useSidebarSearch from '../../hook/products/search/useSidebarSearch';
 
 const SideFilter = () => {
     const {

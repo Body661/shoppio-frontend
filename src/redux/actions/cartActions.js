@@ -11,7 +11,7 @@ import {useGetDataToken} from '../../customHooks/useGetData'
 import {useInsertData} from '../../customHooks/useInsertData';
 import useDeleteData from '../../customHooks/useDeleteData';
 import {useInsUpdateData} from '../../customHooks/useUpdateData'
-//add to cart
+//add to Cart
 export const addProductToCart = (body) => async (dispatch) => {
     try {
         const response = await useInsertData(`/api/cart`, body);
@@ -29,7 +29,7 @@ export const addProductToCart = (body) => async (dispatch) => {
 }
 
 
-//get all cart items
+//get all Cart items
 export const getAllUserCartItems = () => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/api/cart`);
@@ -46,7 +46,7 @@ export const getAllUserCartItems = () => async (dispatch) => {
     }
 }
 
-//clearAll cart Item
+//clearAll Cart Item
 export const clearAllCartItem = () => async (dispatch) => {
     try {
         const response = await useDeleteData(`/api/cart`);
@@ -62,7 +62,7 @@ export const clearAllCartItem = () => async (dispatch) => {
         })
     }
 }
-//delete cart Item
+//delete Cart Item
 export const deleteCartItem = (id) => async (dispatch) => {
     try {
         const response = await useDeleteData(`/api/cart/${id}`);
@@ -80,7 +80,7 @@ export const deleteCartItem = (id) => async (dispatch) => {
     }
 }
 
-//update cart Item
+//update Cart Item
 export const updateCartItem = (id, body) => async (dispatch) => {
     try {
         const response = await useInsUpdateData(`/api/cart/${id}`, body);
@@ -98,7 +98,7 @@ export const updateCartItem = (id, body) => async (dispatch) => {
 }
 
 
-//update cart Item
+//update Cart Item
 export const applyCartCoupon = (body) => async (dispatch) => {
     try {
         const response = await useInsertData(`/api/cart/coupon`, body);

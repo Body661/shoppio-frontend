@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import useProductDetails from '../../hook/products/useProductDetails';
-import UseAddToCart from '../../hook/cart/useAddToCart';
+import UseAddToCart from '../../hook/user/cart/useAddToCart';
 
 const ProductText = () => {
     const { id } = useParams();

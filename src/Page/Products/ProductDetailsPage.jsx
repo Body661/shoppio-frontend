@@ -2,7 +2,7 @@ import React from 'react'
 import {Container} from 'react-bootstrap'
 import CategoryHeader from '../../Components/Category/CategoryHeader'
 import ProductDetails from '../../Components/Products/ProductDetails'
-import RateContainer from '../../Components/Rate/RateContainer'
+import ReviewsContainer from '../../Components/Products/Review/ReviewsContainer'
 import {useParams} from "react-router-dom";
 import useProductDetails from "../../hook/products/useProductDetails";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
@@ -24,7 +24,7 @@ const ProductDetailsPage = () => {
             <CategoryHeader/>
             <Container>
                 <ProductDetails/>
-                <RateContainer rateAvg={rateAvg} rateQty={rateQty}/>
+                <ReviewsContainer rateAvg={rateAvg} rateQty={rateQty}/>
                 <ProductsContainer products={products} title="Products you may like"/>
             </Container>
         </div>

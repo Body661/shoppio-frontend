@@ -50,7 +50,7 @@ export const DELETE_COUPON = "DELETE_COUPON"
 export const GET_ONE_COUPON = "GET_ONE_COUPON"
 export const EDIT_COUPON = "EDIT_COUPON"
 
-// User profile
+// User Profile
 export const ADD_USER_ADDRESS = "ADD_USER_ADDRESS"
 export const GET_ALL_USER_ADDRESSES = "GET_ALL_USER_ADDRESS"
 export const DELETE_USER_ADDRESS = "DELETE_USER_ADDRESS"

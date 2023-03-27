@@ -60,7 +60,7 @@ const useUserProfile = () => {
                     window.location.reload();
                 }, 1500);
             } else {
-                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while updating profile', {
+                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while updating Profile', {
                     type: 'error',
                     toastId: 'updateUserProfileError'
                 });

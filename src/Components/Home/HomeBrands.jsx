@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap';
 import SubTitle from '../Utility/SubTitle';
 import {useHomeBrands} from '../../hook/brand/useHomeBrands';
-import BrandContainer from "../Brand/BrandContainer";
+import BrandsContainer from "../Brand/BrandsContainer";
 
 const HomeBrands = ({ title, btnTitle, path }) => {
     const { brands, loading, error} = useHomeBrands();
@@ -9,7 +9,7 @@ const HomeBrands = ({ title, btnTitle, path }) => {
     return (
         <Container>
             <SubTitle title={title} btnTitle={btnTitle} pathText={path} />
-            <BrandContainer brands={brands} loading={loading} error={error} />
+            <BrandsContainer brands={brands} loading={loading} error={error} />
         </Container>
     );
 };

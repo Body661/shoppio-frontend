@@ -1,5 +1,5 @@
 import {Button, Col, Modal, Row} from 'react-bootstrap'
-import CouponCardHook from '../../hook/coupon/useCouponCard'
+import CouponCardHook from '../../hook/admin/Coupon/useCouponCard'
 import deleteIcon from '../../images/delete.png'
 import editIcon from '../../images/edit.png'
 import {Link} from 'react-router-dom';
