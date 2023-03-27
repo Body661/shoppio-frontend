@@ -15,9 +15,13 @@ export const useAllBrands = () => {
     const pageCount = brands?.data?.paginationRes?.pages || 0;
 
     useEffect(() => {
-        if (brands && brands?.status !== 200) setError(true)
+        if (brands?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         setLoading(false);
-    }, [brands])
+    }, [brands, loading])
 
     const getPage = (page) => {
         dispatch(getAllBrandsPage(page));

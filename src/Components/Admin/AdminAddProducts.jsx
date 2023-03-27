@@ -24,7 +24,7 @@ const AdminAddProducts = () => {
         onSelect,
         onRemove,
         options,
-        handelChangeComplete,
+        handleAddColor,
         removeColor,
         onSelectCategory,
         handleSubmit,
@@ -144,7 +144,7 @@ const AdminAddProducts = () => {
                         <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px"
                              style={{cursor: 'pointer'}}/>
                         {
-                            showColor === true ? <CompactPicker onChangeComplete={handelChangeComplete}/> : null
+                            showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
                         }
 
                     </div>

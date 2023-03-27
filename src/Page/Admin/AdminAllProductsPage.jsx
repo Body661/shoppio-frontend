@@ -4,6 +4,7 @@ import AdminSideBar from '../../Components/Admin/AdminSideBar'
 import Pagination from '../../Components/Utility/Pagination'
 import ViewProductsAdminHook from "../../hook/admin/useAdminGetProducts";
 import AdminAllProductsCard from "../../Components/Admin/AdminAllProductsCard";
+import {Link} from "react-router-dom";
 
 const AdminAllProductsPage = () => {
     const {products, pagination, onPress, loading, error} = ViewProductsAdminHook();
@@ -19,8 +20,10 @@ const AdminAllProductsPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                    <div className='admin-content-text'>Manage products</div>
-
+                    <div className='d-flex justify-content-between align-items-center'>
+                        <div className='admin-content-text'>Manage products</div>
+                        <Link className='product-cart-add px-3 py-3 mx-3' to='/admin/addProduct'>Add new product</Link>
+                    </div>
                     {
                         loading && !error && !products && <Spinner animation="border" variant="primary"/>
                     }

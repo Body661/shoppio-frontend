@@ -1,15 +1,23 @@
 import React from 'react'
-import {Col, Card} from 'react-bootstrap'
+import {Col} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
-const BrandCard = ({img, id}) => {
-    return (
-        <Col xs={6} sm={6} md={4} lg={2} className="my-2 d-flex justify-content-center">
-            <Link to={`/brands/${id}`} style={{textDecoration: 'none'}} className="my-1 brand-card">
-                <Card.Img src={img}/>
-            </Link>
-        </Col>
-    )
-}
+const BrandCard = ({img, id, title}) => (
+    <Col xs={6} sm={6} md={4} lg={2} className="my-4 d-flex justify-content-around">
+        <div className="allCard mb-3">
+
+        <Link to={`/brands/${id}`} style={{textDecoration: 'none'}}>
+            <div
+                className="brand-card"
+                style={{ backgroundImage: `URL(${img})` }}
+            />
+
+            <p className="category-card-text my-2">{title}</p>
+        </Link>
+
+        </div>
+    </Col>
+)
+
 
 export default BrandCard

@@ -29,9 +29,8 @@ const useCashOrder = () => {
                 setAddressDetails(resAddress?.data?.data);
             }
         }
-    }, [loading]);
+    }, [loading, resAddress]);
 
-    console.log(resAddress)
     const handleCreateOrderCash = async () => {
         if (!cartID.trim()) {
             toast('Please add products to cart', {type: 'error'});

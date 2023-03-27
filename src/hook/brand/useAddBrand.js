@@ -28,7 +28,7 @@ const useAddBrand = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!name.trim() || !selectedFile) {
+        if (name.trim() === "" || !selectedFile) {
             toast('Please fill in all required information', {type: 'error'})
             return;
         }

@@ -5,16 +5,17 @@ import {getAllCategories} from '../../redux/actions/CategoryActions'
 import {getAllBrands} from '../../redux/actions/BrandActions';
 import {getSubcategory} from "../../redux/actions/SubcategoryActions";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const useAddProduct = () => {
-
+    const navigate = useNavigate();
     const [options, setOptions] = useState([]);
     const [images, setImages] = useState({});
     const [prodName, setProdName] = useState('');
     const [prodDescription, setProdDescription] = useState('');
     const [priceBefore, setPriceBefore] = useState('');
-    const [priceAfter, setPriceAfter] = useState(0);
-    const [qty, setQty] = useState(0);
+    const [priceAfter, setPriceAfter] = useState('');
+    const [qty, setQty] = useState('');
     const [CatID, setCatID] = useState('');
     const [BrandID, SetBrandID] = useState('');
     const [selectedSubID, setSelectedSubID] = useState([]);
@@ -47,7 +48,7 @@ const useAddProduct = () => {
     const onChangeQty = (event) => setQty(event.target.value);
     const onChangeColor = () => setShowColor(!showColor);
 
-    const handelChangeComplete = (color) => {
+    const handleAddColor = (color) => {
         setColors([...colors, color.hex]);
         setShowColor(!showColor);
     };
@@ -93,15 +94,26 @@ const useAddProduct = () => {
             return toast("Please fill in all information", {type: 'error'});
         }
 
-        //convert base 64 image to file
-        const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
-        //convert array of base 64 image to file
-        const itemImages = Array.from(Array(Object.keys(images).length).keys()).map(
-            (item, index) => {
-                return dataURLtoFile(images[index], Math.random() + ".png")
-            }
-        )
+        // const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
+        //
+        // const itemImages = Array.from(Array(Object.keys(images).length).keys()).map(
+        //     (item, index) => {
+        //         return dataURLtoFile(images[index], Math.random() + ".png")
+        //     }
+        // )
 
+        const itemImagesPromises = Array.from(Array(Object.keys(images).length).keys()).map((image, index) => {
+            return Promise.resolve(dataURLtoFile(images[index], Math.random() + ".png"));
+        });
+
+        let imgCoverPromise;
+        imgCoverPromise = Promise.resolve(dataURLtoFile(images[0], Math.random() + ".png"));
+
+        // Wait for all promises to resolve
+        const [itemImages, imgCover] = await Promise.all([
+            Promise.all(itemImagesPromises),
+            imgCoverPromise,
+        ]);
 
         const formData = new FormData();
         formData.append("title", prodName);
@@ -112,8 +124,9 @@ const useAddProduct = () => {
         formData.append("category", CatID);
         formData.append("brand", BrandID);
         formData.append("priceAfterDiscount", priceAfter);
-        itemImages.forEach((image) => formData.append("images", image));
         colors.forEach((color) => formData.append("colors", color));
+
+        itemImages.forEach((image) => formData.append("images", image));
         selectedSubID.forEach((subcategory) =>
             formData.append("subcategory", subcategory._id)
         );
@@ -123,21 +136,15 @@ const useAddProduct = () => {
         setLoading(false);
     };
 
-    const product = useSelector((state) => state.allProducts.createdProduct);
+    const product = useSelector((state) => state.productReducer.createdProduct);
 
     useEffect(() => {
         if (!loading) {
-            if (product?.status === 201) {
+            if (product && product?.status === 201) {
                 toast("Product added successfully", {type: 'success', toastId: 'addProductSuccess'});
-                setColors([]);
-                setImages([]);
-                setProdName("");
-                setProdDescription("");
-                setPriceBefore(0);
-                setPriceAfter(0);
-                setQty(0);
-                SetBrandID("");
-                setSelectedSubID([]);
+                setTimeout(() => {
+                    navigate(`/admin/allProducts`)
+                }, 1000)
             } else {
                 toast(product?.data?.errors ? product?.data?.errors[0]?.msg : "Error while adding product", {
                     type: 'error',
@@ -164,7 +171,7 @@ const useAddProduct = () => {
         onSelect,
         onRemove,
         options,
-        handelChangeComplete,
+        handleAddColor,
         removeColor,
         onSelectCategory,
         handleSubmit,

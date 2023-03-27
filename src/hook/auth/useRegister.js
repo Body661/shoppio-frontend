@@ -10,6 +10,7 @@ const useRegister = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
+    const [isPress, setIsPress] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -61,6 +62,8 @@ const useRegister = () => {
     //save data
     const onSubmit = async () => {
         if (validationValues()) {
+            setIsPress(true);
+
             await dispatch(
                 createNewUser({
                     name,
@@ -71,13 +74,14 @@ const useRegister = () => {
                 })
             );
             setLoading(false);
+            setIsPress(false);
         }
     };
     const res = useSelector((state) => state.authReducer.createUser);
 
     useEffect(() => {
         if (loading === false) {
-            if (res && res.status === 201) {
+            if (res && res?.status === 201) {
                 toast("Account created successfully", {type: 'success'})
                 setTimeout(() => {
                     navigate('/login');
@@ -93,7 +97,7 @@ const useRegister = () => {
     }
 
         setLoading(true);
-    }, [loading]);
+    }, [loading, res]);
 
     return {
         name,
@@ -108,6 +112,7 @@ const useRegister = () => {
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
+        isPress
     };
 };
 

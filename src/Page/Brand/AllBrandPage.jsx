@@ -8,7 +8,7 @@ const AllBrand = () => {
 
     return (
         <div style={{minHeight: '670px'}}>
-            <BrandContainer brands={brands} loading={loading} error={error}/>
+            <BrandContainer brands={brands} loading={loading} error={error} isAll={true}/>
             {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
         </div>
     )

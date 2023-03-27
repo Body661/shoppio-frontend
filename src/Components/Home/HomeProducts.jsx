@@ -16,14 +16,13 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                     loading && !error && !products && <Spinner animation="border" variant="primary"/>
                 }
                 {
-                    !loading && !error && (
-                        products ? (
-                            products?.map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
-                        ) : <h4 className="notFound">No Products found</h4>
-                    )
+                    !loading && !error && products && ( products?.length > 0 ? (
+                        products?.map((item, index) => (<ProductCard key={index} item={item} favProd={favProd}/>))
+                    ) : <h4 className="notFound">No Products found</h4>)
+
                 }
                 {
-                    !loading && error && products?.length < 1 && <h4 className="error">Something went wrong</h4>
+                    !loading && error && !products && <h4 className="error">Something went wrong</h4>
                 }
             </Row>
 

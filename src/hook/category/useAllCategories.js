@@ -15,9 +15,13 @@ export const useAllCategories = () => {
     let pageCount = categories?.data?.paginationRes?.pages || 0;
 
     useEffect(() => {
-        if (categories && categories?.status !== 200) setError(true)
+        if (categories?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         setLoading(false);
-    }, [categories])
+    }, [categories, loading])
 
     const getPage = (page) => {
         dispatch(getAllCategoriesPage(page));

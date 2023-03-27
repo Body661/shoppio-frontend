@@ -20,8 +20,17 @@ const ProductCard = ({item, favProd}) => {
                     backgroundColor: "#FFFFFF",
                     boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
                 }}>
-                <Link to={`/products/${item?._id}`} style={{textDecoration: 'none'}}>
-                    <Card.Img style={{height: "228px", width: "100%"}} src={item?.cover}/>
+                <Link to={`/products/${item?._id}`} style={{
+                    textDecoration: 'none',
+                    overflow: "hidden",
+                    width: "100%",
+                    height: "100%"
+                }}>
+                    <Card.Img src={item?.cover} style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                    }}/>
                 </Link>
                 <div className="d-flex justify-content-end mx-2">
                     <img

@@ -26,7 +26,7 @@ const AdminAllOrders = () => {
                 {renderOrderItems()}
 
                 {
-                    paginate.pages >= 2 ? (
+                    paginate.pages > 1 ? (
                         <Pagination onPress={onPress} pageCount={paginate.pages ? paginate.pages : 0}/>) : null
                 }
             </Row>

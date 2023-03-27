@@ -41,8 +41,6 @@ const useUserGetAllOrders = () => {
         }
     }, [loading, orders]);
 
-    console.log(orders)
-
     return {
         userName,
         results,

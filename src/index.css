@@ -200,16 +200,6 @@ body {
 /* end discount */
 
 .brand-card {
-    position: relative;
-    height: 140px;
-    width: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-}
-
-.brand-card img {
     width: 130px;
     height: 130px;
     background-size: contain;
@@ -217,21 +207,10 @@ body {
     background-repeat: no-repeat;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: 0.5s;
-    cursor: pointer;
 }
 
-/*.category-card{*/
-/*    width: 130px;*/
-/*    height: 130px;*/
-/*    background-size: contain;*/
-/*    border-radius: 50%;*/
-/*    background-repeat: no-repeat;*/
-/*    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;*/
-/*    transition: 0.5s;*/
-/*}*/
-
 .brand-card:hover {
-    scale: 1.1;
+    scale: 1.05;
 }
 
 /* footer */

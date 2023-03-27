@@ -14,9 +14,13 @@ export const useHomeBrands = () => {
     const brands = useSelector((state) => state.allBrands.brands);
 
     useEffect(() => {
-        if (brands && brands?.status !== 200) setError(true)
+        if (brands?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         setLoading(false);
-    }, [brands])
+    }, [brands, loading])
 
     return {brands: brands?.data?.data, loading, error};
 };

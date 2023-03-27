@@ -22,7 +22,7 @@ const useProductsByCategory = (catID) => {
         await dispatch(getProductsByCategory(page, 50, catID))
     }
 
-    const products = useSelector((state) => state.allProducts.productsByCategory)
+    const products = useSelector((state) => state.productReducer.productsByCategory)
     if (products?.status !== 200 && !loading) setError(true);
 
     let items = [];

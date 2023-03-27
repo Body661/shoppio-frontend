@@ -18,8 +18,8 @@ import AdminAddCategoryPage from "./Page/Admin/AdminAddCategoryPage";
 import AdminAddSubCategoryPage from "./Page/Admin/AdminAddSubCategoryPage";
 import AdminAddProductsPage from "./Page/Admin/AdminAddProductsPage";
 import UserAllOrdersPage from "./Page/User/UserAllOrdersPage";
-import UserFavoriteProductsPage from "./Page/User/UserFavoriteProductsPage";
-import UserAllAddressPage from './Page/User/UserAllAddressPage';
+import UserWishListPage from "./Page/User/UserWishListPage";
+import UserAllAddressesPage from './Page/User/UserAllAddressesPage';
 import UserAddAddressPage from './Page/User/UserAddAddressPage';
 import UserEditAddressPage from './Page/User/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
@@ -102,8 +102,8 @@ function App() {
                     {isUser && (
                         <Route>
                             <Route path="/user/allOrders" element={<UserAllOrdersPage/>}/>
-                            <Route path="/user/favoriteProducts" element={<UserFavoriteProductsPage/>}/>
-                            <Route path="/user/addresses" element={<UserAllAddressPage/>}/>
+                            <Route path="/user/favoriteProducts" element={<UserWishListPage/>}/>
+                            <Route path="/user/addresses" element={<UserAllAddressesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
                             <Route path="/user/edit-address/:id" element={<UserEditAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>

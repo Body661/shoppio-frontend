@@ -32,11 +32,6 @@ const AdminSideBar = () => {
                         Add subcategory
                     </div>
                 </Link>
-                <Link to="/admin/addProduct" style={{textDecoration: 'none'}}>
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Add Product
-                    </div>
-                </Link>
                 <Link to="/admin/addCoupon" style={{textDecoration: 'none'}}>
                     <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
                         Add coupon

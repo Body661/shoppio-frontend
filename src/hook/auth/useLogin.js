@@ -23,7 +23,7 @@ const useLogin = () => {
     const auth = useSelector((state) => state.authReducer.loginUser);
     useEffect(() => {
         if (!loading) {
-            if (auth.status === 200) {
+            if (auth && auth?.status === 200) {
                 const {token, data} = auth.data;
 
                 if (token) {
@@ -37,12 +37,12 @@ const useLogin = () => {
                     toast("Not able to login, please try again later", {type: 'error', toastId: 'loginToken'})
                 }
 
-            } else if (auth.status === 401) {
+            } else if (auth?.status === 401) {
                 toast("Email or password is wrong", {type: 'error', toastId: 'loginWrongData'})
-            } else if (auth.status === 429) {
+            } else if (auth?.status === 429) {
                 toast("Too many requests, try again after 3 hours", {type: 'error', toastId: 'loginTooManyReqs'})
             } else {
-                toast(auth.data?.errors ? auth?.data?.errors[0]?.msg : "Error while logging in", {
+                toast(auth?.data?.errors ? auth?.data?.errors[0]?.msg : "Error while logging in", {
                     type: 'error',
                     toastId: 'loginAnother'
                 })

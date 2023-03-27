@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import UserAllAddresses from '../../Components/User/UserAllAddresses'
 import UserSideBar from '../../Components/User/UserSideBar'
-import UserFavouriteProduct from '../../Components/User/UserFavouriteProduct'
-const UserFavoriteProductsPage = () => {
+const UserAllAddressesPage = () => {
     return (
         <Container >
             <Row className='py-3'>
@@ -11,11 +11,11 @@ const UserFavoriteProductsPage = () => {
                 </Col>
 
                 <Col sm="9" xs="10" md="10">
-                    <UserFavouriteProduct />
+                  <UserAllAddresses />
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default UserFavoriteProductsPage
+export default UserAllAddressesPage

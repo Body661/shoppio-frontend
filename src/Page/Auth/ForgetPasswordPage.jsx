@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import {Container, Row, Col, Spinner} from 'react-bootstrap';
 import useForgetPassword from "../../hook/auth/useForgetPassword";
 
 const ForgetPasswordPage = () => {
-    const {email, onChangeEmail, onSubmit} = useForgetPassword();
+    const {email, onChangeEmail, onSubmit, loading, isPress} = useForgetPassword();
 
     return (
         <Container style={{ minHeight: '690px' }}>
@@ -22,6 +22,11 @@ const ForgetPasswordPage = () => {
                     </button>
                 </Col>
             </Row>
+            {isPress && (
+                <div className="d-flex justify-content-center">
+                    {loading && <Spinner animation="border" role="status"/>}
+                </div>
+            )}
         </Container>
     );
 };

@@ -25,7 +25,7 @@ const useAdminGetProducts = () => {
     }
 
 
-    const allProducts = useSelector((state) => state.allProducts.allProducts)
+    const allProducts = useSelector((state) => state.productReducer.allProducts)
 
     useEffect(() => {
         if (!loading && allProducts?.status !== 200) {

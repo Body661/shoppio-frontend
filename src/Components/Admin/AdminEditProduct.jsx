@@ -1,11 +1,12 @@
 import {useParams} from 'react-router-dom';
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col, Spinner} from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 import add from '../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
 import {CompactPicker} from 'react-color'
 import AdminEditProductsHook from '../../hook/products/useEditProduct';
+import React from "react";
 
 const AdminEditProducts = () => {
     const {id} = useParams();
@@ -28,7 +29,7 @@ const AdminEditProducts = () => {
         onSelect,
         onRemove,
         options,
-        handelChangeComplete,
+        handleAddColor,
         removeColor,
         onSelectCategory,
         handleSubmit,
@@ -37,7 +38,9 @@ const AdminEditProducts = () => {
         priceBefore,
         qty,
         prodDescription,
-        prodName
+        prodName,
+        loading,
+        isPress
     } =
         AdminEditProductsHook(id);
 
@@ -47,7 +50,6 @@ const AdminEditProducts = () => {
                 <div className="admin-content-text pb-4"> Update product - {prodName}</div>
                 <Col sm="8">
                     <div className="text-form pb-2"> Product images</div>
-
 
                     <MultiImageInput
                         images={images}
@@ -123,7 +125,7 @@ const AdminEditProducts = () => {
                         value={BrandID}
                         onChange={onSelectBrand}
                         className="select input-form-area mt-3 px-2 ">
-                        <option value="0">Select Brand</option>
+                        <option>Select Brand</option>
                         {
                             brand?.data?.data ? (brand?.data?.data?.map((item) => {
                                 return (
@@ -152,7 +154,7 @@ const AdminEditProducts = () => {
                         <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px"
                              style={{cursor: 'pointer'}}/>
                         {
-                            showColor === true ? <CompactPicker onChangeComplete={handelChangeComplete}/> : null
+                            showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
                         }
 
                     </div>
@@ -163,6 +165,11 @@ const AdminEditProducts = () => {
                     <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">Save Changes</button>
                 </Col>
             </Row>
+            {isPress && (
+                <div className="d-flex justify-content-center">
+                    {loading && <Spinner animation="border" role="status"/>}
+                </div>
+            )}
         </div>
     )
 }

@@ -21,8 +21,8 @@ const useHomeProducts = () => {
 
     }, [])
 
-    const allProducts = useSelector((state) => state.allProducts.allProducts)
-    const allProductsByCategory = useSelector(state => state.allProducts.productsByCategoryHome)
+    const allProducts = useSelector((state) => state.productReducer.allProducts)
+    const allProductsByCategory = useSelector(state => state.productReducer.productsByCategoryHome)
 
     useEffect(() => {
         if (allProducts?.status !== 200 && !loadingAllProducts) {

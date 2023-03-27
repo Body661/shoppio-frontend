@@ -9,7 +9,7 @@ import useSearch from "../../hook/products/useSearch";
 
 const ShopProductsPage = () => {
 
-    const {items, pagination, onPress, getProduct} = useSearch();
+    const {items, pagination, onPress, getProduct, error, loading} = useSearch();
     let pageCount
     if (pagination) pageCount = pagination;
 
@@ -17,16 +17,16 @@ const ShopProductsPage = () => {
         <div style={{minHeight: '670px'}}>
             <CategoryHeader/>
             <Container>
-                <SearchCountResult onClick={getProduct} title={` ${items.length} Search result`}/>
+                <SearchCountResult onClick={getProduct} title={` ${items?.length || 0} Search result`}/>
                 <Row className='d-flex flex-row search-result-container'>
                     <Col sm="2" xs="2" md="1" className='d-flex search-filter'>
                         <SideFilter/>
                     </Col>
                     <Col sm="10" xs="10" md="11">
-                        <HomeProducts products={items} title="" btntitle=""/>
+                        <HomeProducts products={items} loading={loading} error={error} title="" btntitle=""/>
                     </Col>
                 </Row>
-                <Pagination pageCount={pageCount} onPress={onPress}/>
+                {pageCount > 1 && <Pagination pageCount={pageCount} onPress={onPress}/>}
             </Container>
         </div>
     )

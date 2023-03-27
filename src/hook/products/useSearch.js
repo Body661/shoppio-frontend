@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProductsSearch } from '../../redux/actions/productActions'
 
 const useSearch = () => {
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState(null)
     const [pagination, setPagination] = useState(0)
     const [results, setResults] = useState(0)
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -84,7 +86,7 @@ const useSearch = () => {
         getProduct()
     }, [])
 
-    const allProducts = useSelector(state => state.allProducts.allProducts)
+    const allProducts = useSelector(state => state.productReducer.allProducts)
 
     useEffect(() => {
         if (allProducts?.data?.data) {
@@ -98,7 +100,16 @@ const useSearch = () => {
         }
     }, [allProducts])
 
-    return { items, pagination, onPress, getProduct, results }
+    useEffect(() => {
+        if (allProducts?.status !== 200 && !allProducts) {
+            setError(true)
+        } else {
+            setError(false)
+        }
+        setLoading(false);
+    }, [allProducts, loading])
+
+    return { items, pagination, onPress, getProduct, results, error, loading }
 }
 
 export default useSearch

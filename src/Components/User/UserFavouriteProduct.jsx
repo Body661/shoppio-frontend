@@ -39,7 +39,6 @@ const UserFavouriteProduct = () => {
                 {items?.length <= 0 && !loading && <h6>No items in your wishlist</h6>}
                 {items?.length <= 0 && loading && <Spinner animation={"border"} variant={"primary"}/>}
             </Row>
-            <Pagination/>
         </div>
     )
 }

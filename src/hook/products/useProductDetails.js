@@ -9,18 +9,17 @@ const useProductDetails = (prodID) => {
         dispatch(getOneProduct(prodID))
     }, [])
 
-    const product = useSelector((state) => state.allProducts.product)
+    const product = useSelector((state) => state.productReducer.product)
 
     useEffect(() => {
         if (product?.data?.data?.category) dispatch(getProductsByCategory("", "", product?.data?.data?.category?._id))
     }, [product])
 
-    const productsByCategory = useSelector((state) => state.allProducts.productsByCategory)
+    const productsByCategory = useSelector((state) => state.productReducer.productsByCategory)
 
     //to view images gallery
     let images = []
     if (product?.data?.data?.images) images = product?.data?.data?.images?.map((img) => ({original: img}))
-    if (product?.data?.data?.cover) images.unshift({original: product?.data?.data?.cover})
 
     let products = []
     if (productsByCategory?.data?.data) products = productsByCategory?.data?.data;

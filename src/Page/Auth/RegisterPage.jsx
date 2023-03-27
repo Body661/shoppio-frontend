@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import {Container, Row, Col, Spinner} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import UseRegister from "../../hook/auth/useRegister";
 
 const RegisterPage = () => {
@@ -16,10 +16,12 @@ const RegisterPage = () => {
         onChangePassword,
         onChangeConfirmPassword,
         onSubmit,
+        loading,
+        isPress
     } = UseRegister();
 
     return (
-        <Container style={{ minHeight: "680px" }}>
+        <Container style={{minHeight: "680px"}}>
             <Row className="py-5 d-flex justify-content-center height-search">
                 <Col sm="12" className="d-flex flex-column ">
                     <label className="mx-auto title-login">Register</label>
@@ -61,12 +63,15 @@ const RegisterPage = () => {
                     <button onClick={onSubmit} className="btn-login mx-auto mt-4">Create account</button>
                     <label className="mx-auto my-4">
                         Already have an account?{" "}
-                        <Link to="/login" style={{ textDecoration: "none", cursor: "pointer", color: "red" }}>
+                        <Link to="/login" style={{textDecoration: "none", cursor: "pointer", color: "red"}}>
                             Login
                         </Link>
                     </label>
                 </Col>
             </Row>
+            {isPress && <div className="d-flex justify-content-center">
+                {loading && <Spinner animation="border" role="status"/>}
+            </div>}
         </Container>
     )
 }

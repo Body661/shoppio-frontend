@@ -24,7 +24,7 @@ const useProductsByBrand = (brandID) => {
         setLoading(false)
     }
 
-    const products = useSelector((state) => state.allProducts.productsByBrand)
+    const products = useSelector((state) => state.productReducer.productsByBrand)
 
     if (products?.status !== 200 && !loading) setError(true);
 

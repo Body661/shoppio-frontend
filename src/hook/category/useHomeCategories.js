@@ -14,9 +14,13 @@ const UseHomeCategories = () => {
     const categories = useSelector(state => state.allCategories.categories)
 
     useEffect(() => {
-        if (categories && categories?.status !== 200) setError(true)
+        if (categories?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         setLoading(false);
-    }, [categories])
+    }, [categories, loading])
 
     return {categories: categories?.data?.data, loading, error}
 }

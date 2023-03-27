@@ -55,8 +55,6 @@ const useAddSubcategory = () => {
                 });
             }
 
-            console.log(subcategory)
-
             setName('');
             setId('');
         }
