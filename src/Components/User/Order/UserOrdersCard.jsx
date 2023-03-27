@@ -13,7 +13,7 @@ const UserOrdersCard = ({item}) => {
                 </Col>
                 <Col xs="8" md="6">
                     <div className="d-inline pt-2 cat-title">
-                        {item.product.title || ''}
+                        {item?.product?.title || ''}
                     </div>
                     <div className="d-inline pt-2 cat-rate me-2">{item?.product?.ratingsAvg ?
                         item?.product?.ratingsAvg : 0}</div>

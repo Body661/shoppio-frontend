@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Row, Col} from 'react-bootstrap';
-import ViewAddressesHook from '../../../hook/user/useViewAddresses';
+import useViewAddresses from '../../../hook/user/useViewAddresses';
 import useCashOrder from '../../../hook/user/cart/checkout/useCashOrder';
-import GetUserCartHook from '../../../hook/user/cart/useUserCart';
-import OrderPayOnlineHook from '../../../hook/user/cart/checkout/useOnlinePay';
+import useUserCart from '../../../hook/user/cart/useUserCart';
+import useOnlinePay from '../../../hook/user/cart/checkout/useOnlinePay';
 import {toast} from "react-toastify";
 
 const ChoosePayMethod = () => {
-    const { addresses } = ViewAddressesHook();
+    const { addresses } = useViewAddresses();
     const [type, setType] = useState('');
 
     const {
@@ -16,12 +16,12 @@ const ChoosePayMethod = () => {
         handleCreateOrderCash,
     } = useCashOrder();
 
-    const {handelCreateOrderOnline} = OrderPayOnlineHook(addressDetails);
+    const {handelCreateOrderOnline} = useOnlinePay(addressDetails);
 
     const {
         totalCartPrice,
         totalCartPriceAfterDiscount
-    } = GetUserCartHook();
+    } = useUserCart();
 
     const changeMethod = (e) => {
         setType(e.target.value);

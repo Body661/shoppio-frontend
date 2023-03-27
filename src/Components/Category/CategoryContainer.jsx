@@ -9,11 +9,11 @@ const CategoryContainer = ({categories, loading, error, isAll}) => {
     if (loading && !categories && !error) {
         content = <Spinner animation="border" variant="primary"/>;
 
-    } else if (!loading && !error && categories && categories?.length) {
+    } else if (!loading && !error && categories && categories?.length > 0) {
         content = categories.map((category) => (
             <CategoryCard key={category._id} id={category._id} title={category.name} img={category.img}/>
         ));
-    } else if (!loading && !error && categories && !categories?.length) {
+    } else if (!loading && !error && !categories) {
         content = <h4 className="notFound">No categories found</h4>;
 
     } else if(!loading && error && !categories) {

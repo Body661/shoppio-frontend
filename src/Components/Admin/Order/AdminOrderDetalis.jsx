@@ -1,16 +1,16 @@
 import {useMemo} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
-import ChangeOrderStatusHook from '../../../hook/admin/useChangeOrderStatus';
-import GetOrderDetailsHook from '../../../hook/admin/useGetOrderDetails';
+import useChangeOrderStatus from '../../../hook/admin/useChangeOrderStatus';
+import useGetOrderDetails from '../../../hook/admin/useGetOrderDetails';
 import OrderItem from '../../User/Order/OrderItem';
 
 const AdminOrderDetails = () => {
     const {id} = useParams();
 
-    const {orderData} = GetOrderDetailsHook(id);
+    const {orderData} = useGetOrderDetails(id);
     const {onChangePaid, changePayOrder, onChangeDeliver, changeDeliverOrder} =
-        ChangeOrderStatusHook(id);
+        useChangeOrderStatus(id);
 
     const clientDetails = useMemo(() => {
         const user = orderData?.user || {};

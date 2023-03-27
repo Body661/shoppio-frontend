@@ -1,11 +1,11 @@
 import {Row, Col} from 'react-bootstrap';
-import EditCouponHook from '../../../hook/admin/Coupon/useEditCoupon';
+import useEditCoupon from '../../../hook/admin/Coupon/useEditCoupon';
 import {useParams} from 'react-router-dom';
 
 const EditCoupon = () => {
 
     const {id} = useParams();
-    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit} = EditCouponHook(id)
+    const {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit} = useEditCoupon(id)
 
     return (
         <div>

@@ -4,7 +4,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import add from '../../../images/add.png'
 import {CompactPicker} from "react-color";
 import MultiImageInput from "react-multiple-image-input";
-import AdminAddProductsHook from "../../../hook/admin/Product/useAddProduct";
+import useAddProduct from "../../../hook/admin/Product/useAddProduct";
 
 const AddProduct = () => {
 
@@ -34,7 +34,7 @@ const AddProduct = () => {
         qty,
         prodDescription,
         prodName
-    } = AdminAddProductsHook();
+    } = useAddProduct();
 
     return (
         <div>

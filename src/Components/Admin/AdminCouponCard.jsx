@@ -1,12 +1,12 @@
 import {Button, Col, Modal, Row} from 'react-bootstrap'
-import CouponCardHook from '../../hook/admin/Coupon/useCouponCard'
+import useCouponCard from '../../hook/admin/Coupon/useCouponCard'
 import deleteIcon from '../../images/delete.png'
 import editIcon from '../../images/edit.png'
 import {Link} from 'react-router-dom';
 
 const AdminCouponCard = ({coupon}) => {
 
-    const {formatDate, isModalOpen, handleModalOpen, handleModalClose, handleDelete} = CouponCardHook(coupon)
+    const {formatDate, isModalOpen, handleModalOpen, handleModalClose, handleDelete} = useCouponCard(coupon)
 
     return (
         <div className="user-address-card my-3 px-2">

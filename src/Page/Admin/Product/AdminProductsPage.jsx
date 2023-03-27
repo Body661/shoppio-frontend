@@ -2,12 +2,12 @@ import React from 'react'
 import {Container, Row, Col, Spinner} from 'react-bootstrap'
 import AdminSideBar from '../../../Components/Admin/AdminSideBar'
 import Pagination from '../../../Components/Utility/Pagination'
-import ViewProductsAdminHook from "../../../hook/admin/Product/useAdminGetProducts";
+import useAdminGetProducts from "../../../hook/admin/Product/useAdminGetProducts";
 import AdminProductsCard from "../../../Components/Admin/Product/AdminProductsCard";
 import {Link} from "react-router-dom";
 
 const AdminProductsPage = () => {
-    const {products, pagination, onPress, loading, error} = ViewProductsAdminHook();
+    const {products, pagination, onPress, loading, error} = useAdminGetProducts();
 
     let pageCount
     if (pagination) pageCount = pagination;
@@ -28,12 +28,15 @@ const AdminProductsPage = () => {
                         loading && !error && !products && <Spinner animation="border" variant="primary"/>
                     }
                     {
-                        !loading && !error && products?.length > 0 ?
-                            <Row className='justify-content-start'>
-                                {
-                                    products?.map((item, index) => <AdminProductsCard key={index} item={item}/>)
-                                }
-                            </Row> : <h4 className="notFound">No Products found</h4>
+                        !loading && !error && products &&
+                        (
+                            products?.length > 0 ?
+                                <Row className='justify-content-start'>
+                                    {
+                                        products?.map((item, index) => <AdminProductsCard key={index} item={item}/>)
+                                    }
+                                </Row> : <h4 className="notFound">No Products found</h4>
+                        )
                     }
                     {
                         !loading && error && !products && <h4 className="error">Something went wrong</h4>

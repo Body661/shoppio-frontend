@@ -1,10 +1,10 @@
 import {Row, Spinner} from 'react-bootstrap'
 import AdminOrder from './AdminOrder'
-import UserGetAllOrdersHook from "../../../hook/user/useUserGetAllOrders";
+import useUserGetAllOrders from "../../../hook/user/useUserGetAllOrders";
 import Pagination from "../../Utility/Pagination";
 
 const AdminOrders = () => {
-    const {paginate, orders, onPress, loading, error} = UserGetAllOrdersHook()
+    const {paginate, orders, onPress, loading, error} = useUserGetAllOrders()
 
     const renderOrderItems = () => {
         if (!loading && !error && orders?.length >= 1) return (orders?.map((orderItem, index) => {

@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import ApplyCouponHook from '../../../hook/user/cart/useApplyCoupon';
+import useApplyCoupon from '../../../hook/user/cart/useApplyCoupon';
 import useDeleteCart from "../../../hook/user/cart/useDeleteCart";
 
 const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRes, items}) => {
     const {handleClearCart} = useDeleteCart();
-    const {couponName, onChangeCoupon, handleSubmitCoupon} = ApplyCouponHook();
+    const {couponName, onChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
 
     useEffect(() => {
         if (couponNameRes) {

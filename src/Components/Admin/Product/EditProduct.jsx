@@ -5,7 +5,7 @@ import add from '../../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
 import {CompactPicker} from 'react-color'
-import AdminEditProductsHook from '../../../hook/admin/Product/useEditProduct';
+import useEditProduct from '../../../hook/admin/Product/useEditProduct';
 import React from "react";
 
 const AdminEditProducts = () => {
@@ -42,7 +42,7 @@ const AdminEditProducts = () => {
         loading,
         isPress
     } =
-        AdminEditProductsHook(id);
+        useEditProduct(id);
 
     return (
         <div>

@@ -8,7 +8,7 @@ import {getSubcategory} from "../../../redux/actions/SubcategoryActions";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
-const AdminEditProductsHook = (id) => {
+const useEditProduct = (id) => {
     const navigate = useNavigate();
     const [options, setOptions] = useState([]);
     const [images, setImages] = useState([]);
@@ -254,4 +254,4 @@ const AdminEditProductsHook = (id) => {
     }
 }
 
-export default AdminEditProductsHook
+export default useEditProduct
