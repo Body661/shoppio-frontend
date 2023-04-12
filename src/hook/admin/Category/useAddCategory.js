@@ -41,15 +41,15 @@ const useAddCategory = () => {
         setIsPress(false);
     };
 
-    const addCategoryRes = useSelector(state => state.allCategories.createCategory);
+    const addCategoryRes = useSelector(state => state.categoryReducer.createCategory);
 
     useEffect(() => {
         if (addCategoryRes && !loading) {
             if (addCategoryRes.status === 201) {
                 toast('Category added successfully', {type: 'success', toastId: 'addCategorySuccess'});
-                setImg(avatar);
-                setName('');
-                setSelectedFile(null);
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000)
             } else {
                 toast(addCategoryRes?.data?.errors ? addCategoryRes?.data?.errors[0]?.msg : 'Error while adding the new category', {
                     type: 'error',

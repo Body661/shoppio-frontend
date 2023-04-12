@@ -36,8 +36,8 @@ const useEditProduct = (id) => {
     }, [])
 
     const item = useSelector(state => state.productReducer.product);
-    const category = useSelector(state => state.allCategories.categories);
-    const brand = useSelector(state => state.allBrands.brands);
+    const category = useSelector(state => state.categoryReducer.categories);
+    const brand = useSelector(state => state.brandReducer.brands);
 
     useEffect(() => {
         if (item?.data?.data) {
@@ -66,7 +66,7 @@ const useEditProduct = (id) => {
         }
     }, [CatID, dispatch]);
 
-    const subCat = useSelector(state => state.subcategory.subcategory);
+    const subCat = useSelector(state => state.subcategoryReducer.subcategory);
 
     useEffect(() => {
         if (CatID) {
@@ -123,7 +123,6 @@ const useEditProduct = (id) => {
 
     //to convert base 64 to file
     const dataURLtoFile = (dataurl, filename) => {
-        console.log(dataurl);
         let arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]),
@@ -210,7 +209,7 @@ const useEditProduct = (id) => {
             if (updateProductRes && updateProductRes?.status === 200) {
                 toast("Product updated successfully", {type: 'success', toastId: 'updateProductSuccess'});
                 setTimeout(() => {
-                    navigate(`/admin/allProducts`)
+                    navigate(`/admin/products`)
                 }, 1000)
             } else {
                 toast(updateProductRes?.data?.errors ? updateProductRes?.data?.errors[0]?.msg : "Error while updating product", {

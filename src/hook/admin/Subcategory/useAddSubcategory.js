@@ -3,6 +3,7 @@ import { createSubcategory } from '../../../redux/actions/SubcategoryActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllCategories } from '../../../redux/actions/CategoryActions';
 import { toast } from 'react-toastify';
+import subcategoryReducer from "../../../redux/reducers/subcategoryReducer";
 
 const useAddSubcategory = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const useAddSubcategory = () => {
         dispatch(getAllCategories());
     }, [dispatch]);
 
-    const category = useSelector((state) => state.allCategories.categories);
+    const category = useSelector((state) => state.categoryReducer.categories);
 
     const handleChange = (e) => {
         setId(e.target.value);
@@ -42,7 +43,7 @@ const useAddSubcategory = () => {
         setLoading(false);
     };
 
-    const subcategory = useSelector((state) => state.subcategory.subcategory);
+    const subcategory = useSelector((state) => state.subcategoryReducer.subcategory);
 
     useEffect(() => {
         if (!loading) {

@@ -22,7 +22,7 @@ const AdminProductsPage = () => {
                 <Col sm="9" xs="10" md="10">
                     <div className='d-flex justify-content-between align-items-center'>
                         <div className='admin-content-text'>Manage products</div>
-                        <Link className='product-cart-add px-3 py-3 mx-3' to='/admin/addProduct'>Add new product</Link>
+                        <Link className='product-cart-add px-3 py-3 mx-3' to='/admin/add-product'>Add new product</Link>
                     </div>
                     {
                         loading && !error && !products && <Spinner animation="border" variant="primary"/>

@@ -1,6 +1,6 @@
 import baseURL from '../Api/axiosConfig'
 
-const useDeleteData = async (url, params) => {
+const useDeleteData = async (url) => {
     const config = {
         headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
     }

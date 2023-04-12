@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Col, Card, Row, Modal, Button} from 'react-bootstrap'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {deleteProduct} from "../../../redux/actions/productActions";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
@@ -8,7 +8,6 @@ import {toast} from "react-toastify";
 const AdminProductsCard = ({item}) => {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,24 +38,6 @@ const AdminProductsCard = ({item}) => {
             }
         }
     }, [loading, deleteResponse])
-
-    useEffect(() => {
-        if (!loading) {
-            if (deleteResponse?.status === 200) {
-                toast('Product deleted successfully', {toastId: 'deleteProductSuccess', type: 'success'})
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000)
-            } else {
-                toast(deleteResponse?.data?.errors ? deleteResponse?.data?.errors[0]?.msg : "Error while deleting product", {
-                    type: 'error',
-                    toastId: 'deleteProductError'
-                });
-
-            }
-        }
-
-    }, [deleteResponse])
 
     return (
         <Col xs="12" sm="6" md="5" lg="4" className="d-flex">
@@ -92,7 +73,7 @@ const AdminProductsCard = ({item}) => {
                 <Row className="d-flex justify-content-center px-2">
                     <Col className=" d-flex justify-content-between">
                         <div onClick={handleShow} className="d-inline item-delete-edit">Delete</div>
-                        <Link to={`/admin/editProduct/${item?._id}`} style={{textDecoration: "none"}}>
+                        <Link to={`/admin/updated-product/${item?._id}`} style={{textDecoration: "none"}}>
                             <div className="d-inline item-delete-edit">Edit</div>
                         </Link>
                     </Col>

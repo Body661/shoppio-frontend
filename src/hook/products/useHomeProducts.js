@@ -12,9 +12,9 @@ const useHomeProducts = () => {
     useEffect(() => {
         async function fetchData() {
             setLoadingAllProducts(true)
-            setLoadingCatProducts(true)
-            await dispatch(getAllProducts(4));
-            await dispatch(getProductsByCategoryHome('63a73190f03c4a488cc4b6d9'));
+            // setLoadingCatProducts(true)
+            await dispatch(getAllProducts(10));
+            // await dispatch(getProductsByCategoryHome('63a73190f03c4a488cc4b6d9'));
         }
 
         fetchData();
@@ -22,10 +22,10 @@ const useHomeProducts = () => {
     }, [])
 
     const allProducts = useSelector((state) => state.productReducer.allProducts)
-    const allProductsByCategory = useSelector(state => state.productReducer.productsByCategoryHome)
+    // const allProductsByCategory = useSelector(state => state.productReducer.productsByCategoryHome)
 
     useEffect(() => {
-        if (allProducts?.status !== 200 && !loadingAllProducts) {
+        if (allProducts && allProducts?.status !== 200 && !loadingAllProducts) {
             setErrorAllProducts(true)
         } else {
             setErrorAllProducts(false)
@@ -34,19 +34,19 @@ const useHomeProducts = () => {
     }, [allProducts, loadingAllProducts])
 
 
-    useEffect(() => {
-        if (allProductsByCategory?.status !== 200 && !loadingCatProducts) {
-            setErrorCatProducts(true)
-        } else {
-            setErrorCatProducts(false)
-        }
-        setLoadingCatProducts(false);
-    }, [allProductsByCategory, loadingCatProducts])
+    // useEffect(() => {
+    //     if (allProductsByCategory && allProductsByCategory?.status !== 200 && !loadingCatProducts) {
+    //         setErrorCatProducts(true)
+    //     } else {
+    //         setErrorCatProducts(false)
+    //     }
+    //     setLoadingCatProducts(false);
+    // }, [allProductsByCategory, loadingCatProducts])
 
 
     return {
         bestSeller: allProducts?.data?.data,
-        categoryProducts: allProductsByCategory?.data?.data,
+        // categoryProducts: allProductsByCategory?.data?.data,
         loadingAllProducts,
         errorAllProducts,
         loadingCatProducts,

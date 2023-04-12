@@ -13,7 +13,7 @@ const CategoryHeader = () => {
                         <Link to={`/products`} className="cat-text-header">All</Link>
                         {
                             categories?.data?.data.length > 0 && categories?.data?.data?.map(category => <Link
-                                to={`/category/${category?._id}`} key={category._id}
+                                to={`/categories/${category?._id}`} key={category._id}
                                 className="cat-text-header">{category.name}</Link>)
                         }
                     </Col>

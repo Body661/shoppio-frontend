@@ -10,7 +10,7 @@ import {
 } from '../types'
 import {useInsertData} from "../../customHooks/useInsertData";
 import {useGetDataToken} from "../../customHooks/useGetData";
-import {useInsUpdateData} from "../../customHooks/useUpdateData";
+import {useUpdateData} from "../../customHooks/useUpdateData";
 
 
 // Action creators
@@ -62,7 +62,7 @@ export const verifyPassword = (data) => async (dispatch) => {
 
 export const resetPassword = (data) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/auth/resetPassword`, data);
+        const response = await useUpdateData(`/api/auth/resetPassword`, data);
         dispatch({ type: RESET_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: RESET_PASSWORD, payload: error.response  })
@@ -71,7 +71,7 @@ export const resetPassword = (data) => async (dispatch) => {
 
 export const updateUserProfileData = (body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/users/me`, body);
+        const response = await useUpdateData(`/api/users/me`, body);
         dispatch({ type: UPDATE_USER_PROFILE, payload: response })
     } catch (error) {
         dispatch({ type: UPDATE_USER_PROFILE, payload: error.response  })
@@ -80,7 +80,7 @@ export const updateUserProfileData = (body) => async (dispatch) => {
 
 export const updateUserPassword = (body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/users/updateMyPassword`, body);
+        const response = await useUpdateData(`/api/users/updateMyPassword`, body);
         dispatch({ type: UPDATE_USER_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: UPDATE_USER_PASSWORD, payload: error.response  })

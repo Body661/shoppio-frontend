@@ -23,7 +23,15 @@ const useProductsByCategory = (catID) => {
     }
 
     const products = useSelector((state) => state.productReducer.productsByCategory)
-    if (products?.status !== 200 && !loading) setError(true);
+
+    useEffect(() => {
+        if (products && products?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
+        setLoading(false);
+    }, [products, loading])
 
     let items = [];
     let pagination = [];

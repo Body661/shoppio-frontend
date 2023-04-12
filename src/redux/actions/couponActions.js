@@ -3,7 +3,7 @@ import {ADD_COUPON, GET_ALL_COUPONS, EDIT_COUPON, GET_ONE_COUPON, DELETE_COUPON}
 import {useInsertData} from '../../customHooks/useInsertData'
 import {useGetDataToken} from '../../customHooks/useGetData'
 import useDeleteData from './../../customHooks/useDeleteData';
-import {useInsUpdateData} from '../../customHooks/useUpdateData';
+import {useUpdateData} from '../../customHooks/useUpdateData';
 //add Coupon
 export const addCoupon = (body) => async (dispatch) => {
     try {
@@ -74,7 +74,7 @@ export const deleteCoupon = (id) => async (dispatch) => {
 //edit Coupon
 export const editCoupon = (id, body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/coupons/${id}`, body);
+        const response = await useUpdateData(`/api/coupons/${id}`, body);
 
         dispatch({
             type: EDIT_COUPON,

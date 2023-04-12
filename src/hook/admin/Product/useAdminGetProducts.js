@@ -28,12 +28,11 @@ const useAdminGetProducts = () => {
     const allProducts = useSelector((state) => state.productReducer.allProducts)
 
     useEffect(() => {
-        if (!loading && allProducts?.status !== 200) {
+        if (!loading && allProducts && allProducts?.status !== 200) {
             setError(true)
         } else {
             setError(false)
         }
-
         setLoading(false);
     }, [allProducts, loading])
 

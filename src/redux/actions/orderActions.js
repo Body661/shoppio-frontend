@@ -1,7 +1,7 @@
 import {GET_ALL_ORDERS, UPDATE_ORDER_DELIVER, GET_ONE_ORDER, UPDATE_ORDER_PAY} from '../types'
 
 import {useGetDataToken} from '../../customHooks/useGetData'
-import {useInsUpdateData} from '../../customHooks/useUpdateData';
+import {useUpdateData} from '../../customHooks/useUpdateData';
 
 export const getAllOrders = (page, limit) => async (dispatch) => {
     try {
@@ -38,7 +38,7 @@ export const getOneOrder = (id) => async (dispatch) => {
 
 export const changeOrderPay = (id) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/order/${id}/pay`);
+        const response = await useUpdateData(`/api/order/${id}/pay`);
 
         dispatch({
             type: UPDATE_ORDER_PAY,
@@ -55,7 +55,7 @@ export const changeOrderPay = (id) => async (dispatch) => {
 
 export const changeOrderDelivery = (id) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/order/${id}/delivered`);
+        const response = await useUpdateData(`/api/order/${id}/delivered`);
 
         dispatch({
             type: UPDATE_ORDER_DELIVER,

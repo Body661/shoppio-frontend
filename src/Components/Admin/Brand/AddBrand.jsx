@@ -15,57 +15,54 @@ const AddBrand = () => {
 
 
     return (
-        <div>
-            <Row className="justify-content-start ">
-                <div className="admin-content-text pb-4">Add new brand</div>
-                <Col sm="8">
-                    <div className="text-form pb-2">Brand logo</div>
-                    <div>
-                        <label htmlFor="upload-photo">
-                            <img
-                                src={img}
-                                alt="brand logo"
-                                height="100px"
-                                width="120px"
-                                style={{cursor: "pointer"}}
-                            />
-                        </label>
-                        <input
-                            style={{display: "none"}}
-                            type="file"
-                            name="photo"
-                            onChange={handleImageChange}
-                            id="upload-photo"
+        <>
+            <div className="admin-content-text pb-4">Add new brand</div>
+            <Col>
+                <div className="text-form pb-2">Brand logo</div>
+                <div>
+                    <label htmlFor="upload-photo">
+                        <img
+                            src={img}
+                            alt="brand logo"
+                            height="100px"
+                            width="120px"
+                            style={{cursor: "pointer"}}
                         />
-                    </div>
+                    </label>
                     <input
-                        type="text"
-                        value={name}
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="Brand name"
-                        onChange={handleNameChange}
+                        style={{display: "none"}}
+                        type="file"
+                        name="photo"
+                        onChange={handleImageChange}
+                        id="upload-photo"
                     />
-                </Col>
-            </Row>
-            <Row>
-                <Col sm="8" className="d-flex justify-content-end ">
+                </div>
+
+                <div className="d-flex gap-2 align-items-center mt-3">
+                    <input
+                        onChange={handleNameChange}
+                        value={name}
+                        type="text"
+                        className="input-form  px-3"
+                        placeholder="Brand Name"
+                    />
+
                     <button
                         onClick={handleSubmit}
-                        className="btn-save d-inline mt-2"
-                        disabled={!img || !name || loading}
+                        className="btn-save"
+                        disabled={loading && isPress}
                     >
                         Save changes
                     </button>
-                </Col>
-            </Row>
-
+                </div>
+            </Col>
 
             {isPress && (
                 <div className="mt-3">
                     {loading ? <Spinner animation="border" variant="primary"/> : null}
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

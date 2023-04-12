@@ -61,7 +61,7 @@ const useCashOrder = () => {
             if (order?.status === 201) {
                 toast('Order added successfully', {type: 'success'});
                 setTimeout(() => {
-                    navigate('/user/allOrders');
+                    navigate('/user/orders');
                 }, 1500);
             } else {
                 toast(order?.data?.errors ? order?.data?.errors[0]?.msg : 'Error while adding order, please try again', {

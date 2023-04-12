@@ -162,7 +162,7 @@ const AdminEditProducts = () => {
             </Row>
             <Row>
                 <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">Save Changes</button>
+                    <button onClick={handleSubmit} className="btn-save d-inline mt-2 " disabled={loading && isPress}>Save Changes</button>
                 </Col>
             </Row>
             {isPress && (

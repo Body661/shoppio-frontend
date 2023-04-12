@@ -36,7 +36,7 @@ const AddressCard = ({item}) => {
                 </Col>
                 <Col xs="6" className="d-flex justify-content-end">
                     <div className="d-flex p-2">
-                        <Link to={`/user/edit-address/${item?._id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`/user/addresses/${item?._id}`} style={{textDecoration: 'none'}}>
                             <div className="d-flex mx-2">
                                 <img alt="" className="ms-1 mt-2" src={editIcon} height="17px" width="15px"/>
                                 <p className="item-delete-edit">Edit</p>

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import useSearch from '../useSearch';
 import {getAllCategories} from '../../../redux/actions/CategoryActions';
 import {getAllBrands} from '../../../redux/actions/BrandActions';
+import brandReducer from "../../../redux/reducers/brandReducer";
 
 const useSidebarSearch = () => {
     const {getProduct} = useSearch();
@@ -16,8 +17,8 @@ const useSidebarSearch = () => {
         fetchData();
     }, []);
 
-    const allCategories = useSelector(state => state.allCategories.categories);
-    const allBrands = useSelector(state => state.allBrands.brands);
+    const allCategories = useSelector(state => state.categoryReducer.categories);
+    const allBrands = useSelector(state => state.brandReducer.brands);
 
     const category = allCategories?.data?.data || [];
     const brand = allBrands?.data?.data || [];

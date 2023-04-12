@@ -45,7 +45,7 @@ const NavBarLogin = ({isUser}) => {
                             <NavDropdown title={user.name} id="basic-nav-dropdown"
                                          className="d-flex align-items-center">
                                 {user.role === 'admin' ? (
-                                    <NavDropdown.Item href="/admin/allProducts">Dashboard</NavDropdown.Item>
+                                    <NavDropdown.Item href="/admin/products">Dashboard</NavDropdown.Item>
                                 ) : (
                                     <Link to="/user/profile">
                                         <NavDropdown.Item href="/user/profile">Profile</NavDropdown.Item>

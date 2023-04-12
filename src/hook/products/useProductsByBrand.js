@@ -26,7 +26,14 @@ const useProductsByBrand = (brandID) => {
 
     const products = useSelector((state) => state.productReducer.productsByBrand)
 
-    if (products?.status !== 200 && !loading) setError(true);
+    useEffect(() => {
+        if (products && products?.status !== 200 && !loading) {
+            setError(true)
+        } else {
+            setError(false)
+        }
+        setLoading(false);
+    }, [products, loading])
 
     let items = [];
     let pagination = [];

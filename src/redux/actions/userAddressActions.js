@@ -8,7 +8,7 @@ import {
     GET_ALL_USER_ADDRESSES
 } from '../types'
 import useDeleteData from '../../customHooks/useDeleteData';
-import {useInsUpdateData} from '../../customHooks/useUpdateData'
+import {useUpdateData} from '../../customHooks/useUpdateData'
 
 
 //add user Address
@@ -87,7 +87,7 @@ export const getOneUserAddress = (id) => async (dispatch) => {
 //edit user Address
 export const editUserAddress = (id, body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/addresses/${id}`, body);
+        const response = await useUpdateData(`/api/addresses/${id}`, body);
 
         dispatch({
             type: EDIT_USER_ADDRESS,

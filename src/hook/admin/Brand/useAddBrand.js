@@ -43,7 +43,7 @@ const useAddBrand = () => {
         setLoading(false);
     };
 
-    const addBranRes = useSelector((state) => state.allBrands.createBrand);
+    const addBranRes = useSelector((state) => state.brandReducer.createBrand);
 
     useEffect(() => {
         if (loading === false && isPress) {
@@ -54,6 +54,9 @@ const useAddBrand = () => {
 
             if (addBranRes?.status === 201) {
                 toast('Brand added successfully', {type: 'success', toastId: 'brandAdded'})
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000)
             } else {
                 toast(addBranRes?.data?.errors ? addBranRes?.data?.errors[0]?.msg : 'Error while adding the brand', {
                     type: 'error',

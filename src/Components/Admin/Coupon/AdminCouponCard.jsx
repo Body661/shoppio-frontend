@@ -1,7 +1,7 @@
 import {Button, Col, Modal, Row} from 'react-bootstrap'
-import useCouponCard from '../../hook/admin/Coupon/useCouponCard'
-import deleteIcon from '../../images/delete.png'
-import editIcon from '../../images/edit.png'
+import useCouponCard from '../../../hook/admin/Coupon/useCouponCard'
+import deleteIcon from '../../../images/delete.png'
+import editIcon from '../../../images/edit.png'
 import {Link} from 'react-router-dom';
 
 const AdminCouponCard = ({coupon}) => {
@@ -33,14 +33,15 @@ const AdminCouponCard = ({coupon}) => {
                 <Col xs="6">
                     <div className="p-2">Coupon name: {coupon.name}</div>
                 </Col>
-                <Col xs="6" className="d-flex d-flex justify-content-end">
+                <Col xs="6" className="d-flex justify-content-end">
                     <div className="d-flex p-2">
-                        <Link to={`/admin/editCoupon/${coupon._id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`/admin/coupons/${coupon._id}`} style={{textDecoration: 'none'}}>
                             <div className="d-flex mx-2">
                                 <img alt="" className="ms-1 mt-2" src={editIcon} height="17px" width="15px"/>
                                 <p className="item-delete-edit"> Edit</p>
                             </div>
                         </Link>
+
                         <div onClick={handleModalOpen} className="d-flex ">
                             <img alt="" className="ms-1 mt-2" src={deleteIcon} height="17px" width="15px"/>
                             <p className="item-delete-edit"> Delete </p>

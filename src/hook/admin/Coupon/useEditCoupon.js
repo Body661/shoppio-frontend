@@ -77,7 +77,7 @@ const useEditCoupon = (id) => {
             if (res?.status === 200) {
                 toast('Coupon updated successfully', {type: 'success'});
                 setTimeout(() => {
-                    navigate('/admin/addCoupon');
+                    navigate('/admin/coupons');
                 }, 1000);
             } else {
                 toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while updating Coupon', {

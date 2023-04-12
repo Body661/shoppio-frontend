@@ -1,12 +1,16 @@
 // Category
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const CREATE_CATEGORY = "CREATE_CATEGORY"
-export const GET_ONE_CATEGORY = "GET_ONE_CATEGORY"
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY"
+export const DELETE_CATEGORY = "DELETE_CATEGORY"
+export const GET_CATEGORY = "GET_CATEGORY"
 
 // Brand
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS"
-export const GET_ONE_BRAND = "GET_ONE_BRAND"
+export const GET_BRAND = "GET_BRAND"
 export const CREATE_BRAND = "CREATE_BRAND"
+export const UPDATE_BRAND = "UPDATE_BRAND"
+export const DELETE_BRAND = "DELETE_BRAND"
 
 // Subcategory
 export const CREATE_SUBCATEGORY = "CREATE_SUBCATEGORY"
@@ -74,3 +78,9 @@ export const GET_ONE_ORDER = "GET_ONE_ORDER"
 export const UPDATE_ORDER_PAY = "UPDATE_ORDER_PAY"
 export const UPDATE_ORDER_DELIVER = "UPDATE_ORDER_DELIVER"
 export const CREATE_ORDER_ONLINE = "CREATE_ORDER_ONLINE"
+
+export const GET_ALL_USERS = "GET_ALL_USERS"
+export const GET_USER = "GET_USER"
+export const UPDATE_USER = "UPDATE_USER"
+export const CREATE_USER = "CREATE_USER"
+export const DELETE_USER = "DELETE_USER"

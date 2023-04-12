@@ -11,11 +11,11 @@ export const useAllCategories = () => {
         dispatch(getAllCategories(50));
     }, [dispatch])
 
-    const categories = useSelector(state => state.allCategories.categories)
+    const categories = useSelector(state => state.categoryReducer.categories)
     let pageCount = categories?.data?.paginationRes?.pages || 0;
 
     useEffect(() => {
-        if (categories?.status !== 200 && !loading) {
+        if (categories && categories?.status !== 200 && !loading) {
             setError(true)
         } else {
             setError(false)

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getAllBrands, getAllBrandsPage} from '../../redux/actions/BrandActions';
+import {getAllBrands} from '../../redux/actions/BrandActions';
 
 export const useHomeBrands = () => {
     const dispatch = useDispatch();
@@ -11,10 +11,10 @@ export const useHomeBrands = () => {
         dispatch(getAllBrands(6));
     }, [dispatch]);
 
-    const brands = useSelector((state) => state.allBrands.brands);
+    const brands = useSelector((state) => state.brandReducer.brands);
 
     useEffect(() => {
-        if (brands?.status !== 200 && !loading) {
+        if (brands && brands?.status !== 200 && !loading) {
             setError(true)
         } else {
             setError(false)

@@ -5,12 +5,12 @@ const UserSideBar = () => {
     return (
         <div className="sidebar">
             <div className="d-flex flex-column">
-                <Link to="/user/allOrders" style={{textDecoration: 'none'}}>
+                <Link to="/user/orders" style={{textDecoration: 'none'}}>
                     <div className="admin-side-text mt-3 border-bottom p-2 mx-auto text-center">
                         Manage your orders
                     </div>
                 </Link>
-                <Link to="/user/favoriteProducts" style={{textDecoration: 'none'}}>
+                <Link to="/user/wishlist" style={{textDecoration: 'none'}}>
                     <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
                         Favorites
                     </div>

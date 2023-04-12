@@ -2,7 +2,7 @@ import {CREATE_REVIEW, UPDATE_REVIEW, DELETE_REVIEW, ALL_REVIEW_PRODUCT} from '.
 import {useGetDataToken} from '../../customHooks/useGetData'
 import {useInsertData} from '../../customHooks/useInsertData'
 import useDeleteData from './../../customHooks/useDeleteData';
-import {useInsUpdateData} from '../../customHooks/useUpdateData';
+import {useUpdateData} from '../../customHooks/useUpdateData';
 
 //create rate
 export const createReview = (prodID, body) => async (dispatch) => {
@@ -63,7 +63,7 @@ export const deleteReviewOnProduct = (productId, id) => async (dispatch) => {
 //update review to one product
 export const updateReviewOnProduct = (productId, id, body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/products/${productId}/reviews/${id}`, body);
+        const response = await useUpdateData(`/api/products/${productId}/reviews/${id}`, body);
 
         dispatch({
             type: UPDATE_REVIEW,

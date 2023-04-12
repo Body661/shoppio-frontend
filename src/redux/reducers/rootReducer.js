@@ -11,18 +11,20 @@ import couponReducer from "./couponReducer";
 import cartReducer from "./cartReducer";
 import orderReducer from "./orderReducer";
 import checkoutReducer from "./checkOutReducer";
+import userManagementReducer from "./userManagementReducer";
 
 export default combineReducers({
-    allCategories: categoryReducer,
-    allBrands: brandReducer,
-    subcategory: subcategoryReducer,
+    categoryReducer,
+    brandReducer,
+    subcategoryReducer,
     productReducer,
-    authReducer: authReducer,
-    reviewReducer: reviewReducer,
-    wishlistReducer: wishlistReducer,
-    userAddressesReducer: userAddressesReducer,
-    couponReducer: couponReducer,
-    cartReducer: cartReducer,
-    orderReducer: orderReducer,
-    checkoutReducer: checkoutReducer
+    authReducer,
+    reviewReducer,
+    wishlistReducer,
+    userAddressesReducer,
+    couponReducer,
+    cartReducer,
+    orderReducer,
+    checkoutReducer,
+    userManagementReducer
 })

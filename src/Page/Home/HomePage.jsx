@@ -20,15 +20,13 @@ const HomePage = () => {
         <div className='font' style={{minHeight: '670px'}}>
 
             <Slider/>
-            <HomeCategory title="Categories" btnTitle="More" path="/allCategory"/>
+            <HomeCategory title="Categories" btnTitle="More" path="/categories"/>
             <HomeProducts products={bestSeller} loading={loadingAllProducts} error={errorAllProducts} title="Best seller"
                           btnTitle="More"
                           pathText="/products"/>
-            <DiscountSection/>
-            <HomeProducts products={categoryProducts} loading={loadingCatProducts} error={errorCatProducts}
-                          title="Newest clothes"
-                          btnTitle="More" pathText="/products"/>
-            <HomeBrands title="Brands" btnTitle="More" path="/allBrands"/>
+            {/*<DiscountSection/>*/}
+            {/*<HomeProducts products={categoryProducts} loading={loadingCatProducts} error={errorCatProducts} title="Newest clothes" btnTitle="More" pathText="/products"/>*/}
+            <HomeBrands title="Brands" btnTitle="More" path="/brands"/>
         </div>
     )
 }

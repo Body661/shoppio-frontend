@@ -10,7 +10,7 @@ import {
 import {useGetDataToken} from '../../customHooks/useGetData'
 import {useInsertData} from '../../customHooks/useInsertData';
 import useDeleteData from '../../customHooks/useDeleteData';
-import {useInsUpdateData} from '../../customHooks/useUpdateData'
+import {useUpdateData} from '../../customHooks/useUpdateData'
 //add to Cart
 export const addProductToCart = (body) => async (dispatch) => {
     try {
@@ -83,7 +83,7 @@ export const deleteCartItem = (id) => async (dispatch) => {
 //update Cart Item
 export const updateCartItem = (id, body) => async (dispatch) => {
     try {
-        const response = await useInsUpdateData(`/api/cart/${id}`, body);
+        const response = await useUpdateData(`/api/cart/${id}`, body);
         dispatch({
             type: UPDATE_ITEM_IN_CART,
             payload: response,

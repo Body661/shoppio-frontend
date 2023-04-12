@@ -2,7 +2,10 @@ import * as types from '../types';
 
 const initState = {
     categories: null,
-    createCategory: null
+    createCategory: null,
+    deleteCategory: null,
+    updateCategory: null,
+    category: null
 }
 const categoryReducer = (state = initState, action) => {
 
@@ -16,6 +19,21 @@ const categoryReducer = (state = initState, action) => {
             return {
                 ...state,
                 createCategory: action.payload,
+            }
+        case types.GET_CATEGORY:
+            return {
+                ...state,
+                category: action.payload
+            }
+        case types.DELETE_CATEGORY:
+            return {
+                ...state,
+                deleteCategory: action.payload
+            }
+        case types.UPDATE_CATEGORY:
+            return {
+                ...state,
+                updateCategory: action.payload
             }
         default: {
             return state

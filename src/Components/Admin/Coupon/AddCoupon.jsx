@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {Row, Col, Spinner} from 'react-bootstrap';
 import useAddCoupon from '../../../hook/admin/Coupon/useAddCoupon';
-import AdminCouponCard from '../AdminCouponCard';
+import AdminCouponCard from './AdminCouponCard';
 
 const AddCoupon = () => {
     const dateRef = useRef();

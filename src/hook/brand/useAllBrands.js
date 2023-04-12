@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAllBrands, getAllBrandsPage} from '../../redux/actions/BrandActions';
+import brandReducer from "../../redux/reducers/brandReducer";
 
 export const useAllBrands = () => {
     const dispatch = useDispatch();
@@ -11,11 +12,11 @@ export const useAllBrands = () => {
         dispatch(getAllBrands(50));
     }, [dispatch]);
 
-    const brands = useSelector((state) => state.allBrands.brands);
+    const brands = useSelector((state) => state.brandReducer.brands);
     const pageCount = brands?.data?.paginationRes?.pages || 0;
 
     useEffect(() => {
-        if (brands?.status !== 200 && !loading) {
+        if (brands && brands?.status !== 200 && !loading) {
             setError(true)
         } else {
             setError(false)

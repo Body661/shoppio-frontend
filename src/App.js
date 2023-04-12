@@ -1,3 +1,6 @@
+import {useEffect, useState} from "react";
+import {useJwt} from "react-jwt";
+import {ToastContainer} from "react-toastify";
 import HomePage from "./Page/Home/HomePage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NavBarLogin from "./Components/Utility/NavBarLogin";
@@ -29,12 +32,13 @@ import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
 import AddCouponPage from "./Page/Admin/Coupon/AddCouponPage";
 import EditCouponPage from "./Page/Admin/Coupon/EditCouponPage";
-import React, {useEffect, useState} from "react";
-import {useJwt} from "react-jwt";
 import NotFoundPage from "./Components/Utility/NotFoundPage";
 import ProductsByCategoryPage from "./Page/Products/ProductsByCategoryPage";
 import ProductsByBrandPage from "./Page/Products/ProductsByBrandPage";
-import {ToastContainer} from "react-toastify";
+import UpdateCategoryPage from "./Page/Admin/Category/UpdateCategoryPage";
+import UpdateBrandPage from "./Page/Admin/Brand/UpdateBrandPage";
+import UsersManagementPage from "./Page/Admin/User/UsersManagementPage";
+import EditUserPage from "./Page/Admin/User/EditUserPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -67,11 +71,11 @@ function App() {
 
                 <Routes>
                     <Route index element={<HomePage/>}/>
-                    <Route path="/allCategory" element={<CategoriesPage/>}/>
-                    <Route path="/allBrands" element={<AllBrandPage/>}/>
+                    <Route path="/categories" element={<CategoriesPage/>}/>
+                    <Route path="/brands" element={<AllBrandPage/>}/>
                     <Route path="/products" element={<ProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductDetailsPage/>}/>
-                    <Route path="/category/:id" element={<ProductsByCategoryPage/>}/>
+                    <Route path="/categories/:id" element={<ProductsByCategoryPage/>}/>
                     <Route path="/brands/:id" element={<ProductsByBrandPage/>}/>
 
                     {!isUser && !isAdmin && (
@@ -86,29 +90,33 @@ function App() {
 
                     {isAdmin && (
                         <Route>
-                            <Route path="/admin/allProducts" element={<AdminProductsPage/>}/>
-                            <Route path="/admin/allOrders" element={<AdminOrdersPage/>}/>
+                            <Route path="/admin/products" element={<AdminProductsPage/>}/>
+                            <Route path="/admin/orders" element={<AdminOrdersPage/>}/>
                             <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
-                            <Route path="/admin/addBrand" element={<AddBrandPage/>}/>
-                            <Route path="/admin/addCategory" element={<AddCategoryPage/>}/>
-                            <Route path="/admin/addSubcategory" element={<AddSubCategoryPage/>}/>
-                            <Route path="/admin/addProduct" element={<AddProductPage/>}/>
-                            <Route path="/admin/editProduct/:id" element={<AdminEditProductsPage/>}/>
-                            <Route path="/admin/addCoupon" element={<AddCouponPage/>}/>
-                            <Route path="/admin/editCoupon/:id" element={<EditCouponPage/>}/>
+                            <Route path="/admin/brands" element={<AddBrandPage/>}/>
+                            <Route path="/admin/categories" element={<AddCategoryPage/>}/>
+                            <Route path="/admin/subcategories" element={<AddSubCategoryPage/>}/>
+                            <Route path="/admin/add-product" element={<AddProductPage/>}/>
+                            <Route path="/admin/updated-product/:id" element={<AdminEditProductsPage/>}/>
+                            <Route path="/admin/coupons" element={<AddCouponPage/>}/>
+                            <Route path="/admin/coupons/:id" element={<EditCouponPage/>}/>
+                            <Route path="/admin/update-category/:id" element={<UpdateCategoryPage/>}/>
+                            <Route path="/admin/update-brand/:id" element={<UpdateBrandPage/>}/>
+                            <Route path="/admin/user-management" element={<UsersManagementPage/>}/>
+                            <Route path="/admin/user-management/:id" element={<EditUserPage/>}/>
                         </Route>
                     )}
 
                     {isUser && (
                         <Route>
-                            <Route path="/user/allOrders" element={<UserOrdersPage/>}/>
-                            <Route path="/user/favoriteProducts" element={<UserWishListPage/>}/>
+                            <Route path="/user/orders" element={<UserOrdersPage/>}/>
+                            <Route path="/user/wishlist" element={<UserWishListPage/>}/>
                             <Route path="/user/addresses" element={<UserAllAddressesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
-                            <Route path="/user/edit-address/:id" element={<UserEditAddressPage/>}/>
+                            <Route path="/user/addresses/:id" element={<UserEditAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>
                             <Route path="/cart" element={<CartPage/>}/>
-                            <Route path="/order/payMethod" element={<ChoosePayMethodPage/>}/>
+                            <Route path="/order/pay-method" element={<ChoosePayMethodPage/>}/>
                         </Route>
                     )}
                     <Route path="*" element={<NotFoundPage/>}/>

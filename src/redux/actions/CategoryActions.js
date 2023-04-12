@@ -1,6 +1,8 @@
-import {CREATE_CATEGORY, GET_ALL_CATEGORIES} from '../types'
-import {useGetData} from "../../customHooks/useGetData";
+import {CREATE_CATEGORY, DELETE_CATEGORY, GET_ALL_CATEGORIES, GET_CATEGORY, UPDATE_CATEGORY} from '../types'
+import {useGetData, useGetDataToken} from "../../customHooks/useGetData";
 import {useInsertDataWithImage} from "../../customHooks/useInsertData";
+import useDeleteData from "../../customHooks/useDeleteData";
+import {useUpdateDataWithImage} from "../../customHooks/useUpdateData";
 
 export const getAllCategories = (limit) => async (dispatch) => {
     try {
@@ -44,6 +46,51 @@ export const createCategory = (data) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_CATEGORY,
+            payload: e.response
+        })
+    }
+}
+
+export const getCategory = (categoryId) => async (dispatch) => {
+    try {
+        const response = await useGetDataToken(`/api/categories/${categoryId}`)
+        dispatch({
+            type: GET_CATEGORY,
+            payload: response
+        })
+    } catch (e) {
+        dispatch({
+            type: GET_CATEGORY,
+            payload: e.response
+        })
+    }
+}
+
+export const updateCategory = (id, data) => async (dispatch) => {
+    try {
+        const response = await useUpdateDataWithImage(`/api/categories/${id}`, data)
+        dispatch({
+            type: UPDATE_CATEGORY,
+            payload: response
+        })
+    } catch (e) {
+        dispatch({
+            type: UPDATE_CATEGORY,
+            payload: e.response
+        })
+    }
+}
+
+export const deleteCategory = (id) => async (dispatch) => {
+    try {
+        const response = await useDeleteData(`/api/categories/${id}`)
+        dispatch({
+            type: DELETE_CATEGORY,
+            payload: response
+        })
+    } catch (e) {
+        dispatch({
+            type: DELETE_CATEGORY,
             payload: e.response
         })
     }

@@ -33,7 +33,7 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, couponNameRe
                         ? `${totalCartPrice} Euro ... After discount: ${totalCartPriceAfterDiscount}`
                         : `${totalCartPrice} Euro`}
                 </div>
-                <Link to='/order/payMethod' style={{textDecoration: 'none'}} className='product-cart-add  d-inline '>
+                <Link to='/order/pay-method' style={{textDecoration: 'none'}} className='product-cart-add  d-inline '>
                     <button className='product-cart-add w-100 px-2'>Complete order</button>
                 </Link>
 

@@ -22,9 +22,9 @@ const useAddProduct = () => {
     const [loading, setLoading] = useState(true);
     const [showColor, setShowColor] = useState(false);
     const [colors, setColors] = useState([]);
-    const category = useSelector((state) => state.allCategories.categories);
-    const brand = useSelector((state) => state.allBrands.brands);
-    const subcategory = useSelector((state) => state.subcategory.subcategory);
+    const category = useSelector((state) => state.categoryReducer.categories);
+    const brand = useSelector((state) => state.brandReducer.brands);
+    const subcategory = useSelector((state) => state.subcategoryReducer.subcategory);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -143,7 +143,7 @@ const useAddProduct = () => {
             if (product && product?.status === 201) {
                 toast("Product added successfully", {type: 'success', toastId: 'addProductSuccess'});
                 setTimeout(() => {
-                    navigate(`/admin/allProducts`)
+                    navigate(`/admin/products`)
                 }, 1000)
             } else {
                 toast(product?.data?.errors ? product?.data?.errors[0]?.msg : "Error while adding product", {
