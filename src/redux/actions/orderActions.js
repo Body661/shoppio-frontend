@@ -5,7 +5,7 @@ import {useUpdateData} from '../../customHooks/useUpdateData';
 
 export const getAllOrders = (page, limit) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/order?limit=${limit}&page=${page}`);
+        const response = await useGetDataToken(`/order?limit=${limit}&page=${page}`);
         dispatch({
             type: GET_ALL_ORDERS,
             payload: response
@@ -21,7 +21,7 @@ export const getAllOrders = (page, limit) => async (dispatch) => {
 
 export const getOneOrder = (id) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/order/${id}`);
+        const response = await useGetDataToken(`/order/${id}`);
 
         dispatch({
             type: GET_ONE_ORDER,
@@ -38,7 +38,7 @@ export const getOneOrder = (id) => async (dispatch) => {
 
 export const changeOrderPay = (id) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/api/order/${id}/pay`);
+        const response = await useUpdateData(`/order/${id}/pay`);
 
         dispatch({
             type: UPDATE_ORDER_PAY,
@@ -55,7 +55,7 @@ export const changeOrderPay = (id) => async (dispatch) => {
 
 export const changeOrderDelivery = (id) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/api/order/${id}/delivered`);
+        const response = await useUpdateData(`/order/${id}/delivered`);
 
         dispatch({
             type: UPDATE_ORDER_DELIVER,

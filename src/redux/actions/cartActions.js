@@ -14,7 +14,7 @@ import {useUpdateData} from '../../customHooks/useUpdateData'
 //add to Cart
 export const addProductToCart = (body) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/cart`, body);
+        const response = await useInsertData(`/cart`, body);
         dispatch({
             type: ADD_TO_CART,
             payload: response,
@@ -32,7 +32,7 @@ export const addProductToCart = (body) => async (dispatch) => {
 //get all Cart items
 export const getAllUserCartItems = () => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/cart`);
+        const response = await useGetDataToken(`/cart`);
         dispatch({
             type: GET_USER_CART,
             payload: response,
@@ -49,7 +49,7 @@ export const getAllUserCartItems = () => async (dispatch) => {
 //clearAll Cart Item
 export const clearAllCartItem = () => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/cart`);
+        const response = await useDeleteData(`/cart`);
         dispatch({
             type: CLEAR_USER_CART,
             payload: response,
@@ -65,7 +65,7 @@ export const clearAllCartItem = () => async (dispatch) => {
 //delete Cart Item
 export const deleteCartItem = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/cart/${id}`);
+        const response = await useDeleteData(`/cart/${id}`);
 
         dispatch({
             type: DELETE_ITEM_FROM_CART,
@@ -83,7 +83,7 @@ export const deleteCartItem = (id) => async (dispatch) => {
 //update Cart Item
 export const updateCartItem = (id, body) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/api/cart/${id}`, body);
+        const response = await useUpdateData(`/cart/${id}`, body);
         dispatch({
             type: UPDATE_ITEM_IN_CART,
             payload: response,
@@ -101,7 +101,7 @@ export const updateCartItem = (id, body) => async (dispatch) => {
 //update Cart Item
 export const applyCartCoupon = (body) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/cart/coupon`, body);
+        const response = await useInsertData(`/cart/coupon`, body);
         dispatch({
             type: APPLY_CART_COUPON,
             payload: response,

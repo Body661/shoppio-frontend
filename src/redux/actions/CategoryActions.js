@@ -6,7 +6,7 @@ import {useUpdateDataWithImage} from "../../customHooks/useUpdateData";
 
 export const getAllCategories = (limit) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/categories?limit=${limit}`)
+        const response = await useGetData(`/categories?limit=${limit}`)
 
         dispatch({
             type: GET_ALL_CATEGORIES,
@@ -22,7 +22,7 @@ export const getAllCategories = (limit) => async (dispatch) => {
 
 export const getAllCategoriesPage = (page) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/categories?limit=6&page=${page}`)
+        const response = await useGetData(`/categories?limit=6&page=${page}`)
 
         dispatch({
             type: GET_ALL_CATEGORIES,
@@ -38,7 +38,7 @@ export const getAllCategoriesPage = (page) => async (dispatch) => {
 
 export const createCategory = (data) => async (dispatch) => {
     try {
-        const response = await useInsertDataWithImage('/api/categories', data)
+        const response = await useInsertDataWithImage('/categories', data)
         dispatch({
             type: CREATE_CATEGORY,
             payload: response
@@ -53,7 +53,7 @@ export const createCategory = (data) => async (dispatch) => {
 
 export const getCategory = (categoryId) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/categories/${categoryId}`)
+        const response = await useGetDataToken(`/categories/${categoryId}`)
         dispatch({
             type: GET_CATEGORY,
             payload: response
@@ -68,7 +68,7 @@ export const getCategory = (categoryId) => async (dispatch) => {
 
 export const updateCategory = (id, data) => async (dispatch) => {
     try {
-        const response = await useUpdateDataWithImage(`/api/categories/${id}`, data)
+        const response = await useUpdateDataWithImage(`/categories/${id}`, data)
         dispatch({
             type: UPDATE_CATEGORY,
             payload: response
@@ -83,7 +83,7 @@ export const updateCategory = (id, data) => async (dispatch) => {
 
 export const deleteCategory = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/categories/${id}`)
+        const response = await useDeleteData(`/categories/${id}`)
         dispatch({
             type: DELETE_CATEGORY,
             payload: response

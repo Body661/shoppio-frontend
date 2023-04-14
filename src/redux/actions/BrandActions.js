@@ -6,7 +6,7 @@ import useDeleteData from "../../customHooks/useDeleteData";
 
 export const getAllBrands = (limit) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/brands?limit=${limit}`);
+        const response = await useGetData(`/brands?limit=${limit}`);
         dispatch({type: GET_ALL_BRANDS, payload: response});
     } catch (error) {
         dispatch({type: GET_ALL_BRANDS, payload: error.response});
@@ -15,7 +15,7 @@ export const getAllBrands = (limit) => async (dispatch) => {
 
 export const getAllBrandsPage = (page) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/brands?limit=4&page=${page}`);
+        const response = await useGetData(`/brands?limit=4&page=${page}`);
         dispatch({type: GET_ALL_BRANDS, payload: response});
     } catch (error) {
         dispatch({type: GET_ALL_BRANDS, payload: error.response});
@@ -24,7 +24,7 @@ export const getAllBrandsPage = (page) => async (dispatch) => {
 
 export const createBrand = (formData) => async (dispatch) => {
     try {
-        const response = await useInsertDataWithImage(`/api/brands`, formData);
+        const response = await useInsertDataWithImage(`/brands`, formData);
         dispatch({type: CREATE_BRAND, payload: response});
     } catch (error) {
         dispatch({type: CREATE_BRAND, payload: error.response});
@@ -33,7 +33,7 @@ export const createBrand = (formData) => async (dispatch) => {
 
 export const getBrand = (id) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/brands/${id}`);
+        const response = await useGetData(`/brands/${id}`);
         dispatch({type: GET_BRAND, payload: response});
     } catch (error) {
         dispatch({type: GET_BRAND, payload: error.response});
@@ -42,7 +42,7 @@ export const getBrand = (id) => async (dispatch) => {
 
 export const updatedBrand = (id, formData) => async (dispatch) => {
     try {
-        const response = await useUpdateDataWithImage(`/api/brands/${id}`, formData);
+        const response = await useUpdateDataWithImage(`/brands/${id}`, formData);
         dispatch({type: UPDATE_BRAND, payload: response});
     } catch (error) {
         dispatch({type: UPDATE_BRAND, payload: error.response});
@@ -51,7 +51,7 @@ export const updatedBrand = (id, formData) => async (dispatch) => {
 
 export const deleteBrand = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/brands/${id}`)
+        const response = await useDeleteData(`/brands/${id}`)
         dispatch({
             type: DELETE_BRAND,
             payload: response

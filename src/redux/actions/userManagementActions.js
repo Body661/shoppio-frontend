@@ -6,7 +6,7 @@ import useDeleteData from "../../customHooks/useDeleteData";
 
 export const getUsers = () => async (dispatch) => {
     try {
-        const response = await useGetDataToken('/api/users?limit=50')
+        const response = await useGetDataToken('/users?limit=50')
         dispatch({
             type: types.GET_ALL_USERS,
             payload: response
@@ -21,7 +21,7 @@ export const getUsers = () => async (dispatch) => {
 
 export const getUsersPage = (page) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/users?limit=50&page=${page}`);
+        const response = await useGetDataToken(`/users?limit=50&page=${page}`);
         dispatch({
             type: types.GET_ALL_USERS,
             payload: response
@@ -36,7 +36,7 @@ export const getUsersPage = (page) => async (dispatch) => {
 
 export const getUser = (id) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/users/${id}`)
+        const response = await useGetDataToken(`/users/${id}`)
         dispatch({
             type: types.GET_USER,
             payload: response
@@ -51,7 +51,7 @@ export const getUser = (id) => async (dispatch) => {
 
 export const createUser = (data) => async (dispatch) => {
     try {
-        const response = await useInsertData('/api/users', data)
+        const response = await useInsertData('/users', data)
         dispatch({
             type: types.CREATE_USER,
             payload: response
@@ -66,7 +66,7 @@ export const createUser = (data) => async (dispatch) => {
 
 export const updateUser = (id, data) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/api/users/${id}`, data)
+        const response = await useUpdateData(`/users/${id}`, data)
         dispatch({
             type: types.UPDATE_USER,
             payload: response
@@ -81,7 +81,7 @@ export const updateUser = (id, data) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/users/${id}`)
+        const response = await useDeleteData(`/users/${id}`)
         dispatch({
             type: types.DELETE_USER,
             payload: response

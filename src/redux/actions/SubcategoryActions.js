@@ -4,7 +4,7 @@ import {useGetData} from "../../customHooks/useGetData";
 
 export const createSubcategory = (data) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/categories/${data.categoryId}/subcategories`, {name: data.name})
+        const response = await useInsertData(`/categories/${data.categoryId}/subcategories`, {name: data.name})
         dispatch({
             type: CREATE_SUBCATEGORY,
             payload: response,
@@ -19,7 +19,7 @@ export const createSubcategory = (data) => async (dispatch) => {
 
 export const getSubcategory = (id) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/categories/${id}/subcategories`);
+        const response = await useGetData(`/categories/${id}/subcategories`);
 
         dispatch({
             type: GET_SUBCATEGORY,

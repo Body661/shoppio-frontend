@@ -8,7 +8,7 @@ import {useUpdateDataWithImage} from '../../customHooks/useUpdateData';
 //create products with pagination
 export const createProduct = (formatData) => async (dispatch) => {
     try {
-        const response = await useInsertDataWithImage("/api/products", formatData);
+        const response = await useInsertDataWithImage("/products", formatData);
         dispatch({
             type: types.CREATE_PRODUCT,
             payload: response,
@@ -26,7 +26,7 @@ export const createProduct = (formatData) => async (dispatch) => {
 //get all products with pagination
 export const getAllProducts = (limit) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?limit=${limit}`);
+        const response = await useGetData(`/products?limit=${limit}`);
         dispatch({
             type: types.GET_ALL_PRODUCTS,
             payload: response,
@@ -42,7 +42,7 @@ export const getAllProducts = (limit) => async (dispatch) => {
 
 export const getAllProductsSearch = (queryString) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?${queryString}`);
+        const response = await useGetData(`/products?${queryString}`);
         dispatch({
             type: types.GET_ALL_PRODUCTS,
             payload: response,
@@ -60,7 +60,7 @@ export const getAllProductsSearch = (queryString) => async (dispatch) => {
 //get all products with pagination with pages number
 export const getAllProductsPage = (page, limit) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?page=${page}&limit=${limit}`);
+        const response = await useGetData(`/products?page=${page}&limit=${limit}`);
         dispatch({
             type: types.GET_ALL_PRODUCTS,
             payload: response,
@@ -77,7 +77,7 @@ export const getAllProductsPage = (page, limit) => async (dispatch) => {
 //get one product with id
 export const getOneProduct = (id) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products/${id}`);
+        const response = await useGetData(`/products/${id}`);
         dispatch({
             type: types.GET_PRODUCT_DETAILS,
             payload: response,
@@ -93,7 +93,7 @@ export const getOneProduct = (id) => async (dispatch) => {
 
 export const getProductsByCategoryHome = (categoryID) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?limit=4&category=${categoryID}&sort=-sold&sort=-createdAt`);
+        const response = await useGetData(`/products?limit=4&category=${categoryID}&sort=-sold&sort=-createdAt`);
         dispatch({
             type: types.GET_PRODUCTS_BY_CATEGORY_HOME,
             payload: response,
@@ -109,7 +109,7 @@ export const getProductsByCategoryHome = (categoryID) => async (dispatch) => {
 
 export const getProductsByCategory = (page, limit, categoryID) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?limit=${limit}&category=${categoryID}&page=${page}`);
+        const response = await useGetData(`/products?limit=${limit}&category=${categoryID}&page=${page}`);
         dispatch({
             type: types.GET_PRODUCTS_BY_CATEGORY,
             payload: response,
@@ -125,7 +125,7 @@ export const getProductsByCategory = (page, limit, categoryID) => async (dispatc
 
 export const getProductsByBrand = (page, limit, brandID) => async (dispatch) => {
     try {
-        const response = await useGetData(`/api/products?limit=${limit}&brand=${brandID}&page=${page}`);
+        const response = await useGetData(`/products?limit=${limit}&brand=${brandID}&page=${page}`);
         dispatch({
             type: types.GET_PRODUCTS_BY_BRAND,
             payload: response,
@@ -143,7 +143,7 @@ export const getProductsByBrand = (page, limit, brandID) => async (dispatch) => 
 //delete product with id
 export const deleteProduct = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/products/${id}`);
+        const response = await useDeleteData(`/products/${id}`);
         dispatch({
             type: types.DELETE_PRODUCT,
             payload: response,
@@ -160,7 +160,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 //update product with id
 export const updateProduct = (id, data) => async (dispatch) => {
     try {
-        const response = await useUpdateDataWithImage(`/api/products/${id}`, data);
+        const response = await useUpdateDataWithImage(`/products/${id}`, data);
         dispatch({
             type: types.UPDATE_PRODUCT,
             payload: response,

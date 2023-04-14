@@ -7,7 +7,7 @@ import {useUpdateData} from '../../customHooks/useUpdateData';
 //add Coupon
 export const addCoupon = (body) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/coupons`, body);
+        const response = await useInsertData(`/coupons`, body);
         dispatch({
             type: ADD_COUPON,
             payload: response,
@@ -23,7 +23,7 @@ export const addCoupon = (body) => async (dispatch) => {
 //get all Coupon
 export const getAllCoupon = () => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/coupons`);
+        const response = await useGetDataToken(`/coupons`);
         dispatch({
             type: GET_ALL_COUPONS,
             payload: response,
@@ -40,7 +40,7 @@ export const getAllCoupon = () => async (dispatch) => {
 //get one Coupon
 export const getOneCoupon = (id) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/coupons/${id}`);
+        const response = await useGetDataToken(`/coupons/${id}`);
         dispatch({
             type: GET_ONE_COUPON,
             payload: response,
@@ -57,7 +57,7 @@ export const getOneCoupon = (id) => async (dispatch) => {
 //delete Coupon
 export const deleteCoupon = (id) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/coupons/${id}`);
+        const response = await useDeleteData(`/coupons/${id}`);
         dispatch({
             type: DELETE_COUPON,
             payload: response,
@@ -74,7 +74,7 @@ export const deleteCoupon = (id) => async (dispatch) => {
 //edit Coupon
 export const editCoupon = (id, body) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/api/coupons/${id}`, body);
+        const response = await useUpdateData(`/coupons/${id}`, body);
 
         dispatch({
             type: EDIT_COUPON,

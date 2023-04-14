@@ -4,7 +4,7 @@ import {useGetDataToken} from "../../customHooks/useGetData";
 
 export const createOrderCash = (id, body) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/api/order/${id}`, body);
+        const response = await useInsertData(`/order/${id}`, body);
         dispatch({
             type: CREATE_CASH_ORDER,
             payload: response
@@ -19,7 +19,7 @@ export const createOrderCash = (id, body) => async (dispatch) => {
 }
 export const createOrderOnline = (id, body) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/order/checkout/${id}`, body);
+        const response = await useGetDataToken(`/order/checkout/${id}`, body);
         dispatch({
             type: CREATE_ORDER_ONLINE,
             payload: response,

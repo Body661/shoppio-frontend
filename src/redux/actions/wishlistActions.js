@@ -7,7 +7,7 @@ import useDeleteData from './../../customHooks/useDeleteData';
 //add product to wishlist
 export const addProductToWishList = (body) => async (dispatch) => {
     try {
-        const response = await useInsertData("/api/wishlist", body);
+        const response = await useInsertData("/wishlist", body);
 
         dispatch({
             type: ADD_TO_WISHLIST,
@@ -25,7 +25,7 @@ export const addProductToWishList = (body) => async (dispatch) => {
 //remove product to wishlist
 export const removeProductFromWishList = (prodID) => async (dispatch) => {
     try {
-        const response = await useDeleteData(`/api/wishlist/${prodID}`);
+        const response = await useDeleteData(`/wishlist/${prodID}`);
         dispatch({
             type: REMOVE_FROM_WISHLIST,
             payload: response,
@@ -42,7 +42,7 @@ export const removeProductFromWishList = (prodID) => async (dispatch) => {
 //get wishlist product
 export const getWishlist = () => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/api/wishlist`);
+        const response = await useGetDataToken(`/wishlist`);
         dispatch({
             type: USER_WISHLIST,
             payload: response,
