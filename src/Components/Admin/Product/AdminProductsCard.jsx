@@ -82,20 +82,19 @@ const AdminProductsCard = ({item}) => {
                     <Card.Img style={{height: "230px", width: "100%", objectFit: "contain"}} src={item?.cover}/>
                     <Card.Body>
                         <Card.Title>
-                            <div className="card-title">
+                            <div className="product-card-title">
                                 {item?.title}
                             </div>
                         </Card.Title>
                         <Card.Text>
                             <div className="d-flex justify-content-between">
-                                <div className="card-rate">{item?.ratingsQuantity}</div>
+                                <div className="product-card-rate-text">{item?.ratingsQuantity}</div>
                                 <div className="d-flex">
-                                    <div className="card-price">{item.priceAfterDiscount >= 1 ?
+                                    <div className="product-card-price">{item.priceAfterDiscount >= 1 ?
                                         (<div><span
                                             style={{textDecorationLine: 'line-through'}}>{item.price}</span> {item.priceAfterDiscount}
                                         </div>)
                                         : item.price}</div>
-                                    <div className="card-currency mx-1">Euro</div>
                                 </div>
                             </div>
                         </Card.Text>

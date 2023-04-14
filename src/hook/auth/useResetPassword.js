@@ -12,16 +12,26 @@ const useResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState(localStorage.getItem('user-email'));
+    const [validated, setValidated] = useState(false);
 
-    const onChangePassword = (e) => {
+    const handleChangePassword = (e) => {
         setPassword(e.target.value);
     };
 
-    const onChangeConfirmPassword = (e) => {
+    const handleChangePasswordConfirm = (e) => {
         setConfirmPassword(e.target.value);
     };
 
-    const onSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
         if (!validator.isStrongPassword(password)) {
             toast("Please enter a strong password", {type: 'error'})
             return;
@@ -60,10 +70,11 @@ const useResetPassword = () => {
     return {
         password,
         confirmPassword,
-        onChangePassword,
-        onChangeConfirmPassword,
-        onSubmit,
+        handleChangePassword,
+        handleChangePasswordConfirm,
+        handleSubmit,
         loading,
+        validated
     };
 };
 

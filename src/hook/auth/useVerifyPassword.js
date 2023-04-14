@@ -10,13 +10,23 @@ const useVerifyPassword = () => {
     const navigate = useNavigate();
     const [code, setCode] = useState('');
     const [loading, setLoading] = useState(true);
+    const [validated, setValidated] = useState(false);
 
-    const onChangeCode = (e) => {
+    const handleChangeCode = (e) => {
         setCode(e.target.value);
     };
 
-    const onSubmit = async () => {
-        if (!validator.isNumeric(code)) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
+        if (!validator.isNumeric(code) || code?.length > 6) {
             toast("Please enter a valid code", {type: 'error'})
             return;
         }
@@ -46,7 +56,7 @@ const useVerifyPassword = () => {
         }
     }, [loading, res]);
 
-    return {code, onChangeCode, onSubmit};
+    return {code, handleChangeCode, handleSubmit, validated};
 };
 
 export default useVerifyPassword;

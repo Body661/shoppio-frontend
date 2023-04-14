@@ -7,7 +7,7 @@ const CategoriesPage = () => {
     const {categories, loading, pageCount, getPage, error} = useAllCategories()
 
     return (
-        <div style={{minHeight: '670px'}}>
+        <div style={{minHeight: "80vh"}}>
             <CategoryContainer categories={categories} loading={loading} error={error} isAll={true}/>
             {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
         </div>

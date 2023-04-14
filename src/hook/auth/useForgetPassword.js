@@ -11,10 +11,20 @@ const useForgetPassword = () => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [isPress, setIsPress] = useState(false);
+    const [validated, setValidated] = useState(false);
 
-    const onChangeEmail = (e) => setEmail(e.target.value);
+    const handleChangeEmail = (e) => setEmail(e.target.value);
 
-    const onSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
         if (!validator.isEmail(email)) {
             toast("Please enter a valid email", {type: 'error'})
             return;
@@ -50,7 +60,7 @@ const useForgetPassword = () => {
         }
     }, [loading, res]);
 
-    return {email, onChangeEmail, onSubmit, loading, isPress};
+    return {email, handleChangeEmail, handleSubmit, loading, isPress, validated};
 };
 
 export default useForgetPassword;

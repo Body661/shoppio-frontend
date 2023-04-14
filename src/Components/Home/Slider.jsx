@@ -1,62 +1,72 @@
-import React, {useState} from 'react'
-import {Carousel} from 'react-bootstrap'
+import {useState} from 'react'
+import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/css';
+import "swiper/css/bundle"
+import {Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFade} from 'swiper';
 
-import sliderImg from "../../images/slider1.png";
-import slider4 from "../../images/slider4.png";
-import prod3 from "../../images/prod3.png";
-import prod4 from "../../images/prod4.png";
+import previous from "../../imgs/Icons/previous.png";
+import next from "../../imgs/Icons/next.png";
+
+import ramadan from "../../imgs/Slider/ramadan-sweaters.png";
+import school from "../../imgs/Slider/back-to-school.png";
+import discount25 from "../../imgs/Slider/25off.png";
 
 const Slider = () => {
-    const [index, setIndex] = useState(0)
-    const handleSelect = (selectedIndex) => {
-        setIndex(selectedIndex)
-    }
-    return (
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-            <Carousel.Item className="slider-background" interval={2000}>
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                    <img
-                        style={{height: "296px", width: "313.53px"}}
-                        className=""
-                        src={slider4}
-                        alt="First slide"
-                    />
-                    <div className="">
-                        <h3 className="slider-title">On sale</h3>
-                        <p className="slider-text">Up to 50% discount</p>
-                    </div>
-                </div>
-            </Carousel.Item>
-            <Carousel.Item className="slider-background2" interval={2000}>
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                    <img
-                        style={{height: "296px", width: "313.53px"}}
-                        className=""
-                        src={sliderImg}
-                        alt="First slide"
-                    />
-                    <div className="">
-                        <h3 className="slider-title">On sale</h3>
-                        <p className="slider-text">Up to 50% discount</p>
-                    </div>
-                </div>
-            </Carousel.Item>
+    const [swiperRef, setSwiperRef] = useState(null);
 
-            <Carousel.Item className="slider-background3" interval={2000}>
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                    <img
-                        style={{height: "296px", width: "373.53px"}}
-                        className=""
-                        src={prod3}
-                        alt="First slide"
-                    />
-                    <div className="">
-                        <h3 className="slider-title">On sale</h3>
-                        <p className="slider-text">Up to 50% discount</p>
+    const prevHandler = () => {
+        swiperRef.slidePrev();
+    };
+
+    const nextHandler = () => {
+        swiperRef.slideNext();
+    };
+
+
+    return (
+        <div className="slider">
+            <img onClick={prevHandler} src={previous} alt="Previous" className="slider-arrow-prev"/>
+            <img onClick={nextHandler} src={next} alt="Next" className="slider-arrow-next"/>
+
+            <Swiper
+                modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFade]}
+                effect="fade"
+                spaceBetween={50}
+                slidesPerView={1}
+                loop={true}
+                autoplay={{stopOnLastSlide: false, delay: 5000, disableOnInteraction: false}}
+                lazy={true}
+                onSwiper={(swiper) => setSwiperRef(swiper)}
+            >
+                <SwiperSlide>
+                    <div>
+                        <img
+                            style={{width: "100%", display: "block"}}
+                            src={ramadan}
+                            alt="First slide"
+                        />
                     </div>
-                </div>
-            </Carousel.Item>
-        </Carousel>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div>
+                        <img
+                            style={{width: "100%", display: "block"}}
+                            src={discount25}
+                            alt="Second slide"
+                        />
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div>
+                        <img
+                            style={{width: "100%", display: "block"}}
+                            src={school}
+                            alt="Third slide"
+                        />
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+        </div>
     )
 }
 

@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginUser} from '../../redux/actions/authActions';
 import {toast} from "react-toastify";
+import isEmail from "validator/es/lib/isEmail";
 
 const useLogin = () => {
     const dispatch = useDispatch();
@@ -9,11 +10,27 @@ const useLogin = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(true);
     const [isPress, setIsPress] = useState(false);
+    const [validated, setValidated] = useState(false);
 
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
-    const handleSubmit = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
+        if (!isEmail(email)) {
+            return toast("Please enter a valid email", {type: "error"})
+        } else if (password.trim() === "") {
+            return toast("Please enter your password", {type: "error"})
+        }
+
         setIsPress(true);
         await dispatch(loginUser({email, password}));
         setLoading(false);
@@ -50,7 +67,7 @@ const useLogin = () => {
         }
     }, [loading, auth]);
 
-    return {email, password, loading, handleEmailChange, handlePasswordChange, handleSubmit, isPress};
+    return {email, password, loading, handleEmailChange, handlePasswordChange, handleLogin, isPress, validated};
 };
 
 export default useLogin;

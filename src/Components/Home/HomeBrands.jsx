@@ -1,15 +1,15 @@
 import { Container } from 'react-bootstrap';
-import SubTitle from '../Utility/SubTitle';
+import SectionTitle from '../Utility/SectionTitle';
 import {useHomeBrands} from '../../hook/brand/useHomeBrands';
-import BrandsContainer from "../Brand/BrandsContainer";
+import HomeBrandsContainer from "../Brand/HomeBrandsContainer";
 
 const HomeBrands = ({ title, btnTitle, path }) => {
     const { brands, loading, error} = useHomeBrands();
 
     return (
         <Container>
-            <SubTitle title={title} btnTitle={btnTitle} pathText={path} />
-            <BrandsContainer brands={brands} loading={loading} error={error} />
+            <SectionTitle title={title} btnTitle={btnTitle} pathText={path} />
+            <HomeBrandsContainer brands={brands} loading={loading} error={error} />
         </Container>
     );
 };

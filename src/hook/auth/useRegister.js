@@ -16,20 +16,21 @@ const useRegister = () => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [validated, setValidated] = useState(false);
 
-    const onChangeName = (e) => {
+    const handleChangeName = (e) => {
         setName(e.target.value);
     };
-    const onChangeEmail = (e) => {
+    const handleChangeEmail = (e) => {
         setEmail(e.target.value);
     };
-    const onChangePhone = (e) => {
+    const handleChangePhone = (e) => {
         setPhone(e.target.value);
     };
-    const onChangePassword = (e) => {
+    const handleChangePassword = (e) => {
         setPassword(e.target.value);
     };
-    const onChangeConfirmPassword = (e) => {
+    const handleChangePasswordConfirm = (e) => {
         setConfirmPassword(e.target.value);
     };
 
@@ -59,8 +60,16 @@ const useRegister = () => {
     };
 
 
-    //save data
-    const onSubmit = async () => {
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
         if (validationValues()) {
             setIsPress(true);
 
@@ -94,7 +103,7 @@ const useRegister = () => {
                     toastId: 'registerAnother'
                 })
             }
-    }
+        }
 
         setLoading(true);
     }, [loading, res]);
@@ -106,13 +115,14 @@ const useRegister = () => {
         password,
         confirmPassword,
         loading,
-        onChangeName,
-        onChangeEmail,
-        onChangePhone,
-        onChangePassword,
-        onChangeConfirmPassword,
-        onSubmit,
-        isPress
+        handleChangeName,
+        handleChangeEmail,
+        handleChangePhone,
+        handleChangePassword,
+        handleChangePasswordConfirm,
+        handleRegister,
+        isPress,
+        validated
     };
 };
 

@@ -55,7 +55,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#555550',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                     >
@@ -65,7 +64,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#979797',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                         className="mx-2"
@@ -80,7 +78,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#555550',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                     >
@@ -90,7 +87,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#979797',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                         className="mx-2"
@@ -105,7 +101,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#555550',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                     >
@@ -115,7 +110,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#979797',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                         className="mx-2"
@@ -130,7 +124,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#555550',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                     >
@@ -140,7 +133,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#979797',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                         className="mx-2"
@@ -155,7 +147,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#555550',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                     >
@@ -165,7 +156,6 @@ const AddressCard = ({item}) => {
                     <div
                         style={{
                             color: '#979797',
-                            fontFamily: 'Almarai',
                             fontSize: '16px',
                         }}
                         className="mx-2"

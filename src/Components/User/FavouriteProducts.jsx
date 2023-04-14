@@ -3,7 +3,7 @@ import {Row, Spinner} from 'react-bootstrap';
 import {getWishlist} from "../../redux/actions/wishlistActions";
 import {useDispatch, useSelector} from "react-redux";
 import useProductsContainer from "../../hook/products/useProductsContainer";
-import ProductCard from "../Products/ProductCard";
+import HomeProductCard from "../Products/HomeProductCard";
 
 const FavouriteProducts = () => {
 
@@ -34,7 +34,7 @@ const FavouriteProducts = () => {
             <div className="admin-content-text pb-4">Favorites</div>
             <Row className='justify-content-start'>
                 {items?.length > 0 && !loading && items?.map((item, index) => (
-                    <ProductCard key={index} item={item} favProd={favProd}/>))}
+                    <HomeProductCard key={index} item={item} favProd={favProd}/>))}
                 {items?.length <= 0 && !loading && <h6>No items in your wishlist</h6>}
                 {items?.length <= 0 && loading && <Spinner animation={"border"} variant={"primary"}/>}
             </Row>

@@ -34,7 +34,7 @@ const UseAddToCart = (productId, item) => {
     useEffect(() => {
         if (loading === false && res) {
             if (res?.status === 200) {
-                toast('Product added to Cart successfully', {type: 'success'})
+                toast('Product added to Cart successfully', {type: 'success', toastId: "addProductToCartSuccess"})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
@@ -46,7 +46,7 @@ const UseAddToCart = (productId, item) => {
             } else {
                 toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while adding product to Cart', {
                     type: 'error',
-                    toastId: 'addToCartAnother'
+                    toastId: 'addToCartError'
                 })
             }
         }

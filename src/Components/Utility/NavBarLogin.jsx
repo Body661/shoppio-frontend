@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Navbar, Container, FormControl, Nav, NavDropdown} from 'react-bootstrap';
+import {Navbar, Container, FormControl, Nav, NavDropdown, NavLink, NavbarBrand} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import logo from '../../images/logo.png';
 import login from '../../images/login.png';
 import cart from '../../images/cart.png';
 import useNavbarSearch from '../../hook/products/search/useNavbarSearch';
+import NavbarToggle from "react-bootstrap/NavbarToggle";
+import DropdownItem from "react-bootstrap/DropdownItem";
+import NavbarCollapse from "react-bootstrap/NavbarCollapse";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
 
 const NavBarLogin = ({isUser}) => {
     const {handleKeyPressSearch, handleChangeSearch, searchWord} = useNavbarSearch();
@@ -22,15 +26,29 @@ const NavBarLogin = ({isUser}) => {
     };
 
     return (
-        <Navbar className="sticky-top" bg="white" variant="light" expand="sm">
+        <Navbar className="sticky-top" bg="white" variant="light" expand="lg">
             <Container>
-                <Navbar.Brand>
+                <NavbarBrand>
                     <Link to="/">
                         <img src={logo} className="logo" alt="logo"/>
                     </Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
+                </NavbarBrand>
+
+                <NavbarToggle/>
+
+                <NavbarCollapse>
+                    <Link to="/categories" className="navbar-text d-flex justify-content-center align-items-center p-2">
+                        Categories
+                    </Link>
+
+                    <Link to="/brands" className="navbar-text d-flex justify-content-center align-items-center p-2">
+                        Brands
+                    </Link>
+
+                    <Link to="/products" className="navbar-text d-flex justify-content-center align-items-center p-2 me-2">
+                        Products
+                    </Link>
+
                     <FormControl
                         value={searchWord}
                         onChange={handleChangeSearch}
@@ -40,44 +58,42 @@ const NavBarLogin = ({isUser}) => {
                         className="me-2 w-100 text-center"
                         aria-label="Search"
                     />
+
                     <Nav className="me-auto">
                         {user ? (
-                            <NavDropdown title={user.name} id="basic-nav-dropdown"
-                                         className="d-flex align-items-center">
-                                {user.role === 'admin' ? (
-                                    <NavDropdown.Item href="/admin/products">Dashboard</NavDropdown.Item>
-                                ) : (
-                                    <Link to="/user/profile">
-                                        <NavDropdown.Item href="/user/profile">Profile</NavDropdown.Item>
-                                    </Link>
-                                )}
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item onClick={logOut} href="/">
-                                    Logout
-                                </NavDropdown.Item>
+                            <NavDropdown title={user.name} className="navbar-text justify-content-center align-items-center p-2 flex-column">
+
+                                    {user.role === 'admin' ? (
+                                        <DropdownItem href="/admin/products">Dashboard</DropdownItem>
+                                    ) : (
+                                        <Link to="/user/profile">
+                                            <DropdownItem href="/user/profile">Profile</DropdownItem>
+                                        </Link>
+                                    )}
+
+                                    <NavDropdown.Divider/>
+
+                                    <DropdownItem onClick={logOut} href="/">
+                                        Logout
+                                    </DropdownItem>
                             </NavDropdown>
                         ) : (
-                            <Nav.Link>
-                                <Link to="/login" className="nav-text d-flex mt-3 justify-content-center">
-                                    <img src={login} className="login-img" alt="Login"/>
-                                    <p style={{color: 'black'}}>Login</p>
-                                </Link>
-                            </Nav.Link>
+                            <Link to="/login" className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                <img src={login} className="navbar-icon" alt="Login"/>Login
+                            </Link>
                         )}
 
                         {isUser && (
-                            <Nav.Link href="/cart" style={{color: 'white'}}>
-                                <Link to="cart" className="nav-text d-flex mt-3 justify-content-center">
-                                    <img src={cart} className="login-img" alt="Cart"/>
-                                    <p style={{color: 'black'}}>Cart</p>
-                                </Link>
-                            </Nav.Link>
+                            <Link to="/cart" className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                <img src={cart} className="navbar-icon" alt="Cart"/>Cart
+                            </Link>
                         )}
                     </Nav>
-                </Navbar.Collapse>
+                </NavbarCollapse>
             </Container>
         </Navbar>
-    );
+    )
+
 };
 
 export default NavBarLogin;

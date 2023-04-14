@@ -1,6 +1,6 @@
 import React from 'react'
 import {Container, } from 'react-bootstrap';
-import SubTitle from '../Utility/SubTitle'
+import SectionTitle from '../Utility/SectionTitle'
 import UseHomeCategories from "../../hook/category/useHomeCategories";
 import CategoryContainer from "../Category/CategoryContainer";
 
@@ -9,7 +9,7 @@ const HomeCategory = ({title, btnTitle, path}) => {
 
     return (
         <Container>
-            <SubTitle title={title} btnTitle={btnTitle} pathText={path} />
+            <SectionTitle title={title} btnTitle={btnTitle} pathText={path} />
             <CategoryContainer categories={categories} loading={loading} error={error} />
         </Container>
     );

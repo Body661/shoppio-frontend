@@ -64,7 +64,7 @@ function AdminBrandItem({brand}) {
 
                 <Link to={`/brands/${brand?._id}`} style={{textDecoration: 'none'}}>
                     <div
-                        className="admin-category-card"
+                        className="category-card"
                         style={{backgroundImage: `URL(${brand?.img})`}}
                     />
                     <p className="category-card-text my-2">{brand?.name}</p>

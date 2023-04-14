@@ -1,34 +1,49 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import {Button, Container, Form, FormControl} from 'react-bootstrap';
 import useResetPassword from '../../hook/auth/useResetPassword';
+import logo from "../../images/logo.png";
 
 const ResetPasswordPage = () => {
-    const { password, confirmPassword, onChangePassword, onChangeConfirmPassword, onSubmit } = useResetPassword();
+    const {
+        password,
+        confirmPassword,
+        handleChangePassword,
+        handleChangePasswordConfirm,
+        handleSubmit,
+        validated
+    } = useResetPassword();
 
     return (
-        <Container style={{ minHeight: '690px' }}>
-            <Row className="py-5 d-flex justify-content-center ">
-                <Col sm="12" className="d-flex flex-column ">
-                    <label className="mx-auto title-login">Reset password</label>
-                    <input
-                        value={password}
-                        onChange={onChangePassword}
-                        placeholder="Enter your new password"
-                        type="password"
-                        className="user-input my-3 text-center mx-auto"
-                    />
-                    <input
-                        value={confirmPassword}
-                        onChange={onChangeConfirmPassword}
-                        placeholder="New password confirmation"
-                        type="password"
-                        className="user-input my-3 text-center mx-auto"
-                    />
-                    <button onClick={onSubmit} className="btn-login mx-auto mt-2">
-                        Submit
-                    </button>
-                </Col>
-            </Row>
+        <Container style={{minHeight: "80vh"}} className="d-flex align-items-center justify-content-center">
+            <Form noValidate validated={validated}
+                  className="d-flex flex-column align-items-center justify-content-center b-radius-10 login-form p-3">
+                <img src={logo} alt="logo"/>
+                <h3 className="title-login">Reset password</h3>
+
+                <FormControl
+                    required
+                    minLength={8}
+                    value={password}
+                    onChange={handleChangePassword}
+                    placeholder="Password"
+                    type="password"
+                    className="mb-3 b-radius-10"
+                />
+
+                <FormControl
+                    required
+                    minLength={8}
+                    value={confirmPassword}
+                    onChange={handleChangePasswordConfirm}
+                    placeholder="Confirm password"
+                    type="password"
+                    className="mb-3 b-radius-10"
+                />
+
+                <Button type="submit" variant="dark" onClick={handleSubmit} className="mb-3 btn-login w-100 b-radius-10">
+                    Submit
+                </Button>
+            </Form>
         </Container>
     );
 };

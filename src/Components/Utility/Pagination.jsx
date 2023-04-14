@@ -1,31 +1,33 @@
 import React from 'react'
 import ReactPaginate from "react-paginate";
+import next from "../../imgs/Icons/next.png"
+import previous from "../../imgs/Icons/previous.png"
 
 const Pagination = ({pageCount, onPress}) => {
 
     const handlePageClick = (data) => {
-
         onPress(data.selected + 1)
     };
     return (
         <ReactPaginate
             breakLabel="..."
-            nextLabel="Next"
+            nextLabel={<img src={next} alt="Next page" className="pagination-icon"/>}
+            previousLabel={<img src={previous} alt="Previous page" className="pagination-icon"/>}
             onPageChange={handlePageClick}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2}
             pageCount={pageCount}
-            previousLabel="Previous"
-            containerClassName={"pagination justify-content-center p-3"}
-            pageClassName={"page-item"}
+            containerClassName={"pagination justify-content-center p-3 gap-2 align-items-center"}
+
             pageLinkClassName={"page-link"}
-            previousClassName={"page-item"}
+
+            previousLinkClassName={"previous-page"}
             nextClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextLinkClassName={"page-link"}
+            previousClassName={"previous-page"}
+            nextLinkClassName={"next-page"}
+
             breakClassName={"page-item"}
             breakLinkClassName={"page-link"}
-            activeClassName={"active"}
         />
     )
 }

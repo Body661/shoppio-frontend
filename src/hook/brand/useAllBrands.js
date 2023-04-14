@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAllBrands, getAllBrandsPage} from '../../redux/actions/BrandActions';
-import brandReducer from "../../redux/reducers/brandReducer";
 
 export const useAllBrands = () => {
     const dispatch = useDispatch();

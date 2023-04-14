@@ -1,17 +1,18 @@
 import React from 'react'
-import BrandCard from './BrandCard'
 import {Container, Row, Spinner} from 'react-bootstrap';
+import CubeCard from "../Utility/CubeCard";
+import brandsIcon from "../../imgs/Icons/brands.png";
 
 const BrandsContainer = ({brands, loading, error, isAll}) => {
 
     let content = null;
 
     if (loading && !brands && !error) {
-        content = <Spinner animation="border" variant="primary" />;
+        content = <Spinner animation="border" variant="primary"/>;
 
     } else if (!loading && !error && brands && brands?.length) {
         content = brands.map((brand) => (
-            <BrandCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name}/>
+            <CubeCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name}/>
         ));
 
     } else if (!loading && !error && brands && !brands?.length) {
@@ -23,8 +24,14 @@ const BrandsContainer = ({brands, loading, error, isAll}) => {
 
     return (
         <Container>
-            {isAll && <div className="admin-content-text mt-2">All brands</div>}
-            <Row className="my-1 d-flex justify-content-center">{content}</Row>
+            {isAll &&
+                <div className="page-header">
+                    <img src={brandsIcon} className="page-header-icon"/>
+                    <span className="page-header-text">
+                        All brands
+                    </span>
+                </div>
+            } <Row className="my-1 d-flex justify-content-center">{content}</Row>
         </Container>
     );
 }
