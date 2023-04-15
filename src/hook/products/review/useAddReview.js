@@ -8,7 +8,7 @@ const useAddReview = (id) => {
     const [formData, setFormData] = useState({
         review: '',
         reviewTitle: '',
-        rateValue: 5,
+        rateValue: 0,
         loading: true,
     });
 

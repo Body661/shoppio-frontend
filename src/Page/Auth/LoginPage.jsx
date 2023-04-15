@@ -56,7 +56,7 @@ const LoginPage = () => {
 
                 {isPress && (
                     <div className="d-flex justify-content-center">
-                        {loading && <Spinner animation="border" role="status"/>}
+                        {loading && <Spinner animation="border" role="primary"/>}
                     </div>
                 )}
             </Form>

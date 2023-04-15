@@ -24,7 +24,7 @@ export const createReview = (prodID, body) => async (dispatch) => {
 
 
 //get all review to one product
-export const allReviewProduct = (prodID, page, limit) => async (dispatch) => {
+export const getProductReviews = (prodID, page, limit) => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/products/${prodID}/reviews?page=${page}&limit=${limit}`);
 

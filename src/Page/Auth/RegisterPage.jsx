@@ -1,11 +1,7 @@
-import React from 'react'
-import {Container, Spinner, Form, FormControl, Button, InputGroup} from 'react-bootstrap'
+import {Container, Spinner, Form, FormControl, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import UseRegister from "../../hook/auth/useRegister";
 import logo from "../../images/logo.png";
-import Feedback from "react-bootstrap/Feedback";
-import {yupResolver} from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
 
 const RegisterPage = () => {
     const {
@@ -78,18 +74,19 @@ const RegisterPage = () => {
                     className="mb-3 b-radius-10"
                 />
 
-                <Button type="submit" variant="dark" onClick={handleRegister} className="mb-3 btn-login w-100 b-radius-10">
+                <Button type="submit" variant="dark" onClick={handleRegister}
+                        className="mb-3 btn-login w-100 b-radius-10">
                     Create account
                 </Button>
 
                 <span className="mb-3">
                     Already have an account? <Link to="/login" style={{fontWeight: "bold"}}>Login</Link>
                 </span>
-            </Form>
 
-            {isPress && <div className="d-flex justify-content-center">
-                {loading && <Spinner animation="border" role="status"/>}
-            </div>}
+                {isPress && <div className="d-flex justify-content-center">
+                    {loading && <Spinner animation="border" role="primary"/>}
+                </div>}
+            </Form>
         </Container>
     )
 }

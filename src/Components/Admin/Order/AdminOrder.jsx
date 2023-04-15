@@ -25,7 +25,7 @@ const AdminOrder = ({ orderItem }) => {
                 <div className="w-100">
                     <Row className="justify-content-between">
                         <Col sm="12" className=" d-flex flex-row justify-content-between">
-                            <div className="d-inline pt-2 cat-text"> Order id: {_id}</div>
+                            <div className="d-inline pt-2 xs-black-text"> Order id: {_id}</div>
                         </Col>
                     </Row>
                     <Row className="justify-content-center mt-2">

@@ -38,7 +38,7 @@ const HomeProductCard = ({item, favProd}) => {
                                 src={rate}
                                 className="product-card-rate-star"
                             />
-                            <div className="product-card-rate-text mx-2">{item?.ratingsAvg || 0}</div>
+                            <div className="product-card-rate-text mx-2">{item?.ratingsAvg.toFixed(1) || 0}</div>
                         </div>
                         <div className="d-flex">
                             <div className="product-card-price">

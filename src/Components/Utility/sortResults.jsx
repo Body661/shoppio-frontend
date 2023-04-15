@@ -2,15 +2,15 @@ import React from 'react'
 import UnopDropdown from "unop-react-dropdown";
 import sort from '../../images/sort.png'
 
-const SearchCountResult = ({title, onClick}) => {
+const SortResults = ({title, onClick}) => {
     const clickMe = (key) => {
         localStorage.setItem("sortType", key)
         onClick();
     }
     return (
         <div className="d-flex justify-content-between pt-3 px-2">
-            <div className="sub-tile">{title}</div>
-            <div className="search-count-text d-flex ">
+            <div className="">{title}</div>
+            <div className="d-flex">
                 <UnopDropdown
                     trigger={
                         <p className="mx-1">
@@ -21,7 +21,6 @@ const SearchCountResult = ({title, onClick}) => {
                                 src={sort}
                                 alt=""
                             />
-                            Sort by
                         </p>
                     }
                     delay={0}
@@ -48,4 +47,4 @@ const SearchCountResult = ({title, onClick}) => {
     )
 }
 
-export default SearchCountResult
+export default SortResults

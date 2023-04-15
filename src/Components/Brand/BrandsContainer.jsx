@@ -12,7 +12,7 @@ const BrandsContainer = ({brands, loading, error, isAll}) => {
 
     } else if (!loading && !error && brands && brands?.length) {
         content = brands.map((brand) => (
-            <CubeCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name}/>
+            <CubeCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name} url="brands"/>
         ));
 
     } else if (!loading && !error && brands && !brands?.length) {

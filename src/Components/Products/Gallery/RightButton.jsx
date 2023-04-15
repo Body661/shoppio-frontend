@@ -1,5 +1,4 @@
-import React from 'react'
-import prev from '../../../images/prev.png'
+import prev from '../../../imgs/Icons/previous.png'
 
 const RightButton = (onClick) => {
     return (
@@ -9,7 +8,14 @@ const RightButton = (onClick) => {
             width="35px"
             onClick={onClick}
             height="35px"
-            style={{float: "right", marginTop: "220px", cursor: "pointer"}}
+            style={{
+                cursor: "pointer",
+                position: "absolute",
+                zIndex: 100,
+                left: "15px",
+                top: "50%",
+                transform: "translateY(-50%)"
+            }}
         />
     )
 }

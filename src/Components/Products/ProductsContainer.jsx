@@ -16,7 +16,7 @@ const ProductsContainer = ({title, btnTitle, pathText, products, loading, error,
         ))
 
     } else if (!loading && !error && (products && products?.length <= 0)) {
-        content = <h4 className="notFound">No categories found</h4>;
+        content = <h4 className="notFound">No products found</h4>;
 
     } else if (!loading && error && !products) {
         content = <h4 className="error">Something went wrong</h4>;
@@ -25,7 +25,7 @@ const ProductsContainer = ({title, btnTitle, pathText, products, loading, error,
     return (
         <Container>
             {title ? (<SectionTitle title={title} btntitle={btnTitle} pathText={pathText}/>) : null}
-            <Row className=' d-flex '>
+            <Row className="d-flex justify-content-center">
                 {content}
             </Row>
         </Container>

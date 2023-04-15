@@ -1,40 +1,43 @@
 import React from 'react'
 import {Container, Row, Col, Spinner} from 'react-bootstrap'
-import rate from '../../../images/rate.png'
 import Pagination from '../../Utility/Pagination';
-import Review from './Review';
+import ReviewCard from './ReviewCard';
 import AddReview from './AddReview';
 import {useParams} from "react-router-dom";
-import useViewAllReviews from "../../../hook/products/review/useViewAllReviews";
+import useGetProductReviews from "../../../hook/products/review/useGetProductReviews";
 
-const ReviewsContainer = ({rateAvg, rateQty}) => {
+const ReviewsContainer = ({reviewsAmount}) => {
     const {id} = useParams()
-    const {allReviews, onPress, loading, error} = useViewAllReviews(id)
+    const {reviews, onPress, loading, error} = useGetProductReviews(id)
+
+    let content = null;
+
+    if (!reviews && loading && !error) {
+        content = <Spinner animation={"border"} variant={"primary"}/>
+    } else if ((reviews && reviews?.data?.data?.length > 0) && !loading && !error) {
+        content = reviews.data?.data?.map((review, index) => (<ReviewCard key={index} review={review}/>))
+    } else if ((reviews && reviews?.data?.data?.length <= 0) && !loading && !error) {
+        content = <h6>No reviews found</h6>
+    } else if (!reviews && !loading && error) {
+        content = <h6 className="error">something went wrong</h6>
+    }
 
     return (
-        <Container className='rate-container'>
-            <Row>
-                <Col className="d-flex">
-                    <div className="sub-tile d-inline p-1 ">Reviews</div>
-                    <img className="mt-2" src={rate} alt="" height="16px" width="16px"/>
-                    <div className="cat-rate  d-inline  p-1 pt-2">{rateAvg}</div>
-                    <div className="rate-count d-inline p-1 pt-2">({`${rateQty}  reviews`})</div>
+        <Container>
+            <AddReview/>
+
+            <Row className="mt-2">
+                <Col className="d-flex" sm={12}>
+                    <div className="fw-bold"><span className="fs-5">Reviews</span> ({reviewsAmount})</div>
+                </Col>
+
+                <Col sm={12} className="mt-2">
+                    {content}
+
+                    {reviews?.data?.paginationRes?.pages > 1 && (<Pagination pageCount={reviews?.data?.paginationRes.pages || 0} onPress={onPress}/>)}
                 </Col>
             </Row>
 
-            <AddReview/>
-
-            {!allReviews?.data?.data && loading && !error && <Spinner animation={"border"} variant={"primary"}/>}
-
-            {allReviews?.data?.data?.length > 0 && !loading && !error ? (allReviews.data?.data?.map((review, index) => {
-                return (<Review key={index} review={review}/>)
-            })) : <h6>No reviews yet</h6>}
-
-            {!allReviews?.data && !loading && error && <h6 className="error">something went wrong</h6>}
-
-            {allReviews?.data?.paginationResult && allReviews?.data?.paginationResult?.numberOfPages >= 2 ? (
-                <Pagination pageCount={allReviews?.data?.paginationResult ? allReviews?.data?.paginationResult?.numberOfPages : 0}
-                            onPress={onPress}/>) : null}
         </Container>
     )
 }

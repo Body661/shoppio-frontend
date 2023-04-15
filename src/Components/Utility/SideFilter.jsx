@@ -1,7 +1,8 @@
-import {Button} from 'react-bootstrap';
 import useSidebarSearch from '../../hook/products/search/useSidebarSearch';
-import {Sidebar, Menu, useProSidebar} from 'react-pro-sidebar';
+import {Sidebar, Menu, useProSidebar, sidebarClasses} from 'react-pro-sidebar';
 import filter from "../../imgs/Icons/filter.png"
+import FormCheckInput from "react-bootstrap/FormCheckInput";
+import {FormControl, FormGroup, FormLabel} from "react-bootstrap";
 
 const SideFilter = () => {
     const {
@@ -12,7 +13,7 @@ const SideFilter = () => {
         handlePriceFrom,
         handlePriceTo,
     } = useSidebarSearch();
-    const {collapseSidebar, toggleSidebar, collapsed, toggled, broken} = useProSidebar();
+    const {toggleSidebar, broken} = useProSidebar();
 
     const localFrom = sessionStorage.getItem('priceFrom');
     const localTo = sessionStorage.getItem('priceTo');
@@ -20,68 +21,84 @@ const SideFilter = () => {
     const renderCategoryOptions = () =>
         category.map((item, index) => (
             <div key={index} className="d-flex mt-3">
-                <input onChange={handleClickCategory} type="checkbox" value={item._id}/>
-                <div className="filter-sub me-2 ">{item.name}</div>
+                <FormLabel>
+                    <FormCheckInput onChange={handleClickCategory} type="checkbox" value={item._id}/> {item.name}
+                </FormLabel>
             </div>
         ));
 
     const renderBrandOptions = () =>
         brand.map((item, index) => (
             <div key={index} className="d-flex mt-3">
-                <input onChange={handleClickBrand} type="checkbox" value={item._id}/>
-                <div className="filter-sub me-2 ">{item.name}</div>
+                <FormLabel>
+                    <FormCheckInput onChange={handleClickBrand} type="checkbox" value={item._id}/> {item.name}
+                </FormLabel>
             </div>
         ));
 
     return (
-        <div style={{display: 'flex', height: '100%', minHeight: '400px', width: "fit-content"}}>
-            <Sidebar customBreakPoint="768px" className="b-radius-20" style={{overflow: "hidden"}}>
+        <div style={{display: 'flex', zIndex: "100"}} className="side-filter">
+            <Sidebar customBreakPoint="768px" style={{overflow: "hidden"}}
+                     rootStyles={{
+                         [`.${sidebarClasses.container}`]: {
+                             backgroundColor: 'white',
+                             boxShadow: "none !important",
+                         },
+                         [`.${sidebarClasses.root}`]: {
+                             boxShadow: "none !important",
+                             border: "none"
+                         }
+
+                     }}>
                 <Menu className="p-3">
                     <div className="d-flex flex-column mt-2">
-                        <div className="filter-title">Category</div>
+                        <div className="filter-title">Categories</div>
+                        <hr/>
                         <div className="d-flex mt-3">
-                            <input onChange={handleClickCategory} type="checkbox" value="0"/>
-                            <div className="filter-sub me-2 ">All</div>
+                            <FormLabel>
+                                <FormCheckInput onChange={handleClickCategory} type="checkbox" value={0}/> All
+                            </FormLabel>
                         </div>
                         {category ? renderCategoryOptions() : <h6>No categories found</h6>}
                     </div>
 
                     <div className="d-flex flex-column mt-2">
-                        <div className="filter-title mt-3">Brand</div>
+                        <div className="filter-title mt-3">Brands</div>
+                        <hr/>
                         <div className="d-flex mt-3">
-                            <input onChange={handleClickBrand} type="checkbox" value="0"/>
-                            <div className="filter-sub me-2 ">All</div>
+                            <FormLabel>
+                                <FormCheckInput onChange={handleClickBrand} type="checkbox" value={0}/> All
+                            </FormLabel>
                         </div>
                         {brand ? renderBrandOptions() : <h6>No brands found</h6>}
                     </div>
 
                     <div className="filter-title my-3">Price</div>
-                    <div className="d-flex">
-                        <p className="filter-sub my-2">From:</p>
-                        <input
+                    <FormGroup className="d-flex">
+                        <FormLabel className="d-flex align-items-center justify-content-between">
+                            From: <FormControl
                             value={localFrom}
                             onChange={handlePriceFrom}
-                            className="m-2 text-center"
+                            className="m-2"
                             type="number"
-                            style={{width: '50px', height: '25px'}}
                         />
-                    </div>
-                    <div className="d-flex">
-                        <p className="filter-sub my-2">To:</p>
-                        <input
+                        </FormLabel>
+                        <FormLabel className="d-flex align-items-center justify-content-between">
+                            To: <FormControl
                             onChange={handlePriceTo}
                             value={localTo}
-                            className="m-2 text-center"
+                            className="m-2"
                             type="number"
-                            style={{width: '50px', height: '25px'}}
                         />
-                    </div>
+                        </FormLabel>
+                    </FormGroup>
 
                 </Menu>
             </Sidebar>
             <main style={{padding: 10}}>
                 {broken && (
-                    <img src={filter} alt="Filter" style={{width: "25px"}} onClick={() => toggleSidebar()}/>
+                    <img src={filter} alt="Filter" style={{width: "25px", cursor: "pointer"}}
+                         onClick={() => toggleSidebar()}/>
                 )}
             </main>
         </div>

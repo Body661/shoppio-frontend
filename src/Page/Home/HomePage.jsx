@@ -17,7 +17,7 @@ const HomePage = () => {
     } = useHomeProducts();
 
     return (
-        <div className='font' style={{minHeight: '670px'}}>
+        <div style={{minHeight: "80vh"}}>
 
             <Slider/>
             <HomeCategory title="Shop our top categories" btnTitle="More" path="/categories"/>

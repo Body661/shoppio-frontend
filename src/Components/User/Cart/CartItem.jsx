@@ -46,7 +46,7 @@ const CartItem = ({item}) => {
             <div className="w-100">
                 <Row className="justify-content-between">
                     <Col sm="12" className=" d-flex flex-row justify-content-between">
-                        <div className="d-inline pt-2 cat-text">
+                        <div className="d-inline pt-2 xs-black-text">
                             {item?.product?.category?.name || 'No category'}
                         </div>
                         <div
@@ -55,7 +55,7 @@ const CartItem = ({item}) => {
                             onClick={handleShow}
                         >
                             <img src={deleteIcon} alt="" width="20px" height="24px"/>
-                            <div className="cat-text d-inline me-2">Delete</div>
+                            <div className="xs-black-text d-inline me-2">Delete</div>
                         </div>
                     </Col>
                 </Row>
@@ -71,7 +71,7 @@ const CartItem = ({item}) => {
                 </Row>
                 <Row>
                     <Col sm="12" className="mt-1">
-                        <div className="cat-text d-inline">Brand :</div>
+                        <div className="xs-black-text d-inline">Brand :</div>
                         <div className="brand-text d-inline mx-1">
                             {item?.product?.brand?.name || 'Unknown'}
                         </div>
@@ -91,7 +91,7 @@ const CartItem = ({item}) => {
                 <Row className="justify-content-between">
                     <Col sm="12" className=" d-flex flex-row justify-content-between">
                         <div className="d-inline pt-2 d-flex">
-                            <div className="cat-text mt-2  d-inline">Quantity:</div>
+                            <div className="xs-black-text mt-2  d-inline">Quantity:</div>
                             <input
                                 value={itemCount}
                                 onChange={handleChangeCount}

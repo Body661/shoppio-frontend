@@ -80,7 +80,7 @@ const AdminEditUser = () => {
                         </Col>
 
                         {isPress && <div>
-                            {loadingUpdate && <Spinner animation="border" role="status"/>}
+                            {loadingUpdate && <Spinner animation="border" role="primary"/>}
                         </div>}
                     </Row>
                 </Form>

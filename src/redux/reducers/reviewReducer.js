@@ -1,8 +1,9 @@
 import * as types from '../types';
+import {getProductReviews} from "../actions/reviewActions";
 
 const initState = {
     createReview: null,
-    allReviewProduct: null,
+    productReviews: null,
     deleteReview: null,
     updateReview: null,
 }
@@ -16,7 +17,7 @@ const reviewReducer = (state = initState, action) => {
         case types.ALL_REVIEW_PRODUCT:
             return {
                 ...state,
-                allReviewProduct: action.payload,
+                getProductReviews: action.payload,
             }
         case types.DELETE_REVIEW:
             return {

@@ -15,17 +15,16 @@ const ProductsByCategoryPage = () => {
     if (pagination) pageCount = pagination
 
     return (
-        <div style={{minHeight: '670px'}}>
+        <div style={{minHeight: "80vh"}}>
 
             <Container>
-                <Row className='d-flex flex-row'>
-
-                    <Col sm="12">
-                        <CardProductsContainer products={items} title="" btntitle=""/>
+                <Row className='d-flex flex-row justify-content-center'>
+                    <Col>
+                        <CardProductsContainer products={items}/>
                     </Col>
                 </Row>
 
-                <Pagination pageCount={pageCount} onPress={onPress}/>
+                {pageCount > 1 && <Pagination pageCount={pageCount} onPress={onPress}/>}
             </Container>
         </div>
     )

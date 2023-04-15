@@ -7,7 +7,7 @@ const useProductDetails = (prodID) => {
 
     useEffect(() => {
         dispatch(getOneProduct(prodID))
-    }, [])
+    }, [prodID])
 
     const product = useSelector((state) => state.productReducer.product)
 

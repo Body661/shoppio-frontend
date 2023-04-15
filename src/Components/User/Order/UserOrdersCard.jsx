@@ -20,7 +20,7 @@ const UserOrdersCard = ({item}) => {
                     <div className="rate-count d-inline p-1 pt-2">({`${item?.product?.ratingsQuantity || 0} reviews`})
                     </div>
                     <div className="mt-3">
-                        <div className="cat-text mt-1">Quantity: {item?.quantity}</div>
+                        <div className="xs-black-text mt-1">Quantity: {item?.quantity}</div>
                         <div className="color" style={{backgroundColor: item?.color}}></div>
                     </div>
                 </Col>

@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Container} from 'react-bootstrap'
-import CategoryHeader from '../../Components/Category/CategoryHeader'
 import ProductDetails from '../../Components/Products/ProductDetails'
 import ReviewsContainer from '../../Components/Products/Review/ReviewsContainer'
 import {useParams} from "react-router-dom";
@@ -9,22 +8,24 @@ import ProductsContainer from "../../Components/Products/ProductsContainer";
 
 const ProductDetailsPage = () => {
     const {id} = useParams();
-    const {item, products} = useProductDetails(id);
+    const {product, products, images} = useProductDetails(id);
 
-    let rateAvg;
-    let rateQty;
 
-    if (item) {
-        rateAvg = item.ratingsAvg
-        rateQty = item.ratingsQuantity
+    useEffect(() => {
+
+    }, [])
+
+    let reviewsAmount;
+
+    if (product) {
+        reviewsAmount = product?.ratingsQuantity
     }
 
     return (
-        <div style={{minHeight: '670px'}}>
-            <CategoryHeader/>
+        <div style={{minHeight: '80vh'}}>
             <Container>
-                <ProductDetails/>
-                <ReviewsContainer rateAvg={rateAvg} rateQty={rateQty}/>
+                <ProductDetails product={product} images={images}/>
+                <ReviewsContainer reviewsAmount={reviewsAmount}/>
                 <ProductsContainer products={products} title="Products you may like"/>
             </Container>
         </div>

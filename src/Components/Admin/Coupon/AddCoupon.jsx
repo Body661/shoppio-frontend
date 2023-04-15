@@ -65,7 +65,7 @@ const AddCoupon = () => {
                 </Col>
 
                 {isPress && <div>
-                    {loading && <Spinner animation="border" role="status"/>}
+                    {loading && <Spinner animation="border" role="primary"/>}
                 </div>}
             </Row>
 

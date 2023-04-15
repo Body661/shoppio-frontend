@@ -1,5 +1,4 @@
-import React from 'react'
-import next from '../../../images/next.png'
+import next from '../../../imgs/Icons/next.png'
 
 const LeftButton = (onClick
 ) => {
@@ -10,7 +9,14 @@ const LeftButton = (onClick
             width="35px"
             onClick={onClick}
             height="35px"
-            style={{float: "left", marginTop: "220px", cursor: "pointer"}}
+            style={{
+                cursor: "pointer",
+                position: "absolute",
+                zIndex: 100,
+                right: "15px",
+                top: "50%",
+                transform: "translateY(-50%)"
+            }}
         />
     )
 }

@@ -89,7 +89,7 @@ const useRegister = () => {
     const res = useSelector((state) => state.authReducer.createUser);
 
     useEffect(() => {
-        if (loading === false) {
+        if (!loading) {
             if (res && res?.status === 201) {
                 toast("Account created successfully", {type: 'success'})
                 setTimeout(() => {
@@ -104,8 +104,6 @@ const useRegister = () => {
                 })
             }
         }
-
-        setLoading(true);
     }, [loading, res]);
 
     return {

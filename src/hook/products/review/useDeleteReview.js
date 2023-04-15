@@ -9,8 +9,8 @@ const useDeleteReview = (review) => {
     const [loading, setLoading] = useState(true);
     const [showDelete, setShowDelete] = useState(false);
 
-    const handleClose = () => setShowDelete(false);
-    const handleShow = () => setShowDelete(true);
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
 
     const getUser = () => {
         const user = localStorage.getItem('user');
@@ -29,7 +29,7 @@ const useDeleteReview = (review) => {
         setLoading(true);
         await dispatch(deleteReviewOnProduct(review?.product, review?._id));
         setLoading(false);
-        handleClose();
+        handleCloseDelete();
     };
 
     const res = useSelector((state) => state.reviewReducer.deleteReview);
@@ -50,7 +50,7 @@ const useDeleteReview = (review) => {
         }
     }, [loading, res]);
 
-    return { isUser, handleDelete, handleShow, handleClose, showDelete };
+    return { isUser, handleDelete, handleShowDelete, handleCloseDelete, showDelete };
 };
 
 export default useDeleteReview;
