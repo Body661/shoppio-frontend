@@ -1,20 +1,16 @@
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import AddressCard from './AddressCard';
+import {Row, Col, Container} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import useViewAddresses from '../../../hook/user/useViewAddresses';
+import ProfileAddressCard from "./ProfileAddressCard";
+import {Backdrop, CircularProgress} from "@mui/material";
 
 const UserAddresses = () => {
-    const { addresses, loading } = useViewAddresses();
+    const {addresses, loading} = useViewAddresses();
 
     const renderAddresses = () => {
-        if (loading) {
-            return <h6>Loading...</h6>;
-        }
-
         if (addresses?.data?.data?.length > 0) {
-            return addresses.data.data.map((item, index) => (
-                <AddressCard key={index} item={item} />
+            return addresses.data.data.map((address, index) => (
+                <ProfileAddressCard key={index} address={address}/>
             ));
         }
 
@@ -22,17 +18,22 @@ const UserAddresses = () => {
     };
 
     return (
-        <div>
-            <div className="admin-content-text pb-4">Addresses</div>
+        <Row style={{backgroundColor: "var(--main-gray)"}} className="b-radius-10 mt-4 p-4">
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
+
             {renderAddresses()}
-            <Row className="justify-content-center">
-                <Col sm="5" className="d-flex justify-content-center">
-                    <Link to="/user/add-address" style={{ textDecoration: 'none' }}>
-                        <button className="btn-save">Add new address</button>
-                    </Link>
-                </Col>
-            </Row>
-        </div>
+
+            <Col sm="12" className="d-flex justify-content-center mt-4">
+                <Link to="/user/add-address" style={{textDecoration: 'none'}}>
+                    <button className="btn-save">Add new address</button>
+                </Link>
+            </Col>
+        </Row>
     );
 };
 

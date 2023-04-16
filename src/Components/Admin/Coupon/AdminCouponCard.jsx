@@ -13,17 +13,17 @@ const AdminCouponCard = ({coupon}) => {
             <Modal show={isModalOpen} onHide={handleModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <div className="font">Delete confirmation</div>
+                        <div>Delete confirmation</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font">Are you sure you want to delete this coupon?</div>
+                    <div>Are you sure you want to delete this coupon?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" className="font" onClick={handleModalClose}>
+                    <Button variant="success" onClick={handleModalClose}>
                         Cancel
                     </Button>
-                    <Button variant="dark" className="font" onClick={handleDelete}>
+                    <Button variant="dark" onClick={handleDelete}>
                         Delete
                     </Button>
                 </Modal.Footer>

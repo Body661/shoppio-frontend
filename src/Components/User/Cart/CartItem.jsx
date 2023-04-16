@@ -23,17 +23,17 @@ const CartItem = ({item}) => {
             <Modal show={show} onHide={handleShow}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className="font">Confirm delete</div>
+                        <div>Confirm delete</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font"> Are you sure you want to delete this product from your cart?</div>
+                    <div> Are you sure you want to delete this product from your cart?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="font" variant="outline-dark" onClick={handleClose}>
+                    <Button variant="outline-dark" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button className="font" variant="dark" onClick={handleDeleteItem}>
+                    <Button variant="dark" onClick={handleDeleteItem}>
                         Delete
                     </Button>
                 </Modal.Footer>

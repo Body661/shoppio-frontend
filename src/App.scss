@@ -625,21 +625,6 @@ body {
     cursor: pointer;
   }
 
-  .admin-side-text:hover {
-    background-color: #272727;
-    color: white;
-    font-size: 14px;
-  }
-
-  .admin-content-text {
-    color: #555550;
-    font-size: 21px;
-    font-weight: 800;
-    letter-spacing: 0;
-    line-height: 28px;
-    text-align: left;
-  }
-
   .admin-user-card {
     width: 100%;
     border-radius: 7px;
@@ -757,16 +742,15 @@ body {
   /* end user data */
 
   /* filter style */
-  .side-filter {
-
-    @media screen and (max-width: 768px) {
-      z-index: 9999999 !important;
-    }
-
+  .side-bar {
     .filter-title {
       color: black;
       font-size: 20px;
       font-weight: bold;
+    }
+
+    @media screen and (max-width: 768px) {
+      z-index: 9999999 !important;
     }
   }
 

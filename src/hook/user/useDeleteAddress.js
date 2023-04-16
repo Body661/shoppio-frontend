@@ -5,24 +5,27 @@ import {toast} from 'react-toastify';
 
 const useDeleteAddress = (id) => {
     const dispatch = useDispatch();
-    const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [loadingDeleteAddress, setLoadingDeleteAddress] = useState(true);
+    const [isPressDeleteAddress, setIsPressDeleteAddress] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseDeleteModal = () => setShowDeleteModal(false);
+    const handleShowDeleteModal = () => setShowDeleteModal(true);
 
-    const handleDelete = async () => {
-        setLoading(true)
+    const handleDeleteAddress = async () => {
+        setLoadingDeleteAddress(true)
+        setIsPressDeleteAddress(true)
         await dispatch(deleteUserAddress(id));
-        setShow(false);
-        setLoading(false)
+        setShowDeleteModal(false);
+        setIsPressDeleteAddress(false)
+        setLoadingDeleteAddress(false)
     };
 
-    const response = useSelector((state) => state.userAddressesReducer.deleteAddress)
+    const deleteAddressRes = useSelector((state) => state.userAddressesReducer.deleteAddress)
 
     useEffect(() => {
-        if (!loading) {
-            if (response.status === 200) {
+        if (!loadingDeleteAddress) {
+            if (deleteAddressRes.status === 200) {
                 toast('Address deleted successfully', {type: 'success'});
                 setTimeout(() => {
                     window.location.reload();
@@ -32,10 +35,10 @@ const useDeleteAddress = (id) => {
             }
         }
 
-    }, [loading, response])
+    }, [loadingDeleteAddress, deleteAddressRes])
 
 
-    return {show, handleClose, handleShow, handleDelete};
+    return {showDeleteModal, handleCloseDeleteModal, handleShowDeleteModal, handleDeleteAddress, loadingDeleteAddress, isPressDeleteAddress};
 };
 
 export default useDeleteAddress;

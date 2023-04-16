@@ -1,17 +1,24 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap'
 import UserSideBar from '../../Components/User/UserSideBar'
 import UserProfile from '../../Components/User/UserProfile';
+import UserAddresses from "../../Components/User/Address/UserAddresses";
+import ChangePassword from "../../Components/User/ChangePassword";
+
 const UserProfilePage = () => {
     return (
-        <Container >
-            <Row className='py-3'>
-                <Col sm="3" xs="2" md="2">
-                    <UserSideBar />
+        <Container style={{minHeight: "80vh"}}>
+            <Row className='d-flex flex-row align-items-start products-page-space-between'>
+                <Col xs="1" sm="1" md="1">
+                    <UserSideBar/>
                 </Col>
 
-                <Col sm="9" xs="10" md="10">
-                  <UserProfile />
+                <Col sm="11" xs="10" md="8" lg="9">
+                    <Container>
+                        <UserProfile/>
+                        <UserAddresses/>
+                        <ChangePassword/>
+                    </Container>
                 </Col>
             </Row>
         </Container>

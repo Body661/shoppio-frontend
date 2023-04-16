@@ -13,17 +13,17 @@ const AdminUserCard = ({user}) => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <div className="font">Delete confirmation</div>
+                        <div>Delete confirmation</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font">Are you sure you want to delete this user?</div>
+                    <div>Are you sure you want to delete this user?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" className="font" onClick={handleClose}>
+                    <Button variant="success" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="dark" className="font" onClick={handelDelete}>
+                    <Button variant="dark" onClick={handelDelete}>
                         Delete
                     </Button>
                 </Modal.Footer>

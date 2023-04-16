@@ -22,9 +22,7 @@ import AddSubCategoryPage from "./Page/Admin/Subcategory/AddSubCategoryPage";
 import AddProductPage from "./Page/Admin/Product/AddProductPage";
 import UserOrdersPage from "./Page/User/Order/UserOrdersPage";
 import UserWishListPage from "./Page/User/UserWishListPage";
-import UserAllAddressesPage from './Page/User/Address/UserAllAddressesPage';
 import UserAddAddressPage from './Page/User/Address/UserAddAddressPage';
-import UserEditAddressPage from './Page/User/Address/UserEditAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
 import AdminEditProductsPage from "./Page/Admin/Product/EditProductPage";
 import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
@@ -65,7 +63,7 @@ function App() {
     }, [decodedToken, isExpired])
 
     return (
-        <div className="font">
+        <>
             <BrowserRouter>
                 <NavBarLogin isUser={isUser}/>
 
@@ -111,9 +109,7 @@ function App() {
                         <Route>
                             <Route path="/user/orders" element={<UserOrdersPage/>}/>
                             <Route path="/user/wishlist" element={<UserWishListPage/>}/>
-                            <Route path="/user/addresses" element={<UserAllAddressesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
-                            <Route path="/user/addresses/:id" element={<UserEditAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>
                             <Route path="/cart" element={<CartPage/>}/>
                             <Route path="/order/pay-method" element={<ChoosePayMethodPage/>}/>
@@ -124,7 +120,7 @@ function App() {
             </BrowserRouter>
             <Footer/>
             <ToastContainer/>
-        </div>
+        </>
     );
 }
 

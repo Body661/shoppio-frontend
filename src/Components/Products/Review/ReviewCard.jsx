@@ -22,17 +22,17 @@ const ReviewCard = ({review}) => {
             <Modal show={showDelete} onHide={handleCloseDelete}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className="font">Confirm delete</div>
+                        <div>Confirm delete</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font">Do you sure you want to delete this review?</div>
+                    <div>Do you sure you want to delete this review?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="font" variant="outline-dark" onClick={handleCloseDelete}>
+                    <Button variant="outline-dark" onClick={handleCloseDelete}>
                         Cancel
                     </Button>
-                    <Button className="font" variant="dark" onClick={handleDelete}>
+                    <Button variant="dark" onClick={handleDelete}>
                         Delete
                     </Button>
                 </Modal.Footer>
@@ -42,7 +42,7 @@ const ReviewCard = ({review}) => {
             <Modal show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className="font">Edit review</div>
+                        <div>Edit review</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -77,10 +77,10 @@ const ReviewCard = ({review}) => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="font" variant="outline-dark" onClick={handleCloseEdit}>
+                    <Button variant="outline-dark" onClick={handleCloseEdit}>
                         Cancel
                     </Button>
-                    <Button className="font" variant="dark" onClick={handleEdit}>
+                    <Button variant="dark" onClick={handleEdit}>
                         Save changes
                     </Button>
                 </Modal.Footer>

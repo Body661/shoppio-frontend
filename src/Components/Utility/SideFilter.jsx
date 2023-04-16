@@ -15,8 +15,8 @@ const SideFilter = () => {
     } = useSidebarSearch();
     const {toggleSidebar, broken} = useProSidebar();
 
-    const localFrom = sessionStorage.getItem('priceFrom');
-    const localTo = sessionStorage.getItem('priceTo');
+    const priceFrom = sessionStorage.getItem('priceFrom');
+    const priceTo = sessionStorage.getItem('priceTo');
 
     const renderCategoryOptions = () =>
         category.map((item, index) => (
@@ -37,8 +37,8 @@ const SideFilter = () => {
         ));
 
     return (
-        <div style={{display: 'flex', zIndex: "100"}} className="side-filter">
-            <Sidebar customBreakPoint="768px" style={{overflow: "hidden"}}
+        <div style={{display: 'flex', zIndex: "100"}}>
+            <Sidebar className="side-bar" customBreakPoint="768px" style={{overflow: "hidden"}}
                      rootStyles={{
                          [`.${sidebarClasses.container}`]: {
                              backgroundColor: 'white',
@@ -77,7 +77,7 @@ const SideFilter = () => {
                     <FormGroup className="d-flex">
                         <FormLabel className="d-flex align-items-center justify-content-between">
                             From: <FormControl
-                            value={localFrom}
+                            value={priceFrom}
                             onChange={handlePriceFrom}
                             className="m-2"
                             type="number"
@@ -86,7 +86,7 @@ const SideFilter = () => {
                         <FormLabel className="d-flex align-items-center justify-content-between">
                             To: <FormControl
                             onChange={handlePriceTo}
-                            value={localTo}
+                            value={priceTo}
                             className="m-2"
                             type="number"
                         />

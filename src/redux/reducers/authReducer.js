@@ -7,7 +7,7 @@ const initialState = {
     forgetPassword: null,
     verifyPassword: null,
     resetPassword: null,
-    userProfile: null,
+    updateProfile: null,
     userChangePassword: null,
 };
 
@@ -26,7 +26,7 @@ const authReducer = (state = initialState, action) => {
         case types.RESET_PASSWORD:
             return { ...state, resetPassword: action.payload };
         case types.UPDATE_USER_PROFILE:
-            return { ...state, userProfile: action.payload };
+            return { ...state, updateProfile: action.payload };
         case types.UPDATE_USER_PASSWORD:
             return { ...state, userChangePassword: action.payload };
         default:

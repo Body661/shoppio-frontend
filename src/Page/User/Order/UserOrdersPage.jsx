@@ -5,12 +5,12 @@ import UserOrders from '../../../Components/User/Order/UserOrders'
 const UserOrdersPage = () => {
     return (
         <Container >
-            <Row className='py-3'>
-                <Col sm="3" xs="2" md="2">
+            <Row className='d-flex flex-row align-items-start products-page-space-between'>
+                <Col xs="1" sm="1" md="1">
                     <UserSideBar />
                 </Col>
 
-                <Col sm="9" xs="10" md="10">
+                <Col sm="11" xs="10" md="8" lg="9">
                   <UserOrders />
                 </Col>
             </Row>

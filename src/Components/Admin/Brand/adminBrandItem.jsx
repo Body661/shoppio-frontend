@@ -21,7 +21,7 @@ function AdminBrandItem({brand}) {
             <Modal show={loading && isPress}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className="font">Deleting brand, please wait</div>
+                        <div>Deleting brand, please wait</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -32,17 +32,17 @@ function AdminBrandItem({brand}) {
             <Modal show={isModalOpen} onHide={handleModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <div className="font">Delete confirmation</div>
+                        <div>Delete confirmation</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font">Are you sure you want to delete this brand?</div>
+                    <div>Are you sure you want to delete this brand?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" className="font" onClick={handleModalClose}>
+                    <Button variant="success" onClick={handleModalClose}>
                         Cancel
                     </Button>
-                    <Button variant="dark" className="font" onClick={deleteHandler}>
+                    <Button variant="dark" onClick={deleteHandler}>
                         Delete
                     </Button>
                 </Modal.Footer>

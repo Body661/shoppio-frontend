@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Spinner } from 'react-bootstrap';
+import {Container, Row, Spinner} from 'react-bootstrap';
 import OrderItem from './OrderItem';
 import useUserGetAllOrders from '../../../hook/user/useUserGetAllOrders';
 import Pagination from '../../Utility/Pagination';
@@ -27,7 +27,7 @@ const UserOrders = () => {
     };
 
     return (
-        <div>
+        <Container>
             <div className="admin-content-text pb-4">Welcome {userName}</div>
             <div className="admin-content-text pb-4">{results} Orders</div>
             <Row className="justify-content-between flex-column">
@@ -39,7 +39,7 @@ const UserOrders = () => {
                     pageCount={paginate?.pages ? paginate?.pages : 0}
                 />
             )}
-        </div>
+        </Container>
     );
 };
 

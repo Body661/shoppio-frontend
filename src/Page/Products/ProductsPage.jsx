@@ -25,7 +25,7 @@ const ProductsPage = () => {
 
                 <SortResults onClick={getProducts} title={` ${items?.length || 0} Search result`}/>
                 <Row className='d-flex flex-row align-items-start products-page-space-between'>
-                    <Col xs="1" sm="1" md="1" className='d-flex'>
+                    <Col xs="1" sm="1" md="1">
                         <SideFilter/>
                     </Col>
                     <Col sm="11" xs="10" md="8" lg={9}>

@@ -1,56 +1,57 @@
-import React from 'react';
-import {Row, Col, Modal, Button} from 'react-bootstrap';
-import deleteIcon from '../../images/delete.png';
+import {Row, Col, Modal, Button, FormControl, Form} from 'react-bootstrap';
 import useUserProfile from '../../hook/user/useUserProfile';
+import {Backdrop, CircularProgress} from "@mui/material";
+import {EditOutlined, Person} from "@mui/icons-material";
 
 const UserProfile = () => {
     const {
         userData,
-        show,
-        handleClose,
-        handleShow,
-        handleSubmit,
+        showUpdateModal,
+        handleCloseUpdateModal,
+        handleShowUpdateModal,
+        handleUpdateProfile,
         name,
         email,
         phone,
         onChangeName,
         onChangeEmail,
         onChangePhone,
-        changePassword,
-        oldPassword,
-        newPassword,
-        confirmNewPassword,
-        onChangeOldPass,
-        onChangeNewPass,
-        onChangeConfirmPass,
+        loadingUpdateProfile,
+        loadingGetProfile,
+        isPressUpdateProfile,
     } = useUserProfile();
 
     return (
-        <div>
-            <div className="admin-content-text">Profile</div>
+        <>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={(loadingUpdateProfile && isPressUpdateProfile) || loadingGetProfile}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className="font"></div>
+                        <div>Edit personal information</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input
+                    <FormControl
                         value={name}
                         onChange={onChangeName}
                         type="text"
                         className="input-form font d-block mt-3 px-3"
                         placeholder="Name"
                     />
-                    <input
+                    <FormControl
                         value={email}
                         onChange={onChangeEmail}
                         type="email"
                         className="input-form font d-block mt-3 px-3"
                         placeholder="Email"
                     />
-                    <input
+                    <FormControl
                         value={phone}
                         onChange={onChangePhone}
                         type="phone"
@@ -58,83 +59,55 @@ const UserProfile = () => {
                         placeholder="Phone"
                     />
                 </Modal.Body>
+
                 <Modal.Footer>
-                    <Button className="font" variant="success" onClick={handleClose}>
+                    <Button variant="outline-dark" onClick={handleCloseUpdateModal}>
                         Cancel
                     </Button>
-                    <Button className="font" variant="dark" onClick={handleSubmit}>
+                    <Button variant="dark" onClick={handleUpdateProfile}>
                         Save changes
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <div className="my-3 px-2">
-                <Row className="d-flex justify-content-between pt-2">
-                    <Col xs="6" className="d-flex">
-                        <div className="p-2">Name:</div>
-                        <div className="p-1 item-delete-edit">{userData?.name}</div>
-                    </Col>
-                    <Col xs="6" className="d-flex justify-content-end">
-                        <div onClick={handleShow} className="d-flex mx-2">
-                            <img
-                                alt=""
-                                className="ms-1 mt-2"
-                                src={deleteIcon}
-                                height="17px"
-                                width="15px"
-                            />
-                            <p className="item-delete-edit">Edit</p>
-                        </div>
-                    </Col>
-                </Row>
+            <Row>
+                <div className="page-header mt-4">
+                    <Person style={{fontSize: "45px"}}/>
+                    <span className="page-header-text"> Profile </span>
+                </div>
+            </Row>
 
-                <Row className="">
-                    <Col xs="12" className="d-flex">
-                        <div className="p-2">Phone:</div>
-                        <div className="p-1 item-delete-edit">{userData?.phone}</div>
-                    </Col>
-                </Row>
-                <Row className="">
-                    <Col xs="12" className="d-flex">
-                        <div className="p-2">Email:</div>
-                        <div className="p-1 item-delete-edit">{userData?.email}</div>
-                    </Col>
-                </Row>
-                <Row className="mt-5">
-                    <Col xs="10" sm="8" md="6" className="">
-                        <div className="admin-content-text">Change password</div>
-                        <input
-                            value={oldPassword}
-                            onChange={onChangeOldPass}
-                            type="password"
-                            className="input-form d-block mt-1 px-3"
-                            placeholder="Old password"
-                        />
-                        <input
-                            value={newPassword}
-                            onChange={onChangeNewPass}
-                            type="password"
-                            className="input-form d-block mt-3 px-3"
-                            placeholder="New password"
-                        />
-                        <input
-                            value={confirmNewPassword}
-                            onChange={onChangeConfirmPass}
-                            type="password"
-                            className="input-form d-block mt-3 px-3"
-                            placeholder="Confirm new password"
-                        />
-                    </Col>
-                </Row>
+            <div className="mt-4">
+                <Row style={{backgroundColor: "var(--main-gray)"}} className="b-radius-10 pt-2 pb-2">
 
-                <Row>
-                    <Col xs="10" sm="8" md="6" className="d-flex justify-content-end ">
-                        <button onClick={changePassword} className="btn-save d-inline mt-2 ">Save new password</button>
+                    <Col xs={12}>
+                        <Row>
+                            <Col xs="10">
+                                <span className="fs-6 fw-bold p-0">Personal Information:</span>
+                            </Col>
+
+                            <Col xs="2" className="d-flex justify-content-end">
+                                <EditOutlined onClick={handleShowUpdateModal}/>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col xs="12" className="mt-2">
+                        <span>Name: {userData?.name}</span>
+                    </Col>
+
+                    <Col xs="12" className="mt-2">
+                        <span>Phone: {userData?.phone}</span>
+                    </Col>
+
+                    <Col xs="12" className="mt-2">
+                        <div>Email: {userData?.email}</div>
                     </Col>
                 </Row>
             </div>
-        </div>
-    );
+        </>
+    )
+
 };
 
 export default UserProfile;

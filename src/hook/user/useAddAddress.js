@@ -54,7 +54,7 @@ const useAddAddress = () => {
                 toast('Address added successfully', {type: 'success'});
 
                 setTimeout(() => {
-                    navigate('/user/addresses');
+                    navigate('/user/profile');
                 }, 1000);
             } else {
                 toast(response?.data?.errors ? response?.data?.errors[0]?.msg : 'Error while adding new address', {

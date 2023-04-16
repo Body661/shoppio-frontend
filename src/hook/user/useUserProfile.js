@@ -15,11 +15,19 @@ const useUserProfile = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loadingGetProfile, setLoadingGetProfile] = useState(true);
+    const [loadingUpdateProfile, setLoadingUpdateProfile] = useState(true);
+    const [isPressUpdateProfile, setIsPressUpdateProfile] = useState(false);
+    const [isPressUpdatePass, setIsPressUpdatePass] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const handleCloseUpdateModal = () => setShowUpdateModal(false);
+    const handleShowUpdateModal = () => setShowUpdateModal(true);
 
     useEffect(() => {
         const getUser = async () => {
+            setLoadingGetProfile(true)
             await dispatch(getLoggedUser());
+            setLoadingGetProfile(false)
         };
 
         getUser();
@@ -33,52 +41,61 @@ const useUserProfile = () => {
         setPhone(user?.data?.data.phone);
     }, [user]);
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const onChangeName = (event) => setName(event.target.value);
     const onChangeEmail = (event) => setEmail(event.target.value);
     const onChangePhone = (event) => setPhone(event.target.value);
 
-    const handleSubmit = async () => {
+    const handleUpdateProfile = async () => {
         const body = user?.data?.data.email !== email ? {name, email, phone} : {name, phone};
-        setLoading(true);
+        setLoadingUpdateProfile(true);
+        setIsPressUpdateProfile(true)
         await dispatch(updateUserProfileData(body));
-        setLoading(false);
-        setShow(false);
+        setLoadingUpdateProfile(false);
+        setIsPressUpdateProfile(false)
+        setShowUpdateModal(false);
     };
 
-    const res = useSelector((state) => state.authReducer.userProfile);
+    const updateProfileRes = useSelector((state) => state.authReducer.updateProfile);
 
     useEffect(() => {
-        if (!loading) {
-            if (res && res.status === 200) {
+        if (!loadingUpdateProfile) {
+            if (updateProfileRes && updateProfileRes.status === 200) {
                 toast('Profile updated successfully', {type: 'success'});
-                localStorage.setItem('user', JSON.stringify(res?.data));
+                localStorage.setItem('user', JSON.stringify(updateProfileRes?.data));
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
             } else {
-                toast(res?.data?.errors ? res?.data?.errors[0]?.msg : 'Error while updating Profile', {
+                toast(updateProfileRes?.data?.errors ? updateProfileRes?.data?.errors[0]?.msg : 'Error while updating Profile', {
                     type: 'error',
                     toastId: 'updateUserProfileError'
                 });
             }
         }
-    }, [loading, res]);
+    }, [loadingUpdateProfile, updateProfileRes]);
 
     // Change user password
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
-    const [loadingPass, setLoadingPass] = useState(true);
+    const [loadingUpdatePass, setLoadingUpdatePass] = useState(true);
+    const [validated, setValidated] = useState(false);
 
-    const onChangeOldPass = (event) => setOldPassword(event.target.value);
-    const onChangeNewPass = (event) => setNewPassword(event.target.value);
-    const onChangeConfirmPass = (event) => setConfirmNewPassword(event.target.value);
+    const handleChangeOldPass = (event) => setOldPassword(event.target.value);
+    const handleChangeNewPass = (event) => setNewPassword(event.target.value);
+    const handleChangeConfirmPass = (event) => setConfirmNewPassword(event.target.value);
 
-    const changePassword = async () => {
+    const handleUpdatePassword = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+
+        setValidated(true);
+
         if (oldPassword.trim() === '') {
             toast("Please enter your old password", {type: 'error'})
             return false;
@@ -93,7 +110,8 @@ const useUserProfile = () => {
             toast.error("New password and new password confirmation aren't the same!");
             return;
         }
-        setLoadingPass(true);
+        setLoadingUpdatePass(true);
+        setIsPressUpdatePass(true)
         await dispatch(
             updateUserPassword({
                 currentPassword: oldPassword,
@@ -101,48 +119,55 @@ const useUserProfile = () => {
                 passwordConfirm: confirmNewPassword,
             })
         );
-        setLoadingPass(false);
+        setLoadingUpdatePass(false);
+        setIsPressUpdatePass(false)
     };
 
-    const resPass = useSelector((state) => state.authReducer.userChangePassword);
+    const changePassRes = useSelector((state) => state.authReducer.userChangePassword);
 
     useEffect(() => {
-        if (!loadingPass) {
-            if (resPass.status === 200) {
+        if (!loadingUpdatePass) {
+            if (changePassRes.status === 200) {
                 toast.success('Password changed successfully');
                 localStorage.removeItem('user');
                 localStorage.removeItem('token');
                 setTimeout(() => {
-                    navigate('/login');
+                    window.location.reload();
                 }, 3000);
             } else {
-                toast(resPass?.data?.errors ? resPass?.data?.errors[0]?.msg : 'Error while changing your password!', {
+                toast(changePassRes?.data?.errors ? changePassRes?.data?.errors[0]?.msg : 'Error while changing your password!', {
                     type: 'error',
                     toastId: "changePassError"
                 });
             }
         }
-    }, [loadingPass, resPass]);
+    }, [loadingUpdatePass, changePassRes]);
 
     return {
         userData: user?.data?.data,
-        show,
-        handleClose,
-        handleShow,
-        handleSubmit,
+        showUpdateModal,
+        handleCloseUpdateModal,
+        handleShowUpdateModal,
+        handleUpdateProfile,
         name,
         email,
         phone,
         onChangeName,
         onChangeEmail,
         onChangePhone,
-        changePassword,
+        handleUpdatePassword,
         oldPassword,
         newPassword,
         confirmNewPassword,
-        onChangeOldPass,
-        onChangeNewPass,
-        onChangeConfirmPass,
+        handleChangeOldPass,
+        handleChangeNewPass,
+        handleChangeConfirmPass,
+        loadingUpdateProfile,
+        loadingUpdatePass,
+        loadingGetProfile,
+        isPressUpdateProfile,
+        isPressUpdatePass,
+        validated
     };
 };
 
