@@ -9,6 +9,7 @@ import NavbarToggle from "react-bootstrap/NavbarToggle";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
+import {Person, ShoppingCart} from "@mui/icons-material";
 
 const NavBarLogin = ({isUser}) => {
     const {handleKeyPressSearch, handleChangeSearch, searchWord} = useNavbarSearch();
@@ -45,7 +46,8 @@ const NavBarLogin = ({isUser}) => {
                         Brands
                     </Link>
 
-                    <Link to="/products" className="navbar-text d-flex justify-content-center align-items-center p-2 me-2">
+                    <Link to="/products"
+                          className="navbar-text d-flex justify-content-center align-items-center p-2 me-2">
                         Products
                     </Link>
 
@@ -61,31 +63,34 @@ const NavBarLogin = ({isUser}) => {
 
                     <Nav className="me-auto">
                         {user ? (
-                            <NavDropdown title={user.name} className="navbar-text justify-content-center align-items-center p-2 flex-column">
+                            <NavDropdown title={user.name}
+                                         className="navbar-text justify-content-center align-items-center p-2 flex-column">
 
-                                    {user.role === 'admin' ? (
-                                        <DropdownItem href="/admin/products">Dashboard</DropdownItem>
-                                    ) : (
-                                        <Link to="/user/profile">
-                                            <DropdownItem href="/user/profile">Profile</DropdownItem>
-                                        </Link>
-                                    )}
+                                {user.role === 'admin' ? (
+                                    <DropdownItem href="/admin/products">Dashboard</DropdownItem>
+                                ) : (
+                                    <Link to="/user/profile">
+                                        <DropdownItem href="/user/profile">Profile</DropdownItem>
+                                    </Link>
+                                )}
 
-                                    <NavDropdown.Divider/>
+                                <NavDropdown.Divider/>
 
-                                    <DropdownItem onClick={logOut} href="/">
-                                        Logout
-                                    </DropdownItem>
+                                <DropdownItem onClick={logOut} href="/">
+                                    Logout
+                                </DropdownItem>
                             </NavDropdown>
                         ) : (
-                            <Link to="/login" className="navbar-text d-flex justify-content-center align-items-center p-2">
-                                <img src={login} className="navbar-icon" alt="Login"/>Login
+                            <Link to="/login"
+                                  className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                <Person/> Login
                             </Link>
                         )}
 
                         {isUser && (
-                            <Link to="/cart" className="navbar-text d-flex justify-content-center align-items-center p-2">
-                                <img src={cart} className="navbar-icon" alt="Cart"/>Cart
+                            <Link to="/cart"
+                                  className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                <ShoppingCart/> Cart
                             </Link>
                         )}
                     </Nav>

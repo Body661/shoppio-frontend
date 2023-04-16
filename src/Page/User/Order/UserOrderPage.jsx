@@ -4,7 +4,7 @@ import UserSideBar from '../../../Components/User/UserSideBar'
 import OrderDetails from '../../../Components/User/Order/OrderDetails'
 const UserOrderPage = () => {
     return (
-        <Container >
+        <Container style={{minHeight: "80vh"}}>
             <Row className='d-flex flex-row align-items-start products-page-space-between'>
                 <Col xs="1" sm="1" md="1">
                     <UserSideBar />

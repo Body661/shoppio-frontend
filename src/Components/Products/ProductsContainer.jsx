@@ -2,16 +2,28 @@ import {Col, Container, Row, Spinner} from 'react-bootstrap'
 import SectionTitle from '../Utility/SectionTitle'
 import HomeProductCard from './HomeProductCard'
 import React from "react";
+import useProductsContainer from "../../hook/products/useProductsContainer";
+import {Backdrop, CircularProgress} from "@mui/material";
 
-const ProductsContainer = ({title, btnTitle, pathText, products, loading, error, xSmall = 8, small = 6, medium = 4, large = 3}) => {
+const ProductsContainer = ({
+                               title,
+                               btnTitle,
+                               pathText,
+                               products,
+                               loading,
+                               error,
+                               xSmall = 8,
+                               small = 6,
+                               medium = 4,
+                               large = 3
+                           }) => {
     let content = null;
+    const {favProd} = useProductsContainer()
 
-    if (loading && !products && !error) {
-        content = <Spinner animation="border" variant="primary"/>;
-    } else if (!loading && !error && products && products?.length > 0) {
+    if (!loading && !error && products && products?.length > 0) {
         content = products?.map((item, index) => (
             <Col xs={xSmall} sm={small} md={medium} lg={large}>
-                <HomeProductCard key={index} item={item}/>
+                <HomeProductCard key={index} item={item} favProd={favProd}/>
             </Col>
         ))
 
@@ -24,6 +36,14 @@ const ProductsContainer = ({title, btnTitle, pathText, products, loading, error,
 
     return (
         <Container>
+
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
+
             {title ? (<SectionTitle title={title} btntitle={btnTitle} pathText={pathText}/>) : null}
             <Row className="d-flex justify-content-center">
                 {content}

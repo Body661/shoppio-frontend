@@ -21,7 +21,7 @@ import AddCategoryPage from "./Page/Admin/Category/AddCategoryPage";
 import AddSubCategoryPage from "./Page/Admin/Subcategory/AddSubCategoryPage";
 import AddProductPage from "./Page/Admin/Product/AddProductPage";
 import UserOrdersPage from "./Page/User/Order/UserOrdersPage";
-import UserWishListPage from "./Page/User/UserWishListPage";
+import UserFavoritesPage from "./Page/User/UserFavoritesPage";
 import UserAddAddressPage from './Page/User/Address/UserAddAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
 import AdminEditProductsPage from "./Page/Admin/Product/EditProductPage";
@@ -110,7 +110,7 @@ function App() {
                         <Route>
                             <Route path="/user/orders" element={<UserOrdersPage/>}/>
                             <Route path="/user/orders/:id" element={<UserOrderPage/>}/>
-                            <Route path="/user/wishlist" element={<UserWishListPage/>}/>
+                            <Route path="/user/favorites" element={<UserFavoritesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>
                             <Route path="/cart" element={<CartPage/>}/>

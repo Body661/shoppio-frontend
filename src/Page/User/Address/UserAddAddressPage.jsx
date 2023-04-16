@@ -11,9 +11,7 @@ const UserAddAddressPage = () => {
                 </Col>
 
                 <Col sm="11" xs="10" md="8" lg="9">
-                    <Container>
-                        <AddAddress/>
-                    </Container>
+                    <AddAddress/>
                 </Col>
             </Row>
         </Container>

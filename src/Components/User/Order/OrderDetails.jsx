@@ -15,157 +15,158 @@ const OrderDetails = () => {
 
     console.log(orderData)
 
-    return (<Container style={{minHeight: "80vh"}}>
-        <Backdrop
-            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-            open={loading}
-        >
-            <CircularProgress color="inherit"/>
-        </Backdrop>
+    return (
+        <Container>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
 
-        <Row>
-            <div className="page-header mt-4">
-                <ShoppingCart style={{fontSize: "45px"}}/>
-                <span className="page-header-text fs-6"> Order: {orderData?._id} </span>
-            </div>
-        </Row>
+            <Row>
+                <div className="page-header mt-4">
+                    <ShoppingCart style={{fontSize: "45px"}}/>
+                    <span className="page-header-text fs-6"> Order: {orderData?._id} </span>
+                </div>
+            </Row>
 
-        <Row className="d-flex flex-column gap-2 p-2 b-radius-10 mt-4"
-             style={{backgroundColor: "var(--main-gray)"}}>
-            {orderData?.cartItems && (orderData?.cartItems?.map((item, index) => {
-                return (<Row className="d-flex align-items-center">
-                    <Col xs="3" className="d-flex justify-content-start">
-                        <img width="100%" src={item?.product?.cover} alt={item?.product?.title}
-                             style={{objectFit: "contain"}}/>
-                    </Col>
-                    <Col xs="9" className="d-flex flex-column align-items-start" style={{
-                        textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap",
-                    }}>
+            <Row className="d-flex flex-column gap-2 p-2 b-radius-10 mt-4"
+                 style={{backgroundColor: "var(--main-gray)"}}>
+                {orderData?.cartItems && (orderData?.cartItems?.map((item, index) => {
+                    return (<Row className="d-flex align-items-center">
+                        <Col xs="3" className="d-flex justify-content-start">
+                            <img width="100%" src={item?.product?.cover} alt={item?.product?.title}
+                                 style={{objectFit: "contain"}}/>
+                        </Col>
+                        <Col xs="9" className="d-flex flex-column align-items-start" style={{
+                            textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap",
+                        }}>
                         <span className="fw-bold d-flex gap-1">
                             {item?.product?.title || 'Product title not found'}
                         </span>
 
-                        {item?.color && <span className="color border" style={{backgroundColor: item?.color}}/>}
+                            {item?.color && <span className="color border" style={{backgroundColor: item?.color}}/>}
 
-                        <span>
+                            <span>
                                 €{item?.product?.priceAfterDiscount || item?.product?.price}
                         </span>
-                        <span>
+                            <span>
                                 Quantity: {item?.quantity}
                         </span>
-                    </Col>
-                </Row>)
-            }))}
-        </Row>
+                        </Col>
+                    </Row>)
+                }))}
+            </Row>
 
-        <Row className="mt-4">
-            <Row>
-                <Col sm={12} md={4}>
-                    <div className="d-flex flex-column mt-4">
+            <Row className="mt-4">
+                <Row>
+                    <Col sm={12} md={4}>
+                        <div className="d-flex flex-column mt-4">
                             <span className="fw-bold">
                                 Order number:
                             </span>
-                        <span>
+                            <span>
                                 {orderData?._id}
                             </span>
-                    </div>
-                </Col>
+                        </div>
+                    </Col>
 
-                <Col sm={12} md={4}>
-                    <div className="d-flex flex-column mt-4">
+                    <Col sm={12} md={4}>
+                        <div className="d-flex flex-column mt-4">
                             <span className="fw-bold">
                                 Delivery address:
                             </span>
 
-                        <span>
+                            <span>
                                 {orderData?.user?.name}
                             </span>
 
-                        <span>
+                            <span>
                                 {orderData?.shippingAddress?.details}
                             </span>
 
-                        <span>
+                            <span>
                                 {orderData?.shippingAddress?.postalCode} {orderData?.shippingAddress?.city}
                             </span>
-                    </div>
-                </Col>
+                        </div>
+                    </Col>
 
-                <Col sm={12} md={4}>
-                    <div className="d-flex flex-column mt-4">
+                    <Col sm={12} md={4}>
+                        <div className="d-flex flex-column mt-4">
                             <span className="fw-bold">
                                 Cost overview:
                             </span>
 
-                        <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between">
                                 <span>
                                     Total items ({orderData?.cartItems?.length})
                                 </span>
 
-                            <span>
+                                <span>
                                     €{orderData?.totalOrderPrice}
                                 </span>
-                        </div>
+                            </div>
 
-                        <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between">
                                 <span>
                                     Shipment costs
                                 </span>
 
-                            <span>
+                                <span>
                                     €{orderData?.shippingPrice}
                                 </span>
-                        </div>
+                            </div>
 
-                        <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between">
                                 <span>
                                     Total
                                 </span>
 
-                            <span className="border-top border-dark">
+                                <span className="border-top border-dark">
                                     €{orderData?.totalOrderPrice}
                                 </span>
+                            </div>
                         </div>
-                    </div>
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
 
-            <Row>
-                <Col sm={12} md={4} className="mt-4">
-                    <div className="d-flex flex-column">
+                <Row>
+                    <Col sm={12} md={4} className="mt-4">
+                        <div className="d-flex flex-column">
                         <span className="fw-bold">
                             Ordered on:
                         </span>
-                        <span>
+                            <span>
                             {new Date(orderData?.createdAt).toUTCString()}
                         </span>
-                    </div>
-                </Col>
+                        </div>
+                    </Col>
 
-                <Col sm={12} md={4}>
-                    <div className="d-flex flex-column mt-4">
+                    <Col sm={12} md={4}>
+                        <div className="d-flex flex-column mt-4">
                         <span className="fw-bold">
                             Delivery status:
                         </span>
-                        <span>
+                            <span>
                             {orderData?.isDelivered ? "Delivered" : "Not delivered yet"}
                         </span>
-                    </div>
-                </Col>
+                        </div>
+                    </Col>
 
-                <Col sm={12} md={4}>
-                    <div className="d-flex flex-column mt-4">
+                    <Col sm={12} md={4}>
+                        <div className="d-flex flex-column mt-4">
                         <span className="fw-bold">
                             Pay method:
                         </span>
-                        <span>
+                            <span>
                             {orderData?.payMethod === "online" ? "Online" : "Cash"} ({orderData?.isPaid ? "Paid" : "Not paid yet"})
                         </span>
-                    </div>
-                </Col>
+                        </div>
+                    </Col>
+                </Row>
             </Row>
-        </Row>
-    </Container>)
+        </Container>)
 }
 
 export default OrderDetails
