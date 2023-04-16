@@ -133,6 +133,22 @@ body {
     }
   }
 
+  .color {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    transition: 0.5s;
+
+    &:hover {
+      scale: 1.2;
+    }
+
+    &.active {
+      scale: 1.2;
+    }
+  }
+
   /* End global styles */
 
   /* Start navbar */
@@ -448,22 +464,6 @@ body {
       line-height: 24px;
     }
 
-    .color {
-      cursor: pointer;
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-      transition: 0.5s;
-
-      &:hover {
-        scale: 1.2;
-      }
-
-      &.active {
-        scale: 1.2;
-      }
-    }
-
     .product-description {
       color: var(--main-black);
       font-size: 14px;
@@ -687,33 +687,7 @@ body {
 
   /* end admin  */
 
-  /* user order */
-  .user-order {
-    height: 100%;
-    width: 100%;
-    border-radius: 7px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(151, 151, 151, 0.5);
-  }
-
-  .order-title {
-    color: #272727;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .stat {
-    color: #979797;
-    font-size: 16px;
-    letter-spacing: 0;
-    line-height: 30px;
-    text-align: left;
-  }
-
-  /* end user order */
-
   /* user Address */
-
   .isActiveAddress {
     border-radius: 0 10px 10px 0 !important;
     border-left: 5px solid var(--main-black);

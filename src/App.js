@@ -37,6 +37,7 @@ import UpdateCategoryPage from "./Page/Admin/Category/UpdateCategoryPage";
 import UpdateBrandPage from "./Page/Admin/Brand/UpdateBrandPage";
 import UsersManagementPage from "./Page/Admin/User/UsersManagementPage";
 import EditUserPage from "./Page/Admin/User/EditUserPage";
+import UserOrderPage from "./Page/User/Order/UserOrderPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -108,6 +109,7 @@ function App() {
                     {isUser && (
                         <Route>
                             <Route path="/user/orders" element={<UserOrdersPage/>}/>
+                            <Route path="/user/orders/:id" element={<UserOrderPage/>}/>
                             <Route path="/user/wishlist" element={<UserWishListPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>

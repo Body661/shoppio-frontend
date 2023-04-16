@@ -19,7 +19,7 @@ export const getAllOrders = (page, limit) => async (dispatch) => {
     }
 }
 
-export const getOneOrder = (id) => async (dispatch) => {
+export const getOrderDetails = (id) => async (dispatch) => {
     try {
         const response = await useGetDataToken(`/order/${id}`);
 

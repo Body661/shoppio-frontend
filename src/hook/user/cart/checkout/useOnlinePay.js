@@ -36,6 +36,7 @@ const useOnlinePay = (addressDetails) => {
 
     const order = useSelector((state) => state.checkoutReducer.createOrderOnline);
 
+    console.log(order)
     useEffect(() => {
         if (!loading && order) {
             if (order && order?.data?.session && order?.status === 200) {

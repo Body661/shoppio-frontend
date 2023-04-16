@@ -1,13 +1,12 @@
-import React from 'react';
-import {Container, Row, Spinner} from 'react-bootstrap';
-import OrderItem from './OrderItem';
+import {Container, Row} from 'react-bootstrap';
+import OrderCard from './OrderCard';
 import useUserGetAllOrders from '../../../hook/user/useUserGetAllOrders';
 import Pagination from '../../Utility/Pagination';
+import {Backdrop, CircularProgress} from "@mui/material";
+import {ShoppingCart} from "@mui/icons-material";
 
 const UserOrders = () => {
     const {
-        userName,
-        results,
         paginate,
         orders,
         handlePageChange,
@@ -16,23 +15,37 @@ const UserOrders = () => {
     } = useUserGetAllOrders();
 
     const renderOrderItems = () => {
-        if (loading) return <Spinner animation="border" variant="primary" />;
-        if (error) return <h4 className="error">Something went wrong</h4>;
-        if (orders?.length >= 1) {
-            return orders.map((orderItem, index) => (
-                <OrderItem key={index} orderItem={orderItem} />
+        if ((orders && orders?.length >= 1) && !loading && !error) {
+            return orders.map((order, index) => (
+                <OrderCard key={index} order={order}/>
             ));
+        } else if (!loading && !orders && error) {
+            return <h4 className="error">Something went wrong</h4>
+        } else if ((orders && orders?.length < 1) && !loading && !error) {
+            return <h6>No orders found</h6>;
         }
-        return <h6>No orders yet</h6>;
     };
 
     return (
         <Container>
-            <div className="admin-content-text pb-4">Welcome {userName}</div>
-            <div className="admin-content-text pb-4">{results} Orders</div>
-            <Row className="justify-content-between flex-column">
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
+
+            <Row>
+                <div className="page-header mt-4">
+                    <ShoppingCart style={{fontSize: "45px"}}/>
+                    <span className="page-header-text"> Orders </span>
+                </div>
+            </Row>
+
+            <Row className="justify-content-between flex-column mt-4">
                 {renderOrderItems()}
             </Row>
+
             {paginate?.pages >= 2 && (
                 <Pagination
                     onPress={handlePageChange}

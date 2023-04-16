@@ -74,7 +74,9 @@ const CartItem = ({item}) => {
                         </div>
                     </Col>
 
-                    {item?.color && <div className="color" style={{backgroundColor: item?.color}}/>}
+                    <Col>
+                        {item?.color && <div className="color" style={{backgroundColor: item?.color}}/>}
+                    </Col>
 
                     <div className="d-flex flex-row gap-2 align-items-center mt-2">
                         <Rating

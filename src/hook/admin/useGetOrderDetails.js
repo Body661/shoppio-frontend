@@ -1,37 +1,32 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import {getOneOrder} from '../../redux/actions/orderActions';
+import {getOrderDetails} from '../../redux/actions/orderActions';
 
 const useGetOrderDetails = (id) => {
     const [loading, setLoading] = useState(true);
-    const [orderData, setOrderData] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
+    const [orderData, setOrderData] = useState(null);
     const dispatch = useDispatch()
-
 
     const get = async () => {
         setLoading(true)
-        await dispatch(getOneOrder(id))
+        await dispatch(getOrderDetails(id))
         setLoading(false)
     }
 
     useEffect(() => {
         get()
-    }, [])
+    }, [id])
 
-    const order = useSelector(state => state.orderReducer.getOneOrder)
+    const order = useSelector(state => state.orderReducer.orderDetails)
 
     useEffect(() => {
         if (loading === false) {
-            if (order?.data?.data)
-                setOrderData(order?.data?.data)
-            if (order?.data?.data?.cartItems)
-                setCartItems(order?.data?.data?.cartItems)
+            if (order?.data?.data) setOrderData(order?.data?.data)
         }
     }, [loading, order])
 
 
-    return {orderData, cartItems}
+    return {orderData, loading}
 
 }
 

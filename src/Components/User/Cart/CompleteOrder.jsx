@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Row, Col, FormControl, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import useApplyCoupon from '../../../hook/user/cart/useApplyCoupon';
 
 const CompleteOrder = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCouponName, onClick}) => {

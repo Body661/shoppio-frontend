@@ -3,7 +3,7 @@ import {Row, Col} from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
 import useChangeOrderStatus from '../../../hook/admin/useChangeOrderStatus';
 import useGetOrderDetails from '../../../hook/admin/useGetOrderDetails';
-import OrderItem from '../../User/Order/OrderItem';
+import OrderCard from '../../User/Order/OrderCard';
 
 const AdminOrderDetails = () => {
     const {id} = useParams();
@@ -24,7 +24,7 @@ const AdminOrderDetails = () => {
 
     return (
         <div>
-            <OrderItem orderItem={orderData}/>
+            <OrderCard orderItem={orderData}/>
 
             <Row className="justify-content-center mt-4 user-data">
                 <Col xs="12" className=" d-flex">

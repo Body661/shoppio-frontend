@@ -2,7 +2,7 @@ import * as types from '../types';
 
 const init = {
     getAllOrders: null,
-    getOneOrder: null,
+    orderDetails: null,
     changePay: null,
     deliveryStatus: null,
 }
@@ -16,7 +16,7 @@ const orderReducer = (state = init, action) => {
         case types.GET_ONE_ORDER:
             return {
                 ...state,
-                getOneOrder: action.payload,
+                orderDetails: action.payload,
             }
         case types.UPDATE_ORDER_PAY:
             return {

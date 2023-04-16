@@ -5,13 +5,9 @@ import {getAllOrders} from '../../redux/actions/orderActions';
 const useUserGetAllOrders = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [results, setResults] = useState(0);
     const [paginate, setPaginate] = useState({});
     const [ordersData, setOrdersData] = useState([]);
     const dispatch = useDispatch();
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userName = user ? user.name : '';
 
     const fetchData = async () => {
         setLoading(true);
@@ -25,7 +21,7 @@ const useUserGetAllOrders = () => {
 
     const handlePageChange = async (page) => {
         setLoading(true);
-        await dispatch(getAllOrders(page, 5));
+        await dispatch(getAllOrders(page, 50));
         setLoading(false);
     };
 
@@ -35,15 +31,12 @@ const useUserGetAllOrders = () => {
 
     useEffect(() => {
         if (!loading) {
-            if (orders?.data?.amount) setResults(orders.data.amount);
             if (orders?.data?.paginationRes) setPaginate(orders.data.paginationRes);
             if (orders?.data?.data) setOrdersData(orders.data.data);
         }
     }, [loading, orders]);
 
     return {
-        userName,
-        results,
         paginate,
         orders: ordersData,
         handlePageChange,
