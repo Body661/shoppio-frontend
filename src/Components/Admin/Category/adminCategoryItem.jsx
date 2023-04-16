@@ -62,7 +62,7 @@ function AdminCategoryItem({category}) {
                     </div>
                 </div>
 
-                <Link to={`/categories/${category?._id}`} style={{textDecoration: 'none'}}>
+                <Link to={`/categories/${category?._id}`}>
                     <div
                         className="category-card"
                         style={{backgroundImage: `URL(${category?.img})`}}

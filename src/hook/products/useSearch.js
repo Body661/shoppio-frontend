@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllProductsSearch } from '../../redux/actions/productActions'
+import {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {getAllProductsSearch} from '../../redux/actions/productActions'
 
 const useSearch = () => {
     const [items, setItems] = useState(null)
@@ -54,7 +54,8 @@ const useSearch = () => {
         }
     }
 
-    const getProduct = async () => {
+    const getProducts = async () => {
+        setLoading(true)
         const {
             searchWord,
             catChecked,
@@ -66,9 +67,11 @@ const useSearch = () => {
         const sort = sortData()
 
         await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&keyword=${searchWord}&${catChecked}&${brandChecked}${priceFromString}${priceToString}`))
+        setLoading(false)
     }
 
     const onPress = async (page) => {
+        setLoading(true)
         const {
             searchWord,
             catChecked,
@@ -80,10 +83,11 @@ const useSearch = () => {
         const sort = sortData()
 
         await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&page=${page}&keyword=${searchWord}&${catChecked}&${brandChecked}${priceFromString}${priceToString}`))
+        setLoading(false)
     }
 
     useEffect(() => {
-        getProduct()
+        getProducts()
     }, [])
 
     const allProducts = useSelector(state => state.productReducer.allProducts)
@@ -106,10 +110,9 @@ const useSearch = () => {
         } else {
             setError(false)
         }
-        setLoading(false);
     }, [allProducts, loading])
 
-    return { items, pagination, onPress, getProduct, results, error, loading }
+    return {items, pagination, onPress, getProducts, results, error, loading}
 }
 
 export default useSearch

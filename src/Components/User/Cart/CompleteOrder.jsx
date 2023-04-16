@@ -2,10 +2,8 @@ import React, {useEffect} from 'react';
 import {Row, Col, FormControl, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import useApplyCoupon from '../../../hook/user/cart/useApplyCoupon';
-import useDeleteCart from "../../../hook/user/cart/useDeleteCart";
 
-const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCouponName}) => {
-    const {handleClearCart} = useDeleteCart();
+const CompleteOrder = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCouponName, onClick}) => {
     const {couponName, onChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
 
     useEffect(() => {
@@ -44,20 +42,13 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoupo
                     </Button>
                 </div>
 
-                <Link to='/order/pay-method' className="mt-2">
-                    <Button className="btn-outline-light btn-dark b-radius-10 w-100"
-                            style={{transition: "0.5s"}}>
-                        Complete order
-                    </Button>
-                </Link>
-
-                <Button onClick={handleClearCart} className="btn-outline-light btn-dark b-radius-10 w-100 mt-2"
+                <Button onClick={onClick} className="btn-outline-light btn-dark b-radius-10 w-100 mt-2"
                         style={{transition: "0.5s"}}>
-                    Clear cart
+                    Complete order
                 </Button>
             </Col>
         </Row>
     );
 };
 
-export default CartCheckout;
+export default CompleteOrder;

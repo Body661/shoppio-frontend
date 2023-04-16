@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
 import { getAllUserCartItems } from '../../../redux/actions/cartActions';
 
 const useUserCart = () => {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
-    const [itemsNum, setItemsNum] = useState(0);
+    const [itemsAmount, setItemsNum] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [couponName, setCouponName] = useState('');
     const [totalCartPrice, setTotalCartPrice] = useState(0);
@@ -51,7 +50,7 @@ const useUserCart = () => {
     }, [isLoading, userCart]);
 
     return {
-        itemsNum,
+        itemsAmount,
         cartItems,
         totalCartPrice,
         couponName,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useSearch from '../useSearch';
 
 const useNavbarSearch = () => {
-    const { getProduct } = useSearch();
+    const { getProducts } = useSearch();
     const [searchWord, setSearchWord] = useState('');
 
     const handleChangeSearch = (e) => {
@@ -17,7 +17,7 @@ const useNavbarSearch = () => {
             if (path !== '/products') {
                 window.location.href = '/products';
             } else {
-                getProduct();
+                getProducts();
             }
         }
     };

@@ -3,10 +3,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import useSearch from '../useSearch';
 import {getAllCategories} from '../../../redux/actions/CategoryActions';
 import {getAllBrands} from '../../../redux/actions/BrandActions';
-import brandReducer from "../../../redux/reducers/brandReducer";
 
 const useSidebarSearch = () => {
-    const {getProduct} = useSearch();
+    const {getProducts} = useSearch();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,7 +29,7 @@ const useSidebarSearch = () => {
 
     const updateProduct = () => {
         setTimeout(() => {
-            getProduct();
+            getProducts();
         }, 1000);
     };
 

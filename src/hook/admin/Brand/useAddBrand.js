@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createBrand} from '../../../redux/actions/BrandActions';
-import 'react-toastify/dist/ReactToastify.css';
 import avatar from '../../../images/avatar.png';
 import {toast} from "react-toastify";
 

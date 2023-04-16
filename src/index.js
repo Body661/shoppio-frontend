@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import {ProSidebarProvider} from 'react-pro-sidebar';
 import "react-image-gallery/styles/css/image-gallery.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
     <React.StrictMode>

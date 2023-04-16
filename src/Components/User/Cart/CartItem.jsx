@@ -1,6 +1,10 @@
-import {Button, Col, Modal, Row} from 'react-bootstrap';
-import deleteIcon from '../../../images/delete.png';
+import {Button, Col, FormControl, Modal, Row} from 'react-bootstrap';
 import useDeleteCart from '../../../hook/user/cart/useDeleteCart';
+import {Link} from "react-router-dom";
+import React from "react";
+import {Rating} from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import {DeleteOutline} from "@mui/icons-material";
 
 const CartItem = ({item}) => {
 
@@ -15,7 +19,7 @@ const CartItem = ({item}) => {
     } = useDeleteCart(item);
 
     return (
-        <Col xs="12" className="cart-item-body my-2 d-flex px-2">
+        <Col className="cart-item-body w-100">
             <Modal show={show} onHide={handleShow}>
                 <Modal.Header>
                     <Modal.Title>
@@ -23,12 +27,10 @@ const CartItem = ({item}) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="font">
-                        Are you sure you want to delete this product from your cart?
-                    </div>
+                    <div className="font"> Are you sure you want to delete this product from your cart?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="font" variant="success" onClick={handleClose}>
+                    <Button className="font" variant="outline-dark" onClick={handleClose}>
                         Cancel
                     </Button>
                     <Button className="font" variant="dark" onClick={handleDeleteItem}>
@@ -37,62 +39,59 @@ const CartItem = ({item}) => {
                 </Modal.Footer>
             </Modal>
 
-            <img
-                width="160px"
-                height="197px"
-                src={item?.product?.cover}
-                alt={item?.product?.title}
-            />
-            <div className="w-100">
-                <Row className="justify-content-between">
-                    <Col sm="12" className=" d-flex flex-row justify-content-between">
-                        <div className="d-inline pt-2 xs-black-text">
-                            {item?.product?.category?.name || 'No category'}
-                        </div>
-                        <div
-                            className="d-flex pt-2 "
-                            style={{cursor: 'pointer'}}
-                            onClick={handleShow}
-                        >
-                            <img src={deleteIcon} alt="" width="20px" height="24px"/>
-                            <div className="xs-black-text d-inline me-2">Delete</div>
-                        </div>
-                    </Col>
-                </Row>
-                <Row className="justify-content-center mt-2">
-                    <Col sm="12" className=" d-flex flex-row justify-content-start">
-                        <div className="d-inline pt-2 cat-title">
-                            {item?.product?.title || 'Product title not available'}
-                        </div>
-                        <div className="d-inline pt-2 cat-rate me-2">
-                            {item?.product?.ratingsAvg || 'No rating'}
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="12" className="mt-1">
-                        <div className="xs-black-text d-inline">Brand :</div>
-                        <div className="brand-text d-inline mx-1">
-                            {item?.product?.brand?.name || 'Unknown'}
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="12" className="mt-1 d-flex">
-                        {item?.color && (
-                            <div
-                                className="color ms-2 border"
-                                style={{backgroundColor: `${item?.color}`}}
-                            ></div>
-                        )}
-                    </Col>
-                </Row>
+            <div className="w-100 d-flex align-items-center gap-4" style={{height: "200px"}}>
+                <div style={{width: "200px", backgroundColor: "var(--main-gray)"}} className="h-100 d-flex b-radius-20">
+                    <img
+                        style={{objectFit: "contain"}}
+                        width="100%"
+                        src={item?.product?.cover}
+                        alt={item?.product?.title}
+                        className="p-2"
+                    />
+                </div>
 
-                <Row className="justify-content-between">
-                    <Col sm="12" className=" d-flex flex-row justify-content-between">
-                        <div className="d-inline pt-2 d-flex">
-                            <div className="xs-black-text mt-2  d-inline">Quantity:</div>
-                            <input
+                <Row>
+                    <div className="d-inline pt-2 xs-black-text">
+                        {item?.product?.brand?.name || "Brand not found"}
+                    </div>
+
+                    <Col sm="12" className=" d-flex flex-row justify-content-between align-items-center">
+                        <Link to={`/products/${item?.product?._id}`} className="pt-2 fw-bold">
+                            {item?.product?.title || 'Product title not available'}
+                        </Link>
+
+                        <div>
+                            <div className="xs-black-text d-inline me-2">
+                                {item?.priceAfterDiscount >= 1 ?
+                                    (<>
+                                        <span style={{textDecorationLine: 'line-through'}}>
+                                            €{item?.price}
+                                        </span>
+
+                                        <span className="fw-bold fs-5"> €{item?.priceAfterDiscount}</span>
+                                    </>) : (<span className="fw-bold fs-5"> €{item?.price} </span>)}
+                            </div>
+                        </div>
+                    </Col>
+
+                    {item?.color && <div className="color" style={{backgroundColor: item?.color}}/>}
+
+                    <div className="d-flex flex-row gap-2 align-items-center mt-2">
+                        <Rating
+                            name="simple-controlled"
+                            value={item?.product?.ratingsAvg}
+                            readOnly
+                            icon={<StarIcon style={{color: "black"}} fontSize="20px" color="black"/>}
+                            emptyIcon={<StarIcon style={{opacity: 1}} fontSize="20px"/>}
+                            precision={0.5}
+                        />
+                        <span>({item?.product?.ratingsQuantity})</span>
+                    </div>
+
+                    <Col sm="12">
+                        <div className="d-inline pt-2 d-flex align-items-center">
+                            <FormControl
+                                min={0}
                                 value={itemCount}
                                 onChange={handleChangeCount}
                                 className="mx-2 text-center"
@@ -100,10 +99,9 @@ const CartItem = ({item}) => {
                                 style={{width: "60px", height: "40px"}}
                             />
                             <Button onClick={handleUpdateCart} className='btn btn-dark'>Apply</Button>
-                        </div>
-                        <div className="d-inline pt-2 brand-text">
-                            {item?.product?.priceAfterDiscount >= 1 ? (<><span
-                                style={{textDecorationLine: 'line-through'}}>{item?.product?.price}</span> {item?.product?.priceAfterDiscount}</>) : item?.product?.price} Euro
+
+                            <DeleteOutline className="ps-2" onClick={handleShow}
+                                           style={{fontSize: "40px", cursor: "pointer"}}/>
                         </div>
                     </Col>
                 </Row>

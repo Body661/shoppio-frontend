@@ -22,7 +22,7 @@ const AdminBrands = () => {
     }
 
     return (
-        <div style={{minHeight: '670px'}}>
+        <div style={{minHeight: '80vh'}}>
             {content}
             {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
         </div>

@@ -4,7 +4,7 @@ import ChoosePayMethod from '../../../Components/User/Cart/ChoosePayMethod'
 
 const ChoosePayMethodPage = () => {
     return (
-        <Container style={{minHeight:'670px'}}>
+        <Container style={{minHeight:'80vh'}}>
            <ChoosePayMethod />
         </Container>
     )

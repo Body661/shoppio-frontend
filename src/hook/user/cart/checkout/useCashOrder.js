@@ -14,8 +14,7 @@ const useCashOrder = () => {
     const dispatch = useDispatch();
     const {cartID} = useUserCart();
 
-    const handleChooseAddress = async (e) => {
-        const id = e.target.value.trim();
+    const handleChooseAddress = async (id) => {
         setLoading(true);
         await dispatch(getOneUserAddress(id));
         setLoading(false);

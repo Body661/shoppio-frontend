@@ -1,23 +1,29 @@
 import React from 'react'
 import {Col, Container, Row} from 'react-bootstrap'
-import CategoryHeader from '../../Components/Category/CategoryHeader'
 import Pagination from '../../Components/Utility/Pagination'
 import SortResults from '../../Components/Utility/sortResults'
 import SideFilter from '../../Components/Utility/SideFilter'
 import useSearch from "../../hook/products/useSearch";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
+import {Backdrop, CircularProgress} from "@mui/material";
 
 const ProductsPage = () => {
 
-    const {items, pagination, onPress, getProduct, error, loading} = useSearch();
+    const {items, pagination, onPress, getProducts, error, loading} = useSearch();
     let pageCount
     if (pagination) pageCount = pagination;
 
     return (
         <div style={{minHeight: "80vh"}}>
-            <CategoryHeader/>
             <Container>
-                <SortResults onClick={getProduct} title={` ${items?.length || 0} Search result`}/>
+                <Backdrop
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                    open={loading}
+                >
+                    <CircularProgress color="inherit"/>
+                </Backdrop>
+
+                <SortResults onClick={getProducts} title={` ${items?.length || 0} Search result`}/>
                 <Row className='d-flex flex-row align-items-start products-page-space-between'>
                     <Col xs="1" sm="1" md="1" className='d-flex'>
                         <SideFilter/>

@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
 import {applyCartCoupon} from '../../../redux/actions/cartActions';
 import {toast} from "react-toastify";
 
