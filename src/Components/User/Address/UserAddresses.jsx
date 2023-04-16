@@ -1,4 +1,4 @@
-import {Row, Col, Container} from 'react-bootstrap';
+import {Row, Col, Container, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import useViewAddresses from '../../../hook/user/useViewAddresses';
 import ProfileAddressCard from "./ProfileAddressCard";
@@ -30,7 +30,7 @@ const UserAddresses = () => {
 
             <Col sm="12" className="d-flex justify-content-center mt-4">
                 <Link to="/user/add-address" style={{textDecoration: 'none'}}>
-                    <button className="btn-save">Add new address</button>
+                    <Button className="btn-dark b-radius-10">Add new address</Button>
                 </Link>
             </Col>
         </Row>

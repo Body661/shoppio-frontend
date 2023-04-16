@@ -35,7 +35,7 @@ const ChangePassword = () => {
                             required
                             type="password"
                             minLength={8}
-                            className="input-form d-block mt-3 px-3"
+                            className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Old password"
                             name="old password"
                             value={oldPassword}
@@ -46,7 +46,7 @@ const ChangePassword = () => {
                             required
                             type="password"
                             minLength={8}
-                            className="input-form d-block mt-3 px-3"
+                            className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="New password"
                             name="new password"
                             value={newPassword}
@@ -57,14 +57,14 @@ const ChangePassword = () => {
                             required
                             minLength={8}
                             type="password"
-                            className="input-form d-block mt-3 px-3"
+                            className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Confirm new password"
                             name="confirm new password"
                             value={confirmNewPassword}
                             onChange={handleChangeConfirmPass}
                         />
 
-                        <Button onClick={handleUpdatePassword} className="mt-3" variant="dark">
+                        <Button onClick={handleUpdatePassword} className="mt-3 b-radius-10" variant="dark">
                             Save new password
                         </Button>
                     </Form>

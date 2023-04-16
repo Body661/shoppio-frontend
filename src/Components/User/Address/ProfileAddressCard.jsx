@@ -28,7 +28,7 @@ const ProfileAddressCard = ({address}) => {
     const renderInput = (name, placeholder) => (
         <FormControl
             type="text"
-            className="input-form d-block mt-3 px-3"
+            className="input-form d-block mt-3 px-3 b-radius-10"
             placeholder={placeholder}
             value={addressInfo[name]}
             onChange={handleChangeAddress}
@@ -58,10 +58,10 @@ const ProfileAddressCard = ({address}) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="outline-dark" onClick={handleCloseDeleteModal}>
+                    <Button variant="outline-dark" className="b-radius-10" onClick={handleCloseDeleteModal}>
                         Cancel
                     </Button>
-                    <Button variant="dark" onClick={handleDeleteAddress}>
+                    <Button variant="dark" className="b-radius-10" onClick={handleDeleteAddress}>
                         Delete
                     </Button>
                 </Modal.Footer>
@@ -85,10 +85,10 @@ const ProfileAddressCard = ({address}) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="outline-dark" onClick={handleCloseUpdateModal}>
+                    <Button variant="outline-dark" className="b-radius-10" onClick={handleCloseUpdateModal}>
                         Cancel
                     </Button>
-                    <Button variant="dark" onClick={handleUpdateAddress}>
+                    <Button variant="dark" className="b-radius-10" onClick={handleUpdateAddress}>
                         Save changes
                     </Button>
                 </Modal.Footer>

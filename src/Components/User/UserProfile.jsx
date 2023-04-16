@@ -1,4 +1,4 @@
-import {Row, Col, Modal, Button, FormControl, Form} from 'react-bootstrap';
+import {Row, Col, Modal, Button, FormControl} from 'react-bootstrap';
 import useUserProfile from '../../hook/user/useUserProfile';
 import {Backdrop, CircularProgress} from "@mui/material";
 import {EditOutlined, Person} from "@mui/icons-material";
@@ -41,30 +41,30 @@ const UserProfile = () => {
                         value={name}
                         onChange={onChangeName}
                         type="text"
-                        className="input-form font d-block mt-3 px-3"
+                        className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Name"
                     />
                     <FormControl
                         value={email}
                         onChange={onChangeEmail}
                         type="email"
-                        className="input-form font d-block mt-3 px-3"
+                        className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Email"
                     />
                     <FormControl
                         value={phone}
                         onChange={onChangePhone}
                         type="phone"
-                        className="input-form font d-block mt-3 px-3"
+                        className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Phone"
                     />
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="outline-dark" onClick={handleCloseUpdateModal}>
+                    <Button variant="outline-dark" className="b-radius-10" onClick={handleCloseUpdateModal}>
                         Cancel
                     </Button>
-                    <Button variant="dark" onClick={handleUpdateProfile}>
+                    <Button variant="dark" className="b-radius-10" onClick={handleUpdateProfile}>
                         Save changes
                     </Button>
                 </Modal.Footer>
