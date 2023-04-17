@@ -36,9 +36,9 @@ export const getOrderDetails = (id) => async (dispatch) => {
     }
 }
 
-export const changeOrderPay = (id) => async (dispatch) => {
+export const changeOrderPay = (id, status) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/order/${id}/pay`);
+        const response = await useUpdateData(`/order/${id}/pay`, status);
 
         dispatch({
             type: UPDATE_ORDER_PAY,
@@ -53,9 +53,9 @@ export const changeOrderPay = (id) => async (dispatch) => {
     }
 }
 
-export const changeOrderDelivery = (id) => async (dispatch) => {
+export const changeOrderDelivery = (id, status) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/order/${id}/delivered`);
+        const response = await useUpdateData(`/order/${id}/delivered`, status);
 
         dispatch({
             type: UPDATE_ORDER_DELIVER,

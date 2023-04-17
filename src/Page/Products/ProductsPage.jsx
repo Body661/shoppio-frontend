@@ -10,8 +10,6 @@ import {Backdrop, CircularProgress} from "@mui/material";
 const ProductsPage = () => {
 
     const {items, pagination, onPress, getProducts, error, loading} = useSearch();
-    let pageCount
-    if (pagination) pageCount = pagination;
 
     return (
         <div style={{minHeight: "80vh"}}>
@@ -32,7 +30,7 @@ const ProductsPage = () => {
                         <ProductsContainer products={items} loading={loading} error={error} xSmall={12} small={8} medium={6} large={4}/>
                     </Col>
                 </Row>
-                {pageCount > 1 && <Pagination pageCount={pageCount} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
             </Container>
         </div>
     )

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllProductsSearch} from '../../redux/actions/productActions'
+import {useNavigate} from "react-router-dom";
 
 const useSearch = () => {
     const [items, setItems] = useState(null)
@@ -9,15 +10,21 @@ const useSearch = () => {
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
 
+    const [priceFrom, setPriceFrom] = useState('')
+    const [priceTo, setPriceTo] = useState('')
+    const [searchWord, setSearchWord] = useState('')
+    const [checkedCategory, setCategory] = useState([])
+    const [checkedBrand, setBrand] = useState([])
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+    const handlePriceFrom = (e) => setPriceFrom(e.target.value)
+    const handlePriceTo = (e) => setPriceTo(e.target.value)
+    const handleSearchWord = (e) => setSearchWord(e.target.value)
+    const handleCheckCategory = (categories) => setCategory(categories)
+    const handleCheckBrand = (brands) => setBrand(brands)
 
     const getSearchParams = () => {
-        const searchWord = sessionStorage.getItem('searchWord') || ''
-        const catChecked = sessionStorage.getItem('catChecked') || ''
-        const brandChecked = sessionStorage.getItem('brandChecked') || ''
-        const priceTo = sessionStorage.getItem('priceTo') || ''
-        const priceFrom = sessionStorage.getItem('priceFrom') || ''
-
         let priceFromString = ''
         let priceToString = ''
 
@@ -31,10 +38,12 @@ const useSearch = () => {
 
         return {
             searchWord,
-            catChecked,
-            brandChecked,
+            checkedCategory,
+            checkedBrand,
             priceFromString,
-            priceToString
+            priceToString,
+            priceFrom,
+            priceTo
         }
     }
 
@@ -57,38 +66,37 @@ const useSearch = () => {
     const getProducts = async () => {
         setLoading(true)
         const {
-            searchWord,
-            catChecked,
-            brandChecked,
             priceFromString,
             priceToString
         } = getSearchParams()
 
         const sort = sortData()
 
-        await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&keyword=${searchWord}&${catChecked}&${brandChecked}${priceFromString}${priceToString}`))
+        const categories = checkedCategory.map(val => 'category=' + val).join('&');
+        const brands = checkedBrand.map(val => 'brand=' + val).join('&');
+
+        await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&keyword=${searchWord}&${categories}&${brands}${priceFromString}${priceToString}`))
         setLoading(false)
     }
 
     const onPress = async (page) => {
         setLoading(true)
         const {
-            searchWord,
-            catChecked,
-            brandChecked,
             priceFromString,
             priceToString
         } = getSearchParams()
 
         const sort = sortData()
 
-        await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&page=${page}&keyword=${searchWord}&${catChecked}&${brandChecked}${priceFromString}${priceToString}`))
+        await dispatch(getAllProductsSearch(`sort=${sort}&limit=50&page=${page}&keyword=${searchWord}&${checkedCategory}&${checkedBrand}${priceFromString}${priceToString}`))
         setLoading(false)
     }
 
     useEffect(() => {
-        getProducts()
-    }, [])
+        setTimeout( async () => {
+            await getProducts()
+        }, 1000)
+    }, [searchWord, priceFrom, priceTo])
 
     const allProducts = useSelector(state => state.productReducer.allProducts)
 
@@ -112,7 +120,21 @@ const useSearch = () => {
         }
     }, [allProducts, loading])
 
-    return {items, pagination, onPress, getProducts, results, error, loading}
+    return {
+        items,
+        pagination,
+        onPress,
+        getProducts,
+        results,
+        error,
+        loading,
+        handleSearchWord,
+        handleCheckCategory,
+        handlePriceTo,
+        handlePriceFrom,
+        handleCheckBrand,
+        getSearchParams,
+    }
 }
 
 export default useSearch

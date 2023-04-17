@@ -6,13 +6,8 @@ import {useParams} from 'react-router-dom';
 import UseProductsByCategory from "../../hook/products/useProductsByCategory";
 
 const ProductsByCategoryPage = () => {
-
     const {id} = useParams()
-
-    const {items, pagination, onPress} = UseProductsByCategory(id)
-
-    let pageCount = 0;
-    if (pagination) pageCount = pagination
+    const {items, pagination, onPress, loading} = UseProductsByCategory(id)
 
     return (
         <div style={{minHeight: "80vh"}}>
@@ -20,11 +15,11 @@ const ProductsByCategoryPage = () => {
             <Container>
                 <Row className='d-flex flex-row justify-content-center'>
                     <Col>
-                        <CardProductsContainer products={items}/>
+                        <CardProductsContainer products={items} loading={loading}/>
                     </Col>
                 </Row>
 
-                {pageCount > 1 && <Pagination pageCount={pageCount} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
             </Container>
         </div>
     )

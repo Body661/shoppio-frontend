@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import UserSideBar from '../../../Components/User/UserSideBar'
-import OrderDetails from '../../../Components/User/Order/OrderDetails'
+import OrderDetails from "../../../Components/Order/OrderDetails";
 const UserOrderPage = () => {
     return (
         <Container style={{minHeight: "80vh"}}>

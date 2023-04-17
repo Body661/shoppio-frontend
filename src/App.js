@@ -3,7 +3,7 @@ import {useJwt} from "react-jwt";
 import {ToastContainer} from "react-toastify";
 import HomePage from "./Page/Home/HomePage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import NavBarLogin from "./Components/Utility/NavBarLogin";
+import NavBar from "./Components/Utility/NavBar";
 import Footer from "./Components/Utility/Footer";
 import LoginPage from './Page/Auth/LoginPage';
 import RegisterPage from "./Page/Auth/RegisterPage";
@@ -66,7 +66,7 @@ function App() {
     return (
         <>
             <BrowserRouter>
-                <NavBarLogin isUser={isUser}/>
+                <NavBar isUser={isUser}/>
 
                 <Routes>
                     <Route index element={<HomePage/>}/>

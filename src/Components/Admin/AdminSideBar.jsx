@@ -1,50 +1,76 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Menu, Sidebar, sidebarClasses, useProSidebar} from "react-pro-sidebar";
+import {Button} from "react-bootstrap";
+import {MenuOutlined} from "@mui/icons-material";
 
 const AdminSideBar = () => {
+    const {toggleSidebar, broken} = useProSidebar();
+
     return (
-        <div className="sidebar">
-            <div className="d-flex flex-column">
-                <Link to="/admin/orders">
-                    <div className="admin-side-text mt-3 border-bottom p-2 mx-auto text-center">
-                        Manage orders
-                    </div>
-                </Link>
-                <Link to="/admin/user-management">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Manage users
-                    </div>
-                </Link>
-                <Link to="/admin/products">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Manage products
-                    </div>
-                </Link>
-                <Link to="/admin/brands">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Manage brands
-                    </div>
-                </Link>
+        <div style={{display: 'flex', zIndex: "100"}}>
+            <Sidebar className="side-bar" customBreakPoint="768px" style={{overflow: "hidden"}}
+                     rootStyles={{
+                         [`.${sidebarClasses.container}`]: {
+                             backgroundColor: 'white',
+                             boxShadow: "none !important",
+                         },
+                         [`.${sidebarClasses.root}`]: {
+                             boxShadow: "none !important",
+                             border: "none"
+                         }
 
-                <Link to="/admin/categories">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Manage categories
-                    </div>
-                </Link>
+                     }}>
+                <Menu className="p-3 d-flex flex-column gap-2">
+                    <div className="d-flex flex-column">
+                        <Link to="/admin/orders">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Manage orders
+                            </Button>
+                        </Link>
+                        <Link to="/admin/user-management">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Manage users
+                            </Button>
+                        </Link>
+                        <Link to="/admin/products">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Manage products
+                            </Button>
+                        </Link>
+                        <Link to="/admin/brands">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Manage brands
+                            </Button>
+                        </Link>
 
-                <Link to="/admin/subcategories">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Add subcategory
-                    </div>
-                </Link>
-                <Link to="/admin/coupons">
-                    <div className="admin-side-text my-1 border-bottom p-2 mx-auto text-center">
-                        Add coupon
-                    </div>
-                </Link>
+                        <Link to="/admin/categories">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Manage categories
+                            </Button>
+                        </Link>
 
-            </div>
+                        <Link to="/admin/subcategories">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Add subcategory
+                            </Button>
+                        </Link>
+                        <Link to="/admin/coupons">
+                            <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
+                                Add coupon
+                            </Button>
+                        </Link>
+                    </div>
+                </Menu>
+            </Sidebar>
+            <main style={{padding: 10}}>
+                {broken && (
+                    <MenuOutlined onClick={() => toggleSidebar()}/>
+                )}
+
+            </main>
         </div>
+
     )
 }
 

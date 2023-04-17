@@ -7,10 +7,7 @@ import UseProductsByBrand from "../../hook/products/useProductsByBrand";
 
 const ProductsByBrandPage = () => {
     const {id} = useParams()
-    const {items, pagination, onPress} = UseProductsByBrand(id)
-
-    let pageCount = 0;
-    if (pagination) pageCount = pagination
+    const {items, pagination, onPress, loading} = UseProductsByBrand(id)
     
     return (
         <div style={{minHeight: "80vh"}}>
@@ -18,11 +15,11 @@ const ProductsByBrandPage = () => {
             <Container>
                 <Row>
                     <Col className="d-flex justify-content-center align-items-center">
-                        <CardProductsContainer products={items}/>
+                        <CardProductsContainer products={items} loading={loading}/>
                     </Col>
                 </Row>
 
-                {pageCount > 1 && <Pagination pageCount={pageCount} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
             </Container>
         </div>
     )

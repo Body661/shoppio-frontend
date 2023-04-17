@@ -1,19 +1,13 @@
 import {Row, Col, Container} from 'react-bootstrap'
 import {Link, useParams} from "react-router-dom";
-import useGetOrderDetails from "../../../hook/admin/useGetOrderDetails";
 import {Backdrop, CircularProgress} from "@mui/material";
 import {ShoppingCart} from "@mui/icons-material";
+import useGetOrderDetails from "../../hook/admin/useGetOrderDetails";
+import ChangeOrderStatus from "../Admin/ChangeOrderStatus";
 
-const OrderDetails = () => {
+const OrderDetails = ({isAdmin}) => {
     const {id} = useParams();
     const {orderData, loading} = useGetOrderDetails(id);
-
-    const formatDate = (dateString) => {
-        const options = {year: "numeric", month: "numeric", day: "numeric"}
-        return new Date(dateString).toLocaleDateString(undefined, options)
-    }
-
-    console.log(orderData)
 
     return (
         <Container>
@@ -31,13 +25,16 @@ const OrderDetails = () => {
                 </div>
             </Row>
 
-            <Row className="d-flex flex-column gap-2 p-2 b-radius-10 mt-4"
+            <Row className="d-flex flex-column gap-2 p-3 align-items-center justify-content-center b-radius-10 mt-4"
                  style={{backgroundColor: "var(--main-gray)"}}>
                 {orderData?.cartItems && (orderData?.cartItems?.map((item, index) => {
-                    return (<Row className="d-flex align-items-center">
+                    return (<Row className="d-flex align-items-center b-radius-10"
+                                 style={{backgroundColor: "var(--main-white)"}}>
                         <Col xs="3" className="d-flex justify-content-start">
-                            <img width="100%" src={item?.product?.cover} alt={item?.product?.title}
-                                 style={{objectFit: "contain"}}/>
+                            <Link to={`/products/${item?.product?._id}`}>
+                                <img width="100%" src={item?.product?.cover} alt={item?.product?.title}
+                                     style={{objectFit: "contain"}}/>
+                            </Link>
                         </Col>
                         <Col xs="9" className="d-flex flex-column align-items-start" style={{
                             textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap",
@@ -160,13 +157,17 @@ const OrderDetails = () => {
                             Pay method:
                         </span>
                             <span>
-                            {orderData?.payMethod === "online" ? "Online" : "Cash"} ({orderData?.isPaid ? "Paid" : "Not paid yet"})
+                            {orderData?.paymentMethodType === "card" ? "Online" : "Cash"} ({orderData?.isPaid ? "Paid" : "Not paid yet"})
                         </span>
                         </div>
                     </Col>
                 </Row>
             </Row>
-        </Container>)
+            {
+                isAdmin && <ChangeOrderStatus order={orderData}/>
+            }
+        </Container>
+    )
 }
 
 export default OrderDetails

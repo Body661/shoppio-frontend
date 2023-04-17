@@ -35,14 +35,8 @@ const useProductsByBrand = (brandID) => {
         setLoading(false);
     }, [products, loading])
 
-    let items = [];
-    let pagination = [];
 
-    if (products?.data?.data) items = products?.data?.data;
-    if (products?.data?.paginationRes) pagination = products?.data?.pages;
-
-
-    return {items, pagination, onPress, loading, error}
+    return {items: products?.data?.data, pagination: products?.data?.pages, onPress, loading, error}
 }
 
 export default useProductsByBrand

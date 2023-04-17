@@ -5,13 +5,28 @@ import {getAllCategories} from '../../../redux/actions/CategoryActions';
 import {getAllBrands} from '../../../redux/actions/BrandActions';
 
 const useSidebarSearch = () => {
-    const {getProducts} = useSearch();
+    const {
+        handleCheckCategory,
+        handleCheckBrand,
+        getSearchParams,
+        getProducts
+    } = useSearch();
+
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false)
+    const {
+        checkedCategory,
+        checkedBrand,
+        priceToString,
+        priceFromString
+    } = getSearchParams()
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true)
             await dispatch(getAllCategories());
             await dispatch(getAllBrands());
+            setLoading(false)
         };
         fetchData();
     }, []);
@@ -22,80 +37,52 @@ const useSidebarSearch = () => {
     const category = allCategories?.data?.data || [];
     const brand = allBrands?.data?.data || [];
 
-    const [catChecked, setCatChecked] = useState([]);
-    const [brandChecked, setBrandChecked] = useState([]);
-    const [from, setPriceFrom] = useState(0);
-    const [to, setToFrom] = useState(0);
-
-    const updateProduct = () => {
-        setTimeout(() => {
-            getProducts();
+    const fetchProducts = () => {
+        setTimeout(async () => {
+            setLoading(true)
+            await getProducts();
+            setLoading(false)
         }, 1000);
     };
 
     const handleClickCategory = e => {
         const value = e.target.value;
         if (!value || value.trim() === '') {
-            setCatChecked([]);
+            handleCheckCategory([]);
         } else {
             if (e.target.checked) {
-                setCatChecked([...catChecked, value]);
+                handleCheckCategory([...checkedCategory, value]);
             } else {
-                const newArray = catChecked.filter(item => item !== value);
-                setCatChecked(newArray);
+                const newArray = checkedCategory.filter(item => item !== value);
+                handleCheckCategory(newArray);
             }
         }
     };
-
-    useEffect(() => {
-        const queryCat = catChecked.map(val => 'category=' + val).join('&');
-        sessionStorage.setItem('catChecked', queryCat);
-        updateProduct();
-    }, [catChecked]);
 
     const handleClickBrand = e => {
         const value = e.target.value;
         if (value === '0') {
-            setBrandChecked([]);
+            handleCheckBrand([]);
         } else {
             if (e.target.checked) {
-                setBrandChecked([...brandChecked, value]);
+                handleCheckBrand([...checkedBrand, value]);
             } else {
-                const newArray = brandChecked.filter(item => item !== value);
-                setBrandChecked(newArray);
+                const newArray = checkedBrand.filter(item => item !== value);
+                handleCheckBrand(newArray);
             }
         }
     };
 
     useEffect(() => {
-        const queryBrand = brandChecked.map(val => 'brand=' + val).join('&');
-        sessionStorage.setItem('brandChecked', queryBrand);
-        updateProduct();
-    }, [brandChecked]);
-
-    const handlePriceFrom = e => {
-        const value = e.target.value;
-        sessionStorage.setItem('priceFrom', value);
-        setPriceFrom(value);
-    };
-
-    const handlePriceTo = e => {
-        const value = e.target.value;
-        sessionStorage.setItem('priceTo', value);
-        setToFrom(value);
-    };
-
-    useEffect(() => {
-        updateProduct();
-    }, [from, to]);
+        fetchProducts();
+    }, [checkedCategory, checkedBrand, priceFromString, priceToString]);
 
     return {
         category,
         brand,
         handleClickCategory,
         handleClickBrand,
-        handlePriceFrom,
-        handlePriceTo,
+        loading
     };
 };
 

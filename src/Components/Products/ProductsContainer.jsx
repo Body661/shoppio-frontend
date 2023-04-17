@@ -1,7 +1,6 @@
-import {Col, Container, Row, Spinner} from 'react-bootstrap'
+import {Col, Container, Row} from 'react-bootstrap'
 import SectionTitle from '../Utility/SectionTitle'
 import HomeProductCard from './HomeProductCard'
-import React from "react";
 import useProductsContainer from "../../hook/products/useProductsContainer";
 import {Backdrop, CircularProgress} from "@mui/material";
 

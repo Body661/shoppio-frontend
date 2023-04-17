@@ -1,11 +1,11 @@
 import {Container, Row} from 'react-bootstrap';
 import OrderCard from './OrderCard';
-import useUserGetAllOrders from '../../../hook/user/useUserGetAllOrders';
-import Pagination from '../../Utility/Pagination';
 import {Backdrop, CircularProgress} from "@mui/material";
 import {ShoppingCart} from "@mui/icons-material";
+import useUserGetAllOrders from "../../hook/user/useUserGetAllOrders";
+import Pagination from "../Utility/Pagination";
 
-const UserOrders = () => {
+const OrdersContainer = ({isAdmin}) => {
     const {
         paginate,
         orders,
@@ -17,7 +17,7 @@ const UserOrders = () => {
     const renderOrderItems = () => {
         if ((orders && orders?.length >= 1) && !loading && !error) {
             return orders.map((order, index) => (
-                <OrderCard key={index} order={order}/>
+                <OrderCard key={index} order={order} isAdmin={isAdmin}/>
             ));
         } else if (!loading && !orders && error) {
             return <h4 className="error">Something went wrong</h4>
@@ -46,7 +46,7 @@ const UserOrders = () => {
                 {renderOrderItems()}
             </Row>
 
-            {paginate?.pages >= 2 && (
+            {paginate?.pages > 1 && (
                 <Pagination
                     onPress={handlePageChange}
                     pageCount={paginate?.pages ? paginate?.pages : 0}
@@ -56,4 +56,4 @@ const UserOrders = () => {
     );
 };
 
-export default UserOrders;
+export default OrdersContainer;

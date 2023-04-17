@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Navbar, Container, FormControl, Nav, NavDropdown, NavLink, NavbarBrand} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Navbar, Container, FormControl, Nav, NavDropdown, NavbarBrand} from 'react-bootstrap';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from '../../images/logo.png';
-import login from '../../images/login.png';
-import cart from '../../images/cart.png';
-import useNavbarSearch from '../../hook/products/search/useNavbarSearch';
 import NavbarToggle from "react-bootstrap/NavbarToggle";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
-import DropdownMenu from "react-bootstrap/DropdownMenu";
 import {Person, ShoppingCart} from "@mui/icons-material";
+import useSearch from "../../hook/products/useSearch";
 
-const NavBarLogin = ({isUser}) => {
-    const {handleKeyPressSearch, handleChangeSearch, searchWord} = useNavbarSearch();
+const NavBar = ({isUser}) => {
     const [user, setUser] = useState('');
+    const {handleSearchWord, getSearchParams} = useSearch()
+    const {searchWord} = getSearchParams()
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -24,6 +22,17 @@ const NavBarLogin = ({isUser}) => {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         setUser('');
+    };
+
+    const {getProducts} = useSearch();
+    const navigate = useNavigate();
+
+    const onClickSearch = async (e) => {
+        const path = window.location.pathname;
+        if (path !== '/products') {
+            navigate('/products')
+            await getProducts()
+        }
     };
 
     return (
@@ -53,8 +62,8 @@ const NavBarLogin = ({isUser}) => {
 
                     <FormControl
                         value={searchWord}
-                        onChange={handleChangeSearch}
-                        onKeyPress={handleKeyPressSearch}
+                        onChange={handleSearchWord}
+                        onClick={onClickSearch}
                         type="search"
                         placeholder="Search..."
                         className="me-2 w-100 text-center"
@@ -101,4 +110,4 @@ const NavBarLogin = ({isUser}) => {
 
 };
 
-export default NavBarLogin;
+export default NavBar;

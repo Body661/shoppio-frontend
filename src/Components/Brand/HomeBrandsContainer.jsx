@@ -7,16 +7,15 @@ const HomeBrandsContainer = ({brands, loading, error}) => {
 
     if (loading && !brands && !error) {
         content = <Spinner animation="border" variant="primary"/>;
-
-    } else if (!loading && !error && brands && brands?.length) {
+    } else if (!loading && !error && brands && brands?.length > 0) {
         content = brands.map((brand) => (
             <HomeBrandCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name}/>
         ));
 
-    } else if (!loading && !error && brands && !brands?.length) {
+    } else if (!loading && !error && (brands && brands?.length <= 0)) {
         content = <h4 className="notFound">No brands found</h4>;
 
-    } else {
+    } else if (!loading && error && (!brands || brands?.length <= 0)) {
         content = <h4 className="error">Something went wrong</h4>;
     }
 

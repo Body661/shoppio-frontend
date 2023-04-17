@@ -7,7 +7,7 @@ const UseAddToCart = (productId, item) => {
     const dispatch = useDispatch();
     const [indexColor, setIndexColor] = useState('');
     const [colorText, setColorText] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const colorClick = (index, color) => {
         setIndexColor(index);
@@ -37,7 +37,7 @@ const UseAddToCart = (productId, item) => {
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            } else if(res?.data?.error?.name === 'JsonWebTokenError'){
+            } else if (res?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',
                     toastId: 'addToCartLogin',
