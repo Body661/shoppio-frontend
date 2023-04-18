@@ -9,7 +9,7 @@ const useResetPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState(localStorage.getItem('user-email'));
     const [validated, setValidated] = useState(false);
@@ -19,7 +19,7 @@ const useResetPassword = () => {
     };
 
     const handleChangePasswordConfirm = (e) => {
-        setConfirmPassword(e.target.value);
+        setPasswordConfirm(e.target.value);
     };
 
     const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const useResetPassword = () => {
             return;
         }
 
-        if (password !== confirmPassword) {
+        if (password !== passwordConfirm) {
             toast("Password and confirm password do not match", {type: 'error'})
             return;
         }
@@ -69,7 +69,7 @@ const useResetPassword = () => {
 
     return {
         password,
-        confirmPassword,
+        passwordConfirm,
         handleChangePassword,
         handleChangePasswordConfirm,
         handleSubmit,

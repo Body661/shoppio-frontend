@@ -2,31 +2,32 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 import {deleteUser} from "../../../redux/actions/userManagementActions";
+import {useNavigate} from "react-router-dom";
 
 export const useDeleteUser = (id) => {
-    const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [loadingDeleteUser, setLoadingDeleteUser] = useState(true);
+    const navigate = useNavigate()
+    const handleCloseDeleteModal = () => setShowDeleteModal(false);
+    const handleShowDeleteModal = () => setShowDeleteModal(true);
 
     const dispatch = useDispatch();
 
-    const handelDelete = async () => {
-        setLoading(true)
+    const handleDelete = async () => {
+        setLoadingDeleteUser(true)
         await dispatch(deleteUser(id))
-        setShow(false);
-        setLoading(false)
+        setShowDeleteModal(false);
+        setLoadingDeleteUser(false)
     }
 
     const deleteResponse = useSelector(state => state.userManagementReducer.deleteUser)
 
     useEffect(() => {
-        if (!loading) {
+        if (!loadingDeleteUser) {
             if (deleteResponse && deleteResponse?.status === 200) {
                 toast("User deleted successfully", {type: 'success', toastId: 'deleteUserSuccess'});
                 setTimeout(() => {
-                    window.location.reload();
+                   navigate('/admin/user-management')
                 }, 1000)
             } else {
                 toast(deleteResponse?.data?.errors ? deleteResponse?.data?.errors[0]?.msg : "Error while deleting user", {
@@ -35,7 +36,7 @@ export const useDeleteUser = (id) => {
                 });
             }
         }
-    }, [loading, deleteResponse])
+    }, [loadingDeleteUser, deleteResponse])
 
-    return {show, handleClose, handleShow, handelDelete}
+    return {showDeleteModal, handleCloseDeleteModal, handleShowDeleteModal, handleDelete}
 }

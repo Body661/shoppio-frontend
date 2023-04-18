@@ -4,9 +4,9 @@ import {useInsertData} from "../../customHooks/useInsertData";
 import {useUpdateData} from "../../customHooks/useUpdateData";
 import useDeleteData from "../../customHooks/useDeleteData";
 
-export const getUsers = () => async (dispatch) => {
+export const getUsers = (role, email) => async (dispatch) => {
     try {
-        const response = await useGetDataToken('/users?limit=50')
+        const response = await useGetDataToken(`/users?limit=50&${role}&${email}`)
         dispatch({
             type: types.GET_ALL_USERS,
             payload: response
@@ -19,9 +19,9 @@ export const getUsers = () => async (dispatch) => {
     }
 }
 
-export const getUsersPage = (page) => async (dispatch) => {
+export const getUsersPage = (role, email, page) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/users?limit=50&page=${page}`);
+        const response = await useGetDataToken(`/users?limit=50&${role}&${email}&page=${page}`);
         dispatch({
             type: types.GET_ALL_USERS,
             payload: response

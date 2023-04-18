@@ -15,7 +15,7 @@ const useRegister = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [validated, setValidated] = useState(false);
 
     const handleChangeName = (e) => {
@@ -31,7 +31,7 @@ const useRegister = () => {
         setPassword(e.target.value);
     };
     const handleChangePasswordConfirm = (e) => {
-        setConfirmPassword(e.target.value);
+        setPasswordConfirm(e.target.value);
     };
 
     const validationValues = () => {
@@ -51,7 +51,7 @@ const useRegister = () => {
             toast("Password is not strong enough", {type: 'error'})
             return false;
         }
-        if (password.trim() !== confirmPassword.trim()) {
+        if (password.trim() !== passwordConfirm.trim()) {
             toast("Password and confirm password are not the same", {type: 'error'})
             return false;
         }
@@ -78,7 +78,7 @@ const useRegister = () => {
                     name,
                     email,
                     password,
-                    passwordConfirm: confirmPassword,
+                    passwordConfirm,
                     phone,
                 })
             );
@@ -111,7 +111,7 @@ const useRegister = () => {
         email,
         phone,
         password,
-        confirmPassword,
+        passwordConfirm,
         loading,
         handleChangeName,
         handleChangeEmail,

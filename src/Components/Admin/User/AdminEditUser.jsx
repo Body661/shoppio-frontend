@@ -1,11 +1,17 @@
-import {Button, Col, Container, Row, Spinner, FormSelect, FormText, FormControl, Form} from "react-bootstrap";
+import {Button, Col, Container, Row, Spinner, FormSelect, Form, FormControl, Modal} from "react-bootstrap";
 import {useEditUser} from "../../../hook/admin/user/useEditUser";
 import {useParams} from "react-router-dom";
 import React from "react";
+import {Backdrop, CircularProgress} from "@mui/material";
+import {DeleteOutline, Person} from "@mui/icons-material";
+import AddressCard from "../../User/Address/AddressCard";
+import OrderCard from "../../Order/OrderCard";
+import {useDeleteUser} from "../../../hook/admin/user/useDeleteUser";
 
 const AdminEditUser = () => {
     const {id} = useParams();
     const {
+        user,
         name,
         email,
         phone,
@@ -21,70 +27,121 @@ const AdminEditUser = () => {
         validated
     } = useEditUser(id)
 
+    const {showDeleteModal, handleCloseDeleteModal, handleShowDeleteModal, handleDelete} = useDeleteUser(id)
+
     return (
         <Container>
 
-            {loadingFetch && <Spinner animation="border" variant="primary"/>}
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={(loadingUpdate && isPress) || loadingFetch}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
 
-            {!loadingFetch &&
-                <Form validated={validated}>
-                    <Row className="justify-content-start">
-                        <div className="admin-content-text pb-4">Editing user details: {id}</div>
-                        <Col sm="8">
+            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+                <Modal.Header>
+                    <Modal.Title>
+                        <div>Confirm delete</div>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>Are you sure you want to delete this user?</div>
+                </Modal.Body>
 
-                            <Form.Group as={Col} controlId="validationCustom02">
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="User name"
-                                    value={name}
-                                    onChange={onChangeName}
-                                    className="mt-3"
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                            </Form.Group>
+                <Modal.Footer>
+                    <Button variant="outline-dark" className="b-radius-10" onClick={handleCloseDeleteModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="dark" className="b-radius-10" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
-                            <Form.Group as={Col} controlId="validationCustom02">
-                                <Form.Control
-                                    required
-                                    type="email"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChange={onChangeEmail}
-                                    className="mt-3"
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                            </Form.Group>
+            <Row className="mt-4 d-flex align-items-center justify-content-between">
+                <Col className="page-header">
+                    <Person style={{fontSize: "45px"}}/>
+                    <span className="page-header-text"> {user?.data?.data?.name} </span>
+                </Col>
 
-                            <Form.Group as={Col} controlId="validationCustom02">
-                                <Form.Control
-                                    required
-                                    type="tel"
-                                    placeholder="Phone"
-                                    value={phone}
-                                    onChange={onChangePhone}
-                                    className="mt-3"
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                            </Form.Group>
+                <Col className="d-flex justify-content-end">
+                    <DeleteOutline className="fs-2" onClick={handleShowDeleteModal}/>
+                </Col>
+            </Row>
 
-                            <FormSelect placeholder="Role" onChange={onChangeRole} className="mt-3">
-                                <option value="user" selected={role === "user"}>user</option>
-                                <option value="admin" selected={role === "admin"}>admin</option>
-                            </FormSelect>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="8" className="d-flex justify-content-end ">
-                            <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">Save changes</button>
-                        </Col>
+            <Form validated={validated} style={{backgroundColor: "var(--main-gray)"}}
+                  className="d-flex flex-column justify-content-center align-items-center p-4 mt-4 b-radius-20">
+                <Row>
+                    <Col sm="12">
+                        <FormControl
+                            required
+                            type="text"
+                            placeholder="User name"
+                            value={name}
+                            onChange={onChangeName}
+                            className="mt-3 b-radius-10"
+                        />
 
-                        {isPress && <div>
-                            {loadingUpdate && <Spinner animation="border" role="primary"/>}
-                        </div>}
-                    </Row>
-                </Form>
-            }
+                        <FormControl
+                            required
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={onChangeEmail}
+                            className="mt-3 b-radius-10"
+                        />
+
+                        <FormControl
+                            required
+                            type="tel"
+                            placeholder="Phone"
+                            value={phone}
+                            onChange={onChangePhone}
+                            className="mt-3 b-radius-10"
+                        />
+
+                        <FormSelect placeholder="Role" onChange={onChangeRole} className="mt-3 b-radius-10">
+                            <option value="user" selected={role === "user"}>User</option>
+                            <option value="admin" selected={role === "admin"}>Admin</option>
+                        </FormSelect>
+                    </Col>
+
+                    <Col sm="12" className="d-flex">
+                        <Button onClick={handleSubmit} className="btn-dark mt-2 w-100 b-radius-10">Save changes</Button>
+                    </Col>
+                </Row>
+            </Form>
+
+            {user?.data?.data?.role === "user" && <>
+                <Row className="mt-4">
+                    <Col className="page-header">
+                        <span className="page-header-text"> Addresses </span>
+                    </Col>
+
+                    <Col xs="12">
+                        <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
+                             style={{backgroundColor: "var(--main-gray)"}}>
+                            {user?.data?.data?.addresses?.length ? user?.data?.data?.addresses?.map((address) =>
+                                <AddressCard address={address}/>) : <span>No addresses found</span>}
+                        </Row>
+                    </Col>
+                </Row>
+
+                <Row className="mt-4">
+                    <Col className="page-header">
+                        <span className="page-header-text"> Orders </span>
+                    </Col>
+
+                    <Col xs="12">
+                        <Row>
+                            {user?.data?.data?.orders?.length > 0 ? user?.data?.data?.orders?.map((order) =>
+                                <OrderCard order={order}/>) :
+                                <Col className="d-flex flex-column gap-2 p-2 b-radius-10 mt-2" style={{backgroundColor: "var(--main-gray)"}}>No orders found</Col>}
+                        </Row>
+                    </Col>
+                </Row>
+            </>}
         </Container>
     )
 

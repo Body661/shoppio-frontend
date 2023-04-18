@@ -1,79 +1,28 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import editIcon from "../../../images/edit.png";
-import deleteIcon from "../../../images/delete.png";
-import {useDeleteUser} from "../../../hook/admin/user/useDeleteUser";
 
 const AdminUserCard = ({user}) => {
 
-    const {show, handleClose, handleShow, handelDelete} = useDeleteUser(user._id)
-
     return (
-        <div className="admin-user-card my-3">
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        <div>Delete confirmation</div>
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div>Are you sure you want to delete this user?</div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="success" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="dark" onClick={handelDelete}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            <Row className="d-flex justify-content-between">
-                <Col xs="6">
-                    <h5>User name: {user?.name}</h5>
+        <Link to={`/admin/user-management/${user?._id}`}>
+            <Row style={{backgroundColor: "var(--main-gray)"}} className="p-2 b-radius-20 mt-2">
+                <Col xs={12}>
+                    <span className="fs-5 fw-bold">{user?.name}</span>
                 </Col>
-                <Col xs="6" className="d-flex justify-content-end">
-                    <div className="d-flex p-2">
-                        <Link to={`/admin/user-management/${user?._id}`}>
-                            <div className="d-flex mx-2">
-                                <img alt="" className="ms-1 mt-2" src={editIcon} height="17px" width="15px"/>
-                                <p className="item-delete-edit"> Edit</p>
-                            </div>
-                        </Link>
 
-                        <div className="d-flex " onClick={handleShow}>
-                            <img alt="" className="ms-1 mt-2" src={deleteIcon} height="17px" width="15px"/>
-                            <p className="item-delete-edit"> Delete </p>
-                        </div>
-                    </div>
+                <Col xs={12} className="mt-1">
+                    <span>{user?.email}</span>
+                </Col>
+
+                <Col xs={12} className="mt-1">
+                    <span>{user?.phone}</span>
+                </Col>
+
+                <Col xs={12} className="mt-1">
+                    <span>{user?.role}</span>
                 </Col>
             </Row>
-
-            <Row>
-                <Col xs="12">
-                    <div>
-                        Email: {user?.email}
-                    </div>
-                </Col>
-            </Row>
-
-            <Row className="mt-3">
-                <Col xs="12" className="d-flex">
-                    <div>
-                        Phone Number: {user?.phone}
-                    </div>
-                </Col>
-            </Row>
-
-            <Row className="mt-3">
-                <Col xs="12" className="d-flex">
-                    <div>
-                        Role: {user?.role}
-                    </div>
-                </Col>
-            </Row>
-        </div>
+        </Link>
     );
 };
 

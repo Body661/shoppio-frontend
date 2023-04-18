@@ -6,13 +6,46 @@ export const useAllUsers = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [role, setRole] = useState('')
+    const [email, setEmail] = useState('')
+
+    const handleChooseRole = (e) => {
+        if (e.target.value.trim() !== '') {
+            setRole(`role=${e.target.value}`)
+        } else {
+            setRole("")
+        }
+    }
+    const handleSearchByMail = (e) => {
+        if (e.key === 'Enter') {
+            setEmail(e.target.value);
+        }
+    }
 
     useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch]);
+
+        let emailQuery
+        if (email.trim() !== '') emailQuery = `email=${email.trim()}`
+
+        const fetchUsers = async () => {
+            setLoading(true)
+            await dispatch(getUsers(role, emailQuery));
+            setLoading(false)
+        }
+
+        fetchUsers()
+    }, [dispatch, role, email]);
 
     const users = useSelector((state) => state.userManagementReducer.users);
-    const pageCount = users?.data?.paginationRes?.pages || 0;
+
+    const getPage = async (page) => {
+        let emailQuery
+        if (email.trim() !== '') emailQuery = `email=${email.trim()}`
+
+        setLoading(true)
+        await dispatch(getUsersPage(role, emailQuery, page));
+        setLoading(false)
+    };
 
     useEffect(() => {
         if (users && users?.status !== 200 && !loading) {
@@ -20,12 +53,15 @@ export const useAllUsers = () => {
         } else {
             setError(false)
         }
-        setLoading(false);
     }, [users, loading])
 
-    const getPage = (page) => {
-        dispatch(getUsersPage(page));
+    return {
+        users: users?.data?.data,
+        loading,
+        error,
+        pageCount: users?.data?.paginationRes?.pages,
+        getPage,
+        handleChooseRole,
+        handleSearchByMail
     };
-
-    return {users: users?.data?.data, loading, error, pageCount, getPage};
 };

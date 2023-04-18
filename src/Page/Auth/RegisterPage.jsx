@@ -9,7 +9,7 @@ const RegisterPage = () => {
         email,
         phone,
         password,
-        confirmPassword,
+        passwordConfirm,
         loading,
         handleChangeName,
         handleChangeEmail,
@@ -67,7 +67,7 @@ const RegisterPage = () => {
                 <FormControl
                     required
                     minLength={8}
-                    value={confirmPassword}
+                    value={passwordConfirm}
                     onChange={handleChangePasswordConfirm}
                     placeholder="Confirm password"
                     type="password"

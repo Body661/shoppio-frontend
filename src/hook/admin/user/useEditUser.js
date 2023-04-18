@@ -24,7 +24,7 @@ export const useEditUser = (id) => {
         }
 
         fetchUserData()
-    }, [])
+    }, [id])
 
     const user = useSelector((state) => state.userManagementReducer.user)
 
@@ -35,7 +35,6 @@ export const useEditUser = (id) => {
                 setEmail(user?.data?.data?.email)
                 setPhone(user?.data?.data?.phone)
                 setRole(user?.data?.data?.role)
-                console.log()
             } else {
                 toast("Something went wrong", {type: "error"})
                 setTimeout(() => {
@@ -100,13 +99,11 @@ export const useEditUser = (id) => {
 
     useEffect(() => {
         if (!loadingUpdate) {
-            console.log(updateRes)
-
             if (updateRes && updateRes?.status === 200) {
                 toast("User updated successfully", {type: 'success', toastId: 'updateUserSuccess'});
                 setTimeout(() => {
                     window.location.reload()
-                }, 1000)
+                }, 1500)
             } else {
                 toast(updateRes?.data?.errors ? updateRes?.data?.errors[0]?.msg : "Error while updating user", {
                     type: 'error',
@@ -116,5 +113,5 @@ export const useEditUser = (id) => {
         }
     }, [updateRes, loadingUpdate])
 
-    return {name, email, phone, role, onChangeEmail, onChangeName, onChangePhone, onChangeRole, handleSubmit, loadingFetch, loadingUpdate, isPress, validated}
+    return {user, name, email, phone, role, onChangeEmail, onChangeName, onChangePhone, onChangeRole, handleSubmit, loadingFetch, loadingUpdate, isPress, validated}
 }

@@ -1,8 +1,8 @@
 import {Col, Container, Row} from "react-bootstrap";
 import AdminSideBar from "../../../Components/Admin/AdminSideBar";
-import AdminEditUser from "../../../Components/Admin/User/AdminEditUser";
+import AdminAddUser from "../../../Components/Admin/User/AdminAddUser";
 
-const EditUserPage = () => {
+const AddUserPage = () => {
     return (
         <Container style={{minHeight: "80vh"}}>
             <Row className='d-flex flex-row align-items-start products-page-space-between'>
@@ -11,11 +11,11 @@ const EditUserPage = () => {
                 </Col>
 
                 <Col sm="11" xs="10" md="8" lg="9">
-                    <AdminEditUser/>
+                    <AdminAddUser/>
                 </Col>
             </Row>
         </Container>
     );
 };
 
-export default EditUserPage;
+export default AddUserPage;

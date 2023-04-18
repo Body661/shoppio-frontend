@@ -6,7 +6,7 @@ import logo from "../../images/logo.png";
 const ResetPasswordPage = () => {
     const {
         password,
-        confirmPassword,
+        passwordConfirm,
         handleChangePassword,
         handleChangePasswordConfirm,
         handleSubmit,
@@ -33,7 +33,7 @@ const ResetPasswordPage = () => {
                 <FormControl
                     required
                     minLength={8}
-                    value={confirmPassword}
+                    value={passwordConfirm}
                     onChange={handleChangePasswordConfirm}
                     placeholder="Confirm password"
                     type="password"
