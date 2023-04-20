@@ -1,12 +1,13 @@
 import {useParams} from 'react-router-dom';
-import {Row, Col, Spinner} from 'react-bootstrap';
+import {Row, Col, Spinner, Container, Button, Form, FormControl, FormSelect} from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 import add from '../../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
 import {CompactPicker} from 'react-color'
 import useEditProduct from '../../../hook/admin/Product/useEditProduct';
-import React from "react";
+import {Backdrop, CircularProgress} from "@mui/material";
+import {Inventory} from "@mui/icons-material";
 
 const AdminEditProducts = () => {
     const {id} = useParams();
@@ -40,137 +41,159 @@ const AdminEditProducts = () => {
         prodDescription,
         prodName,
         loading,
-        isPress
+        isPress,
+        loadingFetchData,
+        selectedSubID,
+        currentProductName
     } =
         useEditProduct(id);
 
     return (
-        <div>
-            <Row className="justify-content-start ">
-                <div className="admin-content-text pb-4"> Update product - {prodName}</div>
-                <Col sm="8">
-                    <div className="text-form pb-2"> Product images</div>
+        <Container>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={(loading && isPress) || loadingFetchData}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
 
-                    <MultiImageInput
-                        images={images}
-                        setImages={setImages}
-                        theme={"light"}
-                        allowCrop={false}
-                        max={4}
-                    />
+            <Col className="page-header mt-4" xs={12} md={6}>
+                <Inventory style={{fontSize: "45px"}}/>
+                <span className="page-header-text">Edit product: {currentProductName}</span>
+            </Col>
 
-                    <input
-                        value={prodName}
-                        onChange={onChangeProdName}
-                        type="text"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="Product name"
-                    />
-                    <textarea
-                        className="input-form-area p-2 mt-3"
-                        rows="4"
-                        cols="50"
-                        placeholder="Product description"
-                        value={prodDescription}
-                        onChange={onChangeDesName}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="Price before discount"
-                        value={priceBefore}
-                        onChange={onChangePriceBefore}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="Price after discount"
-                        value={priceAfter}
-                        onChange={onChangePriceAfter}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="Available quantity"
-                        value={qty}
-                        onChange={onChangeQty}
-                    />
-                    <select
-                        name="cat"
-                        value={CatID}
-                        onChange={onSelectCategory}
-                        className="select input-form-area mt-3 px-2 ">
-                        <option value="0">Select category</option>
-                        {
-                            category?.data?.data ? (category?.data?.data?.map((item) => {
-                                return (
-                                    <option value={item?._id}>{item?.name}</option>
-                                )
-                            })) : null
+            <Form style={{backgroundColor: "var(--main-gray)"}}
+                  className="d-flex flex-column justify-content-center align-items-center p-4 mt-4 b-radius-20">
 
-                        }
-                    </select>
+                <Row>
+                    <Col>
+                        <MultiImageInput
+                            images={images}
+                            setImages={setImages}
+                            theme={"light"}
+                            allowCrop={false}
+                            max={5}
+                        />
 
-                    <Multiselect
-                        className="mt-2 text-end"
-                        placeholder="Subcategory"
-                        options={options}
-                        onSelect={onSelect}
-                        onRemove={onRemove}
-                        displayValue="name"
-                        style={{color: "red"}}
-                    />
-                    <select
-                        name="brand"
-                        value={BrandID}
-                        onChange={onSelectBrand}
-                        className="select input-form-area mt-3 px-2 ">
-                        <option>Select Brand</option>
-                        {
-                            brand?.data?.data ? (brand?.data?.data?.map((item) => {
-                                return (
-                                    <option value={item?._id}>{item?.name}</option>
-                                )
-                            })) : null
+                        <FormControl
+                            value={prodName}
+                            onChange={onChangeProdName}
+                            type="text"
+                            className="input-form d-block mt-3 px-3"
+                            placeholder="Product name"
+                        />
+                        <FormControl
+                            className="p-2 mt-3"
+                            rows="4"
+                            cols="50"
+                            placeholder="Product description"
+                            value={prodDescription}
+                            onChange={onChangeDesName}
+                        />
+                        <FormControl
+                            type="number"
+                            className="input-form d-block mt-3 px-3"
+                            placeholder="Price before discount"
+                            value={priceBefore}
+                            onChange={onChangePriceBefore}
+                        />
+                        <FormControl
+                            type="number"
+                            className="input-form d-block mt-3 px-3"
+                            placeholder="Price after discount"
+                            value={priceAfter}
+                            onChange={onChangePriceAfter}
+                        />
+                        <FormControl
+                            type="number"
+                            className="input-form d-block mt-3 px-3"
+                            placeholder="Available quantity"
+                            value={qty}
+                            onChange={onChangeQty}
+                        />
 
-                        }
-                    </select>
-                    <div className="text-form mt-3 ">Available Colors</div>
-                    <div className="mt-1 d-flex">
-                        {
-                            colors.length >= 1 ? (
-                                colors.map((color, index) => {
+                        <FormSelect
+                            name="cat"
+                            value={CatID}
+                            onChange={onSelectCategory}
+                            className="mt-3 px-2 ">
+                            <option value="0">Select category</option>
+                            {
+                                category?.data?.data ? (category?.data?.data?.map((item) => {
                                     return (
-                                        <div key={index}
-                                             onClick={() => removeColor(color)}
-                                             className="color ms-2 border  mt-1"
-                                             style={{backgroundColor: color}}></div>
+                                        <option value={item?._id}>{item?.name}</option>
                                     )
-                                })
+                                })) : null
 
-                            ) : null
-                        }
+                            }
+                        </FormSelect>
 
-                        <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px"
-                             style={{cursor: 'pointer'}}/>
-                        {
-                            showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
-                        }
+                        <Multiselect
+                            className="mt-3"
+                            placeholder="Subcategory"
+                            options={options}
+                            onSelect={onSelect}
+                            onRemove={onRemove}
+                            displayValue="name"
+                            selectedValues={selectedSubID}
+                        />
 
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handleSubmit} className="btn-save d-inline mt-2 " disabled={loading && isPress}>Save Changes</button>
-                </Col>
-            </Row>
+                        <FormSelect
+                            name="brand"
+                            value={BrandID}
+                            onChange={onSelectBrand}
+                            className="mt-3 px-2 ">
+                            <option>Select Brand</option>
+                            {
+                                brand?.data?.data ? (brand?.data?.data?.map((item) => {
+                                    return (
+                                        <option value={item?._id}>{item?.name}</option>
+                                    )
+                                })) : null
+
+                            }
+                        </FormSelect>
+
+                        <div style={{backgroundColor: "var(--main-white)"}}
+                             className="p-2 b-radius-10 mt-3 d-flex flex-column border border-1">
+                            <div className="text-form">Available Colors</div>
+                            <div className="d-flex">
+                                {
+                                    colors.length >= 1 ? (
+                                        colors.map((color, index) => {
+                                            return (
+                                                <div key={index}
+                                                     onClick={() => removeColor(color)}
+                                                     className="color ms-2 border  mt-1"
+                                                     style={{backgroundColor: color}}></div>
+                                            )
+                                        })
+
+                                    ) : null
+                                }
+
+                                <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px"
+                                     style={{cursor: 'pointer'}}/>
+                                {
+                                    showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
+                                }
+
+                            </div>
+                        </div>
+                    </Col>
+
+                    <Col sm="12" className="d-flex mt-3">
+                        <Button onClick={handleSubmit} className="btn-dark w-100 b-radius-10">Save changes</Button>
+                    </Col>
+                </Row>
+            </Form>
+
             {isPress && (
                 <div className="d-flex justify-content-center">
                     {loading && <Spinner animation="border" role="primary"/>}
                 </div>
             )}
-        </div>
+        </Container>
     )
 }
 

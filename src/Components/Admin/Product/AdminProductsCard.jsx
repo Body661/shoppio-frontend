@@ -1,20 +1,21 @@
-import React, {useEffect, useState} from 'react'
-import {Col, Card, Row, Modal, Button} from 'react-bootstrap'
+import {useEffect, useState} from 'react'
+import {Col, Card, Modal, Button, CardImg} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {deleteProduct} from "../../../redux/actions/productActions";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
+import {DeleteOutline, EditOutlined, Star} from "@mui/icons-material";
 
 const AdminProductsCard = ({item}) => {
-    const [show, setShow] = useState(false);
+    const [showDelete, setShow] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseDelete = () => setShow(false);
+    const handleShowDelete = () => setShow(true);
 
     const dispatch = useDispatch();
 
-    const handelDelete = async () => {
+    const handleDelete = async () => {
         setLoading(true)
         await dispatch(deleteProduct(item?._id))
         setShow(false);
@@ -40,66 +41,67 @@ const AdminProductsCard = ({item}) => {
     }, [loading, deleteResponse])
 
     return (
-        <Col xs="12" sm="6" md="5" lg="4" className="d-flex">
-
-            <Modal show={show} onHide={handleClose}>
+        <Col className="d-flex">
+            <Modal show={showDelete} onHide={handleCloseDelete}>
                 <Modal.Header>
                     <Modal.Title>
-                        <div className='font'>Confirm delete</div>
+                        <div>Confirm delete</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='font'>Are you sure you want to delete this product?</div>
+                    <div>Do you sure you want to delete this product?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className='font' variant="success" onClick={handleClose}>
+                    <Button variant="outline-dark" onClick={handleCloseDelete}>
                         Cancel
                     </Button>
-                    <Button className='font' variant="dark" onClick={handelDelete}>
+                    <Button variant="dark" onClick={handleDelete}>
                         Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <Card
-                className="my-2"
-                style={{
-                    width: "100%",
-                    height: "350px",
-                    borderRadius: "8px",
-                    border: "none",
-                    backgroundColor: "#FFFFFF",
-                }}>
-                <Row className="d-flex justify-content-center px-2">
-                    <Col className=" d-flex justify-content-between">
-                        <div onClick={handleShow} className="d-inline item-delete-edit">Delete</div>
-                        <Link to={`/admin/updated-product/${item?._id}`} style={{textDecoration: "none"}}>
-                            <div className="d-inline item-delete-edit">Edit</div>
+            <Card className="my-2 product-card">
+                <div className="product-card-img-holder b-radius-20">
+                    <div className="d-flex justify-content-between">
+                        <DeleteOutline className="favorite-icon" onClick={handleShowDelete}/>
+                        <Link to={`/admin/products/${item?._id}`}>
+                            <EditOutlined className="favorite-icon-right"/>
                         </Link>
-                    </Col>
-                </Row>
-                <Link to={`/products/${item?._id}`} style={{textDecoration: "none", overflow: "hidden"}}>
-                    <Card.Img style={{height: "230px", width: "100%", objectFit: "contain"}} src={item?.cover}/>
-                    <Card.Body>
-                        <Card.Title>
-                            <div className="product-card-title">
-                                {item?.title}
+                    </div>
+
+                    <Link to={`/products/${item?._id}`}>
+                        <CardImg src={item?.cover} className="product-cover"/>
+                    </Link>
+                </div>
+
+                <Card.Body>
+                    <Card.Title>
+                        <div className="product-card-title text-center">
+                            {item?.title}
+                        </div>
+                    </Card.Title>
+                    <Card.Text>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className="d-flex align-items-center">
+                                <Star style={{fontSize: "17px"}}/>
+                                <div className="product-card-rate-text mx-2">{item?.ratingsAvg?.toFixed(1) || 0}</div>
                             </div>
-                        </Card.Title>
-                        <Card.Text>
-                            <div className="d-flex justify-content-between">
-                                <div className="product-card-rate-text">{item?.ratingsQuantity}</div>
-                                <div className="d-flex">
-                                    <div className="product-card-price">{item.priceAfterDiscount >= 1 ?
-                                        (<div><span
-                                            style={{textDecorationLine: 'line-through'}}>{item.price}</span> {item.priceAfterDiscount}
-                                        </div>)
-                                        : item.price}</div>
+                            <div className="d-flex">
+                                <div className="product-card-price">
+                                    {item.priceAfterDiscount >= 1 ?
+                                        (<div>
+                                            <span
+                                                style={{
+                                                    textDecorationLine: 'line-through',
+                                                    color: "gray"
+                                                }}> €{item.price} </span> €{item.priceAfterDiscount}
+                                        </div>) : ` € ${item.price}`}
                                 </div>
                             </div>
-                        </Card.Text>
-                    </Card.Body>
-                </Link>
+                        </div>
+                    </Card.Text>
+                </Card.Body>
             </Card>
         </Col>
     )

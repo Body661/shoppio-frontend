@@ -23,9 +23,9 @@ export const useAllCategories = () => {
         setLoading(false);
     }, [categories, loading])
 
-    const getPage = (page) => {
+    const handleChangePage = (page) => {
         dispatch(getAllCategoriesPage(page));
     }
 
-    return {categories: categories?.data?.data, loading, error, pageCount, getPage};
+    return {categories: categories?.data?.data, loading, error, pageCount, handleChangePage};
 }

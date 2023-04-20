@@ -24,7 +24,7 @@ const CartPage = () => {
             </Row>
 
             <Row className="mt-4">
-                <Col xs="12" md="12" lg="9">
+                <Col xs="12" md="12" lg={itemsAmount >= 1 ? "9" : "12"}>
                     {itemsAmount >= 1 ? (
                         <div className="d-flex flex-column gap-2">
                             {cartItems.map((item, index) => <CartItem key={index} item={item}/>)}

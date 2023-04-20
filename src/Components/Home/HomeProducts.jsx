@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, Spinner} from 'react-bootstrap'
 import SectionTitle from '../Utility/SectionTitle'
 import HomeProductCard from '../Products/HomeProductCard'

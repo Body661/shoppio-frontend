@@ -8,22 +8,33 @@ const useAdminGetProducts = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            if (e.target.value.trim() !== '') {
+                setSearchTerm(`keyword=${e.target.value}`)
+            } else {
+                setSearchTerm("")
+            }
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true)
-            await dispatch(getAllProducts(50))
+            await dispatch(getAllProducts(50, searchTerm))
+            setLoading(false)
         }
 
         fetchData()
-    }, [])
+    }, [searchTerm])
 
-
-    const onPress = async (page) => {
+    const handleChangePage = async (page) => {
         setLoading(true)
-        await dispatch(getAllProductsPage(page, 50))
+        await dispatch(getAllProductsPage(page, 50, searchTerm))
+        setLoading(false)
     }
-
 
     const allProducts = useSelector((state) => state.productReducer.allProducts)
 
@@ -36,7 +47,14 @@ const useAdminGetProducts = () => {
         setLoading(false);
     }, [allProducts, loading])
 
-    return {products: allProducts?.data?.data, pagination: allProducts?.data.paginationRes?.pages, onPress, loading, error}
+    return {
+        products: allProducts?.data?.data,
+        pagination: allProducts?.data.paginationRes?.pages,
+        handleChangePage,
+        loading,
+        error,
+        handleSearch
+    }
 }
 
 export default useAdminGetProducts

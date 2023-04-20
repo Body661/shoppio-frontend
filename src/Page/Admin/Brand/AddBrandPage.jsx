@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
 import AdminSideBar from '../../../Components/Admin/AdminSideBar'
 import AddBrand from '../../../Components/Admin/Brand/AddBrand'

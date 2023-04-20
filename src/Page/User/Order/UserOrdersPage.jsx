@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import UserSideBar from '../../../Components/User/UserSideBar'
 import OrdersContainer from "../../../Components/Order/OrdersContainer";

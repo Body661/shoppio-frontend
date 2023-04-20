@@ -41,17 +41,14 @@ const useEditCoupon = (id) => {
     }, [loading, oneCoupon]);
 
     const onChangeName = (event) => {
-        event.persist();
         setCouponName(event.target.value);
     };
 
     const onChangeDate = (event) => {
-        event.persist();
         setCouponDate(event.target.value);
     };
 
     const onChangeValue = (event) => {
-        event.persist();
         setCouponValue(event.target.value);
     };
 

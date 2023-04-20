@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, } from 'react-bootstrap';
 import SectionTitle from '../Utility/SectionTitle'
 import UseHomeCategories from "../../hook/category/useHomeCategories";

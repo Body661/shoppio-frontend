@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, Row, Col, Spinner} from 'react-bootstrap'
 import Pagination from '../../Utility/Pagination';
 import ReviewCard from './ReviewCard';
@@ -8,7 +7,7 @@ import useGetProductReviews from "../../../hook/products/review/useGetProductRev
 
 const ReviewsContainer = ({reviewsAmount}) => {
     const {id} = useParams()
-    const {reviews, onPress, loading, error} = useGetProductReviews(id)
+    const {reviews, handleChangePage, loading, error} = useGetProductReviews(id)
 
     let content = null;
 
@@ -34,7 +33,7 @@ const ReviewsContainer = ({reviewsAmount}) => {
                 <Col sm={12} className="mt-2">
                     {content}
 
-                    {reviews?.data?.paginationRes?.pages > 1 && (<Pagination pageCount={reviews?.data?.paginationRes.pages || 0} onPress={onPress}/>)}
+                    {reviews?.data?.paginationRes?.pages > 1 && (<Pagination pageCount={reviews?.data?.paginationRes.pages || 0} handleChangePage={handleChangePage}/>)}
                 </Col>
             </Row>
 

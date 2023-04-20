@@ -11,7 +11,7 @@ const AdminUsersContainer = () => {
     const {
         users,
         pageCount,
-        getPage,
+        handleChangePage,
         loading,
         handleSearchByMail,
         handleChooseRole
@@ -56,7 +56,7 @@ const AdminUsersContainer = () => {
                     </FormLabel>
                 </Col>
                 <Col xs={12} md={3} className="mt-2">
-                    <FormControl placeholder="Search by email" type="text" onKeyPress={handleSearchByMail}/>
+                    <FormControl placeholder="Search by email" type="text" className="b-radius-10" onKeyPress={handleSearchByMail}/>
                 </Col>
             </Row>
 
@@ -64,7 +64,7 @@ const AdminUsersContainer = () => {
                 {users?.map((user) => <AdminUserCard user={user}/>)}
             </Row>
 
-            {pageCount > 1 && <Pagination pageCount={pageCount} onPress={getPage}/>}
+            {pageCount > 1 && <Pagination pageCount={pageCount} handleChangePage={handleChangePage}/>}
         </Container>
     );
 };

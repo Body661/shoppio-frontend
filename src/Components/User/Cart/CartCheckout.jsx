@@ -44,7 +44,7 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoupo
                     </Button>
                 </div>
 
-                <Link to='/order/pay-method' className="mt-2">
+                <Link to='/cart/pay-method' className="mt-2">
                     <Button className="btn-outline-light btn-dark b-radius-10 w-100"
                             style={{transition: "0.5s"}}>
                         Complete order

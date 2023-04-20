@@ -6,7 +6,7 @@ import {useAllBrands} from "../../../hook/brand/useAllBrands";
 
 const AdminBrands = () => {
 
-    const {brands, loading, error, pageCount, getPage} = useAllBrands()
+    const {brands, loading, error, pageCount, handleChangePage} = useAllBrands()
 
     let content = null;
 
@@ -24,7 +24,7 @@ const AdminBrands = () => {
     return (
         <div style={{minHeight: '80vh'}}>
             {content}
-            {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
+            {pageCount > 1 ? (<Pagination pageCount={pageCount} handleChangePage={handleChangePage}/>) : null}
         </div>
     );
 };

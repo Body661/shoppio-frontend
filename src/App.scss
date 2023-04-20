@@ -241,17 +241,24 @@ body {
       background-color: var(--main-gray);
       padding: 10px;
 
-      .favorite-icon {
+      .favorite-icon, .favorite-icon-right {
         width: 30px;
         height: 30px;
         position: absolute;
-        right: 15px;
         cursor: pointer;
         transition: 0.5s;
 
         &:hover {
           scale: 1.3;
         }
+      }
+
+      .favorite-icon {
+        left: 15px;
+      }
+
+      .favorite-icon-right {
+        right: 15px;
       }
 
       .product-cover {
@@ -273,17 +280,13 @@ body {
 
     .product-card-price {
       color: black;
-      font-size: 20px;
+      font-size: 17px;
       font-weight: bold;
-    }
-
-    .product-card-rate-star {
-      width: 20px;
     }
 
     .product-card-rate-text {
       color: var(--main-black);
-      font-size: 20px;
+      font-size: 17px;
       font-weight: bold;
     }
   }
@@ -642,15 +645,6 @@ body {
     text-align: left;
   }
 
-  .select {
-    box-sizing: border-box;
-    height: 40px;
-    color: #979797;
-    width: 100%;
-    border: 1px solid #979797;
-    border-radius: 8px;
-  }
-
   .btn-save {
     border: none;
     color: white;
@@ -789,3 +783,17 @@ body {
 }
 
 /* end footer */
+
+.search-wrapper {
+  background-color: var(--main-white) !important;
+  border-radius: 10px !important;
+
+  .chip {
+    background-color: var(--main-black);
+  }
+}
+
+.sc-AxiKw {
+  border-radius: 10px !important;
+  border: 1px solid #ced4da !important;
+}

@@ -8,7 +8,7 @@ const OrderCard = ({order, isAdmin}) => {
     }
 
     return (
-        <Link to={`/admin/orders/${order?._id}`} className="user-order mt-4">
+        <Link to={`${isAdmin ? "/admin" : "/user"}/orders/${order?._id}`} className="user-order mt-4">
             <Row>
                 <div className="xs-black-text">
                     <span>{formatDate(order?.createdAt)} | </span>

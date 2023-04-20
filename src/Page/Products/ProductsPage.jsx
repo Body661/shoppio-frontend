@@ -1,4 +1,3 @@
-import React from 'react'
 import {Col, Container, Row} from 'react-bootstrap'
 import Pagination from '../../Components/Utility/Pagination'
 import SortResults from '../../Components/Utility/sortResults'
@@ -9,7 +8,7 @@ import {Backdrop, CircularProgress} from "@mui/material";
 
 const ProductsPage = () => {
 
-    const {items, pagination, onPress, getProducts, error, loading} = useSearch();
+    const {items, pagination, handleChangePage, getProducts, error, loading} = useSearch();
 
     return (
         <div style={{minHeight: "80vh"}}>
@@ -30,7 +29,7 @@ const ProductsPage = () => {
                         <ProductsContainer products={items} loading={loading} error={error} xSmall={12} small={8} medium={6} large={4}/>
                     </Col>
                 </Row>
-                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} handleChangePage={handleChangePage}/>}
             </Container>
         </div>
     )

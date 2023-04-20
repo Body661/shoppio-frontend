@@ -1,8 +1,8 @@
 import {Button, Card, CardImg} from 'react-bootstrap'
-import rate from "../../imgs/Icons/star-filled.png";
 import {Link} from 'react-router-dom';
 import UseWishlist from "../../hook/products/useWishlist";
 import UseAddToCart from "../../hook/user/cart/useAddToCart";
+import {Star} from "@mui/icons-material";
 
 const HomeProductCard = ({item, favProd}) => {
     const {favImg, handleFav} = UseWishlist(item, favProd)
@@ -16,7 +16,7 @@ const HomeProductCard = ({item, favProd}) => {
                     src={favImg}
                     onClick={handleFav}
                     alt="favorite"
-                    className="favorite-icon"
+                    className="favorite-icon-right"
                 />
 
                 <Link to={`/products/${item?._id}`}>
@@ -33,12 +33,8 @@ const HomeProductCard = ({item, favProd}) => {
                 <Card.Text>
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="d-flex align-items-center">
-                            <img
-                                alt="rating start"
-                                src={rate}
-                                className="product-card-rate-star"
-                            />
-                            <div className="product-card-rate-text mx-2">{item?.ratingsAvg.toFixed(1) || 0}</div>
+                            <Star style={{fontSize: "17px"}}/>
+                            <div className="product-card-rate-text mx-2">{item?.ratingsAvg?.toFixed(1) || 0}</div>
                         </div>
                         <div className="d-flex">
                             <div className="product-card-price">

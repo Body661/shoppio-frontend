@@ -20,6 +20,8 @@ const useAddProduct = () => {
     const [BrandID, SetBrandID] = useState('');
     const [selectedSubID, setSelectedSubID] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isPress, setIsPress] = useState(false);
+    const [loadingFetchData, setLoadingFetchData] = useState(true);
     const [showColor, setShowColor] = useState(false);
     const [colors, setColors] = useState([]);
     const category = useSelector((state) => state.categoryReducer.categories);
@@ -28,8 +30,10 @@ const useAddProduct = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        setLoadingFetchData(true)
         dispatch(getAllCategories());
         dispatch(getAllBrands());
+        setLoadingFetchData(false)
     }, [dispatch]);
 
     useEffect(() => {
@@ -60,7 +64,9 @@ const useAddProduct = () => {
 
     const onSelectCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
+            setLoadingFetchData(true)
             await dispatch(getSubcategory(e.target.value));
+            setLoadingFetchData(false)
         }
         setCatID(e.target.value);
     };
@@ -94,14 +100,6 @@ const useAddProduct = () => {
             return toast("Please fill in all information", {type: 'error'});
         }
 
-        // const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
-        //
-        // const itemImages = Array.from(Array(Object.keys(images).length).keys()).map(
-        //     (item, index) => {
-        //         return dataURLtoFile(images[index], Math.random() + ".png")
-        //     }
-        // )
-
         const itemImagesPromises = Array.from(Array(Object.keys(images).length).keys()).map((image, index) => {
             return Promise.resolve(dataURLtoFile(images[index], Math.random() + ".png"));
         });
@@ -123,17 +121,18 @@ const useAddProduct = () => {
         formData.append("cover", imgCover);
         formData.append("category", CatID);
         formData.append("brand", BrandID);
-        formData.append("priceAfterDiscount", priceAfter);
-        colors.forEach((color) => formData.append("colors", color));
+
+        if (priceAfter) formData.append("priceAfterDiscount", priceAfter);
+        if (selectedSubID?.length > 0) selectedSubID?.forEach((subcategory) => formData.append("subcategories[]", subcategory._id));
+        if (colors?.length > 0) colors.forEach((color) => formData.append("colors[]", color));
 
         itemImages.forEach((image) => formData.append("images", image));
-        selectedSubID.forEach((subcategory) =>
-            formData.append("subcategory", subcategory._id)
-        );
 
         setLoading(true);
+        setIsPress(true);
         await dispatch(createProduct(formData));
         setLoading(false);
+        setIsPress(false);
     };
 
     const product = useSelector((state) => state.productReducer.createdProduct);
@@ -180,7 +179,10 @@ const useAddProduct = () => {
         priceBefore,
         qty,
         prodDescription,
-        prodName
+        prodName,
+        loading,
+        loadingFetchData,
+        isPress
     }
 
 }

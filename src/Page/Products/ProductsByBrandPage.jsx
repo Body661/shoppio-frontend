@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, Col, Row} from 'react-bootstrap';
 import Pagination from '../../Components/Utility/Pagination';
 import CardProductsContainer from './../../Components/Products/ProductsContainer';
@@ -7,7 +6,7 @@ import UseProductsByBrand from "../../hook/products/useProductsByBrand";
 
 const ProductsByBrandPage = () => {
     const {id} = useParams()
-    const {items, pagination, onPress, loading} = UseProductsByBrand(id)
+    const {items, pagination, handleChangePage, loading} = UseProductsByBrand(id)
     
     return (
         <div style={{minHeight: "80vh"}}>
@@ -19,7 +18,7 @@ const ProductsByBrandPage = () => {
                     </Col>
                 </Row>
 
-                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} handleChangePage={handleChangePage}/>}
             </Container>
         </div>
     )

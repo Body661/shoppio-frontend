@@ -1,4 +1,3 @@
-import React from 'react'
 import {Container, Col, Row} from 'react-bootstrap';
 import Pagination from '../../Components/Utility/Pagination';
 import CardProductsContainer from './../../Components/Products/ProductsContainer';
@@ -7,7 +6,7 @@ import UseProductsByCategory from "../../hook/products/useProductsByCategory";
 
 const ProductsByCategoryPage = () => {
     const {id} = useParams()
-    const {items, pagination, onPress, loading} = UseProductsByCategory(id)
+    const {items, pagination, handleChangePage, loading} = UseProductsByCategory(id)
 
     return (
         <div style={{minHeight: "80vh"}}>
@@ -19,7 +18,7 @@ const ProductsByCategoryPage = () => {
                     </Col>
                 </Row>
 
-                {pagination > 1 && <Pagination pageCount={pagination} onPress={onPress}/>}
+                {pagination > 1 && <Pagination pageCount={pagination} handleChangePage={handleChangePage}/>}
             </Container>
         </div>
     )

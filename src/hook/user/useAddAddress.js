@@ -19,7 +19,6 @@ const useAddAddress = () => {
     const [loading, setLoading] = useState(true);
 
     const handleChange = (event) => {
-        event.persist();
         setAddress((prevState) => ({
             ...prevState,
             [event.target.name]: event.target.value,

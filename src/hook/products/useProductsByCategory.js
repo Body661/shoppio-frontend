@@ -18,7 +18,7 @@ const useProductsByCategory = (catID) => {
     }, [])
 
     //when click pagination
-    const onPress = async (page) => {
+    const handleChangePage = async (page) => {
         await dispatch(getProductsByCategory(page, 50, catID))
     }
 
@@ -33,7 +33,7 @@ const useProductsByCategory = (catID) => {
         setLoading(false);
     }, [products, loading])
 
-    return {items: products?.data?.data, pagination: products?.data?.paginationRes?.pages, onPress, loading, error}
+    return {items: products?.data?.data, pagination: products?.data?.paginationRes?.pages, handleChangePage, loading, error}
 }
 
 export default useProductsByCategory

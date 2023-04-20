@@ -24,16 +24,21 @@ const useEditProduct = (id) => {
     const [colors, setColors] = useState([]);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const [loadingFetchData, setLoadingFetchData] = useState(true);
     const [isPress, setIsPress] = useState(false);
 
     useEffect(() => {
-        const run = async () => {
+        const fetchData = async () => {
+            setLoadingFetchData(true)
             await dispatch(getOneProduct(id))
             await dispatch(getAllCategories());
             await dispatch(getAllBrands());
+            setLoadingFetchData(false)
         }
-        run();
-    }, [])
+
+        fetchData();
+
+    }, [id])
 
     const item = useSelector(state => state.productReducer.product);
     const category = useSelector(state => state.categoryReducer.categories);
@@ -41,22 +46,25 @@ const useEditProduct = (id) => {
 
     useEffect(() => {
         if (item?.data?.data) {
-            setImages(item.data.data.images);
-            setProdName(item.data.data.title);
-            setProdDescription(item.data.data.description);
-            setPriceBefore(item.data.data.price);
-            setPriceAfter(item.data.data.priceAfterDiscount);
-            setQty(item.data.data.quantity);
-            setCatID(item.data.data.category?._id);
-            setBrandID(item.data.data.brand?._id);
-            setColors(item.data.data.colors);
+            setImages(item?.data?.data?.images);
+            setProdName(item?.data?.data?.title);
+            setProdDescription(item?.data?.data?.description);
+            setPriceBefore(item?.data?.data?.price);
+            setPriceAfter(item?.data?.data?.priceAfterDiscount);
+            setQty(item?.data?.data?.quantity);
+            setCatID(item?.data?.data?.category?._id);
+            setBrandID(item?.data?.data?.brand?._id);
+            setColors(item?.data?.data?.colors);
+            setSelectedSubID(item?.data?.data?.subcategories)
         }
     }, [item]);
 
     const onSelectCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
+            setLoadingFetchData(true)
             setCatID(e.target.value);
             await dispatch(getSubcategory(e.target.value));
+            setLoadingFetchData(false)
         }
     };
 
@@ -78,12 +86,10 @@ const useEditProduct = (id) => {
     const onRemove = (selectedList) => setSelectedSubID(selectedList);
 
     const onChangeProdName = (event) => {
-        event.persist();
         setProdName(event.target.value);
     };
 
     const onChangeDesName = (event) => {
-        event.persist();
         setProdDescription(event.target.value);
     };
 
@@ -98,22 +104,18 @@ const useEditProduct = (id) => {
     };
 
     const onChangePriceBefore = (event) => {
-        event.persist();
         setPriceBefore(event.target.value);
     };
 
     const onChangePriceAfter = (event) => {
-        event.persist();
         setPriceAfter(event.target.value);
     };
 
     const onChangeQty = (event) => {
-        event.persist();
         setQty(event.target.value)
     };
 
     const onChangeColor = (event) => {
-        event.persist();
         setShowColor((prev) => !prev);
     };
 
@@ -188,10 +190,9 @@ const useEditProduct = (id) => {
         formData.append("price", priceBefore);
         formData.append("category", CatID);
         formData.append("brand", BrandID);
-        formData.append("priceAfterDiscount", priceAfter);
-
-        colors.forEach((color) => formData.append("colors[]", color));
-        selectedSubID.forEach((item) => formData.append("subcategory", item._id));
+        if (priceAfter) formData.append("priceAfterDiscount", priceAfter);
+        if (selectedSubID?.length > 0) selectedSubID?.forEach((subcategory) => formData.append("subcategories[]", subcategory._id));
+        if (colors?.length > 0) colors.forEach((color) => formData.append("colors[]", color));
 
         formData.append("cover", imgCover);
         itemImages.forEach((item) => formData.append("images", item));
@@ -249,7 +250,10 @@ const useEditProduct = (id) => {
         prodDescription,
         prodName,
         loading,
-        isPress
+        isPress,
+        loadingFetchData,
+        selectedSubID,
+        currentProductName: item?.data?.data?.title
     }
 }
 

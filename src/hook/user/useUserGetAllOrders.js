@@ -19,7 +19,7 @@ const useUserGetAllOrders = () => {
         fetchData();
     }, []);
 
-    const handlePageChange = async (page) => {
+    const handleChangePage = async (page) => {
         setLoading(true);
         await dispatch(getAllOrders(page, 50));
         setLoading(false);
@@ -39,7 +39,7 @@ const useUserGetAllOrders = () => {
     return {
         paginate,
         orders: ordersData,
-        handlePageChange,
+        handleChangePage,
         loading,
         error,
     };

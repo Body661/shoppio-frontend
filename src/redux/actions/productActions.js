@@ -24,9 +24,9 @@ export const createProduct = (formatData) => async (dispatch) => {
 }
 
 //get all products with pagination
-export const getAllProducts = (limit) => async (dispatch) => {
+export const getAllProducts = (limit, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/products?limit=${limit}`);
+        const response = await useGetData(`/products?limit=${limit}&${searchTerm}`);
         dispatch({
             type: types.GET_ALL_PRODUCTS,
             payload: response,
@@ -58,9 +58,9 @@ export const getAllProductsSearch = (queryString) => async (dispatch) => {
 
 
 //get all products with pagination with pages number
-export const getAllProductsPage = (page, limit) => async (dispatch) => {
+export const getAllProductsPage = (page, limit, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/products?page=${page}&limit=${limit}`);
+        const response = await useGetData(`/products?page=${page}&limit=${limit}&${searchTerm}`);
         dispatch({
             type: types.GET_ALL_PRODUCTS,
             payload: response,

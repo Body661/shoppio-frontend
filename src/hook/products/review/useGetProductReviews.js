@@ -24,12 +24,12 @@ const useGetProductReviews = (id) => {
         if (reviews?.status !== 200 && !loading) setError(true);
     }, [reviews, loading]);
 
-    const onPress = async (page) => {
+    const handleChangePage = async (page) => {
         setError(false);
         await dispatch(getProductReviews(id, page, 5));
     };
 
-    return { reviews, onPress, loading, error };
+    return { reviews, handleChangePage, loading, error };
 };
 
 export default useGetProductReviews;

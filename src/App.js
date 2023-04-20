@@ -71,11 +71,13 @@ function App() {
 
                 <Routes>
                     <Route index element={<HomePage/>}/>
-                    <Route path="/categories" element={<CategoriesPage/>}/>
-                    <Route path="/brands" element={<AllBrandPage/>}/>
                     <Route path="/products" element={<ProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductDetailsPage/>}/>
+
+                    <Route path="/categories" element={<CategoriesPage/>}/>
                     <Route path="/categories/:id" element={<ProductsByCategoryPage/>}/>
+
+                    <Route path="/brands" element={<AllBrandPage/>}/>
                     <Route path="/brands/:id" element={<ProductsByBrandPage/>}/>
 
                     {!isUser && !isAdmin && (
@@ -91,17 +93,23 @@ function App() {
                     {isAdmin && (
                         <Route>
                             <Route path="/admin/products" element={<AdminProductsPage/>}/>
+                            <Route path="/admin/products/add-product" element={<AddProductPage/>}/>
+                            <Route path="/admin/products/:id" element={<AdminEditProductsPage/>}/>
+
                             <Route path="/admin/orders" element={<AdminOrdersPage/>}/>
                             <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
+
                             <Route path="/admin/brands" element={<AddBrandPage/>}/>
+                            <Route path="/admin/brands/:id" element={<UpdateBrandPage/>}/>
+
                             <Route path="/admin/categories" element={<AddCategoryPage/>}/>
+                            <Route path="/admin/categories/:id" element={<UpdateCategoryPage/>}/>
+
                             <Route path="/admin/subcategories" element={<AddSubCategoryPage/>}/>
-                            <Route path="/admin/add-product" element={<AddProductPage/>}/>
-                            <Route path="/admin/updated-product/:id" element={<AdminEditProductsPage/>}/>
+
                             <Route path="/admin/coupons" element={<AddCouponPage/>}/>
                             <Route path="/admin/coupons/:id" element={<EditCouponPage/>}/>
-                            <Route path="/admin/update-category/:id" element={<UpdateCategoryPage/>}/>
-                            <Route path="/admin/update-brand/:id" element={<UpdateBrandPage/>}/>
+
                             <Route path="/admin/user-management" element={<UsersManagementPage/>}/>
                             <Route path="/admin/user-management/add-user" element={<AddUserPage/>}/>
                             <Route path="/admin/user-management/:id" element={<EditUserPage/>}/>
@@ -112,11 +120,12 @@ function App() {
                         <Route>
                             <Route path="/user/orders" element={<UserOrdersPage/>}/>
                             <Route path="/user/orders/:id" element={<UserOrderPage/>}/>
+
                             <Route path="/user/favorites" element={<UserFavoritesPage/>}/>
                             <Route path="/user/add-address" element={<UserAddAddressPage/>}/>
                             <Route path="/user/profile" element={<UserProfilePage/>}/>
                             <Route path="/cart" element={<CartPage/>}/>
-                            <Route path="/order/pay-method" element={<ChoosePayMethodPage/>}/>
+                            <Route path="/cart/pay-method" element={<ChoosePayMethodPage/>}/>
                         </Route>
                     )}
                     <Route path="*" element={<NotFoundPage/>}/>

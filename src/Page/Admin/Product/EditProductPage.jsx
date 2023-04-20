@@ -1,17 +1,16 @@
-import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
 import AdminSideBar from '../../../Components/Admin/AdminSideBar'
 import AdminEditProduct from "../../../Components/Admin/Product/EditProduct";
 
 const AdminEditProductsPage = () => {
     return (
-        <Container>
-            <Row className='py-3'>
-                <Col sm="3" xs="2" md="2">
+        <Container style={{minHeight: "80vh"}}>
+            <Row className='d-flex flex-row align-items-start products-page-space-between'>
+                <Col xs="1" sm="1" md="1">
                     <AdminSideBar/>
                 </Col>
 
-                <Col sm="9" xs="10" md="10">
+                <Col sm="11" xs="10" md="8" lg="9">
                     <AdminEditProduct/>
                 </Col>
             </Row>

@@ -9,7 +9,7 @@ const OrdersContainer = ({isAdmin}) => {
     const {
         paginate,
         orders,
-        handlePageChange,
+        handleChangePage,
         loading,
         error,
     } = useUserGetAllOrders();
@@ -48,7 +48,7 @@ const OrdersContainer = ({isAdmin}) => {
 
             {paginate?.pages > 1 && (
                 <Pagination
-                    onPress={handlePageChange}
+                    handleChangePage={handleChangePage}
                     pageCount={paginate?.pages ? paginate?.pages : 0}
                 />
             )}

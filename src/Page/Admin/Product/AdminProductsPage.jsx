@@ -1,50 +1,17 @@
-import React from 'react'
-import {Container, Row, Col, Spinner} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap'
 import AdminSideBar from '../../../Components/Admin/AdminSideBar'
-import Pagination from '../../../Components/Utility/Pagination'
-import useAdminGetProducts from "../../../hook/admin/Product/useAdminGetProducts";
-import AdminProductsCard from "../../../Components/Admin/Product/AdminProductsCard";
-import {Link} from "react-router-dom";
+import AdminProductsContainer from "../../../Components/Admin/Product/AdminProductsContainer";
 
 const AdminProductsPage = () => {
-    const {products, pagination, onPress, loading, error} = useAdminGetProducts();
-
-    let pageCount
-    if (pagination) pageCount = pagination;
-
     return (
-        <Container>
-            <Row className='py-3'>
-                <Col sm="3" xs="2" md="2">
+        <Container style={{minHeight: "80vh"}}>
+            <Row className='d-flex flex-row align-items-start products-page-space-between'>
+                <Col xs="1" sm="1" md="1">
                     <AdminSideBar/>
                 </Col>
 
-                <Col sm="9" xs="10" md="10">
-                    <div className='d-flex justify-content-between align-items-center'>
-                        <div className='admin-content-text'>Manage products</div>
-                        <Link className='product-cart-add px-3 py-3 mx-3' to='/admin/add-product'>Add new product</Link>
-                    </div>
-                    {
-                        loading && !error && !products && <Spinner animation="border" variant="primary"/>
-                    }
-                    {
-                        !loading && !error && products &&
-                        (
-                            products?.length > 0 ?
-                                <Row className='justify-content-start'>
-                                    {
-                                        products?.map((item, index) => <AdminProductsCard key={index} item={item}/>)
-                                    }
-                                </Row> : <h4 className="notFound">No Products found</h4>
-                        )
-                    }
-                    {
-                        !loading && error && !products && <h4 className="error">Something went wrong</h4>
-                    }
-
-                    {
-                        pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={onPress}/>) : null
-                    }
+                <Col sm="11" xs="10" md="8" lg="9">
+                    <AdminProductsContainer/>
                 </Col>
             </Row>
         </Container>

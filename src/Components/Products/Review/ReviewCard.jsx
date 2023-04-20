@@ -70,7 +70,7 @@ const ReviewCard = ({review}) => {
                         as="textarea"
                         value={formData.newReview}
                         onChange={(e) => onChange(e, 'newReview')}
-                        className="input-form-area p-2 mt-3"
+                        className="p-2 mt-3"
                         rows="2"
                         cols="20"
                         placeholder="Review"

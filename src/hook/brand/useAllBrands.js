@@ -23,9 +23,9 @@ export const useAllBrands = () => {
         setLoading(false);
     }, [brands, loading])
 
-    const getPage = (page) => {
+    const handleChangePage = (page) => {
         dispatch(getAllBrandsPage(page));
     };
 
-    return {brands: brands?.data?.data, loading, error, pageCount, getPage};
+    return {brands: brands?.data?.data, loading, error, pageCount, handleChangePage};
 };

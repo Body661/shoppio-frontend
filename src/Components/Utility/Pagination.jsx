@@ -1,12 +1,11 @@
-import React from 'react'
 import ReactPaginate from "react-paginate";
 import next from "../../imgs/Icons/next.png"
 import previous from "../../imgs/Icons/previous.png"
 
-const Pagination = ({pageCount, onPress}) => {
+const Pagination = ({pageCount, handleChangePage}) => {
 
     const handlePageClick = (data) => {
-        onPress(data.selected + 1)
+        handleChangePage(data.selected + 1)
     };
     return (
         <ReactPaginate

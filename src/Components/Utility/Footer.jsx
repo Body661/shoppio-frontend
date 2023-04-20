@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Col ,Row} from "react-bootstrap";
 import facebook from "../../images/facebook.png";
 import instagram from "../../images/instagram.png";

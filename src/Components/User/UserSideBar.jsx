@@ -1,4 +1,3 @@
-import React from 'react'
 import {Link} from 'react-router-dom'
 import {Menu, Sidebar, sidebarClasses, useProSidebar} from "react-pro-sidebar";
 import {MenuOutlined} from "@mui/icons-material";

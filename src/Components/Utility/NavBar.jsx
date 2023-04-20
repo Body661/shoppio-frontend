@@ -5,7 +5,7 @@ import logo from '../../images/logo.png';
 import NavbarToggle from "react-bootstrap/NavbarToggle";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
-import {Person, ShoppingCart} from "@mui/icons-material";
+import {Favorite, Person, ShoppingCart} from "@mui/icons-material";
 import useSearch from "../../hook/products/useSearch";
 
 const NavBar = ({isUser}) => {
@@ -97,10 +97,17 @@ const NavBar = ({isUser}) => {
                         )}
 
                         {isUser && (
-                            <Link to="/cart"
-                                  className="navbar-text d-flex justify-content-center align-items-center p-2">
-                                <ShoppingCart/> Cart
-                            </Link>
+                            <>
+                                <Link to="/cart"
+                                      className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                    <ShoppingCart/>
+                                </Link>
+
+                                <Link to="/user/favorites"
+                                      className="navbar-text d-flex justify-content-center align-items-center p-2">
+                                    <Favorite/>
+                                </Link>
+                            </>
                         )}
                     </Nav>
                 </NavbarCollapse>

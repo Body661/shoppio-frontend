@@ -79,7 +79,7 @@ const useSearch = () => {
         setLoading(false)
     }
 
-    const onPress = async (page) => {
+    const handleChangePage = async (page) => {
         setLoading(true)
         const {
             priceFromString,
@@ -123,7 +123,7 @@ const useSearch = () => {
     return {
         items,
         pagination,
-        onPress,
+        handleChangePage,
         getProducts,
         results,
         error,

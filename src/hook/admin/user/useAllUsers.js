@@ -38,7 +38,7 @@ export const useAllUsers = () => {
 
     const users = useSelector((state) => state.userManagementReducer.users);
 
-    const getPage = async (page) => {
+    const handleChangePage = async (page) => {
         let emailQuery
         if (email.trim() !== '') emailQuery = `email=${email.trim()}`
 
@@ -60,7 +60,7 @@ export const useAllUsers = () => {
         loading,
         error,
         pageCount: users?.data?.paginationRes?.pages,
-        getPage,
+        handleChangePage,
         handleChooseRole,
         handleSearchByMail
     };

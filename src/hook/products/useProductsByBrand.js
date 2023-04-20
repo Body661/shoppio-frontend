@@ -18,7 +18,7 @@ const useProductsByBrand = (brandID) => {
     }, [])
 
     //when click pagination
-    const onPress = async (page) => {
+    const handleChangePage = async (page) => {
         setLoading(true)
         await dispatch(getProductsByBrand(page, 50, brandID))
         setLoading(false)
@@ -36,7 +36,7 @@ const useProductsByBrand = (brandID) => {
     }, [products, loading])
 
 
-    return {items: products?.data?.data, pagination: products?.data?.pages, onPress, loading, error}
+    return {items: products?.data?.data, pagination: products?.data?.pages, handleChangePage, loading, error}
 }
 
 export default useProductsByBrand

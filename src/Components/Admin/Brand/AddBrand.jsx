@@ -1,5 +1,4 @@
-import React from 'react'
-import {Row, Col, Spinner} from 'react-bootstrap'
+import {Col, Spinner} from 'react-bootstrap'
 import useAddBrand from "../../../hook/admin/Brand/useAddBrand";
 
 const AddBrand = () => {

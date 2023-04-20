@@ -6,7 +6,7 @@ import AdminCategoriesContainer from "./AdminCategoriesContainer";
 
 const AdminCategories = () => {
 
-    const {categories, pageCount, error, getPage, loading} = useAllCategories()
+    const {categories, pageCount, error, handleChangePage, loading} = useAllCategories()
 
     let content = null;
 
@@ -24,7 +24,7 @@ const AdminCategories = () => {
     return (
         <div style={{minHeight: '80vh'}}>
             {content}
-            {pageCount > 1 ? (<Pagination pageCount={pageCount} onPress={getPage}/>) : null}
+            {pageCount > 1 ? (<Pagination pageCount={pageCount} handleChangePage={handleChangePage}/>) : null}
         </div>
     );
 };
