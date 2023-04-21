@@ -26,7 +26,7 @@ const useAddProduct = () => {
     const [colors, setColors] = useState([]);
     const category = useSelector((state) => state.categoryReducer.categories);
     const brand = useSelector((state) => state.brandReducer.brands);
-    const subcategory = useSelector((state) => state.subcategoryReducer.subcategory);
+    const subcategories = useSelector((state) => state.subcategoryReducer.subcategories);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -37,11 +37,10 @@ const useAddProduct = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (CatID?.trim() !== '' && subcategory?.data?.data) {
-            setOptions(subcategory.data.data);
+        if (CatID?.trim() !== '' && subcategories?.data?.data) {
+            setOptions(subcategories.data.data);
         }
-    }, [CatID, subcategory]);
-
+    }, [CatID, subcategories]);
     const onSelect = (selectedList) => setSelectedSubID(selectedList);
     const onRemove = (selectedList) => setSelectedSubID(selectedList);
 
@@ -65,7 +64,7 @@ const useAddProduct = () => {
     const onSelectCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
-            await dispatch(getSubcategoriesOfCategory(e.target.value));
+            await dispatch(getSubcategoriesOfCategory(e.target.value, '', ''));
             setLoadingFetchData(false)
         }
         setCatID(e.target.value);

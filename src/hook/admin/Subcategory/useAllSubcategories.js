@@ -29,9 +29,9 @@ export const useAllSubcategories = () => {
 
     const handleSelectCategory = (e) => {
         if (e.target.value.trim() !== '') {
-            dispatch(getSubcategoriesOfCategory(e.target.value.trim(), page, searchTerm));
+            dispatch(getSubcategoriesOfCategory(e.target.value.trim(), `page=${page}`, searchTerm));
         } else {
-            dispatch(getSubcategories(page, searchTerm));
+            dispatch(getSubcategories(`page=${page}`, searchTerm));
         }
     }
 

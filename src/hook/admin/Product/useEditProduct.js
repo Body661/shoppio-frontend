@@ -74,13 +74,13 @@ const useEditProduct = (id) => {
         }
     }, [CatID, dispatch]);
 
-    const subCat = useSelector(state => state.subcategoryReducer.subcategory);
+    const subcategories = useSelector((state) => state.subcategoryReducer.subcategories);
 
     useEffect(() => {
         if (CatID) {
-            setOptions(subCat?.data?.data);
+            setOptions(subcategories?.data?.data);
         }
-    }, [subCat, CatID]);
+    }, [subcategories, CatID]);
 
     const onSelect = (selectedList) => setSelectedSubID(selectedList);
     const onRemove = (selectedList) => setSelectedSubID(selectedList);

@@ -21,7 +21,7 @@ export const createSubcategory = (data) => async (dispatch) => {
 
 export const getSubcategories = (page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/subcategories?limit=50&page=${page}&${searchTerm}`);
+        const response = await useGetData(`/subcategories?limit=50&${page}&${searchTerm}`);
 
         dispatch({
             type: types.GET_ALL_SUBCATEGORIES,
@@ -38,7 +38,7 @@ export const getSubcategories = (page, searchTerm) => async (dispatch) => {
 
 export const getSubcategoriesOfCategory = (categoryId, page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/categories/${categoryId}/subcategories?${searchTerm}&page=${page}`);
+        const response = await useGetData(`/categories/${categoryId}/subcategories?${searchTerm}&${page}`);
 
         dispatch({
             type: types.GET_ALL_SUBCATEGORIES,

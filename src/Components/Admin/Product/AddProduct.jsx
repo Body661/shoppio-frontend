@@ -76,7 +76,7 @@ const AddProduct = () => {
                         />
 
                         <FormControl
-                            as="textArea"
+                            as="textarea"
                             className="p-2 mt-3 b-radius-10"
                             rows="4"
                             cols="50"
