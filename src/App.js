@@ -18,7 +18,6 @@ import AdminOrdersPage from "./Page/Admin/Order/AdminOrdersPage";
 import AdminOrderDetailsPage from "./Page/Admin/Order/AdminOrderDetailsPage";
 import AdminBrandsPage from "./Page/Admin/Brand/AdminBrandsPage";
 import AddCategoryPage from "./Page/Admin/Category/AddCategoryPage";
-import AddSubCategoryPage from "./Page/Admin/Subcategory/AddSubCategoryPage";
 import AddProductPage from "./Page/Admin/Product/AddProductPage";
 import UserOrdersPage from "./Page/User/Order/UserOrdersPage";
 import UserFavoritesPage from "./Page/User/UserFavoritesPage";
@@ -41,6 +40,9 @@ import UserOrderPage from "./Page/User/Order/UserOrderPage";
 import AddUserPage from "./Page/Admin/User/AddUserPage";
 import AddBrandPage from "./Page/Admin/Brand/AddBrandPage";
 import AdminCategoriesPage from "./Page/Admin/Category/AdminCategoriesPage";
+import AddSubcategoryPage from "./Page/Admin/Subcategory/AddSubcategoryPage";
+import AdminSubcategoriesPage from "./Page/Admin/Subcategory/AdminSubcategoriesPage";
+import UpdateSubcategoryPage from "./Page/Admin/Subcategory/UpdateSubcategoryPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -109,7 +111,9 @@ function App() {
                             <Route path="/admin/categories/add-category" element={<AddCategoryPage/>}/>
                             <Route path="/admin/categories/:id" element={<UpdateCategoryPage/>}/>
 
-                            <Route path="/admin/subcategories" element={<AddSubCategoryPage/>}/>
+                            <Route path="/admin/subcategories" element={<AdminSubcategoriesPage/>}/>
+                            <Route path="/admin/subcategories/add-subcategory" element={<AddSubcategoryPage/>}/>
+                            <Route path="/admin/subcategories/:id" element={<UpdateSubcategoryPage/>}/>
 
                             <Route path="/admin/coupons" element={<AddCouponPage/>}/>
                             <Route path="/admin/coupons/:id" element={<EditCouponPage/>}/>

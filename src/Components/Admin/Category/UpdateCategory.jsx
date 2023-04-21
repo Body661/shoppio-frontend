@@ -1,8 +1,7 @@
-import {Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import useUpdateCategory from "../../../hook/admin/Category/useUpdateCategory";
 import {useParams} from "react-router-dom";
 import {Backdrop, CircularProgress} from "@mui/material";
-import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import {Category} from "@mui/icons-material";
 
 const UpdateCategory = () => {

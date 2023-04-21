@@ -3,7 +3,7 @@ import {createProduct} from '../../../redux/actions/productActions';
 import {useSelector, useDispatch} from 'react-redux'
 import {getAllCategories} from '../../../redux/actions/CategoryActions'
 import {getAllBrands} from '../../../redux/actions/BrandActions';
-import {getSubcategory} from "../../../redux/actions/SubcategoryActions";
+import {getSubcategoriesOfCategory} from "../../../redux/actions/SubcategoryActions";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
@@ -65,7 +65,7 @@ const useAddProduct = () => {
     const onSelectCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
-            await dispatch(getSubcategory(e.target.value));
+            await dispatch(getSubcategoriesOfCategory(e.target.value));
             setLoadingFetchData(false)
         }
         setCatID(e.target.value);

@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {getAllCategories} from '../../../redux/actions/CategoryActions'
 import {getAllBrands} from '../../../redux/actions/BrandActions';
 import {updateProduct} from '../../../redux/actions/productActions';
-import {getSubcategory} from "../../../redux/actions/SubcategoryActions";
+import {getSubcategoriesOfCategory} from "../../../redux/actions/SubcategoryActions";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
@@ -63,14 +63,14 @@ const useEditProduct = (id) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
             setCatID(e.target.value);
-            await dispatch(getSubcategory(e.target.value));
+            await dispatch(getSubcategoriesOfCategory(e.target.value));
             setLoadingFetchData(false)
         }
     };
 
     useEffect(() => {
         if (CatID) {
-            dispatch(getSubcategory(CatID));
+            dispatch(getSubcategoriesOfCategory(CatID));
         }
     }, [CatID, dispatch]);
 

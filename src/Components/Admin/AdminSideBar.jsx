@@ -51,12 +51,12 @@ const AdminSideBar = () => {
 
                         <Link to="/admin/subcategories">
                             <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
-                                Add subcategory
+                                Manage subcategories
                             </Button>
                         </Link>
                         <Link to="/admin/coupons">
                             <Button className="btn-dark mt-3 border-bottom p-2 mx-auto text-center w-100">
-                                Add coupon
+                                Manage coupons
                             </Button>
                         </Link>
                     </div>
