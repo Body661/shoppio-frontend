@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.scss';
 import App from './App';
@@ -11,9 +10,10 @@ import "swiper/css/pagination";
 import {ProSidebarProvider} from 'react-pro-sidebar';
 import "react-image-gallery/styles/css/image-gallery.css";
 import 'react-toastify/dist/ReactToastify.css';
+import {StrictMode} from "react";
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
             <SSRProvider>
                 <ProSidebarProvider>
@@ -21,7 +21,7 @@ ReactDOM.render(
                 </ProSidebarProvider>
             </SSRProvider>
         </Provider>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root')
 );
 

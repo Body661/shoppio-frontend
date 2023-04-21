@@ -1,7 +1,6 @@
 import {Button, Col, FormControl, Modal, Row} from 'react-bootstrap';
 import useDeleteCart from '../../../hook/user/cart/useDeleteCart';
 import {Link} from "react-router-dom";
-import React from "react";
 import {Rating} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import {DeleteOutline} from "@mui/icons-material";

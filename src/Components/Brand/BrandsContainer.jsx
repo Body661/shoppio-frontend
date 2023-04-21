@@ -1,9 +1,9 @@
-import {Container, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import CubeCard from "../Utility/CubeCard";
-import brandsIcon from "../../imgs/Icons/brands.png";
 import {Backdrop, CircularProgress} from "@mui/material";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
 
-const BrandsContainer = ({brands, loading, error}) => {
+const BrandsContainer = ({brands, loading, error, isAll}) => {
 
     let content = null;
 
@@ -31,10 +31,12 @@ const BrandsContainer = ({brands, loading, error}) => {
 
             </div>
 
-            <img src={brandsIcon} className="page-header-icon"/>
-            <span className="page-header-text">
-                        All brands
-                    </span>
+            {isAll &&
+                <Col className="page-header">
+                    <LoyaltyIcon style={{fontSize: "45px"}}/>
+                    <span className="page-header-text">  All brands </span>
+                </Col>
+            }
             <Row className="my-1 d-flex justify-content-center">{content}</Row>
         </Container>
     );

@@ -4,18 +4,18 @@ import {useInsertDataWithImage} from '../../customHooks/useInsertData';
 import {useUpdateDataWithImage} from "../../customHooks/useUpdateData";
 import useDeleteData from "../../customHooks/useDeleteData";
 
-export const getAllBrands = (limit) => async (dispatch) => {
+export const getAllBrands = (limit, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/brands?limit=${limit}`);
+        const response = await useGetData(`/brands?limit=${limit}&${searchTerm}`);
         dispatch({type: GET_ALL_BRANDS, payload: response});
     } catch (error) {
         dispatch({type: GET_ALL_BRANDS, payload: error.response});
     }
 };
 
-export const getAllBrandsPage = (page) => async (dispatch) => {
+export const getAllBrandsPage = (page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/brands?limit=4&page=${page}`);
+        const response = await useGetData(`/brands?limit=50&page=${page}&${searchTerm}`);
         dispatch({type: GET_ALL_BRANDS, payload: response});
     } catch (error) {
         dispatch({type: GET_ALL_BRANDS, payload: error.response});

@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {createCategory} from '../../../redux/actions/CategoryActions';
 import avatar from '../../../images/avatar.png';
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const useAddCategory = () => {
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const useAddCategory = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isPress, setIsPress] = useState(false);
+    const navigate = useNavigate()
 
     const handleNameChange = event => setName(event.target.value);
 
@@ -47,8 +49,8 @@ const useAddCategory = () => {
             if (addCategoryRes.status === 201) {
                 toast('Category added successfully', {type: 'success', toastId: 'addCategorySuccess'});
                 setTimeout(() => {
-                    window.location.reload();
-                }, 1000)
+                    navigate('/admin/categories')
+                }, 1500)
             } else {
                 toast(addCategoryRes?.data?.errors ? addCategoryRes?.data?.errors[0]?.msg : 'Error while adding the new category', {
                     type: 'error',

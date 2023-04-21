@@ -1,5 +1,4 @@
 import {Button, Col, Container, FormCheck, FormControl, FormLabel, Row} from "react-bootstrap";
-import React from "react";
 import AdminUserCard from "./AdminUserCard";
 import Pagination from "../../Utility/Pagination";
 import {useAllUsers} from "../../../hook/admin/user/useAllUsers";

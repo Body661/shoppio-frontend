@@ -1,15 +1,12 @@
-import {Container, Row, Spinner} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import CubeCard from '../Utility/CubeCard';
-import categoriesIcon from '../../imgs/Icons/categories.png';
 import {Backdrop, CircularProgress} from "@mui/material";
+import {Category} from "@mui/icons-material";
 
 const CategoryContainer = ({categories, loading, error, isAll}) => {
     let content = null;
 
-    if (loading && !categories && !error && !isAll) {
-        content = content = <Spinner animation="border" variant="primary"/>;
-
-    } else if (!loading && !error && categories && categories?.length > 0) {
+    if (!loading && !error && categories && categories?.length > 0) {
         content = categories.map((category) => (
             <CubeCard key={category._id} id={category._id} title={category.name} img={category.img} url="categories"/>
         ));
@@ -30,12 +27,10 @@ const CategoryContainer = ({categories, loading, error, isAll}) => {
             </Backdrop>
 
             {isAll &&
-                <div className="page-header">
-                    <img src={categoriesIcon} className="page-header-icon"/>
-                    <span className="page-header-text">
-                        All categories
-                    </span>
-                </div>
+                <Col className="page-header">
+                    <Category style={{fontSize: "45px"}}/>
+                    <span className="page-header-text">  All categories </span>
+                </Col>
             }
             <Row className="my-1 d-flex justify-content-center">{content}</Row>
         </Container>

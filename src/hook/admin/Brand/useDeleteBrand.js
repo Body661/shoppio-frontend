@@ -8,14 +8,14 @@ const useDeleteBrand = (category) => {
     const [isPress, setIsPress] = useState(false)
     const dispatch = useDispatch()
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
-    const handleModalOpen = () => setIsModalOpen(true);
-    const handleModalClose = () => setIsModalOpen(false);
+    const handleOpenDelete = () => setShowDelete(true);
+    const handleCloseDelete = () => setShowDelete(false);
 
-    const deleteHandler = async () => {
+    const handleDelete = async () => {
         setIsPress(true)
-        setIsModalOpen(false)
+        setShowDelete(false)
         await dispatch(deleteBrand(category))
         setLoading(false)
         setIsPress(false)
@@ -23,7 +23,6 @@ const useDeleteBrand = (category) => {
 
     const deleteRes = useSelector(state => state.brandReducer.deleteBrand)
 
-    console.log(deleteRes)
     useEffect(() => {
         if (!loading) {
             if (deleteRes && deleteRes?.status === 200) {
@@ -44,12 +43,12 @@ const useDeleteBrand = (category) => {
 
 
     return {
-        deleteHandler,
+        handleDelete,
         loading,
         isPress,
-        isModalOpen,
-        handleModalOpen,
-        handleModalClose
+        showDelete,
+        handleOpenDelete,
+        handleCloseDelete
     }
 }
 

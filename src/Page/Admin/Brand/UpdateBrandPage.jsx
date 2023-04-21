@@ -4,13 +4,13 @@ import UpdateBrand from "../../../Components/Admin/Brand/UpdateBrand";
 
 const UpdateCategoryPage = () => {
     return (
-        <Container>
-            <Row className='py-3'>
-                <Col sm="3" xs="2" md="2">
+        <Container style={{minHeight: "80vh"}}>
+            <Row className='d-flex flex-row align-items-start products-page-space-between'>
+                <Col xs="1" sm="1" md="1">
                     <AdminSideBar/>
                 </Col>
 
-                <Col sm="9" xs="10" md="10">
+                <Col sm="11" xs="10" md="8" lg="9">
                     <UpdateBrand/>
                 </Col>
             </Row>

@@ -8,14 +8,14 @@ const useDeleteCategory = (category) => {
     const [isPress, setIsPress] = useState(false)
     const dispatch = useDispatch()
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
-    const handleModalOpen = () => setIsModalOpen(true);
-    const handleModalClose = () => setIsModalOpen(false);
+    const handleOpenDelete = () => setShowDelete(true);
+    const handleCloseDelete = () => setShowDelete(false);
 
-    const deleteHandler = async () => {
+    const handleDelete = async () => {
         setIsPress(true)
-        setIsModalOpen(false)
+        setShowDelete(false)
         await dispatch(deleteCategory(category))
         setLoading(false)
         setIsPress(false)
@@ -43,12 +43,12 @@ const useDeleteCategory = (category) => {
 
 
     return {
-        deleteHandler,
+        handleDelete,
         loading,
         isPress,
-        isModalOpen,
-        handleModalOpen,
-        handleModalClose
+        showDelete,
+        handleOpenDelete,
+        handleCloseDelete
     }
 }
 

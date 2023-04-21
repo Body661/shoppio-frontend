@@ -4,7 +4,6 @@ import filter from "../../imgs/Icons/filter.png"
 import FormCheckInput from "react-bootstrap/FormCheckInput";
 import {FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import {Backdrop, CircularProgress} from "@mui/material";
-import React from "react";
 import useSearch from "../../hook/products/useSearch";
 
 const SideFilter = () => {

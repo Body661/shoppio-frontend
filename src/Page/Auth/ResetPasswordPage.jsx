@@ -1,4 +1,3 @@
-import React from 'react';
 import {Button, Container, Form, FormControl} from 'react-bootstrap';
 import useResetPassword from '../../hook/auth/useResetPassword';
 import logo from "../../images/logo.png";

@@ -6,10 +6,21 @@ export const useAllBrands = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
-        dispatch(getAllBrands(50));
-    }, [dispatch]);
+        dispatch(getAllBrands(50, searchTerm));
+    }, [dispatch, searchTerm]);
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            if (e.target.value.trim() !== '') {
+                setSearchTerm(`name=${e.target.value}`);
+            } else {
+                setSearchTerm("")
+            }
+        }
+    }
 
     const brands = useSelector((state) => state.brandReducer.brands);
     const pageCount = brands?.data?.paginationRes?.pages || 0;
@@ -24,8 +35,8 @@ export const useAllBrands = () => {
     }, [brands, loading])
 
     const handleChangePage = (page) => {
-        dispatch(getAllBrandsPage(page));
+        dispatch(getAllBrandsPage(page, searchTerm));
     };
 
-    return {brands: brands?.data?.data, loading, error, pageCount, handleChangePage};
+    return {brands: brands?.data?.data, loading, error, pageCount, handleChangePage, handleSearch};
 };

@@ -1,18 +1,14 @@
-import {Col, Container, Row} from 'react-bootstrap'
+import {Container, Row} from 'react-bootstrap'
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import useProductsContainer from "../../hook/products/useProductsContainer";
 import {getWishlist} from "../../redux/actions/wishlistActions";
-import HomeProductCard from "../../Components/Products/HomeProductCard";
-import {Backdrop, CircularProgress} from "@mui/material";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
-import {Favorite, ShoppingCart} from "@mui/icons-material";
+import {Favorite} from "@mui/icons-material";
 
 const UserFavoritesPage = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
-    const {favProd} = useProductsContainer()
 
     useEffect(() => {
         const get = async () => {
@@ -42,7 +38,7 @@ const UserFavoritesPage = () => {
 
             <Row className='justify-content-start mt-4'>
                 <ProductsContainer products={items} loading={loading}/>
-                {items?.length <= 0 && !loading && <h6>No items in your wishlist</h6>}
+                {items?.length <= 0 && !loading && <h6>No items added to your wishlist</h6>}
             </Row>
         </Container>
     )

@@ -103,7 +103,7 @@ const useUpdateCategory = (categoryId) => {
         }
     }, [updateCategoryRes, loadingUpdate]);
 
-    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress}
+    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress, loading}
 }
 
 export default useUpdateCategory

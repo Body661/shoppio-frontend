@@ -1,7 +1,6 @@
 import {Button, Col, Container, Row, Spinner, FormSelect, Form, FormControl, Modal} from "react-bootstrap";
 import {useEditUser} from "../../../hook/admin/user/useEditUser";
 import {useParams} from "react-router-dom";
-import React from "react";
 import {Backdrop, CircularProgress} from "@mui/material";
 import {DeleteOutline, Person} from "@mui/icons-material";
 import AddressCard from "../../User/Address/AddressCard";

@@ -4,9 +4,9 @@ import {useInsertDataWithImage} from "../../customHooks/useInsertData";
 import useDeleteData from "../../customHooks/useDeleteData";
 import {useUpdateDataWithImage} from "../../customHooks/useUpdateData";
 
-export const getAllCategories = (limit) => async (dispatch) => {
+export const getAllCategories = (limit, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/categories?limit=${limit}`)
+        const response = await useGetData(`/categories?limit=${limit}&${searchTerm}`)
 
         dispatch({
             type: GET_ALL_CATEGORIES,
@@ -20,9 +20,9 @@ export const getAllCategories = (limit) => async (dispatch) => {
     }
 }
 
-export const getAllCategoriesPage = (page) => async (dispatch) => {
+export const getAllCategoriesPage = (page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/categories?limit=6&page=${page}`)
+        const response = await useGetData(`/categories?limit=6&page=${page}&${searchTerm}`)
 
         dispatch({
             type: GET_ALL_CATEGORIES,

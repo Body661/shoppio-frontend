@@ -3,14 +3,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {createBrand} from '../../../redux/actions/BrandActions';
 import avatar from '../../../images/avatar.png';
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const useAddBrand = () => {
     const dispatch = useDispatch();
     const [img, setImg] = useState(avatar);
     const [name, setName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [isPress, setIsPress] = useState(false);
+    const navigate = useNavigate()
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -54,8 +56,8 @@ const useAddBrand = () => {
             if (addBranRes?.status === 201) {
                 toast('Brand added successfully', {type: 'success', toastId: 'brandAdded'})
                 setTimeout(() => {
-                    window.location.reload();
-                }, 1000)
+                    navigate('/admin/brands')
+                }, 1500)
             } else {
                 toast(addBranRes?.data?.errors ? addBranRes?.data?.errors[0]?.msg : 'Error while adding the brand', {
                     type: 'error',

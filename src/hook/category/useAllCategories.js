@@ -6,10 +6,21 @@ export const useAllCategories = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
-        dispatch(getAllCategories(50));
-    }, [dispatch])
+        dispatch(getAllCategories(50, searchTerm));
+    }, [dispatch, searchTerm])
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            if (e.target.value.trim() !== '') {
+                setSearchTerm(`name=${e.target.value}`);
+            } else {
+                setSearchTerm("")
+            }
+        }
+    }
 
     const categories = useSelector(state => state.categoryReducer.categories)
     let pageCount = categories?.data?.paginationRes?.pages || 0;
@@ -24,8 +35,8 @@ export const useAllCategories = () => {
     }, [categories, loading])
 
     const handleChangePage = (page) => {
-        dispatch(getAllCategoriesPage(page));
+        dispatch(getAllCategoriesPage(page, searchTerm));
     }
 
-    return {categories: categories?.data?.data, loading, error, pageCount, handleChangePage};
+    return {categories: categories?.data?.data, loading, error, pageCount, handleChangePage, handleSearch};
 }

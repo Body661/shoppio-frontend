@@ -16,7 +16,7 @@ import ChoosePayMethodPage from "./Page/User/Cart/ChoosePayMethodPage";
 import AdminProductsPage from "./Page/Admin/Product/AdminProductsPage";
 import AdminOrdersPage from "./Page/Admin/Order/AdminOrdersPage";
 import AdminOrderDetailsPage from "./Page/Admin/Order/AdminOrderDetailsPage";
-import AddBrandPage from "./Page/Admin/Brand/AddBrandPage";
+import AdminBrandsPage from "./Page/Admin/Brand/AdminBrandsPage";
 import AddCategoryPage from "./Page/Admin/Category/AddCategoryPage";
 import AddSubCategoryPage from "./Page/Admin/Subcategory/AddSubCategoryPage";
 import AddProductPage from "./Page/Admin/Product/AddProductPage";
@@ -39,6 +39,8 @@ import UsersManagementPage from "./Page/Admin/User/UsersManagementPage";
 import EditUserPage from "./Page/Admin/User/EditUserPage";
 import UserOrderPage from "./Page/User/Order/UserOrderPage";
 import AddUserPage from "./Page/Admin/User/AddUserPage";
+import AddBrandPage from "./Page/Admin/Brand/AddBrandPage";
+import AdminCategoriesPage from "./Page/Admin/Category/AdminCategoriesPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -99,10 +101,12 @@ function App() {
                             <Route path="/admin/orders" element={<AdminOrdersPage/>}/>
                             <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage/>}/>
 
-                            <Route path="/admin/brands" element={<AddBrandPage/>}/>
+                            <Route path="/admin/brands" element={<AdminBrandsPage/>}/>
+                            <Route path="/admin/brands/add-brand" element={<AddBrandPage/>}/>
                             <Route path="/admin/brands/:id" element={<UpdateBrandPage/>}/>
 
-                            <Route path="/admin/categories" element={<AddCategoryPage/>}/>
+                            <Route path="/admin/categories" element={<AdminCategoriesPage/>}/>
+                            <Route path="/admin/categories/add-category" element={<AddCategoryPage/>}/>
                             <Route path="/admin/categories/:id" element={<UpdateCategoryPage/>}/>
 
                             <Route path="/admin/subcategories" element={<AddSubCategoryPage/>}/>

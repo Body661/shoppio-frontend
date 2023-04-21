@@ -34,7 +34,6 @@ const useUpdateBrand = (brandId) => {
 
     useEffect(() => {
         const fetchBrandData = async () => {
-
             await dispatch(getBrand(brandId));
             setLoading(false)
         }
@@ -44,7 +43,6 @@ const useUpdateBrand = (brandId) => {
 
     const brand = useSelector(state => state.brandReducer.brand)
 
-    console.log(brand)
     useEffect(() => {
         if (!loading) {
             if (brand && brand?.status === 200) {
@@ -104,7 +102,7 @@ const useUpdateBrand = (brandId) => {
         }
     }, [updateBrandRes, loadingUpdate]);
 
-    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress}
+    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress, loading}
 }
 
 export default useUpdateBrand

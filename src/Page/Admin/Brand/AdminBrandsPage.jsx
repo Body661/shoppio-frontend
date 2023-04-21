@@ -1,8 +1,8 @@
 import {Container, Row, Col} from 'react-bootstrap'
-import AdminSideBar from "../../../Components/Admin/AdminSideBar";
-import UpdateCategory from "../../../Components/Admin/Category/UpdateCategory";
+import AdminSideBar from '../../../Components/Admin/AdminSideBar'
+import AdminBrandsContainer from "../../../Components/Admin/Brand/AdminBrandsContainer";
 
-const UpdateCategoryPage = () => {
+const AdminBrandsPage = () => {
     return (
         <Container style={{minHeight: "80vh"}}>
             <Row className='d-flex flex-row align-items-start products-page-space-between'>
@@ -11,11 +11,11 @@ const UpdateCategoryPage = () => {
                 </Col>
 
                 <Col sm="11" xs="10" md="8" lg="9">
-                    <UpdateCategory/>
+                    <AdminBrandsContainer/>
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default UpdateCategoryPage
+export default AdminBrandsPage

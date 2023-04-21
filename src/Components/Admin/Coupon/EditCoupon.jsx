@@ -1,7 +1,6 @@
 import {Row, Col, Spinner} from 'react-bootstrap';
 import useEditCoupon from '../../../hook/admin/Coupon/useEditCoupon';
 import {useParams} from 'react-router-dom';
-import React from "react";
 
 const EditCoupon = () => {
 
