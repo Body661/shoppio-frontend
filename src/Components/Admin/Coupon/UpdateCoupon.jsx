@@ -1,11 +1,12 @@
-import {useRef} from 'react';
-import {Row, Col, Container, FormControl, Button, Form} from 'react-bootstrap';
-import useAddCoupon from '../../../hook/admin/Coupon/useAddCoupon';
+import {Row, Col, Container, Form, FormControl, Button} from 'react-bootstrap';
+import useEditCoupon from '../../../hook/admin/Coupon/useEditCoupon';
+import {useParams} from 'react-router-dom';
 import {Backdrop, CircularProgress} from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
-const AddCoupon = () => {
-    const dateRef = useRef();
+const UpdateCoupon = () => {
+
+    const {id} = useParams();
     const {
         couponName,
         couponDate,
@@ -14,30 +15,23 @@ const AddCoupon = () => {
         onChangeDate,
         onChangeValue,
         onSubmit,
-        loading,
+        loadingUpdate,
         isPress
-    } = useAddCoupon();
-
-    const handleDateFocus = () => {
-        dateRef.current.type = 'date';
-    };
-
-    const handleDateBlur = () => {
-        dateRef.current.type = 'text';
-    };
+    } = useEditCoupon(id)
 
     return (
+
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loadingUpdate && isPress}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
 
             <Col className="page-header mt-4" xs={12} md={6}>
                 <LocalOfferIcon style={{fontSize: "45px"}}/>
-                <span className="page-header-text"> Add coupon</span>
+                <span className="page-header-text"> Editing coupon</span>
             </Col>
 
             <Form style={{backgroundColor: "var(--main-gray)"}}
@@ -52,14 +46,11 @@ const AddCoupon = () => {
                             placeholder="Coupon name"
                         />
                         <FormControl
-                            ref={dateRef}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Expiration date"
                             onChange={onChangeDate}
                             value={couponDate}
-                            onFocus={handleDateFocus}
-                            onBlur={handleDateBlur}
                         />
                         <FormControl
                             value={couponValue}
@@ -70,13 +61,12 @@ const AddCoupon = () => {
                         />
                     </Col>
                     <Col sm="12" className="d-flex mt-3">
-                        <Button onClick={onSubmit} className="btn-dark w-100 b-radius-10">Add coupon</Button>
+                        <Button onClick={onSubmit} className="btn-dark w-100 b-radius-10">Save changes</Button>
                     </Col>
                 </Row>
             </Form>
         </Container>
     )
+}
 
-};
-
-export default AddCoupon;
+export default UpdateCoupon

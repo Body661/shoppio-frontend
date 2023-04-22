@@ -17,7 +17,7 @@ const useEditCoupon = (id) => {
 
 
     const formatDate = (dateString) => {
-        const options = {year: 'numeric', month: 'numeric', day: 'numeric'};
+        const options = {year: 'numeric', month: '2-digit', day: 'numeric'};
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
@@ -53,10 +53,16 @@ const useEditCoupon = (id) => {
     };
 
     const onSubmit = async () => {
-        if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
+    if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
             toast('Please fill in all information!', {type: 'error'});
             return;
         }
+
+        if(couponValue > 100) {
+            toast('Discount value is invalid!', {type: 'error'});
+            return;
+        }
+
         setLoadingUpdate(true);
         setIsPress(true)
         await dispatch(editCoupon(id, {

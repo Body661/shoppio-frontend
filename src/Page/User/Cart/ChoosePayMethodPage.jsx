@@ -67,7 +67,7 @@ const ChoosePayMethodPage = () => {
 
             <Row>
                 <Col>
-                    <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
+                    <div className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                          style={{backgroundColor: "var(--main-gray)"}}>
                         {addresses?.data?.data?.length > 0 ? (
                             addresses?.data?.data?.map((address) =>
@@ -84,22 +84,24 @@ const ChoosePayMethodPage = () => {
                                 Add address
                             </Button>
                         </Link>
-                    </Row>
+                    </div>
 
-                    <Row>
-                        <div className="page-header mt-4">
+                    <div>
+                        <Col className="page-header mt-4">
                             <PaymentOutlined style={{fontSize: "45px"}}/>
                             <span className="page-header-text"> Pay method </span>
-                        </div>
-                    </Row>
+                        </Col>
+                    </div>
 
-                    <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
+                    <div className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                          style={{backgroundColor: "var(--main-gray)"}}>
-                        {payMethods?.map(payMethod =>
-                            <div onClick={() => changeMethod(payMethod.value)}>
-                                <PayMethod payMethod={payMethod} isChosen={type}/>
-                            </div>)}
-                    </Row>
+                        <Col>
+                            {payMethods?.map(payMethod =>
+                                <div onClick={() => changeMethod(payMethod.value)}>
+                                    <PayMethod payMethod={payMethod} isChosen={type}/>
+                                </div>)}
+                        </Col>
+                    </div>
                 </Col>
 
                 <Col xs="12" md="12" lg={3}>

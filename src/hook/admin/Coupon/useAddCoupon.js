@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addCoupon, getAllCoupon} from '../../../redux/actions/couponActions';
+import {addCoupon} from '../../../redux/actions/couponActions';
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const useAddCoupon = () => {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const useAddCoupon = () => {
     const [couponValue, setCouponValue] = useState('');
     const [loading, setLoading] = useState(true);
     const [isPress, setIsPress] = useState(false);
+    const navigate = useNavigate()
 
     const onChangeName = (event) => {
         setCouponName(event.target.value);
@@ -26,6 +28,11 @@ const useAddCoupon = () => {
     const onSubmit = async () => {
         if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
             toast('Please fill in all information!', {type: 'error'});
+            return;
+        }
+
+        if (couponValue > 100) {
+            toast('Discount value is invalid!', {type: 'error'});
             return;
         }
 
@@ -46,7 +53,7 @@ const useAddCoupon = () => {
             if (addCouponRes && addCouponRes.status === 201) {
                 toast("Coupon added successfully", {type: 'success'});
                 setTimeout(() => {
-                    window.location.reload()
+                    navigate('/admin/coupons')
                 }, 1000)
             } else {
                 toast(addCouponRes?.data?.errors ? addCouponRes?.data?.errors[0]?.msg : 'Error while adding Coupon', {
@@ -58,19 +65,6 @@ const useAddCoupon = () => {
 
     }, [loading, addCouponRes])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(getAllCoupon());
-        };
-
-        fetchData();
-    }, [dispatch]);
-
-    const allCoupons = useSelector(state => state.couponReducer.allCoupons)
-
-    let coupons = [];
-    if (allCoupons?.data?.data) coupons = allCoupons?.data?.data
-
     return {
         couponName,
         couponDate,
@@ -79,7 +73,6 @@ const useAddCoupon = () => {
         onChangeDate,
         onChangeValue,
         onSubmit,
-        coupons,
         loading,
         isPress
     };

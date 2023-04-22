@@ -1,23 +1,22 @@
-import {useAllCategories} from "../../../hook/category/useAllCategories";
 import Pagination from "../../Utility/Pagination";
 import {Button, Col, Container, FormControl, Row} from "react-bootstrap";
 import {Backdrop, CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
-import {CategoryOutlined} from "@mui/icons-material";
-import AdminCategoryItem from "./adminCategoryCard";
+import AdminCouponCard from "./AdminCouponCard";
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import {useGetCoupons} from "../../../hook/admin/Coupon/useGetCoupons";
 
-const AdminCategoriesContainer = () => {
-
-    const {categories, pageCount, error, handleChangePage, loading, handleSearch} = useAllCategories()
+const AdminCouponsContainer = () => {
+    const {coupons, pageCount, error, handleChangePage, loading, handleSearch} = useGetCoupons();
 
     let content = null;
 
-    if (!loading && !error && categories && categories?.length > 0) {
-        content = categories?.map((category) => <AdminCategoryItem category={category}/>)
-    } else if (!loading && !error && !categories) {
-        content = <h4 className="notFound">No categories found</h4>;
+    if (!loading && !error && coupons && coupons?.length > 0) {
+        content = coupons?.map((coupon) => <AdminCouponCard key={coupon?._id} coupon={coupon}/>)
+    } else if (!loading && !error && !coupons) {
+        content = <h4 className="notFound">No coupons found</h4>;
 
-    } else if (!loading && error && !categories) {
+    } else if (!loading && error && !coupons) {
         content = <h4 className="error">Something went wrong</h4>;
     }
 
@@ -32,16 +31,16 @@ const AdminCategoriesContainer = () => {
 
             <Row className="d-flex justify-content-between align-items-center">
                 <Col className="page-header mt-4" xs={12} md={6}>
-                    <CategoryOutlined style={{fontSize: "45px"}}/>
-                    <span className="page-header-text"> Categories </span>
+                    <LocalOfferIcon style={{fontSize: "45px"}}/>
+                    <span className="page-header-text"> coupons </span>
                 </Col>
 
                 <Col sm={12} md={6}>
-                    <Link to='/admin/categories/add-category'
+                    <Link to='/admin/coupons/add-coupon'
                           className="mt-3 d-flex justify-content-center">
                         <Button className="btn-outline-light btn-dark b-radius-10 w-100"
                                 style={{transition: "0.5s"}}>
-                            Add new category
+                            Add new coupon
                         </Button>
                     </Link>
                 </Col>
@@ -65,4 +64,4 @@ const AdminCategoriesContainer = () => {
     );
 };
 
-export default AdminCategoriesContainer;
+export default AdminCouponsContainer;

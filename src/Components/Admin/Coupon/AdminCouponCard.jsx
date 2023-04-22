@@ -1,26 +1,38 @@
-import {Button, Col, Modal, Row} from 'react-bootstrap'
-import useCouponCard from '../../../hook/admin/Coupon/useCouponCard'
-import deleteIcon from '../../../images/delete.png'
-import editIcon from '../../../images/edit.png'
-import {Link} from 'react-router-dom';
+import {Button, Col, Modal} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {Backdrop, CircularProgress} from "@mui/material";
+import {Delete, Edit} from "@mui/icons-material";
+import useDeleteCoupon from "../../../hook/admin/Coupon/useDeleteCoupon";
 
-const AdminCouponCard = ({coupon}) => {
+function AdminCouponCard({coupon}) {
+    const {isModalOpen, handleModalOpen, handleModalClose, handleDelete, loading, isPress} = useDeleteCoupon(coupon?._id)
 
-    const {formatDate, isModalOpen, handleModalOpen, handleModalClose, handleDelete} = useCouponCard(coupon)
+    const formatDate = (dateString) => {
+        const options = {year: 'numeric', month: '2-digit', day: 'numeric'};
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
 
     return (
-        <div className="user-address-card my-3 px-2">
+        <Col xs={12} sm={6} md={5} lg={3}>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading && isPress}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
+
             <Modal show={isModalOpen} onHide={handleModalClose}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>
-                        <div>Delete confirmation</div>
+                        <div>Confirm delete</div>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div>Are you sure you want to delete this coupon?</div>
+                    <div>Do you sure you want to delete this coupon?</div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" onClick={handleModalClose}>
+                    <Button variant="outline-dark" onClick={handleModalClose}>
                         Cancel
                     </Button>
                     <Button variant="dark" onClick={handleDelete}>
@@ -29,64 +41,38 @@ const AdminCouponCard = ({coupon}) => {
                 </Modal.Footer>
             </Modal>
 
-            <Row className="d-flex justify-content-between">
-                <Col xs="6">
-                    <div className="p-2">Coupon name: {coupon.name}</div>
-                </Col>
-                <Col xs="6" className="d-flex justify-content-end">
-                    <div className="d-flex p-2">
-                        <Link to={`/admin/coupons/${coupon._id}`}>
-                            <div className="d-flex mx-2">
-                                <img alt="" className="ms-1 mt-2" src={editIcon} height="17px" width="15px"/>
-                                <p className="item-delete-edit"> Edit</p>
-                            </div>
+            <Col className="mt-4">
+                <div className="d-flex flex-column align-items-center gap-2 p-2 b-radius-10"
+                     style={{backgroundColor: "var(--main-gray)"}}>
+                    <div className="d-flex justify-content-between w-100">
+                        <Link to={`/admin/coupons/${coupon?._id}`} className="d-flex">
+                            <Edit/>
                         </Link>
 
-                        <div onClick={handleModalOpen} className="d-flex ">
-                            <img alt="" className="ms-1 mt-2" src={deleteIcon} height="17px" width="15px"/>
-                            <p className="item-delete-edit"> Delete </p>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col xs="12">
-                    <div
-                        style={{
-                            color: '#555550',
-                            fontSize: '16px',
-                        }}
-                    >
-                        Expiration date: {formatDate(coupon.expire)}
-                    </div>
-                </Col>
-            </Row>
-
-            <Row className="mt-3">
-                <Col xs="12" className="d-flex">
-                    <div
-                        style={{
-                            color: '#555550',
-                            fontSize: '16px',
-                        }}
-                    >
-                        Discount:
+                        <Delete onClick={handleModalOpen}/>
                     </div>
 
-                    <div
-                        style={{
-                            color: '#979797',
-                            fontSize: '16px',
-                        }}
-                        className="mx-2"
-                    >
-                        {coupon.discount}%
+                    <div>
+                        <p className="my-2 text-center ">
+                            <span>Coupon: </span>
+                            <span className="fw-bold"> {coupon?.name}</span>
+                        </p>
+
+                        <p className="my-2 text-center">
+                            <span>Expiration date: </span>
+                            <span className="fw-bold"> {formatDate(coupon?.expire)}</span>
+                        </p>
+
+                        <p className="my-2 text-center">
+                            <span>Discount: </span>
+                            <span className="fw-bold"> {coupon?.discount}</span>
+                        </p>
                     </div>
-                </Col>
-            </Row>
-        </div>
+                </div>
+
+            </Col>
+        </Col>
     );
 }
 
-export default AdminCouponCard
+export default AdminCouponCard;

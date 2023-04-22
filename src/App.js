@@ -28,7 +28,7 @@ import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
 import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
 import AddCouponPage from "./Page/Admin/Coupon/AddCouponPage";
-import EditCouponPage from "./Page/Admin/Coupon/EditCouponPage";
+import UpdateCouponPage from "./Page/Admin/Coupon/UpdateCouponPage";
 import NotFoundPage from "./Components/Utility/NotFoundPage";
 import ProductsByCategoryPage from "./Page/Products/ProductsByCategoryPage";
 import ProductsByBrandPage from "./Page/Products/ProductsByBrandPage";
@@ -43,6 +43,7 @@ import AdminCategoriesPage from "./Page/Admin/Category/AdminCategoriesPage";
 import AddSubcategoryPage from "./Page/Admin/Subcategory/AddSubcategoryPage";
 import AdminSubcategoriesPage from "./Page/Admin/Subcategory/AdminSubcategoriesPage";
 import UpdateSubcategoryPage from "./Page/Admin/Subcategory/UpdateSubcategoryPage";
+import AdminCouponsPage from "./Page/Admin/Coupon/AdminCouponsPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -115,8 +116,9 @@ function App() {
                             <Route path="/admin/subcategories/add-subcategory" element={<AddSubcategoryPage/>}/>
                             <Route path="/admin/subcategories/:id" element={<UpdateSubcategoryPage/>}/>
 
-                            <Route path="/admin/coupons" element={<AddCouponPage/>}/>
-                            <Route path="/admin/coupons/:id" element={<EditCouponPage/>}/>
+                            <Route path="/admin/coupons" element={<AdminCouponsPage/>}/>
+                            <Route path="/admin/coupons/add-coupon" element={<AddCouponPage/>}/>
+                            <Route path="/admin/coupons/:id" element={<UpdateCouponPage/>}/>
 
                             <Route path="/admin/user-management" element={<UsersManagementPage/>}/>
                             <Route path="/admin/user-management/add-user" element={<AddUserPage/>}/>

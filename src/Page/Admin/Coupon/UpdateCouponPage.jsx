@@ -1,8 +1,8 @@
 import {Container, Row, Col} from 'react-bootstrap'
-import AdminSideBar from '../../../Components/Admin/AdminSideBar'
-import AddCoupon from "../../../Components/Admin/Coupon/AddCoupon";
+import AdminSideBar from "../../../Components/Admin/AdminSideBar";
+import UpdateCoupon from "../../../Components/Admin/Coupon/UpdateCoupon";
 
-const AddCouponPage = () => {
+const UpdateCouponPage = () => {
     return (
         <Container style={{minHeight: "80vh"}}>
             <Row className='d-flex flex-row align-items-start products-page-space-between'>
@@ -11,11 +11,11 @@ const AddCouponPage = () => {
                 </Col>
 
                 <Col sm="11" xs="10" md="8" lg="9">
-                    <AddCoupon />
+                    <UpdateCoupon/>
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default AddCouponPage
+export default UpdateCouponPage

@@ -21,9 +21,9 @@ export const addCoupon = (body) => async (dispatch) => {
     }
 }
 //get all Coupon
-export const getAllCoupon = () => async (dispatch) => {
+export const getAllCoupons = (page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/coupons`);
+        const response = await useGetDataToken(`/coupons?limit=50&page=${page}&${searchTerm}`);
         dispatch({
             type: GET_ALL_COUPONS,
             payload: response,
