@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {Row, Col, Spinner, Container, Button, Form, FormControl, FormSelect} from 'react-bootstrap';
+import {Row, Col, Container, Button, Form, FormControl, FormSelect} from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 import add from '../../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
@@ -187,12 +187,6 @@ const AdminEditProducts = () => {
                     </Col>
                 </Row>
             </Form>
-
-            {isPress && (
-                <div className="d-flex justify-content-center">
-                    {loading && <Spinner animation="border" role="primary"/>}
-                </div>
-            )}
         </Container>
     )
 }
