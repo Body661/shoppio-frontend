@@ -44,6 +44,7 @@ import AddSubcategoryPage from "./Page/Admin/Subcategory/AddSubcategoryPage";
 import AdminSubcategoriesPage from "./Page/Admin/Subcategory/AdminSubcategoriesPage";
 import UpdateSubcategoryPage from "./Page/Admin/Subcategory/UpdateSubcategoryPage";
 import AdminCouponsPage from "./Page/Admin/Coupon/AdminCouponsPage";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -71,6 +72,8 @@ function App() {
 
     return (
         <>
+            <Analytics/>
+
             <BrowserRouter>
                 <NavBar isUser={isUser}/>
 
