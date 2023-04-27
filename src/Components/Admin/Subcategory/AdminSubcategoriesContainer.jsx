@@ -16,7 +16,7 @@ const AdminSubcategoriesContainer = () => {
         handleChangePage,
         loading,
         handleSearch,
-        handleSelectCategory
+        handleChangeCategory
     } = useAllSubcategories()
 
     let content = null;
@@ -68,7 +68,7 @@ const AdminSubcategoriesContainer = () => {
 
             <Row className="d-flex align-items-center justify-content-end">
                 <Col xs={12} md={6} className="mt-2">
-                    <FormSelect className="b-radius-10" onChange={handleSelectCategory}>
+                    <FormSelect className="b-radius-10" onChange={handleChangeCategory}>
                         <option value="" defaultChecked={true}>
                             Search by category
                         </option>

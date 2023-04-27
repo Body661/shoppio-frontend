@@ -64,8 +64,8 @@ const ChangeOrderStatus = ({order}) => {
 
             <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                  style={{backgroundColor: "var(--main-gray)"}}>
-                {deliveryStatuses?.map(status =>
-                    <Col xs={12} onClick={() => changeDeliveryStatus(status.value)}>
+                {deliveryStatuses?.map((status, index) =>
+                    <Col xs={12} onClick={() => changeDeliveryStatus(status.value)} key={index}>
                         <Row
                             className={`user-address-card p-2 b-radius-10 ${deliveryStatus === status.value && "isActiveAddress"}`}
                             style={{backgroundColor: "var(--main-white)"}}>
@@ -85,8 +85,8 @@ const ChangeOrderStatus = ({order}) => {
 
             <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                  style={{backgroundColor: "var(--main-gray)"}}>
-                {payStatuses?.map(status =>
-                    <Col xs={12} onClick={() => changePayStatus(status.value)}>
+                {payStatuses?.map((status, index) =>
+                    <Col xs={12} onClick={() => changePayStatus(status.value)} key={index}>
                         <Row
                             className={`user-address-card p-2 b-radius-10 ${payStatus === status.value && "isActiveAddress"} ${order?.paymentMethodType === "card" && "bg-opacity-75"}`}
                             style={order?.paymentMethodType === "card" ? {backgroundColor: "var(--main-gray)"} : {backgroundColor: "var(--main-white)"}}>

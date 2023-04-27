@@ -10,10 +10,10 @@ const useEditCoupon = (id) => {
 
     const [loading, setLoading] = useState(true);
     const [loadingUpdate, setLoadingUpdate] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [couponName, setCouponName] = useState('');
     const [couponDate, setCouponDate] = useState('');
-    const [couponValue, setCouponValue] = useState('');
+    const [discount, setDiscount] = useState('');
 
 
     const formatDate = (dateString) => {
@@ -36,42 +36,42 @@ const useEditCoupon = (id) => {
         if (loading === false && oneCoupon?.data?.data) {
             setCouponName(oneCoupon?.data?.data?.name);
             setCouponDate(formatDate(oneCoupon?.data?.data?.expire));
-            setCouponValue(oneCoupon?.data?.data?.discount);
+            setDiscount(oneCoupon?.data?.data?.discount);
         }
     }, [loading, oneCoupon]);
 
-    const onChangeName = (event) => {
+    const handleChangeName = (event) => {
         setCouponName(event.target.value);
     };
 
-    const onChangeDate = (event) => {
+    const handleChangeExpireDate = (event) => {
         setCouponDate(event.target.value);
     };
 
-    const onChangeValue = (event) => {
-        setCouponValue(event.target.value);
+    const handleChangeDiscount = (event) => {
+        setDiscount(event.target.value);
     };
 
-    const onSubmit = async () => {
-    if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
+    const handleSubmit = async () => {
+    if (couponName.trim() === '' || couponDate.trim() === '' || discount <= 0) {
             toast('Please fill in all information!', {type: 'error'});
             return;
         }
 
-        if(couponValue > 100) {
+        if(discount > 100) {
             toast('Discount value is invalid!', {type: 'error'});
             return;
         }
 
         setLoadingUpdate(true);
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(editCoupon(id, {
             name: couponName,
             expire: couponDate.split('-').reverse().join('-'),
-            discount: couponValue
+            discount
         }));
         setLoadingUpdate(false);
-        setIsPress(false)
+        setIsSubmitted(false)
     };
 
     const res = useSelector(state => state.couponReducer.editCoupon)
@@ -92,7 +92,7 @@ const useEditCoupon = (id) => {
 
     }, [loadingUpdate, res])
 
-    return {couponName, couponDate, couponValue, onChangeName, onChangeDate, onChangeValue, onSubmit, loadingUpdate, isPress};
+    return {couponName, couponDate, discount, handleChangeName, handleChangeExpireDate, handleChangeDiscount, handleSubmit, loadingUpdate, isSubmitted};
 };
 
 export default useEditCoupon;

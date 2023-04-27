@@ -12,7 +12,7 @@ export const useEditUser = (id) => {
     const [phone, setPhone] = useState("")
     const [loadingFetch, setLoadingFetch] = useState(true)
     const [loadingUpdate, setLoadingUpdate] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [validated, setValidated] = useState(false);
@@ -45,16 +45,16 @@ export const useEditUser = (id) => {
 
     }, [user, loadingFetch])
 
-    const onChangeName = (e) => {
+    const handleChangeName = (e) => {
         setName(e.target.value)
     }
-    const onChangeEmail = (e) => {
+    const handleChangeEmail = (e) => {
         setEmail(e.target.value)
     }
-    const onChangePhone = (e) => {
+    const handleChangePhone = (e) => {
         setPhone(e.target.value)
     }
-    const onChangeRole = (e) => {
+    const handleChangeRole = (e) => {
         setRole(e.target.value)
     }
 
@@ -84,7 +84,7 @@ export const useEditUser = (id) => {
         }
 
         setLoadingUpdate(true)
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(updateUser(id, {
             email,
             name,
@@ -92,7 +92,7 @@ export const useEditUser = (id) => {
             phone
         }))
         setLoadingUpdate(false)
-        setIsPress(false)
+        setIsSubmitted(false)
     }
 
     const updateRes = useSelector(state => state.userManagementReducer.updateUser)
@@ -113,5 +113,5 @@ export const useEditUser = (id) => {
         }
     }, [updateRes, loadingUpdate])
 
-    return {user, name, email, phone, role, onChangeEmail, onChangeName, onChangePhone, onChangeRole, handleSubmit, loadingFetch, loadingUpdate, isPress, validated}
+    return {user, name, email, phone, role, handleChangeEmail, handleChangeName, handleChangePhone, handleChangeRole, handleSubmit, loadingFetch, loadingUpdate, isSubmitted, validated}
 }

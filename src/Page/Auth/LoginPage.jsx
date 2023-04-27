@@ -11,7 +11,7 @@ const LoginPage = () => {
         handleEmailChange,
         handlePasswordChange,
         handleLogin,
-        isPress,
+        isSubmitted,
         validated
     } = useLogin();
 
@@ -53,7 +53,7 @@ const LoginPage = () => {
                 </span>
 
 
-                {isPress && (
+                {isSubmitted && (
                     <div className="d-flex justify-content-center">
                         {loading && <Spinner animation="border" role="primary"/>}
                     </div>

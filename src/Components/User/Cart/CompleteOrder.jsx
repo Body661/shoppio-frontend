@@ -3,11 +3,11 @@ import {Row, Col, FormControl, Button} from 'react-bootstrap';
 import useApplyCoupon from '../../../hook/user/cart/useApplyCoupon';
 
 const CompleteOrder = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCouponName, onClick}) => {
-    const {couponName, onChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
+    const {couponName, handleChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
 
     useEffect(() => {
         if (AppliedCouponName) {
-            onChangeCoupon(AppliedCouponName);
+            handleChangeCoupon(AppliedCouponName);
         }
     }, [AppliedCouponName]);
 
@@ -31,7 +31,7 @@ const CompleteOrder = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoup
                         className="b-radius-10"
                         type="text"
                         value={couponName}
-                        onChange={(e) => onChangeCoupon(e.target.value)}
+                        onChange={(e) => handleChangeCoupon(e.target.value)}
                         placeholder='Coupon code'
                     />
 

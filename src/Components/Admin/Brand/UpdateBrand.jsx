@@ -13,15 +13,15 @@ const UpdateBrand = () => {
         handleSubmit,
         handleNameChange,
         loadingUpdate,
-        isPress,
-        loading
+        isSubmitted,
+        loadingFetch
     } = useUpdateBrand(id);
 
     return (
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingUpdate && isPress) || loading}
+                open={(loadingUpdate && isSubmitted) || loadingFetch}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

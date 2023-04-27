@@ -7,17 +7,17 @@ const useDeleteAddress = (id) => {
     const dispatch = useDispatch();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [loadingDeleteAddress, setLoadingDeleteAddress] = useState(true);
-    const [isPressDeleteAddress, setIsPressDeleteAddress] = useState(false);
+    const [isSubmittedDeleteAddress, setIsSubmittedDeleteAddress] = useState(false);
 
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
     const handleShowDeleteModal = () => setShowDeleteModal(true);
 
     const handleDeleteAddress = async () => {
         setLoadingDeleteAddress(true)
-        setIsPressDeleteAddress(true)
+        setIsSubmittedDeleteAddress(true)
         await dispatch(deleteUserAddress(id));
         setShowDeleteModal(false);
-        setIsPressDeleteAddress(false)
+        setIsSubmittedDeleteAddress(false)
         setLoadingDeleteAddress(false)
     };
 
@@ -38,7 +38,7 @@ const useDeleteAddress = (id) => {
     }, [loadingDeleteAddress, deleteAddressRes])
 
 
-    return {showDeleteModal, handleCloseDeleteModal, handleShowDeleteModal, handleDeleteAddress, loadingDeleteAddress, isPressDeleteAddress};
+    return {showDeleteModal, handleCloseDeleteModal, handleShowDeleteModal, handleDeleteAddress, loadingDeleteAddress, isSubmittedDeleteAddress};
 };
 
 export default useDeleteAddress;

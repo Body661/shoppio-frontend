@@ -13,19 +13,19 @@ const UserProfile = () => {
         name,
         email,
         phone,
-        onChangeName,
-        onChangeEmail,
-        onChangePhone,
+        handleChangeName,
+        handleChangeEmail,
+        handleChangePhone,
         loadingUpdateProfile,
         loadingGetProfile,
-        isPressUpdateProfile,
+        isSubmittedUpdateProfile,
     } = useUserProfile();
 
     return (
         <>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingUpdateProfile && isPressUpdateProfile) || loadingGetProfile}
+                open={(loadingUpdateProfile && isSubmittedUpdateProfile) || loadingGetProfile}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -39,21 +39,21 @@ const UserProfile = () => {
                 <Modal.Body>
                     <FormControl
                         value={name}
-                        onChange={onChangeName}
+                        onChange={handleChangeName}
                         type="text"
                         className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Name"
                     />
                     <FormControl
                         value={email}
-                        onChange={onChangeEmail}
+                        onChange={handleChangeEmail}
                         type="email"
                         className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Email"
                     />
                     <FormControl
                         value={phone}
-                        onChange={onChangePhone}
+                        onChange={handleChangePhone}
                         type="phone"
                         className="input-form font d-block mt-3 px-3 b-radius-10"
                         placeholder="Phone"

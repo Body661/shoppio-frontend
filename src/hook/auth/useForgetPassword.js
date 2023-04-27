@@ -10,7 +10,7 @@ const useForgetPassword = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [validated, setValidated] = useState(false);
 
     const handleChangeEmail = (e) => setEmail(e.target.value);
@@ -31,10 +31,10 @@ const useForgetPassword = () => {
         }
 
         localStorage.setItem('user-email', email);
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(forgetPassword({email}));
         setLoading(false);
-        setIsPress(false)
+        setIsSubmitted(false)
     };
 
     const res = useSelector((state) => state.authReducer.forgetPassword);
@@ -60,7 +60,7 @@ const useForgetPassword = () => {
         }
     }, [loading, res]);
 
-    return {email, handleChangeEmail, handleSubmit, loading, isPress, validated};
+    return {email, handleChangeEmail, handleSubmit, loading, isSubmitted, validated};
 };
 
 export default useForgetPassword;

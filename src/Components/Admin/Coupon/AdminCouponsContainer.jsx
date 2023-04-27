@@ -15,7 +15,6 @@ const AdminCouponsContainer = () => {
         content = coupons?.map((coupon) => <AdminCouponCard key={coupon?._id} coupon={coupon}/>)
     } else if (!loading && !error && !coupons) {
         content = <h4 className="notFound">No coupons found</h4>;
-
     } else if (!loading && error && !coupons) {
         content = <h4 className="error">Something went wrong</h4>;
     }

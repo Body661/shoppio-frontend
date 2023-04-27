@@ -5,7 +5,7 @@ import {Delete, Edit} from "@mui/icons-material";
 import useDeleteCoupon from "../../../hook/admin/Coupon/useDeleteCoupon";
 
 function AdminCouponCard({coupon}) {
-    const {isModalOpen, handleModalOpen, handleModalClose, handleDelete, loading, isPress} = useDeleteCoupon(coupon?._id)
+    const {isModalOpen, handleModalOpen, handleModalClose, handleDelete, loading, isSubmitted} = useDeleteCoupon(coupon?._id)
 
     const formatDate = (dateString) => {
         const options = {year: 'numeric', month: '2-digit', day: 'numeric'};
@@ -17,7 +17,7 @@ function AdminCouponCard({coupon}) {
         <Col xs={12} sm={6} md={5} lg={3}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

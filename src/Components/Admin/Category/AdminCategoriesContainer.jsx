@@ -13,7 +13,7 @@ const AdminCategoriesContainer = () => {
     let content = null;
 
     if (!loading && !error && categories && categories?.length > 0) {
-        content = categories?.map((category) => <AdminCategoryItem category={category}/>)
+        content = categories?.map((category) => <AdminCategoryItem key={category?._id} category={category}/>)
     } else if (!loading && !error && !categories) {
         content = <h4 className="notFound">No categories found</h4>;
 

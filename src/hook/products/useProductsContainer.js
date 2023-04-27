@@ -6,7 +6,7 @@ import {getWishlist} from '../../redux/actions/wishlistActions';
 const useProductContainer = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
-    const [favProd, setFavProd] = useState([])
+    const [isFavProduct, setIsFavProduct] = useState([])
 
     useEffect(() => {
         const get = async () => {
@@ -23,12 +23,12 @@ const useProductContainer = () => {
     useEffect(() => {
 
         if (loading === false && res?.data?.data?.length >= 1) {
-            setFavProd(res?.data?.data?.map(item => item._id))
-        } else setFavProd([])
+            setIsFavProduct(res?.data?.data?.map(item => item?._id))
+        } else setIsFavProduct([])
 
     }, [loading, res?.data?.data])
 
-    return {favProd, loading}
+    return {isFavProduct, loading}
 }
 
 export default useProductContainer

@@ -12,15 +12,15 @@ const AdminEditUser = () => {
         phone,
         password,
         passwordConfirm,
-        onChangePassword,
-        onChangeEmail,
-        onChangeName,
-        onChangePhone,
-        onChangeRole,
-        onChangePasswordConfirm,
+        handleChangePassword,
+        handleChangeEmail,
+        handleChangeName,
+        handleChangePhone,
+        handleChangeRole,
+        handleChangePasswordConfirm,
         handleSubmit,
         loading,
-        isPress,
+        isSubmitted,
         validated
     } = useAddUser(id)
 
@@ -28,7 +28,7 @@ const AdminEditUser = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -49,7 +49,7 @@ const AdminEditUser = () => {
                             type="text"
                             placeholder="User name"
                             value={name}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             className="mt-3 b-radius-10"
                         />
 
@@ -58,7 +58,7 @@ const AdminEditUser = () => {
                             type="email"
                             placeholder="Email"
                             value={email}
-                            onChange={onChangeEmail}
+                            onChange={handleChangeEmail}
                             className="mt-3 b-radius-10"
                         />
 
@@ -68,7 +68,7 @@ const AdminEditUser = () => {
                             type="password"
                             placeholder="Password"
                             value={password}
-                            onChange={onChangePassword}
+                            onChange={handleChangePassword}
                             className="mt-3 b-radius-10"
                         />
 
@@ -78,7 +78,7 @@ const AdminEditUser = () => {
                             type="password"
                             placeholder="Password confirm"
                             value={passwordConfirm}
-                            onChange={onChangePasswordConfirm}
+                            onChange={handleChangePasswordConfirm}
                             className="mt-3 b-radius-10"
                         />
 
@@ -87,11 +87,11 @@ const AdminEditUser = () => {
                             type="tel"
                             placeholder="Phone"
                             value={phone}
-                            onChange={onChangePhone}
+                            onChange={handleChangePhone}
                             className="mt-3 b-radius-10"
                         />
 
-                        <FormSelect placeholder="Role" onChange={onChangeRole} className="mt-3 b-radius-10">
+                        <FormSelect placeholder="Role" onChange={handleChangeRole} className="mt-3 b-radius-10">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </FormSelect>

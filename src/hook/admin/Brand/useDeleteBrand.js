@@ -5,7 +5,7 @@ import {deleteBrand} from "../../../redux/actions/BrandActions";
 
 const useDeleteBrand = (category) => {
     const [loading, setLoading] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const dispatch = useDispatch()
 
     const [showDelete, setShowDelete] = useState(false);
@@ -14,11 +14,11 @@ const useDeleteBrand = (category) => {
     const handleCloseDelete = () => setShowDelete(false);
 
     const handleDelete = async () => {
-        setIsPress(true)
+        setIsSubmitted(true)
         setShowDelete(false)
         await dispatch(deleteBrand(category))
         setLoading(false)
-        setIsPress(false)
+        setIsSubmitted(false)
     }
 
     const deleteRes = useSelector(state => state.brandReducer.deleteBrand)
@@ -45,7 +45,7 @@ const useDeleteBrand = (category) => {
     return {
         handleDelete,
         loading,
-        isPress,
+        isSubmitted,
         showDelete,
         handleOpenDelete,
         handleCloseDelete

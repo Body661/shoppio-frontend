@@ -7,7 +7,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => {
 
-    const {favProd} = useProductsContainer()
+    const {isFavProduct} = useProductsContainer()
 
     return (
         <Container>
@@ -41,9 +41,9 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                         }}
                         className="mySwiper"
                     >
-                        {products?.map((item, index) => (
-                            <SwiperSlide key={item?._id}>
-                                <HomeProductCard key={index} item={item} favProd={favProd}/>
+                        {products?.map((product) => (
+                            <SwiperSlide key={product?._id}>
+                                <HomeProductCard product={product} isFavProduct={isFavProduct}/>
                             </SwiperSlide>
                         ))}
                     </Swiper>

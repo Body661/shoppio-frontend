@@ -27,7 +27,7 @@ export const useAllSubcategories = () => {
         setPage(page);
     }
 
-    const handleSelectCategory = (e) => {
+    const handleChangeCategory = (e) => {
         if (e.target.value.trim() !== '') {
             dispatch(getSubcategoriesOfCategory(e.target.value.trim(), `page=${page}`, searchTerm));
         } else {
@@ -53,6 +53,6 @@ export const useAllSubcategories = () => {
         pageCount: subcategories?.data?.paginationRes?.pages,
         handleChangePage,
         handleSearch,
-        handleSelectCategory
+        handleChangeCategory
     };
 }

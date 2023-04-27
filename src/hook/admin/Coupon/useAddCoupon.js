@@ -8,41 +8,41 @@ const useAddCoupon = () => {
     const dispatch = useDispatch();
     const [couponName, setCouponName] = useState('');
     const [couponDate, setCouponDate] = useState('');
-    const [couponValue, setCouponValue] = useState('');
+    const [discount, setDiscount] = useState('');
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate()
 
-    const onChangeName = (event) => {
+    const handleChangeName = (event) => {
         setCouponName(event.target.value);
     };
 
-    const onChangeDate = (event) => {
+    const handleChangeExpireDate = (event) => {
         setCouponDate(event.target.value);
     };
 
-    const onChangeValue = (event) => {
-        setCouponValue(event.target.value);
+    const handleChangeDiscount = (event) => {
+        setDiscount(event.target.value);
     };
 
-    const onSubmit = async () => {
-        if (couponName.trim() === '' || couponDate.trim() === '' || couponValue <= 0) {
+    const handleSubmit = async () => {
+        if (couponName.trim() === '' || couponDate.trim() === '' || discount <= 0) {
             toast('Please fill in all information!', {type: 'error'});
             return;
         }
 
-        if (couponValue > 100) {
+        if (discount > 100) {
             toast('Discount value is invalid!', {type: 'error'});
             return;
         }
 
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(addCoupon({
             name: couponName,
             expire: couponDate,
-            discount: couponValue,
+            discount,
         }));
-        setIsPress(false)
+        setIsSubmitted(false)
         setLoading(false);
     };
 
@@ -68,13 +68,13 @@ const useAddCoupon = () => {
     return {
         couponName,
         couponDate,
-        couponValue,
-        onChangeName,
-        onChangeDate,
-        onChangeValue,
-        onSubmit,
+        discount,
+        handleChangeName,
+        handleChangeExpireDate,
+        handleChangeDiscount,
+        handleSubmit,
         loading,
-        isPress
+        isSubmitted
     };
 };
 

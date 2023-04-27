@@ -4,14 +4,14 @@ import {CategoryOutlined} from "@mui/icons-material";
 import useAddSubcategory from "../../../hook/admin/Subcategory/useAddSubcategory";
 
 const AddCategory = () => {
-    const {name, categories, handleChange, handleSubmit, onChangeName, loading, isPress} = useAddSubcategory();
+    const {name, categories, handleChangeCategory, handleSubmit, handleChangeName, loading, isSubmitted} = useAddSubcategory();
 
     return (
         <Container>
 
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -27,13 +27,13 @@ const AddCategory = () => {
                     <Col>
                         <FormControl
                             value={name}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Subcategory name"
                         />
 
-                        <FormSelect name="category" id="cat" className="select mt-3 px-2" onChange={handleChange}>
+                        <FormSelect name="category" id="cat" className="select mt-3 px-2" onChange={handleChangeCategory}>
                             <option value={0}>Select main category</option>
                             {categories?.data?.data?.map((category) => (
                                 <option key={category?._id} value={category?._id}>

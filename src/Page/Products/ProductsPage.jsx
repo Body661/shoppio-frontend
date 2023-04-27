@@ -20,7 +20,7 @@ const ProductsPage = () => {
                     <CircularProgress color="inherit"/>
                 </Backdrop>
 
-                <SortResults onClick={getProducts} title={` ${items?.length || 0} Search result`}/>
+                <SortResults title={` ${items?.length || 0} Search result`}/>
                 <Row className='d-flex flex-row align-items-start products-page-space-between'>
                     <Col xs="1" sm="1" md="1">
                         <SideFilter/>

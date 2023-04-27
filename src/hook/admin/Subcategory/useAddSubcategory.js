@@ -10,7 +10,7 @@ const useAddSubcategory = () => {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -19,11 +19,11 @@ const useAddSubcategory = () => {
 
     const categories = useSelector((state) => state.categoryReducer.categories);
 
-    const handleChange = (e) => {
+    const handleChangeCategory = (e) => {
         setId(e.target.value);
     };
 
-    const onChangeName = (e) => {
+    const handleChangeName = (e) => {
         setName(e.target.value);
     };
 
@@ -41,10 +41,10 @@ const useAddSubcategory = () => {
         }
 
         setLoading(true);
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(createSubcategory({name, categoryId: id}));
         setLoading(false);
-        setIsPress(false)
+        setIsSubmitted(false)
     };
 
     const subcategory = useSelector((state) => state.subcategoryReducer.createSubcategory);
@@ -66,7 +66,7 @@ const useAddSubcategory = () => {
         }
     }, [loading, subcategory]);
 
-    return {id, name, loading, categories, subcategory, handleChange, handleSubmit, onChangeName, isPress};
+    return {id, name, loading, categories, subcategory, handleChangeCategory, handleSubmit, handleChangeName, isSubmitted};
 };
 
 export default useAddSubcategory;

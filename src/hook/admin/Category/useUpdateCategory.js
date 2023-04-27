@@ -8,7 +8,7 @@ const useUpdateCategory = (categoryId) => {
 
     const [loading, setLoading] = useState(true)
     const [loadingUpdate, setLoadingUpdate] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const navigate = useNavigate();
     const [img, setImg] = useState(null)
     const [name, setName] = useState('')
@@ -79,10 +79,10 @@ const useUpdateCategory = (categoryId) => {
         }
 
         setLoadingUpdate(true);
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(updateCategory(categoryId, formData));
         setLoadingUpdate(false);
-        setIsPress(false);
+        setIsSubmitted(false);
     };
 
     const updateCategoryRes = useSelector(state => state.categoryReducer.updateCategory);
@@ -103,7 +103,7 @@ const useUpdateCategory = (categoryId) => {
         }
     }, [updateCategoryRes, loadingUpdate]);
 
-    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress, loading}
+    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isSubmitted, loading}
 }
 
 export default useUpdateCategory

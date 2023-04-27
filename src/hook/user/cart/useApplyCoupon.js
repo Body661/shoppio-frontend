@@ -8,7 +8,7 @@ const UseApplyCoupon = () => {
     const [couponName, setCouponName] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const onChangeCoupon = (coupon) => {
+    const handleChangeCoupon = (coupon) => {
         setCouponName(coupon);
     };
 
@@ -42,7 +42,7 @@ const UseApplyCoupon = () => {
         }
     }, [loading, res]);
 
-    return {couponName, onChangeCoupon, handleSubmitCoupon, loading};
+    return {couponName, handleChangeCoupon, handleSubmitCoupon, loading};
 };
 
 export default UseApplyCoupon;

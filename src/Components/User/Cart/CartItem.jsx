@@ -39,7 +39,7 @@ const CartItem = ({item}) => {
             </Modal>
 
             <div className="w-100 d-flex align-items-center gap-4" style={{height: "200px"}}>
-                <div style={{width: "200px", backgroundColor: "var(--main-gray)"}} className="h-100 d-flex b-radius-20">
+                <div style={{backgroundColor: "var(--main-gray)"}} className="h-100 d-flex b-radius-20 cart-item-img">
                     <img
                         style={{objectFit: "contain"}}
                         width="100%"
@@ -49,13 +49,17 @@ const CartItem = ({item}) => {
                     />
                 </div>
 
-                <Row>
-                    <div className="d-inline pt-2 xs-black-text">
-                        {item?.product?.brand?.name || "Brand not found"}
+                <Row style={{
+                    textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap",
+                }}>
+                    <div className="pt-2 xs-black-text">
+                        <p>{item?.product?.brand?.name || "Brand not found"}</p>
                     </div>
 
                     <Col sm="12" className=" d-flex flex-row justify-content-between align-items-center">
-                        <Link to={`/products/${item?.product?._id}`} className="pt-2 fw-bold">
+                        <Link to={`/products/${item?.product?._id}`} className="pt-2 fw-bold" style={{
+                            textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap",
+                        }}>
                             {item?.product?.title || 'Product title not available'}
                         </Link>
 

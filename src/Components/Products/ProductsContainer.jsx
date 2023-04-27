@@ -17,12 +17,12 @@ const ProductsContainer = ({
                                large = 3
                            }) => {
     let content = null;
-    const {favProd} = useProductsContainer()
+    const {isFavProduct} = useProductsContainer()
 
     if (!loading && !error && products && products?.length > 0) {
-        content = products?.map((item, index) => (
-            <Col xs={xSmall} sm={small} md={medium} lg={large}>
-                <HomeProductCard key={index} item={item} favProd={favProd}/>
+        content = products?.map((product) => (
+            <Col xs={xSmall} sm={small} md={medium} lg={large} key={product?._id}>
+                <HomeProductCard product={product} isFavProduct={isFavProduct}/>
             </Col>
         ))
 

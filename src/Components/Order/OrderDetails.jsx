@@ -27,9 +27,9 @@ const OrderDetails = ({isAdmin}) => {
 
             <Row className="d-flex flex-column gap-2 p-3 align-items-center justify-content-center b-radius-10 mt-4"
                  style={{backgroundColor: "var(--main-gray)"}}>
-                {orderData?.cartItems && (orderData?.cartItems?.map((item, index) => {
+                {orderData?.cartItems && (orderData?.cartItems?.map((item) => {
                     return (<Row className="d-flex align-items-center b-radius-10"
-                                 style={{backgroundColor: "var(--main-white)"}}>
+                                 style={{backgroundColor: "var(--main-white)"}} key={item?._id}>
                         <Col xs="3" className="d-flex justify-content-start">
                             <Link to={`/products/${item?.product?._id}`}>
                                 <img width="100%" src={item?.product?.cover} alt={item?.product?.title}

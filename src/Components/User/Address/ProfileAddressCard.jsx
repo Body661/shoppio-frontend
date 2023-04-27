@@ -11,14 +11,14 @@ const ProfileAddressCard = ({address}) => {
         handleShowDeleteModal,
         handleDeleteAddress,
         loadingDeleteAddress,
-        isPressDeleteAddress
+        isSubmittedDeleteAddress
     } = useDeleteAddress(address?._id);
 
     const {
         addressInfo,
         handleChangeAddress,
         handleUpdateAddress,
-        isPressUpdateAddress,
+        isSubmittedUpdateAddress,
         loadingUpdateAddress,
         showUpdateModal,
         handleCloseUpdateModal,
@@ -42,7 +42,7 @@ const ProfileAddressCard = ({address}) => {
 
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingDeleteAddress && isPressDeleteAddress) || (isPressUpdateAddress && loadingUpdateAddress)}
+                open={(loadingDeleteAddress && isSubmittedDeleteAddress) || (isSubmittedUpdateAddress && loadingUpdateAddress)}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

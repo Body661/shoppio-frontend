@@ -14,7 +14,7 @@ const ReviewsContainer = ({reviewsAmount}) => {
     if (!reviews && loading && !error) {
         content = <Spinner animation={"border"} variant={"primary"}/>
     } else if ((reviews && reviews?.data?.data?.length > 0) && !loading && !error) {
-        content = reviews.data?.data?.map((review, index) => (<ReviewCard key={index} review={review}/>))
+        content = reviews.data?.data?.map((review) => (<ReviewCard key={review?._id} review={review}/>))
     } else if ((reviews && reviews?.data?.data?.length <= 0) && !loading && !error) {
         content = <h6>No reviews found</h6>
     } else if (!reviews && !loading && error) {

@@ -16,7 +16,7 @@ const useEditProduct = (id) => {
     const [prodDescription, setProdDescription] = useState('');
     const [priceBefore, setPriceBefore] = useState(0);
     const [priceAfter, setPriceAfter] = useState(0);
-    const [qty, setQty] = useState(0);
+    const [quantity, setQuantity] = useState(0);
     const [CatID, setCatID] = useState('');
     const [BrandID, setBrandID] = useState('');
     const [selectedSubID, setSelectedSubID] = useState([]);
@@ -25,7 +25,7 @@ const useEditProduct = (id) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [loadingFetchData, setLoadingFetchData] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,7 +51,7 @@ const useEditProduct = (id) => {
             setProdDescription(item?.data?.data?.description);
             setPriceBefore(item?.data?.data?.price);
             setPriceAfter(item?.data?.data?.priceAfterDiscount);
-            setQty(item?.data?.data?.quantity);
+            setQuantity(item?.data?.data?.quantity);
             setCatID(item?.data?.data?.category?._id);
             setBrandID(item?.data?.data?.brand?._id);
             setColors(item?.data?.data?.colors);
@@ -59,7 +59,7 @@ const useEditProduct = (id) => {
         }
     }, [item]);
 
-    const onSelectCategory = async (e) => {
+    const handleChangeCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
             setCatID(e.target.value);
@@ -85,11 +85,11 @@ const useEditProduct = (id) => {
     const onSelect = (selectedList) => setSelectedSubID(selectedList);
     const onRemove = (selectedList) => setSelectedSubID(selectedList);
 
-    const onChangeProdName = (event) => {
+    const handleChangeProductName = (event) => {
         setProdName(event.target.value);
     };
 
-    const onChangeDesName = (event) => {
+    const handleChangeDescription = (event) => {
         setProdDescription(event.target.value);
     };
 
@@ -103,23 +103,23 @@ const useEditProduct = (id) => {
         setColors(newColor);
     };
 
-    const onChangePriceBefore = (event) => {
+    const handleChangePrice = (event) => {
         setPriceBefore(event.target.value);
     };
 
-    const onChangePriceAfter = (event) => {
+    const handleChangePriceAfterDiscount = (event) => {
         setPriceAfter(event.target.value);
     };
 
-    const onChangeQty = (event) => {
-        setQty(event.target.value)
+    const handleChangeQuantity = (event) => {
+        setQuantity(event.target.value)
     };
 
-    const onChangeColor = (event) => {
+    const handleChangeColor = () => {
         setShowColor((prev) => !prev);
     };
 
-    const onSelectBrand = (e) => {
+    const handleChangeBrand = (e) => {
         setBrandID(e.target.value);
     };
 
@@ -186,7 +186,7 @@ const useEditProduct = (id) => {
         const formData = new FormData();
         formData.append("title", prodName);
         formData.append("description", prodDescription);
-        formData.append("quantity", qty);
+        formData.append("quantity", quantity);
         formData.append("price", priceBefore);
         formData.append("category", CatID);
         formData.append("brand", BrandID);
@@ -197,10 +197,10 @@ const useEditProduct = (id) => {
         formData.append("cover", imgCover);
         itemImages.forEach((item) => formData.append("images", item));
 
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(updateProduct(id, formData));
         setLoading(false);
-        setIsPress(false)
+        setIsSubmitted(false)
     };
 
     const updateProductRes = useSelector((state) => state.productReducer.updateProduct);
@@ -224,12 +224,12 @@ const useEditProduct = (id) => {
     return {
         CatID,
         BrandID,
-        onChangeDesName,
-        onChangeQty,
-        onChangeColor,
-        onChangePriceAfter,
-        onChangePriceBefore,
-        onChangeProdName,
+        handleChangeDescription,
+        handleChangeQuantity,
+        handleChangeColor,
+        handleChangePriceAfterDiscount,
+        handleChangePrice,
+        handleChangeProductName,
         showColor,
         category,
         brand,
@@ -241,16 +241,16 @@ const useEditProduct = (id) => {
         options,
         handleAddColor,
         removeColor,
-        onSelectCategory,
+        handleChangeCategory,
         handleSubmit,
-        onSelectBrand,
+        handleChangeBrand,
         colors,
         priceBefore,
-        qty,
+        quantity,
         prodDescription,
         prodName,
         loading,
-        isPress,
+        isSubmitted,
         loadingFetchData,
         selectedSubID,
         currentProductName: item?.data?.data?.title

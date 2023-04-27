@@ -6,13 +6,13 @@ const ChangePassword = () => {
 
     const {
         handleUpdatePassword,
-        oldPassword,
+        currentPassword,
         newPassword,
         confirmNewPassword,
-        handleChangeOldPass,
+        handleChangeCurrentPassword,
         handleChangeNewPass,
         handleChangeConfirmPass,
-        isPressUpdatePass,
+        isSubmittedUpdatePass,
         loadingUpdatePass,
         validated
     } = useUserProfile();
@@ -24,7 +24,7 @@ const ChangePassword = () => {
 
                     <Backdrop
                         sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                        open={(isPressUpdatePass && loadingUpdatePass)}
+                        open={(isSubmittedUpdatePass && loadingUpdatePass)}
                     >
                         <CircularProgress color="inherit"/>
                     </Backdrop>
@@ -35,10 +35,10 @@ const ChangePassword = () => {
                             type="password"
                             minLength={8}
                             className="input-form d-block mt-3 px-3 b-radius-10"
-                            placeholder="Old password"
-                            name="old password"
-                            value={oldPassword}
-                            onChange={handleChangeOldPass}
+                            placeholder="Current password"
+                            name="Current password"
+                            value={currentPassword}
+                            onChange={handleChangeCurrentPassword}
                         />
 
                         <FormControl

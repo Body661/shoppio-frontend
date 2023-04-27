@@ -1,10 +1,12 @@
 import UnopDropdown from "unop-react-dropdown";
-import sort from '../../images/sort.png'
+import {Sort} from "@mui/icons-material";
+import useSearch from "../../hook/products/useSearch";
 
-const SortResults = ({title, onClick}) => {
-    const clickMe = (key) => {
-        localStorage.setItem("sortType", key)
-        onClick();
+const SortResults = ({title}) => {
+    const {handleSetSortType} = useSearch()
+
+    const selectSortType = (key) => {
+        handleSetSortType(key)
     }
     return (
         <div className="d-flex justify-content-between pt-3 px-2">
@@ -12,31 +14,23 @@ const SortResults = ({title, onClick}) => {
             <div className="d-flex">
                 <UnopDropdown
                     trigger={
-                        <p className="mx-1">
-                            <img
-                                width="20px"
-                                height="20px"
-                                className="ms-1"
-                                src={sort}
-                                alt=""
-                            />
-                        </p>
+                        <Sort/>
                     }
                     delay={0}
                     align="CENTER"
                     hover>
                     <div className="card-filter">
-                        <div onClick={() => clickMe(" ")} className="border-bottom card-filter-item">Clear sorting</div>
-                        <div onClick={() => clickMe("Best seller")} className="border-bottom card-filter-item">Best
+                        <div onClick={() => selectSortType("")} className="border-bottom card-filter-item">Clear sorting</div>
+                        <div onClick={() => selectSortType("Best seller")} className="border-bottom card-filter-item">Best
                             seller
                         </div>
-                        <div onClick={() => clickMe("Most rated")} className="border-bottom card-filter-item">Most
+                        <div onClick={() => selectSortType("Most rated")} className="border-bottom card-filter-item">Most
                             rated
                         </div>
-                        <div onClick={() => clickMe("Price from low to high")}
+                        <div onClick={() => selectSortType("Price from low to high")}
                              className="border-bottom card-filter-item">Price from low to high
                         </div>
-                        <div onClick={() => clickMe("Price from high to low")} className=" card-filter-item">Price from
+                        <div onClick={() => selectSortType("Price from high to low")} className=" card-filter-item">Price from
                             high to low
                         </div>
                     </div>

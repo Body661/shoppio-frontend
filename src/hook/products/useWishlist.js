@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addProductToWishList, removeProductFromWishList} from '../../redux/actions/wishlistActions';
-import favOff from "../../imgs/Icons/heart.png";
-import favOn from "../../imgs/Icons/heart-filled.png";
+import favOff from "../../images/Icons/heart.png";
+import favOn from "../../images/Icons/heart-filled.png";
 import {toast} from "react-toastify";
 
-const useWishlist = (item, favProd) => {
+const useWishlist = (item, isFavProduct) => {
     const dispatch = useDispatch();
     const [favImg, setFavImg] = useState(favOff);
 
@@ -15,8 +15,8 @@ const useWishlist = (item, favProd) => {
     const [isFav, setIsFav] = useState(false);
 
     useEffect(() => {
-        setIsFav(favProd?.includes(item?._id));
-    }, [favProd, item?._id]);
+        setIsFav(isFavProduct?.includes(item?._id));
+    }, [isFavProduct, item?._id]);
 
     useEffect(() => {
         setFavImg(isFav ? favOn : favOff);

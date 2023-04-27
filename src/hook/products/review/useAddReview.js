@@ -8,16 +8,16 @@ const useAddReview = (id) => {
     const [formData, setFormData] = useState({
         review: '',
         reviewTitle: '',
-        rateValue: 0,
+        rate: 0,
         loading: true,
     });
 
-    const onChange = (e, field) => {
+    const handleChangeReview = (e, field) => {
         setFormData({...formData, [field]: e.target.value});
     };
 
-    const onChangeRateValue = (val) => {
-        setFormData({...formData, rateValue: val});
+    const handleChangeRate = (val) => {
+        setFormData({...formData, rate: val});
     };
 
     const getUser = () => {
@@ -27,7 +27,7 @@ const useAddReview = (id) => {
 
     const user = getUser();
 
-    const onSubmit = async () => {
+    const handleSubmit = async () => {
         if (formData.reviewTitle.trim() === '') {
             toast('Please write your review title', {type: 'error'});
             return;
@@ -43,7 +43,7 @@ const useAddReview = (id) => {
             createReview(id, {
                 title: formData.reviewTitle,
                 description: formData.review,
-                ratings: formData.rateValue,
+                ratings: formData.rate,
             })
         );
         setFormData({...formData, loading: false});
@@ -76,11 +76,11 @@ const useAddReview = (id) => {
     }, [formData.loading, res]);
 
     return {
-        onChange,
-        onChangeRateValue,
+        handleChangeReview,
+        handleChangeRate,
         formData,
         user,
-        onSubmit,
+        handleSubmit,
     };
 };
 

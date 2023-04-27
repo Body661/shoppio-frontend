@@ -12,7 +12,7 @@ const ReviewCard = ({review}) => {
         handleCloseEdit,
         handleShowEdit,
         handleEdit,
-        onChange,
+        handleChangeReview,
         formData,
     } = useEditReview(review);
 
@@ -50,26 +50,26 @@ const ReviewCard = ({review}) => {
                     <Rating
                         className="mt-2"
                         name="hover-feedback"
-                        value={formData?.newRateValue || 0}
+                        value={formData?.newRate || 0}
                         readOnly={false}
                         icon={<StarIcon style={{color: "black"}} fontSize="20px" color="black"/>}
                         emptyIcon={<StarIcon style={{opacity: 1}} fontSize="20px"/>}
                         precision={0.5}
-                        onChange={(event, newValue) => {
-                            onChange({target: {value: newValue}}, 'newRateValue');
+                        onChange={(event, newRate) => {
+                            handleChangeReview({target: {value: newRate}}, 'newRate');
                         }}/>
 
                     <FormControl
                         type="text"
                         value={formData.newReviewTitle}
-                        onChange={(e) => onChange(e, 'newReviewTitle')}
+                        onChange={(e) => handleChangeReview(e, 'newReviewTitle')}
                         className="input-form p-2 mt-3"
                         placeholder="Review title"
                     />
                     <FormControl
                         as="textarea"
                         value={formData.newReview}
-                        onChange={(e) => onChange(e, 'newReview')}
+                        onChange={(e) => handleChangeReview(e, 'newReview')}
                         className="p-2 mt-3"
                         rows="2"
                         cols="20"

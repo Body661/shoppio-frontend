@@ -12,12 +12,12 @@ import useProductsContainer from "../../hook/products/useProductsContainer";
 import StarIcon from "@mui/icons-material/Star";
 
 const ProductDetails = ({product, images}) => {
-    const {favProd} = useProductsContainer()
+    const {isFavProduct} = useProductsContainer()
 
-    const {isFav, favImg, handleFav} = UseWishlist(product, favProd)
+    const {isFav, favImg, handleFav} = UseWishlist(product, isFavProduct)
 
     const {id} = useParams();
-    const {colorClick, indexColor, addToCartHandle} = UseAddToCart(id, product);
+    const {colorClick, indexColor, addToCartHandle} = UseAddToCart(product);
 
     return (<div className="product-details">
         <Row>

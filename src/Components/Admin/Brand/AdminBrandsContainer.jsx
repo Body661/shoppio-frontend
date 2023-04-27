@@ -12,7 +12,7 @@ function AdminBrandsContainer() {
     let content;
 
     if (!loading && !error && brands && brands?.length > 0) {
-        content = brands?.map((brand) => <AdminBrandCard brand={brand}/>)
+        content = brands?.map((brand) => <AdminBrandCard key={brand?._id} brand={brand}/>)
     } else if (!loading && !error && !brands) {
         content = <h4 className="notFound">No brands found</h4>;
 

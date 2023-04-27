@@ -10,13 +10,13 @@ const UpdateCoupon = () => {
     const {
         couponName,
         couponDate,
-        couponValue,
-        onChangeName,
-        onChangeDate,
-        onChangeValue,
-        onSubmit,
+        discount,
+        handleChangeName,
+        handleChangeExpireDate,
+        handleChangeDiscount,
+        handleSubmit,
         loadingUpdate,
-        isPress
+        isSubmitted
     } = useEditCoupon(id)
 
     return (
@@ -24,7 +24,7 @@ const UpdateCoupon = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loadingUpdate && isPress}
+                open={loadingUpdate && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -40,7 +40,7 @@ const UpdateCoupon = () => {
                     <Col>
                         <FormControl
                             value={couponName}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Coupon name"
@@ -49,19 +49,19 @@ const UpdateCoupon = () => {
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Expiration date"
-                            onChange={onChangeDate}
+                            onChange={handleChangeExpireDate}
                             value={couponDate}
                         />
                         <FormControl
-                            value={couponValue}
-                            onChange={onChangeValue}
+                            value={discount}
+                            onChange={handleChangeDiscount}
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Discount"
                         />
                     </Col>
                     <Col sm="12" className="d-flex mt-3">
-                        <Button onClick={onSubmit} className="btn-dark w-100 b-radius-10">Save changes</Button>
+                        <Button onClick={handleSubmit} className="btn-dark w-100 b-radius-10">Save changes</Button>
                     </Col>
                 </Row>
             </Form>

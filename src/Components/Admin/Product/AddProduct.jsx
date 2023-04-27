@@ -1,21 +1,20 @@
 import {Row, Col, Container, FormControl, FormSelect, Form, Button} from 'react-bootstrap'
 import Multiselect from 'multiselect-react-dropdown';
-import add from '../../../images/add.png'
 import {CompactPicker} from "react-color";
 import MultiImageInput from "react-multiple-image-input";
 import useAddProduct from "../../../hook/admin/Product/useAddProduct";
 import {Backdrop, CircularProgress} from "@mui/material";
-import {Colorize, Inventory} from "@mui/icons-material";
+import {AddCircleRounded, Inventory} from "@mui/icons-material";
 
 const AddProduct = () => {
 
     const {
-        onChangeDescription,
-        onChangeQty,
-        onChangeColor,
-        onChangePriceAfter,
-        onChangePriceBefore,
-        onChangeProdName,
+        handleChangeDescription,
+        handleChangeQuantity,
+        handleChangeColor,
+        handleChangePriceAfterDiscount,
+        handleChangePrice,
+        handleChangeProductName,
         showColor,
         category,
         brand,
@@ -27,24 +26,24 @@ const AddProduct = () => {
         options,
         handleAddColor,
         removeColor,
-        onSelectCategory,
+        handleChangeCategory,
         handleSubmit,
-        onSelectBrand,
+        handleChangeBrand,
         colors,
         priceBefore,
-        qty,
+        quantity,
         prodDescription,
         prodName,
         loading,
         loadingFetchData,
-        isPress
+        isSubmitted
     } = useAddProduct();
 
     return (
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loading && isPress) || loadingFetchData}
+                open={(loading && isSubmitted) || loadingFetchData}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -69,7 +68,7 @@ const AddProduct = () => {
 
                         <FormControl
                             value={prodName}
-                            onChange={onChangeProdName}
+                            onChange={handleChangeProductName}
                             type="text"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Product name"
@@ -82,43 +81,40 @@ const AddProduct = () => {
                             cols="50"
                             placeholder="Product description"
                             value={prodDescription}
-                            onChange={onChangeDescription}
+                            onChange={handleChangeDescription}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Price before discount"
                             value={priceBefore}
-                            onChange={onChangePriceBefore}
+                            onChange={handleChangePrice}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Price after discount"
                             value={priceAfter}
-                            onChange={onChangePriceAfter}
+                            onChange={handleChangePriceAfterDiscount}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Available quantity"
-                            value={qty}
-                            onChange={onChangeQty}
+                            value={quantity}
+                            onChange={handleChangeQuantity}
                         />
 
                         <FormSelect
                             type="select"
                             name="cat"
-                            onChange={onSelectCategory}
+                            onChange={handleChangeCategory}
                             className="mt-3 px-2 b-radius-10">
                             <option value={0}>Choose category</option>
                             {
-                                category?.data?.data ? (category?.data?.data?.map((item, index) => {
-                                    return (
-                                        <option key={index} value={item?._id}>{item?.name}</option>
-                                    )
-                                })) : null
-
+                                category?.data?.data && (category?.data?.data?.map((category) =>
+                                    <option key={category?._id} value={category?._id}>{category?.name}</option>
+                                ))
                             }
                         </FormSelect>
 
@@ -133,20 +129,19 @@ const AddProduct = () => {
 
                         <FormSelect
                             name="brand"
-                            onChange={onSelectBrand}
+                            onChange={handleChangeBrand}
                             className="mt-3 px-2 b-radius-10">
                             <option value={0}>Choose brand</option>
                             {
-                                brand?.data?.data ? (brand?.data?.data?.map((item, index) => {
-                                    return (
-                                        <option key={index} value={item?._id}>{item?.name}</option>
-                                    )
-                                })) : null
+                                brand?.data?.data && (brand?.data?.data?.map((brand) =>
+                                    <option key={brand?._id} value={brand?._id}>{brand?.name}</option>
+                                ))
 
                             }
                         </FormSelect>
 
-                        <div style={{backgroundColor: "var(--main-white)"}} className="p-2 b-radius-10 mt-3 d-flex flex-column border border-1">
+                        <div style={{backgroundColor: "var(--main-white)"}}
+                             className="p-2 b-radius-10 mt-3 d-flex flex-column border border-1">
                             <div className="text-form">Colors</div>
 
                             <div className="d-flex">
@@ -164,8 +159,7 @@ const AddProduct = () => {
                                     ) : null
                                 }
 
-                                <img onClick={onChangeColor} src={add} width="30px" height="35px"
-                                     style={{cursor: 'pointer'}}/>
+                                <AddCircleRounded onClick={handleChangeColor}/>
                                 {
                                     showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
                                 }

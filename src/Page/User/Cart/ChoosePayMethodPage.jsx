@@ -71,7 +71,7 @@ const ChoosePayMethodPage = () => {
                          style={{backgroundColor: "var(--main-gray)"}}>
                         {addresses?.data?.data?.length > 0 ? (
                             addresses?.data?.data?.map((address) =>
-                                <div onClick={() => handleChooseAddress(address?._id)}>
+                                <div key={address?._id} onClick={() => handleChooseAddress(address?._id)}>
                                     <AddressCard address={address} isChosen={addressDetails?._id}/>
                                 </div>
                             )
@@ -95,12 +95,10 @@ const ChoosePayMethodPage = () => {
 
                     <div className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                          style={{backgroundColor: "var(--main-gray)"}}>
-                        <Col>
-                            {payMethods?.map(payMethod =>
-                                <div onClick={() => changeMethod(payMethod.value)}>
-                                    <PayMethod payMethod={payMethod} isChosen={type}/>
+                            {payMethods?.map((payMethod, index) =>
+                                <div key={index} onClick={() => changeMethod(payMethod.value)}>
+                                    <PayMethod payMethod={payMethod} isChosen={type} key={index}/>
                                 </div>)}
-                        </Col>
                     </div>
                 </Col>
 

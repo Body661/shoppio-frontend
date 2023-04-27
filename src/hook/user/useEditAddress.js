@@ -3,14 +3,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {editUserAddress} from '../../redux/actions/userAddressActions';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
+import validator from "validator/es";
 
 const useEditAddress = (address) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [loadingUpdateAddress, setLoadingUpdateAddress] = useState(true);
-    const [isPressUpdateAddress, setIsPressUpdateAddress] = useState(false);
+    const [isSubmittedUpdateAddress, setIsSubmittedUpdateAddress] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
-
 
     const handleCloseUpdateModal = () => setShowUpdateModal(false);
     const handleShowUpdateModal = () => setShowUpdateModal(true);
@@ -29,12 +29,24 @@ const useEditAddress = (address) => {
     };
 
     const handleUpdateAddress = async () => {
+        if (
+            addressInfo.alias.trim() === '' ||
+            addressInfo.street.trim() === '' ||
+            !validator.isPostalCode(addressInfo.postalCode, 'NL') ||
+            !validator.isMobilePhone(addressInfo.phone) ||
+            addressInfo.city.trim() === '' ||
+            addressInfo.country.trim() === ''
+        ) {
+            toast("Please fill in all information and make sure that's it correct", {type: 'error'});
+            return;
+        }
+
         setLoadingUpdateAddress(true);
-        setIsPressUpdateAddress(true);
+        setIsSubmittedUpdateAddress(true);
         await dispatch(editUserAddress(address?._id, addressInfo));
         setLoadingUpdateAddress(false);
-        setIsPressUpdateAddress(false);
-        showUpdateModal(false)
+        setIsSubmittedUpdateAddress(false);
+        setShowUpdateModal(false)
     };
 
     const updateAddressRes = useSelector((state) => state.userAddressesReducer.editAddress);
@@ -61,7 +73,7 @@ const useEditAddress = (address) => {
         addressInfo,
         handleChangeAddress,
         handleUpdateAddress,
-        isPressUpdateAddress,
+        isSubmittedUpdateAddress,
         loadingUpdateAddress,
         showUpdateModal,
         handleCloseUpdateModal,

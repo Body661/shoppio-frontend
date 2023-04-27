@@ -13,14 +13,14 @@ function AdminSubcategoryItem({subcategory}) {
         handleOpenDelete,
         handleCloseDelete,
         loading,
-        isPress
+        isSubmitted
     } = useDeleteSubcategory(subcategory?._id)
 
     return (
         <Col xs={12} sm={6} md={5} lg={3}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

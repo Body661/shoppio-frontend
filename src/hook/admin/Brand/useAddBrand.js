@@ -1,17 +1,17 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createBrand} from '../../../redux/actions/BrandActions';
-import avatar from '../../../images/avatar.png';
+import addImg from '../../../images/Icons/addImg.png';
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
 const useAddBrand = () => {
     const dispatch = useDispatch();
-    const [img, setImg] = useState(avatar);
+    const [img, setImg] = useState(addImg);
     const [name, setName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate()
 
     const handleNameChange = (event) => {
@@ -39,7 +39,7 @@ const useAddBrand = () => {
         formData.append('img', selectedFile);
 
         setLoading(true);
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(createBrand(formData));
         setLoading(false);
     };
@@ -47,12 +47,7 @@ const useAddBrand = () => {
     const addBranRes = useSelector((state) => state.brandReducer.createBrand);
 
     useEffect(() => {
-        if (loading === false && isPress) {
-            setImg(avatar);
-            setName('');
-            setSelectedFile(null);
-            setIsPress(false);
-
+        if (loading === false && isSubmitted) {
             if (addBranRes?.status === 201) {
                 toast('Brand added successfully', {type: 'success', toastId: 'brandAdded'})
                 setTimeout(() => {
@@ -65,13 +60,13 @@ const useAddBrand = () => {
                 })
             }
         }
-    }, [loading, addBranRes, isPress]);
+    }, [loading, addBranRes, isSubmitted]);
 
     return {
         img,
         name,
         loading,
-        isPress,
+        isSubmitted,
         handleNameChange,
         handleImageChange,
         handleSubmit,

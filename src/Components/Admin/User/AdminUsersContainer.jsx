@@ -60,7 +60,7 @@ const AdminUsersContainer = () => {
             </Row>
 
             <Row className="my-1 d-flex gap-lg-4 justify-content-center">
-                {users?.map((user) => <AdminUserCard user={user}/>)}
+                {users?.map((user) => <AdminUserCard key={user?._id} user={user}/>)}
             </Row>
 
             {pageCount > 1 && <Pagination pageCount={pageCount} handleChangePage={handleChangePage}/>}

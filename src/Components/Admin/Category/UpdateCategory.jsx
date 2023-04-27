@@ -13,7 +13,7 @@ const UpdateCategory = () => {
         handleSubmit,
         handleNameChange,
         loadingUpdate,
-        isPress,
+        isSubmitted,
         loading
     } = useUpdateCategory(id);
 
@@ -21,7 +21,7 @@ const UpdateCategory = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingUpdate && isPress) || loading}
+                open={(loadingUpdate && isSubmitted) || loading}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

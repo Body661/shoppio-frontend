@@ -8,7 +8,7 @@ const AddCategory = () => {
         img,
         name,
         loading,
-        isPress,
+        isSubmitted,
         handleNameChange,
         handleImageChange,
         handleSubmit
@@ -19,7 +19,7 @@ const AddCategory = () => {
 
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

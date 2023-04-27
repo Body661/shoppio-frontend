@@ -6,9 +6,9 @@ import {useNavigate} from "react-router-dom";
 
 const useUpdateBrand = (brandId) => {
 
-    const [loading, setLoading] = useState(true)
+    const [loadingFetch, setLoadingFetch] = useState(true)
     const [loadingUpdate, setLoadingUpdate] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const navigate = useNavigate();
     const [img, setImg] = useState(null)
     const [name, setName] = useState('')
@@ -34,17 +34,18 @@ const useUpdateBrand = (brandId) => {
 
     useEffect(() => {
         const fetchBrandData = async () => {
+            setLoadingFetch(true)
             await dispatch(getBrand(brandId));
-            setLoading(false)
+            setLoadingFetch(false)
         }
 
         fetchBrandData()
-    }, [])
+    }, [brandId, dispatch])
 
     const brand = useSelector(state => state.brandReducer.brand)
 
     useEffect(() => {
-        if (!loading) {
+        if (!loadingFetch) {
             if (brand && brand?.status === 200) {
                 setName(brand?.data?.data?.name)
                 setImg(brand?.data?.data?.img)
@@ -65,7 +66,7 @@ const useUpdateBrand = (brandId) => {
                 }, 1500)
             }
         }
-    }, [loading, brand])
+    }, [loadingFetch, brand])
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -78,10 +79,10 @@ const useUpdateBrand = (brandId) => {
         }
 
         setLoadingUpdate(true);
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(updatedBrand(brandId, formData));
         setLoadingUpdate(false);
-        setIsPress(false);
+        setIsSubmitted(false);
     };
 
     const updateBrandRes = useSelector(state => state.brandReducer.updateBrand);
@@ -102,7 +103,7 @@ const useUpdateBrand = (brandId) => {
         }
     }, [updateBrandRes, loadingUpdate]);
 
-    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isPress, loading}
+    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isSubmitted, loadingFetch}
 }
 
 export default useUpdateBrand

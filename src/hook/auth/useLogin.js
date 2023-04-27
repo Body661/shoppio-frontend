@@ -9,7 +9,7 @@ const useLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [validated, setValidated] = useState(false);
 
     const handleEmailChange = (event) => setEmail(event.target.value);
@@ -31,10 +31,10 @@ const useLogin = () => {
             return toast("Please enter your password", {type: "error"})
         }
 
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(loginUser({email, password}));
         setLoading(false);
-        setIsPress(false);
+        setIsSubmitted(false);
     };
 
     const auth = useSelector((state) => state.authReducer.loginUser);
@@ -67,7 +67,7 @@ const useLogin = () => {
         }
     }, [loading, auth]);
 
-    return {email, password, loading, handleEmailChange, handlePasswordChange, handleLogin, isPress, validated};
+    return {email, password, loading, handleEmailChange, handlePasswordChange, handleLogin, isSubmitted, validated};
 };
 
 export default useLogin;

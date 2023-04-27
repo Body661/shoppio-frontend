@@ -27,7 +27,7 @@ const NavBar = ({isUser}) => {
     const {getProducts} = useSearch();
     const navigate = useNavigate();
 
-    const onClickSearch = async (e) => {
+    const onClickSearch = async () => {
         const path = window.location.pathname;
         if (path !== '/products') {
             navigate('/products')

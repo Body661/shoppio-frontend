@@ -38,7 +38,6 @@ const UserFavoritesPage = () => {
 
             <Row className='justify-content-start mt-4'>
                 <ProductsContainer products={items} loading={loading}/>
-                {items?.length <= 0 && !loading && <h6>No items added to your wishlist</h6>}
             </Row>
         </Container>
     )

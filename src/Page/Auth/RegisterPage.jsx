@@ -17,7 +17,7 @@ const RegisterPage = () => {
         handleChangePassword,
         handleChangePasswordConfirm,
         handleRegister,
-        isPress,
+        isSubmitted,
         validated
     } = UseRegister();
 
@@ -83,7 +83,7 @@ const RegisterPage = () => {
                     Already have an account? <Link to="/login" style={{fontWeight: "bold"}}>Login</Link>
                 </span>
 
-                {isPress && <div className="d-flex justify-content-center">
+                {isSubmitted && <div className="d-flex justify-content-center">
                     {loading && <Spinner animation="border" role="primary"/>}
                 </div>}
             </Form>

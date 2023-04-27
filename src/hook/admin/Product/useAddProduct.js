@@ -15,12 +15,12 @@ const useAddProduct = () => {
     const [prodDescription, setProdDescription] = useState('');
     const [priceBefore, setPriceBefore] = useState('');
     const [priceAfter, setPriceAfter] = useState('');
-    const [qty, setQty] = useState('');
+    const [quantity, setQuantity] = useState('');
     const [CatID, setCatID] = useState('');
     const [BrandID, SetBrandID] = useState('');
     const [selectedSubID, setSelectedSubID] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [loadingFetchData, setLoadingFetchData] = useState(true);
     const [showColor, setShowColor] = useState(false);
     const [colors, setColors] = useState([]);
@@ -44,12 +44,12 @@ const useAddProduct = () => {
     const onSelect = (selectedList) => setSelectedSubID(selectedList);
     const onRemove = (selectedList) => setSelectedSubID(selectedList);
 
-    const onChangeProdName = (event) => setProdName(event.target.value);
-    const onChangeDescription = (event) => setProdDescription(event.target.value);
-    const onChangePriceBefore = (event) => setPriceBefore(event.target.value);
-    const onChangePriceAfter = (event) => setPriceAfter(event.target.value);
-    const onChangeQty = (event) => setQty(event.target.value);
-    const onChangeColor = () => setShowColor(!showColor);
+    const handleChangeProductName = (event) => setProdName(event.target.value);
+    const handleChangeDescription = (event) => setProdDescription(event.target.value);
+    const handleChangePrice = (event) => setPriceBefore(event.target.value);
+    const handleChangePriceAfterDiscount = (event) => setPriceAfter(event.target.value);
+    const handleChangeQuantity = (event) => setQuantity(event.target.value);
+    const handleChangeColor = () => setShowColor(!showColor);
 
     const handleAddColor = (color) => {
         setColors([...colors, color.hex]);
@@ -61,7 +61,7 @@ const useAddProduct = () => {
         setColors(newColor);
     };
 
-    const onSelectCategory = async (e) => {
+    const handleChangeCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
             await dispatch(getSubcategoriesOfCategory(e.target.value, '', ''));
@@ -70,7 +70,7 @@ const useAddProduct = () => {
         setCatID(e.target.value);
     };
 
-    const onSelectBrand = (e) => SetBrandID(e.target.value);
+    const handleChangeBrand = (e) => SetBrandID(e.target.value);
 
     function dataURLtoFile(dataURL, filename) {
         let arr = dataURL.split(',');
@@ -115,7 +115,7 @@ const useAddProduct = () => {
         const formData = new FormData();
         formData.append("title", prodName);
         formData.append("description", prodDescription);
-        formData.append("quantity", qty);
+        formData.append("quantity", quantity);
         formData.append("price", priceBefore);
         formData.append("cover", imgCover);
         formData.append("category", CatID);
@@ -128,10 +128,10 @@ const useAddProduct = () => {
         itemImages.forEach((image) => formData.append("images", image));
 
         setLoading(true);
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(createProduct(formData));
         setLoading(false);
-        setIsPress(false);
+        setIsSubmitted(false);
     };
 
     const product = useSelector((state) => state.productReducer.createdProduct);
@@ -154,12 +154,12 @@ const useAddProduct = () => {
 
 
     return {
-        onChangeDescription,
-        onChangeQty,
-        onChangeColor,
-        onChangePriceAfter,
-        onChangePriceBefore,
-        onChangeProdName,
+        handleChangeDescription,
+        handleChangeQuantity,
+        handleChangeColor,
+        handleChangePriceAfterDiscount,
+        handleChangePrice,
+        handleChangeProductName,
         showColor,
         category,
         brand,
@@ -171,17 +171,17 @@ const useAddProduct = () => {
         options,
         handleAddColor,
         removeColor,
-        onSelectCategory,
+        handleChangeCategory,
         handleSubmit,
-        onSelectBrand,
+        handleChangeBrand,
         colors,
         priceBefore,
-        qty,
+        quantity,
         prodDescription,
         prodName,
         loading,
         loadingFetchData,
-        isPress
+        isSubmitted
     }
 
 }

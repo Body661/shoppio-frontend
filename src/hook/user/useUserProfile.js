@@ -17,8 +17,8 @@ const useUserProfile = () => {
     const [phone, setPhone] = useState('');
     const [loadingGetProfile, setLoadingGetProfile] = useState(true);
     const [loadingUpdateProfile, setLoadingUpdateProfile] = useState(true);
-    const [isPressUpdateProfile, setIsPressUpdateProfile] = useState(false);
-    const [isPressUpdatePass, setIsPressUpdatePass] = useState(false);
+    const [isSubmittedUpdateProfile, setIsSubmittedUpdateProfile] = useState(false);
+    const [isSubmittedUpdatePass, setIsSubmittedUpdatePass] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const handleCloseUpdateModal = () => setShowUpdateModal(false);
     const handleShowUpdateModal = () => setShowUpdateModal(true);
@@ -42,17 +42,17 @@ const useUserProfile = () => {
     }, [user]);
 
 
-    const onChangeName = (event) => setName(event.target.value);
-    const onChangeEmail = (event) => setEmail(event.target.value);
-    const onChangePhone = (event) => setPhone(event.target.value);
+    const handleChangeName = (event) => setName(event.target.value);
+    const handleChangeEmail = (event) => setEmail(event.target.value);
+    const handleChangePhone = (event) => setPhone(event.target.value);
 
     const handleUpdateProfile = async () => {
         const body = user?.data?.data.email !== email ? {name, email, phone} : {name, phone};
         setLoadingUpdateProfile(true);
-        setIsPressUpdateProfile(true)
+        setIsSubmittedUpdateProfile(true)
         await dispatch(updateUserProfileData(body));
         setLoadingUpdateProfile(false);
-        setIsPressUpdateProfile(false)
+        setIsSubmittedUpdateProfile(false)
         setShowUpdateModal(false);
     };
 
@@ -76,13 +76,13 @@ const useUserProfile = () => {
     }, [loadingUpdateProfile, updateProfileRes]);
 
     // Change user password
-    const [oldPassword, setOldPassword] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [loadingUpdatePass, setLoadingUpdatePass] = useState(true);
     const [validated, setValidated] = useState(false);
 
-    const handleChangeOldPass = (event) => setOldPassword(event.target.value);
+    const handleChangeCurrentPassword = (event) => setCurrentPassword(event.target.value);
     const handleChangeNewPass = (event) => setNewPassword(event.target.value);
     const handleChangeConfirmPass = (event) => setConfirmNewPassword(event.target.value);
 
@@ -96,8 +96,8 @@ const useUserProfile = () => {
 
         setValidated(true);
 
-        if (oldPassword.trim() === '') {
-            toast("Please enter your old password", {type: 'error'})
+        if (currentPassword.trim() === '') {
+            toast("Please enter your current password", {type: 'error'})
             return false;
         }
 
@@ -111,16 +111,16 @@ const useUserProfile = () => {
             return;
         }
         setLoadingUpdatePass(true);
-        setIsPressUpdatePass(true)
+        setIsSubmittedUpdatePass(true)
         await dispatch(
             updateUserPassword({
-                currentPassword: oldPassword,
+                currentPassword,
                 password: newPassword,
                 passwordConfirm: confirmNewPassword,
             })
         );
         setLoadingUpdatePass(false);
-        setIsPressUpdatePass(false)
+        setIsSubmittedUpdatePass(false)
     };
 
     const changePassRes = useSelector((state) => state.authReducer.userChangePassword);
@@ -152,21 +152,21 @@ const useUserProfile = () => {
         name,
         email,
         phone,
-        onChangeName,
-        onChangeEmail,
-        onChangePhone,
+        handleChangeName,
+        handleChangeEmail,
+        handleChangePhone,
         handleUpdatePassword,
-        oldPassword,
+        currentPassword,
         newPassword,
         confirmNewPassword,
-        handleChangeOldPass,
+        handleChangeCurrentPassword,
         handleChangeNewPass,
         handleChangeConfirmPass,
         loadingUpdateProfile,
         loadingUpdatePass,
         loadingGetProfile,
-        isPressUpdateProfile,
-        isPressUpdatePass,
+        setIsSubmittedUpdateProfile,
+        setIsSubmittedUpdatePass,
         validated
     };
 };

@@ -1,4 +1,4 @@
-import prev from '../../../imgs/Icons/previous.png'
+import prev from '../../../images/Icons/previous.png'
 
 const RightButton = (onClick) => {
     return (

@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 const useDeleteCoupon = (id) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -15,10 +15,10 @@ const useDeleteCoupon = (id) => {
 
     const handleDelete = async () => {
         setLoading(true)
-        setIsPress(true)
+        setIsSubmitted(true)
         await dispatch(deleteCoupon(id));
         setLoading(false)
-        setIsPress(false)
+        setIsSubmitted(false)
         handleModalClose();
     };
 
@@ -42,7 +42,7 @@ const useDeleteCoupon = (id) => {
             }
         }
     }, [loading, response])
-    return {isModalOpen, handleModalOpen, handleModalClose, handleDelete, loading, isPress};
+    return {isModalOpen, handleModalOpen, handleModalClose, handleDelete, loading, isSubmitted};
 };
 
 export default useDeleteCoupon;

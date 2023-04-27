@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 import {DeleteOutline, EditOutlined, Star} from "@mui/icons-material";
 
-const AdminProductsCard = ({item}) => {
+const AdminProductsCard = ({product}) => {
     const [showDelete, setShow] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +17,7 @@ const AdminProductsCard = ({item}) => {
 
     const handleDelete = async () => {
         setLoading(true)
-        await dispatch(deleteProduct(item?._id))
+        await dispatch(deleteProduct(product?._id))
         setShow(false);
         setLoading(false)
     }
@@ -65,38 +65,38 @@ const AdminProductsCard = ({item}) => {
                 <div className="product-card-img-holder b-radius-20">
                     <div className="d-flex justify-content-between">
                         <DeleteOutline className="favorite-icon" onClick={handleShowDelete}/>
-                        <Link to={`/admin/products/${item?._id}`}>
+                        <Link to={`/admin/products/${product?._id}`}>
                             <EditOutlined className="favorite-icon-right"/>
                         </Link>
                     </div>
 
-                    <Link to={`/products/${item?._id}`}>
-                        <CardImg src={item?.cover} className="product-cover"/>
+                    <Link to={`/products/${product?._id}`}>
+                        <CardImg src={product?.cover} className="product-cover"/>
                     </Link>
                 </div>
 
                 <Card.Body>
                     <Card.Title>
                         <div className="product-card-title text-center">
-                            {item?.title}
+                            {product?.title}
                         </div>
                     </Card.Title>
                     <Card.Text>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex align-items-center">
                                 <Star style={{fontSize: "17px"}}/>
-                                <div className="product-card-rate-text mx-2">{item?.ratingsAvg?.toFixed(1) || 0}</div>
+                                <div className="product-card-rate-text mx-2">{product?.ratingsAvg?.toFixed(1) || 0}</div>
                             </div>
                             <div className="d-flex">
                                 <div className="product-card-price">
-                                    {item.priceAfterDiscount >= 1 ?
+                                    {product.priceAfterDiscount >= 1 ?
                                         (<div>
                                             <span
                                                 style={{
                                                     textDecorationLine: 'line-through',
                                                     color: "gray"
-                                                }}> €{item.price} </span> €{item.priceAfterDiscount}
-                                        </div>) : ` € ${item.price}`}
+                                                }}> €{product.price} </span> €{product.priceAfterDiscount}
+                                        </div>) : ` € ${product.price}`}
                                 </div>
                             </div>
                         </div>

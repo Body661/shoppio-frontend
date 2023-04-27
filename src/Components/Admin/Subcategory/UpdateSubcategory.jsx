@@ -20,10 +20,10 @@ const UpdateSubcategory = () => {
         name,
         loading,
         categories,
-        handleChange,
+        handleChangeCategory,
         handleSubmit,
-        onChangeName,
-        isPress,
+        handleChangeName,
+        isSubmitted,
         loadingUpdate
     } = useUpdateSubcategory(id);
 
@@ -31,7 +31,7 @@ const UpdateSubcategory = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingUpdate && isPress) || loading}
+                open={(loadingUpdate && isSubmitted) || loading}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -51,13 +51,13 @@ const UpdateSubcategory = () => {
                     <Col>
                         <FormControl
                             value={name}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Subcategory name"
                         />
 
-                        <FormSelect name="category" id="cat" className="select mt-3 px-2" onChange={handleChange}>
+                        <FormSelect name="category" id="cat" className="select mt-3 px-2" onChange={handleChangeCategory}>
                             <option value="">Select main category</option>
                             {categories?.data?.data?.map((category) => (
                                 <option selected={categoryId === category?._id} key={category?._id}

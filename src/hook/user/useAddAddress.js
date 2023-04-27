@@ -36,7 +36,7 @@ const useAddAddress = () => {
             city.trim() === '' ||
             country.trim() === ''
         ) {
-            toast('Please fill in all information', {type: 'error'});
+            toast("Please fill in all information and make sure that's it correct", {type: 'error'});
             return;
         }
 

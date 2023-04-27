@@ -1,4 +1,4 @@
-import next from '../../../imgs/Icons/next.png'
+import next from '../../../images/Icons/next.png'
 
 const LeftButton = (onClick
 ) => {

@@ -4,12 +4,12 @@ import 'swiper/css';
 import "swiper/css/bundle"
 import {Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFade} from 'swiper';
 
-import previous from "../../imgs/Icons/previous.png";
-import next from "../../imgs/Icons/next.png";
+import previous from "../../images/Icons/previous.png";
+import next from "../../images/Icons/next.png";
 
-import ramadan from "../../imgs/Slider/ramadan-sweaters.png";
-import school from "../../imgs/Slider/back-to-school.png";
-import discount25 from "../../imgs/Slider/25off.png";
+import ramadan from "../../images/Slider/ramadan-sweaters.png";
+import school from "../../images/Slider/back-to-school.png";
+import discount25 from "../../images/Slider/25off.png";
 
 const Slider = () => {
     const [swiperRef, setSwiperRef] = useState(null);
@@ -35,7 +35,6 @@ const Slider = () => {
                 slidesPerView={1}
                 loop={true}
                 autoplay={{stopOnLastSlide: false, delay: 5000, disableOnInteraction: false}}
-                lazy={true}
                 onSwiper={(swiper) => setSwiperRef(swiper)}
             >
                 <SwiperSlide>

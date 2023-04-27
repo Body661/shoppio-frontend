@@ -9,13 +9,13 @@ const AddCoupon = () => {
     const {
         couponName,
         couponDate,
-        couponValue,
-        onChangeName,
-        onChangeDate,
-        onChangeValue,
-        onSubmit,
+        discount,
+        handleChangeName,
+        handleChangeExpireDate,
+        handleChangeDiscount,
+        handleSubmit,
         loading,
-        isPress
+        isSubmitted
     } = useAddCoupon();
 
     const handleDateFocus = () => {
@@ -30,7 +30,7 @@ const AddCoupon = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={loading && isPress}
+                open={loading && isSubmitted}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -46,7 +46,7 @@ const AddCoupon = () => {
                     <Col>
                         <FormControl
                             value={couponName}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Coupon name"
@@ -56,21 +56,21 @@ const AddCoupon = () => {
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Expiration date"
-                            onChange={onChangeDate}
+                            onChange={handleChangeExpireDate}
                             value={couponDate}
                             onFocus={handleDateFocus}
                             onBlur={handleDateBlur}
                         />
                         <FormControl
-                            value={couponValue}
-                            onChange={onChangeValue}
+                            value={discount}
+                            onChange={handleChangeDiscount}
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Discount"
                         />
                     </Col>
                     <Col sm="12" className="d-flex mt-3">
-                        <Button onClick={onSubmit} className="btn-dark w-100 b-radius-10">Add coupon</Button>
+                        <Button onClick={handleSubmit} className="btn-dark w-100 b-radius-10">Add coupon</Button>
                     </Col>
                 </Row>
             </Form>

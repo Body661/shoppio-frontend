@@ -6,7 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 const AddReview = () => {
     const {id} = useParams();
-    const {onChange, onChangeRateValue, formData, onSubmit} = useAddReview(id);
+    const {handleSubmit, handleChangeRate, formData,handleChangeReview, onSubmit} = useAddReview(id);
 
     return (
         <div className="mt-2">
@@ -19,13 +19,13 @@ const AddReview = () => {
                     <Rating
                         className="mt-2"
                         name="hover-feedback"
-                        value={formData?.rateValue || 0}
+                        value={formData?.rate || 0}
                         readOnly={false}
                         icon={<StarIcon style={{color: "black"}} fontSize="20px" color="black"/>}
                         emptyIcon={<StarIcon style={{opacity: 1}} fontSize="20px"/>}
                         precision={0.5}
                         onChange={(event, newValue) => {
-                            onChangeRateValue(newValue)
+                            handleChangeRate(newValue)
                         }}/>
 
                 </Col>
@@ -36,7 +36,7 @@ const AddReview = () => {
                     <FormControl
                         type="text"
                         value={formData?.reviewTitle}
-                        onChange={(e) => onChange(e, 'reviewTitle')}
+                        onChange={(e) => handleChangeReview(e, 'reviewTitle')}
                         className="input-form p-2 mt-3"
                         placeholder="Review title"
                     />
@@ -44,14 +44,14 @@ const AddReview = () => {
                     <FormControl
                         as="textarea"
                         value={formData?.review}
-                        onChange={(e) => onChange(e, 'review')}
+                        onChange={(e) => handleChangeReview(e, 'review')}
                         className="p-2 mt-3"
                         rows="2"
                         cols="20"
                         placeholder="Review"
                     />
                     <div className="d-flex justify-content-end mt-3">
-                        <Button onClick={onSubmit} className="btn-dark b-radius-30 px-3 py-2">
+                        <Button onClick={handleSubmit} className="btn-dark b-radius-30 px-3 py-2">
                             Submit
                         </Button>
                     </div>

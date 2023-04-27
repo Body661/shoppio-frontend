@@ -3,7 +3,7 @@ import useForgetPassword from "../../hook/auth/useForgetPassword";
 import logo from "../../images/logo.png";
 
 const ForgetPasswordPage = () => {
-    const {email, handleChangeEmail, handleSubmit, loading, isPress, validated} = useForgetPassword();
+    const {email, handleChangeEmail, handleSubmit, loading, isSubmitted, validated} = useForgetPassword();
 
     return (
         <Container style={{minHeight: "80vh"}} className="d-flex align-items-center justify-content-center">
@@ -27,7 +27,7 @@ const ForgetPasswordPage = () => {
 
             </Form>
 
-            {isPress && (
+            {isSubmitted && (
                 <div className="d-flex justify-content-center">
                     {loading && <Spinner animation="border" role="primary"/>}
                 </div>

@@ -1,6 +1,6 @@
 import useSidebarSearch from '../../hook/products/search/useSidebarSearch';
 import {Sidebar, Menu, useProSidebar, sidebarClasses} from 'react-pro-sidebar';
-import filter from "../../imgs/Icons/filter.png"
+import filter from "../../images/Icons/filter.png"
 import FormCheckInput from "react-bootstrap/FormCheckInput";
 import {FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import {Backdrop, CircularProgress} from "@mui/material";
@@ -19,8 +19,8 @@ const SideFilter = () => {
 
     const {
         getSearchParams,
-        handlePriceTo,
-        handlePriceFrom,
+        handleChangePriceTo,
+        handleChangePriceFrom,
     } = useSearch()
 
     const {priceFrom, priceTo} = getSearchParams()
@@ -92,14 +92,14 @@ const SideFilter = () => {
                         <FormLabel className="d-flex align-items-center justify-content-between">
                             From: <FormControl
                             value={priceFrom}
-                            onChange={handlePriceFrom}
+                            onChange={handleChangePriceFrom}
                             className="m-2"
                             type="number"
                         />
                         </FormLabel>
                         <FormLabel className="d-flex align-items-center justify-content-between">
                             To: <FormControl
-                            onChange={handlePriceTo}
+                            onChange={handleChangePriceTo}
                             value={priceTo}
                             className="m-2"
                             type="number"

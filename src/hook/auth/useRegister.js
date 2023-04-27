@@ -10,7 +10,7 @@ const useRegister = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -71,7 +71,7 @@ const useRegister = () => {
         setValidated(true);
 
         if (validationValues()) {
-            setIsPress(true);
+            setIsSubmitted(true);
 
             await dispatch(
                 createNewUser({
@@ -83,7 +83,7 @@ const useRegister = () => {
                 })
             );
             setLoading(false);
-            setIsPress(false);
+            setIsSubmitted(false);
         }
     };
     const res = useSelector((state) => state.authReducer.createUser);
@@ -119,7 +119,7 @@ const useRegister = () => {
         handleChangePassword,
         handleChangePasswordConfirm,
         handleRegister,
-        isPress,
+        isSubmitted,
         validated
     };
 };

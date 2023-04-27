@@ -1,17 +1,17 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createCategory} from '../../../redux/actions/CategoryActions';
-import avatar from '../../../images/avatar.png';
+import addImg from '../../../images/Icons/addImg.png';
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
 const useAddCategory = () => {
     const dispatch = useDispatch();
-    const [img, setImg] = useState(avatar);
+    const [img, setImg] = useState(addImg);
     const [name, setName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [isPress, setIsPress] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate()
 
     const handleNameChange = event => setName(event.target.value);
@@ -36,10 +36,10 @@ const useAddCategory = () => {
         formData.append('img', selectedFile);
 
         setLoading(true);
-        setIsPress(true);
+        setIsSubmitted(true);
         await dispatch(createCategory(formData));
         setLoading(false);
-        setIsPress(false);
+        setIsSubmitted(false);
     };
 
     const addCategoryRes = useSelector(state => state.categoryReducer.createCategory);
@@ -64,7 +64,7 @@ const useAddCategory = () => {
         img,
         name,
         loading,
-        isPress,
+        isSubmitted,
         handleNameChange,
         handleImageChange,
         handleSubmit,

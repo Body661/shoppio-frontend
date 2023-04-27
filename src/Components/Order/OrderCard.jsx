@@ -22,8 +22,8 @@ const OrderCard = ({order, isAdmin}) => {
 
 
             <Row className="d-flex flex-column gap-2 p-2 b-radius-10" style={{backgroundColor: "var(--main-gray)"}}>
-                {order?.cartItems && (order?.cartItems?.map((item, index) => {
-                    return (<Row className="d-flex align-items-center">
+                {order?.cartItems && (order?.cartItems?.map((item) => {
+                    return (<Row className="d-flex align-items-center" key={item?._id}>
                         <Col xs="3" className="d-flex justify-content-start">
                             <img width="100%" src={item?.product?.cover} alt={item?.product?.title}
                                  style={{objectFit: "contain"}}/>

@@ -11,9 +11,9 @@ const AdminProductsContainer = () => {
     const {products, pagination, handleChangePage, loading, error, handleSearch} = useAdminGetProducts();
 
     if (!loading && !error && products && products?.length > 0) {
-        content = products?.map((item, index) => (
+        content = products?.map((product) => (
             <Col xs={8} sm={6} md={4} lg={3}>
-                <AdminProductsCard key={index} item={item}/>
+                <AdminProductsCard key={product?._id} product={product}/>
             </Col>
         ))
 

@@ -4,8 +4,8 @@ import Slider from '../../Components/Home/Slider';
 import AdSection from '../../Components/Home/AdSection';
 import HomeBrands from "../../Components/Home/HomeBrands";
 import useHomeProducts from "../../hook/products/useHomeProducts";
-import cashBack from "../../imgs/Icons/money-back.png"
-import amazon from "../../imgs/Ads/amazon.png"
+import cashBack from "../../images/Icons/money-back.png"
+import amazon from "../../images/Ads/amazon.png"
 import {Button} from "react-bootstrap";
 
 const HomePage = () => {

@@ -5,7 +5,7 @@ import {toast} from "react-toastify";
 
 const useDeleteSubcategory = (id) => {
     const [loading, setLoading] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const dispatch = useDispatch()
 
     const [showDelete, setShowDelete] = useState(false);
@@ -14,11 +14,11 @@ const useDeleteSubcategory = (id) => {
     const handleCloseDelete = () => setShowDelete(false);
 
     const handleDelete = async () => {
-        setIsPress(true)
+        setIsSubmitted(true)
         setShowDelete(false)
         await dispatch(deleteSubcategory(id))
         setLoading(false)
-        setIsPress(false)
+        setIsSubmitted(false)
     }
 
     const deleteRes = useSelector(state => state.subcategoryReducer.deleteSubcategory)
@@ -45,7 +45,7 @@ const useDeleteSubcategory = (id) => {
     return {
         handleDelete,
         loading,
-        isPress,
+        isSubmitted,
         showDelete,
         handleOpenDelete,
         handleCloseDelete

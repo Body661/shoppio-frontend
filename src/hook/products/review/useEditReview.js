@@ -10,14 +10,14 @@ const useEditReview = (review) => {
     const [formData, setFormData] = useState({
         newReview: review?.description,
         newReviewTitle: review?.title,
-        newRateValue: review?.ratings,
+        newRate: review?.ratings,
     });
 
     const [showEdit, setShowEdit] = useState(false);
     const handleCloseEdit = () => setShowEdit(false);
     const handleShowEdit = () => setShowEdit(true);
 
-    const onChange = (e, field) => {
+    const handleChangeReview = (e, field) => {
         setFormData({ ...formData, [field]: e.target.value });
     };
 
@@ -36,7 +36,7 @@ const useEditReview = (review) => {
             updateReviewOnProduct(review?.product, review?._id, {
                 title: formData.newReviewTitle,
                 description: formData.newReview,
-                ratings: formData.newRateValue,
+                ratings: formData.newRate,
             }),
         );
         setLoading(false);
@@ -68,7 +68,7 @@ const useEditReview = (review) => {
         handleCloseEdit,
         handleShowEdit,
         handleEdit,
-        onChange,
+        handleChangeReview,
         formData,
     };
 };

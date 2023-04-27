@@ -1,6 +1,6 @@
 import ReactPaginate from "react-paginate";
-import next from "../../imgs/Icons/next.png"
-import previous from "../../imgs/Icons/previous.png"
+import next from "../../images/Icons/next.png"
+import previous from "../../images/Icons/previous.png"
 
 const Pagination = ({pageCount, handleChangePage}) => {
 

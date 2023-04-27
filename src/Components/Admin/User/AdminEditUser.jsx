@@ -15,14 +15,14 @@ const AdminEditUser = () => {
         email,
         phone,
         role,
-        onChangeEmail,
-        onChangeName,
-        onChangePhone,
-        onChangeRole,
+        handleChangeEmail,
+        handleChangeName,
+        handleChangePhone,
+        handleChangeRole,
         handleSubmit,
         loadingFetch,
         loadingUpdate,
-        isPress,
+        isSubmitted,
         validated
     } = useEditUser(id)
 
@@ -33,7 +33,7 @@ const AdminEditUser = () => {
 
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loadingUpdate && isPress) || loadingFetch}
+                open={(loadingUpdate && isSubmitted) || loadingFetch}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -78,7 +78,7 @@ const AdminEditUser = () => {
                             type="text"
                             placeholder="User name"
                             value={name}
-                            onChange={onChangeName}
+                            onChange={handleChangeName}
                             className="mt-3 b-radius-10"
                         />
 
@@ -87,7 +87,7 @@ const AdminEditUser = () => {
                             type="email"
                             placeholder="Email"
                             value={email}
-                            onChange={onChangeEmail}
+                            onChange={handleChangeEmail}
                             className="mt-3 b-radius-10"
                         />
 
@@ -96,11 +96,11 @@ const AdminEditUser = () => {
                             type="tel"
                             placeholder="Phone"
                             value={phone}
-                            onChange={onChangePhone}
+                            onChange={handleChangePhone}
                             className="mt-3 b-radius-10"
                         />
 
-                        <FormSelect placeholder="Role" onChange={onChangeRole} className="mt-3 b-radius-10">
+                        <FormSelect placeholder="Role" onChange={handleChangeRole} className="mt-3 b-radius-10">
                             <option value="user" selected={role === "user"}>User</option>
                             <option value="admin" selected={role === "admin"}>Admin</option>
                         </FormSelect>
@@ -122,7 +122,7 @@ const AdminEditUser = () => {
                         <Row className='mt-2 p-3 b-radius-20 d-flex flex-column gap-2'
                              style={{backgroundColor: "var(--main-gray)"}}>
                             {user?.data?.data?.addresses?.length ? user?.data?.data?.addresses?.map((address) =>
-                                <AddressCard address={address}/>) : <span>No addresses found</span>}
+                                <AddressCard key={address?._id} address={address}/>) : <span>No addresses found</span>}
                         </Row>
                     </Col>
                 </Row>
@@ -134,9 +134,10 @@ const AdminEditUser = () => {
 
                     <Col xs="12">
                         <Row>
-                            {user?.data?.data?.orders?.length > 0 ? user?.data?.data?.orders?.map((order) =>
-                                <OrderCard order={order}/>) :
-                                <Col className="d-flex flex-column gap-2 p-2 b-radius-10 mt-2" style={{backgroundColor: "var(--main-gray)"}}>No orders found</Col>}
+                            {user?.data?.data?.orders?.length ? user?.data?.data?.orders?.map((order) =>
+                                    <OrderCard key={order?._id} order={order}/>) :
+                                <Col className="d-flex flex-column gap-2 p-2 b-radius-10 mt-2"
+                                     style={{backgroundColor: "var(--main-gray)"}}>No orders found</Col>}
                         </Row>
                     </Col>
                 </Row>

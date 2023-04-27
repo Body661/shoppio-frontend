@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addProductToCart} from '../../../redux/actions/cartActions';
 import {toast} from "react-toastify";
 
-const UseAddToCart = (productId, item) => {
+const UseAddToCart = (product) => {
     const dispatch = useDispatch();
     const [indexColor, setIndexColor] = useState('');
     const [colorText, setColorText] = useState('');
@@ -15,15 +15,15 @@ const UseAddToCart = (productId, item) => {
     };
 
     const addToCartHandle = async () => {
-        if (item?.colors?.length >= 1 && colorText === '') {
+        if (product?.colors?.length >= 1 && colorText === '') {
             toast('Please select the color', {type: 'warning'})
             return;
         }
         setLoading(true);
-        if (item?.colors?.length < 1) {
-            await dispatch(addProductToCart({productId}));
+        if (product?.colors?.length < 1) {
+            await dispatch(addProductToCart({productId: product?._id}));
         } else {
-            await dispatch(addProductToCart({productId, color: colorText.trim()}));
+            await dispatch(addProductToCart({productId: product?._id, color: colorText.trim()}));
         }
         setLoading(false);
     };
@@ -34,9 +34,6 @@ const UseAddToCart = (productId, item) => {
         if (loading === false && res) {
             if (res?.status === 200) {
                 toast('Product added to Cart successfully', {type: 'success', toastId: "addProductToCartSuccess"})
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
             } else if (res?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',

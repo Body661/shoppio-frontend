@@ -1,13 +1,12 @@
 import {useParams} from 'react-router-dom';
 import {Row, Col, Container, Button, Form, FormControl, FormSelect} from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
-import add from '../../../images/add.png'
 import MultiImageInput from 'react-multiple-image-input';
 
 import {CompactPicker} from 'react-color'
 import useEditProduct from '../../../hook/admin/Product/useEditProduct';
 import {Backdrop, CircularProgress} from "@mui/material";
-import {Inventory} from "@mui/icons-material";
+import {AddCircleRounded, Inventory} from "@mui/icons-material";
 
 const AdminEditProducts = () => {
     const {id} = useParams();
@@ -15,12 +14,12 @@ const AdminEditProducts = () => {
     const {
         CatID,
         BrandID,
-        onChangeDesName,
-        onChangeQty,
-        onChangeColor,
-        onChangePriceAfter,
-        onChangePriceBefore,
-        onChangeProdName,
+        handleChangeDescription,
+        handleChangeQuantity,
+        handleChangeColor,
+        handleChangePriceAfterDiscount,
+        handleChangePrice,
+        handleChangeProductName,
         showColor,
         category,
         brand,
@@ -32,16 +31,16 @@ const AdminEditProducts = () => {
         options,
         handleAddColor,
         removeColor,
-        onSelectCategory,
+        handleChangeCategory,
         handleSubmit,
-        onSelectBrand,
+        handleChangeBrand,
         colors,
         priceBefore,
-        qty,
+        quantity,
         prodDescription,
         prodName,
         loading,
-        isPress,
+        isSubmitted,
         loadingFetchData,
         selectedSubID,
         currentProductName
@@ -52,7 +51,7 @@ const AdminEditProducts = () => {
         <Container>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={(loading && isPress) || loadingFetchData}
+                open={(loading && isSubmitted) || loadingFetchData}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -77,7 +76,7 @@ const AdminEditProducts = () => {
 
                         <FormControl
                             value={prodName}
-                            onChange={onChangeProdName}
+                            onChange={handleChangeProductName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Product name"
@@ -88,43 +87,40 @@ const AdminEditProducts = () => {
                             cols="50"
                             placeholder="Product description"
                             value={prodDescription}
-                            onChange={onChangeDesName}
+                            onChange={handleChangeDescription}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Price before discount"
                             value={priceBefore}
-                            onChange={onChangePriceBefore}
+                            onChange={handleChangePrice}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Price after discount"
                             value={priceAfter}
-                            onChange={onChangePriceAfter}
+                            onChange={handleChangePriceAfterDiscount}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Available quantity"
-                            value={qty}
-                            onChange={onChangeQty}
+                            value={quantity}
+                            onChange={handleChangeQuantity}
                         />
 
                         <FormSelect
                             name="cat"
                             value={CatID}
-                            onChange={onSelectCategory}
+                            onChange={handleChangeCategory}
                             className="mt-3 px-2 ">
                             <option value="0">Select category</option>
                             {
-                                category?.data?.data ? (category?.data?.data?.map((item) => {
-                                    return (
-                                        <option value={item?._id}>{item?.name}</option>
-                                    )
-                                })) : null
-
+                                category?.data?.data && (category?.data?.data?.map((category) =>
+                                    <option key={category?._id} value={category?._id}>{category?.name}</option>
+                                ))
                             }
                         </FormSelect>
 
@@ -141,16 +137,13 @@ const AdminEditProducts = () => {
                         <FormSelect
                             name="brand"
                             value={BrandID}
-                            onChange={onSelectBrand}
+                            onChange={handleChangeBrand}
                             className="mt-3 px-2 ">
                             <option>Select Brand</option>
                             {
-                                brand?.data?.data ? (brand?.data?.data?.map((item) => {
-                                    return (
-                                        <option value={item?._id}>{item?.name}</option>
-                                    )
-                                })) : null
-
+                                brand?.data?.data && (brand?.data?.data?.map((brand) =>
+                                    <option key={brand?._id} value={brand?._id}>{brand?.name}</option>
+                                ))
                             }
                         </FormSelect>
 
@@ -172,8 +165,7 @@ const AdminEditProducts = () => {
                                     ) : null
                                 }
 
-                                <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px"
-                                     style={{cursor: 'pointer'}}/>
+                                <AddCircleRounded onClick={handleChangeColor}/>
                                 {
                                     showColor === true ? <CompactPicker onChangeComplete={handleAddColor}/> : null
                                 }

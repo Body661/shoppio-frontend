@@ -6,11 +6,11 @@ import useDeleteCart from "../../../hook/user/cart/useDeleteCart";
 
 const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCouponName}) => {
     const {handleClearCart} = useDeleteCart();
-    const {couponName, onChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
+    const {couponName, handleChangeCoupon, handleSubmitCoupon} = useApplyCoupon();
 
     useEffect(() => {
         if (AppliedCouponName) {
-            onChangeCoupon(AppliedCouponName);
+            handleChangeCoupon(AppliedCouponName);
         }
     }, [AppliedCouponName]);
 
@@ -34,7 +34,7 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoupo
                         className="b-radius-10"
                         type="text"
                         value={couponName}
-                        onChange={(e) => onChangeCoupon(e.target.value)}
+                        onChange={(e) => handleChangeCoupon(e.target.value)}
                         placeholder='Coupon code'
                     />
 

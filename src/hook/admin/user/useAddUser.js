@@ -13,29 +13,29 @@ export const useAddUser = () => {
     const [role, setRole] = useState("user")
     const [phone, setPhone] = useState("")
     const [loading, setLoading] = useState(true)
-    const [isPress, setIsPress] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [validated, setValidated] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onChangeName = (e) => {
+    const handleChangeName = (e) => {
         setName(e.target.value)
     }
-    const onChangeEmail = (e) => {
+    const handleChangeEmail = (e) => {
         setEmail(e.target.value)
     }
 
-    const onChangePassword = (e) => {
+    const handleChangePassword = (e) => {
         setPassword(e.target.value)
     }
 
-    const onChangePasswordConfirm = (e) => {
+    const handleChangePasswordConfirm = (e) => {
         setPasswordConfirm(e.target.value)
     }
-    const onChangePhone = (e) => {
+    const handleChangePhone = (e) => {
         setPhone(e.target.value)
     }
-    const onChangeRole = (e) => {
+    const handleChangeRole = (e) => {
         setRole(e.target.value)
     }
 
@@ -75,7 +75,7 @@ export const useAddUser = () => {
             setValidated(true);
 
             setLoading(true)
-            setIsPress(true)
+            setIsSubmitted(true)
             await dispatch(createUser({
                 email,
                 password,
@@ -85,7 +85,7 @@ export const useAddUser = () => {
                 phone
             }))
             setLoading(false)
-            setIsPress(false)
+            setIsSubmitted(false)
         }
     }
 
@@ -114,15 +114,15 @@ export const useAddUser = () => {
         passwordConfirm,
         phone,
         role,
-        onChangeEmail,
-        onChangePassword,
-        onChangePasswordConfirm,
-        onChangeName,
-        onChangePhone,
-        onChangeRole,
+        handleChangeEmail,
+        handleChangePassword,
+        handleChangePasswordConfirm,
+        handleChangeName,
+        handleChangePhone,
+        handleChangeRole,
         handleSubmit,
         loading,
-        isPress,
+        isSubmitted,
         validated
     }
 }
