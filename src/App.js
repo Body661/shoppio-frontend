@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import {useJwt} from "react-jwt";
 import {ToastContainer} from "react-toastify";
 import HomePage from "./Page/Home/HomePage";
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
@@ -45,6 +44,8 @@ import AdminSubcategoriesPage from "./Page/Admin/Subcategory/AdminSubcategoriesP
 import UpdateSubcategoryPage from "./Page/Admin/Subcategory/UpdateSubcategoryPage";
 import AdminCouponsPage from "./Page/Admin/Coupon/AdminCouponsPage";
 import {Analytics} from '@vercel/analytics/react';
+import {useJwt} from "react-jwt";
+import OrderAddedPage from "./Page/User/Order/OrderAddedPage";
 
 function App() {
     const [isUser, setIsUser] = useState(false)
@@ -145,6 +146,7 @@ function App() {
                             <Route path="/user/profile" element={<UserProfilePage/>}/>
                             <Route path="/cart" element={<CartPage/>}/>
                             <Route path="/cart/pay-method" element={<ChoosePayMethodPage/>}/>
+                            <Route path="/cart/order-received" element={<OrderAddedPage/>}/>
                         </Route>
                     )}
 
