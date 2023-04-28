@@ -7,7 +7,7 @@ import {Autoplay, Navigation, Pagination, Scrollbar, A11y, EffectFade} from 'swi
 import previous from "../../images/Icons/previous.png";
 import next from "../../images/Icons/next.png";
 
-import ramadan from "../../images/Slider/ramadan-sweaters.png";
+import sweaters from "../../images/Slider/sweaters.png";
 import school from "../../images/Slider/back-to-school.png";
 import discount25 from "../../images/Slider/25off.png";
 
@@ -41,7 +41,7 @@ const Slider = () => {
                     <div>
                         <img
                             style={{width: "100%", display: "block"}}
-                            src={ramadan}
+                            src={sweaters}
                             alt="First slide"
                         />
                     </div>
