@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {addProductToCart} from '../../../redux/actions/cartActions';
 import {toast} from "react-toastify";
+import favOff from "../../../images/Icons/heart.png";
 
 const UseAddToCart = (product) => {
     const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const UseAddToCart = (product) => {
         if (loading === false && res) {
             if (res?.status === 200) {
                 toast('Product added to Cart successfully', {type: 'success', toastId: "addProductToCartSuccess"})
-            } else if (res?.data?.error?.name === 'JsonWebTokenError') {
+            }else if (res?.status === 401) {
+                toast("You are not logged in, please login first", {type: 'error', toastId: 'addToCartLogin'})
+            }  else if (res?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',
                     toastId: 'addToCartLogin',

@@ -58,6 +58,10 @@ const useWishlist = (item, isFavProduct) => {
                 })
                 setIsFav(false);
                 setFavImg(favOff);
+            } else if (resAdd?.status === 401) {
+                toast("You are not logged in, please login first", {type: 'error', toastId: 'addToWishListLogin'})
+                setIsFav(false);
+                setFavImg(favOff);
             } else if (resAdd?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',

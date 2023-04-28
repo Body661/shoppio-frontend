@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useJwt} from "react-jwt";
 import {ToastContainer} from "react-toastify";
 import HomePage from "./Page/Home/HomePage";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import NavBar from "./Components/Utility/NavBar";
 import Footer from "./Components/Utility/Footer";
 import LoginPage from './Page/Auth/LoginPage';
@@ -44,15 +44,18 @@ import AddSubcategoryPage from "./Page/Admin/Subcategory/AddSubcategoryPage";
 import AdminSubcategoriesPage from "./Page/Admin/Subcategory/AdminSubcategoriesPage";
 import UpdateSubcategoryPage from "./Page/Admin/Subcategory/UpdateSubcategoryPage";
 import AdminCouponsPage from "./Page/Admin/Coupon/AdminCouponsPage";
-import { Analytics } from '@vercel/analytics/react';
+import {Analytics} from '@vercel/analytics/react';
 
 function App() {
     const [isUser, setIsUser] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [decodingToken, setDecodingToken] = useState(true);
     const {decodedToken, isExpired} = useJwt(localStorage.getItem("token"));
 
     useEffect(() => {
-        if (decodedToken && !isExpired) {
+        setDecodingToken(true);
+
+        if (decodedToken && !isExpired && decodedToken?.role) {
             if (decodedToken?.role === "admin") {
                 setIsAdmin(true)
                 setIsUser(false)
@@ -62,12 +65,15 @@ function App() {
             } else {
                 setIsAdmin(false)
                 setIsUser(false)
+                localStorage.removeItem("token")
+                localStorage.removeItem("user")
             }
-        } else if (localStorage.getItem("token") && isExpired) {
+        } else if (localStorage.getItem("token") && isExpired || decodedToken?.role) {
             localStorage.removeItem("token")
             localStorage.removeItem("user")
-            window.location.reload();
         }
+
+        setDecodingToken(false);
     }, [decodedToken, isExpired])
 
     return (
@@ -141,7 +147,9 @@ function App() {
                             <Route path="/cart/pay-method" element={<ChoosePayMethodPage/>}/>
                         </Route>
                     )}
-                    <Route path="*" element={<NotFoundPage/>}/>
+
+                    {!decodingToken && <Route path="*" element={<NotFoundPage/>}/>}
+
                 </Routes>
             </BrowserRouter>
             <Footer/>

@@ -58,6 +58,8 @@ const useAddReview = (id) => {
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
+            } else if (res?.status === 401) {
+                toast("You are not logged in, please login first", {type: 'error', toastId: 'addReviewLogin'})
             } else if (res?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',
