@@ -44,7 +44,7 @@ export const useGetCoupons = () => {
     }, [coupons, loading])
 
     return {
-        coupons: coupons?.data?.data?.coupons,
+        coupons: coupons?.data?.data,
         loading,
         error,
         pageCount: coupons?.data?.paginationRes?.pages || 0,
