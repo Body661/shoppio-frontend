@@ -21,17 +21,17 @@ const ForgetPasswordPage = () => {
                     className="my-3 mb-3 b-radius-10"
                 />
 
-                <Button type="submit" variant="dark" onClick={handleSubmit} className="mb-3 btn-login w-100 b-radius-10">
+                <Button type="submit" variant="dark" onClick={handleSubmit}
+                        className="mb-3 btn-login w-100 b-radius-10">
                     Send code
                 </Button>
 
+                {isSubmitted && (
+                    <div className="d-flex justify-content-center">
+                        {loading && <Spinner animation="border" role="primary"/>}
+                    </div>
+                )}
             </Form>
-
-            {isSubmitted && (
-                <div className="d-flex justify-content-center">
-                    {loading && <Spinner animation="border" role="primary"/>}
-                </div>
-            )}
         </Container>
     );
 };

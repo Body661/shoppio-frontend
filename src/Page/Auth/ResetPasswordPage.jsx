@@ -1,4 +1,4 @@
-import {Button, Container, Form, FormControl} from 'react-bootstrap';
+import {Button, Container, Form, FormControl, Spinner} from 'react-bootstrap';
 import useResetPassword from '../../hook/auth/useResetPassword';
 import logo from "../../images/logo.png";
 
@@ -9,7 +9,9 @@ const ResetPasswordPage = () => {
         handleChangePassword,
         handleChangePasswordConfirm,
         handleSubmit,
-        validated
+        validated,
+        isSubmitted,
+        loading
     } = useResetPassword();
 
     return (
@@ -42,6 +44,12 @@ const ResetPasswordPage = () => {
                 <Button type="submit" variant="dark" onClick={handleSubmit} className="mb-3 btn-login w-100 b-radius-10">
                     Submit
                 </Button>
+
+                {isSubmitted && (
+                    <div className="d-flex justify-content-center">
+                        {loading && <Spinner animation="border" role="primary"/>}
+                    </div>
+                )}
             </Form>
         </Container>
     );

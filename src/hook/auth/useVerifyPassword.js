@@ -10,6 +10,7 @@ const useVerifyPassword = () => {
     const navigate = useNavigate();
     const [code, setCode] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [validated, setValidated] = useState(false);
 
     const handleChangeCode = (e) => {
@@ -32,8 +33,10 @@ const useVerifyPassword = () => {
         }
 
         setLoading(true);
+        setIsSubmitted(true)
         await dispatch(verifyPassword({code}));
         setLoading(false);
+        setIsSubmitted(false)
     };
 
     const res = useSelector((state) => state.authReducer.verifyPassword);
@@ -56,7 +59,7 @@ const useVerifyPassword = () => {
         }
     }, [loading, res]);
 
-    return {code, handleChangeCode, handleSubmit, validated};
+    return {code, handleChangeCode, handleSubmit, validated, loading, isSubmitted};
 };
 
 export default useVerifyPassword;

@@ -1,9 +1,9 @@
-import {Button, Container, Form, FormControl} from 'react-bootstrap';
+import {Button, Container, Form, FormControl, Spinner} from 'react-bootstrap';
 import useVerifyPassword from '../../hook/auth/useVerifyPassword';
 import logo from "../../images/logo.png";
 
 const VerifyPasswordPage = () => {
-    const {code, handleChangeCode, handleSubmit, validated} = useVerifyPassword();
+    const {code, handleChangeCode, handleSubmit, validated, loading, isSubmitted} = useVerifyPassword();
 
     return (
         <Container style={{minHeight: "80vh"}} className="d-flex align-items-center justify-content-center">
@@ -25,6 +25,12 @@ const VerifyPasswordPage = () => {
                 <Button type="submit" variant="dark" onClick={handleSubmit} className="mb-3 btn-login w-100 b-radius-10">
                     Submit
                 </Button>
+
+                {isSubmitted && (
+                    <div className="d-flex justify-content-center">
+                        {loading && <Spinner animation="border" role="primary"/>}
+                    </div>
+                )}
             </Form>
         </Container>
     )

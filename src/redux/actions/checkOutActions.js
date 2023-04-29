@@ -1,6 +1,6 @@
 import {CREATE_CASH_ORDER, CREATE_ORDER_ONLINE} from '../types'
 import {useInsertData} from '../../customHooks/useInsertData'
-import {useGetDataToken} from "../../customHooks/useGetData";
+import {useGetDataToken, useGetDataTokenWithBody} from "../../customHooks/useGetData";
 
 export const createOrderCash = (id, body) => async (dispatch) => {
     try {
@@ -19,7 +19,7 @@ export const createOrderCash = (id, body) => async (dispatch) => {
 }
 export const createOrderOnline = (id, body) => async (dispatch) => {
     try {
-        const response = await useGetDataToken(`/order/checkout/${id}`, body);
+        const response = await useInsertData(`/order/checkout/${id}`, body);
         dispatch({
             type: CREATE_ORDER_ONLINE,
             payload: response,

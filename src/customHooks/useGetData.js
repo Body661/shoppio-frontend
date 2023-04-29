@@ -1,7 +1,7 @@
 import baseURL from "../Api/axiosConfig";
 
 export const useGetData = async (url, params) => {
-   return await baseURL.get(url, params)
+    return await baseURL.get(url, params)
 }
 
 export const useGetDataToken = async (url) => {

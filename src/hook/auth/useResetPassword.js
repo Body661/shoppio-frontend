@@ -11,6 +11,7 @@ const useResetPassword = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [loading, setLoading] = useState(true);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [email, setEmail] = useState(localStorage.getItem('user-email'));
     const [validated, setValidated] = useState(false);
 
@@ -43,7 +44,9 @@ const useResetPassword = () => {
         }
 
         setLoading(true);
+        setIsSubmitted(true)
         await dispatch(resetPassword({email, password}));
+        setIsSubmitted(false)
         setLoading(false);
     };
     const res = useSelector((state) => state.authReducer.resetPassword);
@@ -74,7 +77,8 @@ const useResetPassword = () => {
         handleChangePasswordConfirm,
         handleSubmit,
         loading,
-        validated
+        validated,
+        isSubmitted
     };
 };
 

@@ -39,7 +39,7 @@ const useOnlinePay = (addressDetails) => {
     useEffect(() => {
         if (!loading && order) {
             if (order && order?.data?.session && order?.status === 200) {
-                window.open(order.data?.session?.url, '_self');
+                window.open(order.data?.session, '_self');
             } else {
                 toast(order?.data?.errors ? order?.data?.errors[0]?.msg : 'Error while adding order, please try again', {
                     type: 'error',

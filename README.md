@@ -38,13 +38,13 @@ The app follows a clear and organized directory structure to ensure maintainabil
 1- Clone the project
 
 ```bash
-  git clone https://github.com/Body661/e-commerce-frontend.git
+  git clone https://github.com/Body661/shoppio-frontend.git
 ```
 
 2- Go to the project directory
 
 ```bash
-  cd e-commerce-frontend
+  cd shoppio-frontend
 ```
 
 3- Install dependencies
