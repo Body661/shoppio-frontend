@@ -2,11 +2,11 @@ import {
     CREATE_NEW_USER,
     RESET_PASSWORD,
     VERIFY_PASSWORD,
-    FORGET_PASSWORD,
     GET_CURRENT_USER,
     LOGIN_USER,
     UPDATE_USER_PASSWORD,
-    UPDATE_USER_PROFILE
+    UPDATE_USER_PROFILE,
+    FORGOT_PASSWORD
 } from '../types'
 import {useInsertData} from "../../customHooks/useInsertData";
 import {useGetDataToken} from "../../customHooks/useGetData";
@@ -45,9 +45,9 @@ export const getLoggedUser = () => async (dispatch) => {
 export const forgotPassword = (data) => async (dispatch) => {
     try {
         const response = await useInsertData(`/auth/forgot-password`, data);
-        dispatch({ type: FORGET_PASSWORD, payload: response })
+        dispatch({ type: FORGOT_PASSWORD, payload: response })
     } catch (error) {
-        dispatch({ type: FORGET_PASSWORD, payload: error.response  })
+        dispatch({ type: FORGOT_PASSWORD, payload: error.response  })
     }
 }
 

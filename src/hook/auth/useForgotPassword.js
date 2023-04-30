@@ -47,14 +47,14 @@ const useForgotPassword = () => {
                     navigate('/user/verify-code');
                 }, 1000);
             } else if (res?.status === 400) {
-                toast("Email doesn't exist", {type: 'error', toastId: 'forgetEmailNotExist'})
+                toast("Email doesn't exist", {type: 'error', toastId: 'forgotEmailNotExist'})
                 localStorage.removeItem('user-email');
             } else if (res?.status === 429) {
-                toast("Too many requests, try again after 1 hour", {type: 'error', toastId: 'forgetManyReqs'})
+                toast("Too many requests, try again after 1 hour", {type: 'error', toastId: 'forgotManyReqs'})
             } else {
                 toast(res?.data?.errors ? res?.data?.errors?.[0]?.msg : 'Something went wrong, try again later', {
                     type: 'error',
-                    toastId: 'forgetAnother'
+                    toastId: 'forgotAnother'
                 })
             }
         }

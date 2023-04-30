@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action) => {
             return { ...state, loginUser: action.payload };
         case types.GET_CURRENT_USER:
             return { ...state, currentUser: action.payload };
-        case types.FORGET_PASSWORD:
+        case types.FORGOT_PASSWORD:
             return { ...state, forgotPassword: action.payload };
         case types.VERIFY_PASSWORD:
             return { ...state, verifyPassword: action.payload };

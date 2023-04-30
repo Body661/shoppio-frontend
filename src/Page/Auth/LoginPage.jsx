@@ -44,7 +44,7 @@ const LoginPage = () => {
                     Login
                 </Button>
 
-                <Link to="/user/forget-password" className="mb-3">
+                <Link to="/user/forgot-password" className="mb-3">
                     Forgot password?
                 </Link>
 

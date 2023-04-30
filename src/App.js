@@ -55,7 +55,6 @@ function App() {
 
     useEffect(() => {
         setDecodingToken(true);
-
         if (decodedToken && !isExpired && decodedToken?.role) {
             if (decodedToken?.role === "admin") {
                 setIsAdmin(true)
