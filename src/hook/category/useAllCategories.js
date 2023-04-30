@@ -23,7 +23,7 @@ export const useAllCategories = () => {
     }
 
     const categories = useSelector(state => state.categoryReducer.categories)
-    let pageCount = categories?.data?.paginationRes?.pages || 0;
+    let pageCount = categories?.data?.pagination?.pages || 0;
 
     useEffect(() => {
         if (categories && categories?.status !== 200 && !loading) {

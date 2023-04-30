@@ -12,6 +12,7 @@ import cartReducer from "./cartReducer";
 import orderReducer from "./orderReducer";
 import checkoutReducer from "./checkOutReducer";
 import userManagementReducer from "./userManagementReducer";
+import searchReducer from "./searchReducer";
 
 export default combineReducers({
     categoryReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
     cartReducer,
     orderReducer,
     checkoutReducer,
-    userManagementReducer
+    userManagementReducer,
+    searchReducer
 })

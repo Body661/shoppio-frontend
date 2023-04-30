@@ -5,19 +5,18 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 
 const useUpdateBrand = (brandId) => {
-
-    const [loadingFetch, setLoadingFetch] = useState(true)
-    const [loadingUpdate, setLoadingUpdate] = useState(true)
-    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [loadingFetch, setLoadingFetch] = useState(true);
+    const [loadingUpdate, setLoadingUpdate] = useState(true);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
-    const [img, setImg] = useState(null)
-    const [name, setName] = useState('')
+    const [img, setImg] = useState(null);
+    const [name, setName] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const handleNameChange = event => setName(event.target.value);
+    const handleNameChange = (event) => setName(event.target.value);
 
-    const handleImageChange = event => {
+    const handleImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             setImg(URL.createObjectURL(event.target.files[0]));
             setSelectedFile(event.target.files[0]);
@@ -32,50 +31,53 @@ const useUpdateBrand = (brandId) => {
         return new File([data], Math.random() + ".png", metadata);
     };
 
+    // Fetch brand data on component mount
     useEffect(() => {
         const fetchBrandData = async () => {
-            setLoadingFetch(true)
+            setLoadingFetch(true);
             await dispatch(getBrand(brandId));
-            setLoadingFetch(false)
-        }
+            setLoadingFetch(false);
+        };
 
-        fetchBrandData()
-    }, [brandId, dispatch])
+        fetchBrandData();
+    }, [brandId, dispatch]);
 
-    const brand = useSelector(state => state.brandReducer.brand)
+    const brand = useSelector((state) => state.brandReducer.brand);
 
+    // Set form values based on fetched brand data
     useEffect(() => {
         if (!loadingFetch) {
             if (brand && brand?.status === 200) {
-                setName(brand?.data?.data?.name)
-                setImg(brand?.data?.data?.img)
+                setName(brand?.data?.data?.name);
+                setImg(brand?.data?.data?.img);
 
                 const solveImgPromise = async () => {
                     let imgPromise;
-                    imgPromise = Promise.resolve(convertURLtoFile(brand?.data?.data?.img, Math.random() + ".png"));
+                    imgPromise = Promise.resolve(
+                        convertURLtoFile(brand?.data?.data?.img, Math.random() + ".png")
+                    );
                     const brandImg = await imgPromise;
                     setSelectedFile(brandImg);
-                }
+                };
 
-                solveImgPromise()
-
+                solveImgPromise();
             } else {
-                toast("Something went wrong, please try again later", {type: "error"})
+                toast("Something went wrong, please try again later", {type: "error"});
                 setTimeout(() => {
-                    navigate('/admin/brands')
-                }, 1500)
+                    navigate("/admin/brands");
+                }, 1500);
             }
         }
-    }, [loadingFetch, brand])
+    }, [loadingFetch, brand, navigate]);
 
-    const handleSubmit = async event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const formData = new FormData();
-        formData.append('name', name);
+        formData.append("name", name);
 
         if (selectedFile) {
-            formData.append('img', selectedFile);
+            formData.append("img", selectedFile);
         }
 
         setLoadingUpdate(true);
@@ -85,25 +87,43 @@ const useUpdateBrand = (brandId) => {
         setIsSubmitted(false);
     };
 
-    const updateBrandRes = useSelector(state => state.brandReducer.updateBrand);
+    const updateBrandRes = useSelector((state) => state.brandReducer.updateBrand);
 
+    // Display toast and navigate to the admin brands page after successful update
     useEffect(() => {
         if (updateBrandRes && !loadingUpdate) {
             if (updateBrandRes?.status === 200) {
-                toast('Brand updated successfully', {type: 'success', toastId: 'updateBrandSuccess'});
-                setTimeout(() => {
-                    navigate('/admin/brands')
-                }, 1000)
-            } else {
-                toast(updateBrandRes?.data?.errors ? updateBrandRes?.data?.errors[0]?.msg : 'Error while updating the brand', {
-                    type: 'error',
-                    toastId: 'updateBrandError'
+                toast("Brand updated successfully", {
+                    type: "success",
+                    toastId: "updateBrandSuccess",
                 });
+                setTimeout(() => {
+                    navigate("/admin/brands");
+                }, 1000);
+            } else {
+                toast(
+                    updateBrandRes?.data?.errors
+                        ? updateBrandRes?.data?.errors[0]?.msg
+                        : "Error while updating the brand",
+                    {
+                        type: "error",
+                        toastId: "updateBrandError",
+                    }
+                );
             }
         }
-    }, [updateBrandRes, loadingUpdate]);
+    }, [updateBrandRes, loadingUpdate, navigate]);
 
-    return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isSubmitted, loadingFetch}
-}
+    return {
+        name,
+        img,
+        handleNameChange,
+        handleSubmit,
+        handleImageChange,
+        loadingUpdate,
+        isSubmitted,
+        loadingFetch,
+    };
+};
 
-export default useUpdateBrand
+export default useUpdateBrand;

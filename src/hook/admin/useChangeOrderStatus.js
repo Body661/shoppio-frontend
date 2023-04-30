@@ -38,7 +38,7 @@ const useChangeOrderStatus = (id) => {
     useEffect(() => {
         if (!loadingPay && changePayRes) {
             if (changePayRes.status === 200) {
-                toast("OrderCard pay status changed successfully", {type: 'success'})
+                toast("Order pay status changed successfully", {type: 'success'})
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);

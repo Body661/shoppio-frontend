@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {ToastContainer} from "react-toastify";
 import HomePage from "./Page/Home/HomePage";
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NavBar from "./Components/Utility/NavBar";
 import Footer from "./Components/Utility/Footer";
 import LoginPage from './Page/Auth/LoginPage';
@@ -23,7 +23,7 @@ import UserFavoritesPage from "./Page/User/UserFavoritesPage";
 import UserAddAddressPage from './Page/User/Address/UserAddAddressPage';
 import UserProfilePage from "./Page/User/UserProfilePage";
 import AdminEditProductsPage from "./Page/Admin/Product/EditProductPage";
-import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
+import ForgotPasswordPage from "./Page/Auth/ForgotPasswordPage";
 import VerifyPasswordPage from "./Page/Auth/VerifyPasswordResetCode";
 import ResetPasswordPage from "./Page/Auth/ResetPasswordPage";
 import AddCouponPage from "./Page/Admin/Coupon/AddCouponPage";
@@ -69,7 +69,7 @@ function App() {
                 localStorage.removeItem("token")
                 localStorage.removeItem("user")
             }
-        } else if (localStorage.getItem("token") && isExpired || decodedToken?.role) {
+        } else if ((localStorage.getItem("token") && isExpired) || decodedToken?.role) {
             localStorage.removeItem("token")
             localStorage.removeItem("user")
         }
@@ -99,7 +99,7 @@ function App() {
                         <Route>
                             <Route path="/register" element={<RegisterPage/>}/>
                             <Route path="/login" element={<LoginPage/>}/>
-                            <Route path="/user/forget-password" element={<ForgetPasswordPage/>}/>
+                            <Route path="/user/forgot-password" element={<ForgotPasswordPage/>}/>
                             <Route path="/user/verify-code" element={<VerifyPasswordPage/>}/>
                             <Route path="/user/reset-password" element={<ResetPasswordPage/>}/>
                         </Route>

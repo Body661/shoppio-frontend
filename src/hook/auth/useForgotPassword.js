@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {forgetPassword} from '../../redux/actions/authActions';
+import {forgotPassword} from '../../redux/actions/authActions';
 import {useNavigate} from 'react-router-dom';
 import validator from 'validator/es';
 import {toast} from "react-toastify";
 
-const useForgetPassword = () => {
+const useForgotPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -32,12 +32,12 @@ const useForgetPassword = () => {
 
         localStorage.setItem('user-email', email);
         setIsSubmitted(true)
-        await dispatch(forgetPassword({email}));
+        await dispatch(forgotPassword({email}));
         setLoading(false);
         setIsSubmitted(false)
     };
 
-    const res = useSelector((state) => state.authReducer.forgetPassword);
+    const res = useSelector((state) => state.authReducer.forgotPassword);
 
     useEffect(() => {
         if (!loading) {
@@ -63,4 +63,4 @@ const useForgetPassword = () => {
     return {email, handleChangeEmail, handleSubmit, loading, isSubmitted, validated};
 };
 
-export default useForgetPassword;
+export default useForgotPassword;

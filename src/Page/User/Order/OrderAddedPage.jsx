@@ -2,8 +2,6 @@ import {Container, Row} from 'react-bootstrap'
 import {useParams} from "react-router-dom";
 
 const UserOrderPage = () => {
-    const {id} = useParams();
-
     return (
         <Container style={{minHeight: "80vh"}}
                    className='d-flex flex-column align-items-center justify-content-center'>

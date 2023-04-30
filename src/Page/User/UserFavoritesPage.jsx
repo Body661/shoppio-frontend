@@ -17,7 +17,7 @@ const UserFavoritesPage = () => {
             setLoading(false)
         }
         get()
-    }, [])
+    }, [dispatch])
 
     const res = useSelector(state => state.wishlistReducer.allWishList)
 
@@ -25,7 +25,7 @@ const UserFavoritesPage = () => {
         if (loading === false) {
             if (res) setItems(res?.data?.data)
         }
-    }, [loading])
+    }, [loading, res])
 
     return (
         <Container style={{minHeight: "80vh"}}>

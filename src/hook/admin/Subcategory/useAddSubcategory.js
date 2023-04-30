@@ -64,7 +64,7 @@ const useAddSubcategory = () => {
                 });
             }
         }
-    }, [loading, subcategory]);
+    }, [loading, subcategory, navigate]);
 
     return {id, name, loading, categories, subcategory, handleChangeCategory, handleSubmit, handleChangeName, isSubmitted};
 };

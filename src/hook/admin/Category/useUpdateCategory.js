@@ -40,7 +40,7 @@ const useUpdateCategory = (categoryId) => {
         }
 
         fetchCategoryData()
-    }, [])
+    }, [dispatch])
 
     const category = useSelector(state => state.categoryReducer.category)
 
@@ -66,7 +66,7 @@ const useUpdateCategory = (categoryId) => {
                 }, 1500)
             }
         }
-    }, [loading, category])
+    }, [loading, category, navigate])
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -101,7 +101,7 @@ const useUpdateCategory = (categoryId) => {
                 });
             }
         }
-    }, [updateCategoryRes, loadingUpdate]);
+    }, [updateCategoryRes, loadingUpdate, navigate]);
 
     return {name, img, handleNameChange, handleSubmit, handleImageChange, loadingUpdate, isSubmitted, loading}
 }

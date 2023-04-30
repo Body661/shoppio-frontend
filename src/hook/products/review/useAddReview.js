@@ -2,9 +2,11 @@ import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {createReview} from '../../../redux/actions/reviewActions';
 import {toast} from 'react-toastify';
+import {useJwt} from "react-jwt";
 
 const useAddReview = (id) => {
     const dispatch = useDispatch();
+    const {decodedToken, isExpired} = useJwt(localStorage.getItem("user"));
     const [formData, setFormData] = useState({
         review: '',
         reviewTitle: '',
@@ -21,8 +23,7 @@ const useAddReview = (id) => {
     };
 
     const getUser = () => {
-        const user = localStorage.getItem('user');
-        return user ? JSON.parse(user) : null;
+        return decodedToken && !isExpired ? decodedToken?.user : null;
     };
 
     const user = getUser();

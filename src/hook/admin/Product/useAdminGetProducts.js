@@ -28,7 +28,7 @@ const useAdminGetProducts = () => {
         }
 
         fetchData()
-    }, [searchTerm])
+    }, [searchTerm, dispatch])
 
     const handleChangePage = async (page) => {
         setLoading(true)
@@ -49,7 +49,7 @@ const useAdminGetProducts = () => {
 
     return {
         products: allProducts?.data?.data,
-        pagination: allProducts?.data.paginationRes?.pages,
+        pagination: allProducts?.data.pagination?.pages,
         handleChangePage,
         loading,
         error,

@@ -2,25 +2,26 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReviewOnProduct } from '../../../redux/actions/reviewActions';
 import { toast } from 'react-toastify';
+import {useJwt} from "react-jwt";
 
 const useDeleteReview = (review) => {
     const dispatch = useDispatch();
     const [isUser, setIsUser] = useState(false);
     const [loading, setLoading] = useState(true);
     const [showDelete, setShowDelete] = useState(false);
+    const {decodedToken, isExpired} = useJwt(localStorage.getItem("user"));
 
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
 
     const getUser = () => {
-        const user = localStorage.getItem('user');
-        return user ? JSON.parse(user) : null;
+        return decodedToken && !isExpired ? decodedToken : null;
     };
 
     const user = getUser();
 
     useEffect(() => {
-        if (review?.user?._id === user?._id) {
+        if (review?.user?._id === user?.user?._id) {
             setIsUser(true);
         }
     }, [review, user]);

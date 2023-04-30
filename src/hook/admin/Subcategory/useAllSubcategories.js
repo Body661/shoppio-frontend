@@ -50,7 +50,7 @@ export const useAllSubcategories = () => {
         subcategories: subcategories?.data?.data,
         loading,
         error,
-        pageCount: subcategories?.data?.paginationRes?.pages,
+        pageCount: subcategories?.data?.pagination?.pages,
         handleChangePage,
         handleSearch,
         handleChangeCategory

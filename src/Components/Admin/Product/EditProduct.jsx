@@ -12,8 +12,8 @@ const AdminEditProducts = () => {
     const {id} = useParams();
 
     const {
-        CatID,
-        BrandID,
+        categoryId,
+        brandId,
         handleChangeDescription,
         handleChangeQuantity,
         handleChangeColor,
@@ -23,7 +23,7 @@ const AdminEditProducts = () => {
         showColor,
         category,
         brand,
-        priceAfter,
+        priceAfterDiscount,
         images,
         setImages,
         onSelect,
@@ -35,14 +35,14 @@ const AdminEditProducts = () => {
         handleSubmit,
         handleChangeBrand,
         colors,
-        priceBefore,
+        priceBeforeDiscount,
         quantity,
-        prodDescription,
-        prodName,
+        productDescription,
+        productName,
         loading,
         isSubmitted,
         loadingFetchData,
-        selectedSubID,
+        selectedSubcategoryId,
         currentProductName
     } =
         useEditProduct(id);
@@ -75,7 +75,7 @@ const AdminEditProducts = () => {
                         />
 
                         <FormControl
-                            value={prodName}
+                            value={productName}
                             onChange={handleChangeProductName}
                             type="text"
                             className="input-form d-block mt-3 px-3"
@@ -86,21 +86,21 @@ const AdminEditProducts = () => {
                             rows="4"
                             cols="50"
                             placeholder="Product description"
-                            value={prodDescription}
+                            value={productDescription}
                             onChange={handleChangeDescription}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Price before discount"
-                            value={priceBefore}
+                            value={priceBeforeDiscount}
                             onChange={handleChangePrice}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3"
                             placeholder="Price after discount"
-                            value={priceAfter}
+                            value={priceAfterDiscount}
                             onChange={handleChangePriceAfterDiscount}
                         />
                         <FormControl
@@ -113,7 +113,7 @@ const AdminEditProducts = () => {
 
                         <FormSelect
                             name="cat"
-                            value={CatID}
+                            value={categoryId}
                             onChange={handleChangeCategory}
                             className="mt-3 px-2 ">
                             <option value="0">Select category</option>
@@ -131,12 +131,12 @@ const AdminEditProducts = () => {
                             onSelect={onSelect}
                             onRemove={onRemove}
                             displayValue="name"
-                            selectedValues={selectedSubID}
+                            selectedValues={selectedSubcategoryId}
                         />
 
                         <FormSelect
                             name="brand"
-                            value={BrandID}
+                            value={brandId}
                             onChange={handleChangeBrand}
                             className="mt-3 px-2 ">
                             <option>Select Brand</option>

@@ -28,16 +28,28 @@ const useAddAddress = () => {
     const handleSubmit = async () => {
         const {alias, street, postalCode, phone, city, country} = address;
 
-        if (
-            alias.trim() === '' ||
-            street.trim() === '' ||
-            !validator.isPostalCode(postalCode, 'NL') ||
-            !validator.isMobilePhone(phone) ||
-            city.trim() === '' ||
-            country.trim() === ''
-        ) {
-            toast("Please fill in all information and make sure that's it correct", {type: 'error'});
-            return;
+        if(alias.trim() === ''){
+            return  toast("Please fill in your address alias", {type: 'error'});
+        }
+
+        if(street.trim() === ''){
+            return toast("Please fill in your street and house number", {type: 'error'});
+        }
+
+        if(!validator.isPostalCode(postalCode, 'NL')){
+            return  toast("Postal code is wrong", {type: 'error'});
+        }
+
+        if(!validator.isMobilePhone(phone)){
+            return toast("Mobile phone is wrong", {type: 'error'});
+        }
+
+        if(city.trim() === ''){
+            return toast("Please enter your city", {type: 'error'});
+        }
+
+        if(country.trim() === ''){
+            return  toast("Please enter your country", {type: 'error'});
         }
 
         setLoading(true);

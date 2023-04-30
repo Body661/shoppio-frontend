@@ -1,9 +1,9 @@
 import {Container, Spinner, Form, FormControl, Button} from 'react-bootstrap';
-import useForgetPassword from "../../hook/auth/useForgetPassword";
+import useForgotPassword from "../../hook/auth/useForgotPassword";
 import logo from "../../images/logo.png";
 
-const ForgetPasswordPage = () => {
-    const {email, handleChangeEmail, handleSubmit, loading, isSubmitted, validated} = useForgetPassword();
+const ForgotPasswordPage = () => {
+    const {email, handleChangeEmail, handleSubmit, loading, isSubmitted, validated} = useForgotPassword();
 
     return (
         <Container style={{minHeight: "80vh"}} className="d-flex align-items-center justify-content-center">
@@ -36,4 +36,4 @@ const ForgetPasswordPage = () => {
     );
 };
 
-export default ForgetPasswordPage;
+export default ForgotPasswordPage;

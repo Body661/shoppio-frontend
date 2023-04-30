@@ -12,7 +12,7 @@ const CartCheckout = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoupo
         if (AppliedCouponName) {
             handleChangeCoupon(AppliedCouponName);
         }
-    }, [AppliedCouponName]);
+    }, [AppliedCouponName, handleChangeCoupon]);
 
     return (
         <Row className='my-1 d-flex justify-content-center p-2'>

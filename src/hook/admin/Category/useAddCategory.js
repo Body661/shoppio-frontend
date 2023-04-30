@@ -10,7 +10,7 @@ const useAddCategory = () => {
     const [img, setImg] = useState(addImg);
     const [name, setName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate()
 
@@ -26,8 +26,13 @@ const useAddCategory = () => {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        if (!name.trim() || !selectedFile) {
-            toast('Please fill in all required information', {type: 'error'})
+        if (!name.trim()) {
+            toast('Category name', {type: 'error'})
+            return;
+        }
+
+        if (!selectedFile) {
+            toast('Category image is required', {type: 'error'})
             return;
         }
 
@@ -58,7 +63,7 @@ const useAddCategory = () => {
                 });
             }
         }
-    }, [addCategoryRes, loading]);
+    }, [addCategoryRes, loading, navigate]);
 
     return {
         img,

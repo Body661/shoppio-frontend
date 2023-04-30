@@ -6,7 +6,6 @@ const useGetOrderDetails = (id) => {
     const [loading, setLoading] = useState(true);
     const [orderData, setOrderData] = useState(null);
     const dispatch = useDispatch()
-
     const get = async () => {
         setLoading(true)
         await dispatch(getOrderDetails(id))
@@ -15,7 +14,7 @@ const useGetOrderDetails = (id) => {
 
     useEffect(() => {
         get()
-    }, [id])
+    }, [id, dispatch])
 
     const order = useSelector(state => state.orderReducer.orderDetails)
 

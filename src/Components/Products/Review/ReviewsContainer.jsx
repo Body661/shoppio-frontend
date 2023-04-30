@@ -33,7 +33,7 @@ const ReviewsContainer = ({reviewsAmount}) => {
                 <Col sm={12} className="mt-2">
                     {content}
 
-                    {reviews?.data?.paginationRes?.pages > 1 && (<Pagination pageCount={reviews?.data?.paginationRes.pages || 0} handleChangePage={handleChangePage}/>)}
+                    {reviews?.data?.pagination?.pages > 1 && (<Pagination pageCount={reviews?.data?.pagination.pages || 0} handleChangePage={handleChangePage}/>)}
                 </Col>
             </Row>
 

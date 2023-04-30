@@ -2,14 +2,14 @@ import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {getProductsByCategory} from "../../redux/actions/productActions";
 
-const useProductsByCategory = (catID) => {
+const useProductsByCategory = (categoryId) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(true)
 
     const getProduct = async () => {
         setLoading(true)
-        await dispatch(getProductsByCategory('', 50, catID))
+        await dispatch(getProductsByCategory('', 50, categoryId))
         setLoading(false)
     }
 
@@ -19,7 +19,7 @@ const useProductsByCategory = (catID) => {
 
     //when click pagination
     const handleChangePage = async (page) => {
-        await dispatch(getProductsByCategory(page, 50, catID))
+        await dispatch(getProductsByCategory(page, 50, categoryId))
     }
 
     const products = useSelector((state) => state.productReducer.productsByCategory)
@@ -33,7 +33,7 @@ const useProductsByCategory = (catID) => {
         setLoading(false);
     }, [products, loading])
 
-    return {items: products?.data?.data, pagination: products?.data?.paginationRes?.pages, handleChangePage, loading, error}
+    return {items: products?.data?.data, pagination: products?.data?.pagination?.pages, handleChangePage, loading, error}
 }
 
 export default useProductsByCategory

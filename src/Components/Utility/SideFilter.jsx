@@ -5,6 +5,7 @@ import FormCheckInput from "react-bootstrap/FormCheckInput";
 import {FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import {Backdrop, CircularProgress} from "@mui/material";
 import useSearch from "../../hook/products/useSearch";
+import {useSelector} from "react-redux";
 
 const SideFilter = () => {
     const {
@@ -14,6 +15,8 @@ const SideFilter = () => {
         handleClickBrand,
         loading
     } = useSidebarSearch();
+
+    const searchParams = useSelector((state) => state.searchReducer.searchParams);
 
     const {toggleSidebar, broken} = useProSidebar();
 
@@ -29,7 +32,8 @@ const SideFilter = () => {
         category.map((item, index) => (
             <div key={index} className="d-flex mt-3">
                 <FormLabel>
-                    <FormCheckInput onChange={handleClickCategory} type="checkbox" value={item._id}/> {item.name}
+                    <FormCheckInput onChange={handleClickCategory} type="checkbox" value={item._id}
+                                    checked={searchParams?.checkedCategory?.includes(item?._id)}/> {item.name}
                 </FormLabel>
             </div>
         ));
@@ -38,7 +42,8 @@ const SideFilter = () => {
         brand.map((item, index) => (
             <div key={index} className="d-flex mt-3">
                 <FormLabel>
-                    <FormCheckInput onChange={handleClickBrand} type="checkbox" value={item._id}/> {item.name}
+                    <FormCheckInput onChange={handleClickBrand} type="checkbox" value={item._id}
+                                    checked={searchParams?.checkedBrand?.includes(item?._id)}/> {item.name}
                 </FormLabel>
             </div>
         ));
@@ -70,7 +75,7 @@ const SideFilter = () => {
                         <hr/>
                         <div className="d-flex mt-3">
                             <FormLabel>
-                                <FormCheckInput onChange={handleClickCategory} type="checkbox" value={0}/> All
+                                <FormCheckInput onChange={handleClickCategory} type="checkbox" value={''}/> All
                             </FormLabel>
                         </div>
                         {category ? renderCategoryOptions() : <h6>No categories found</h6>}
@@ -81,7 +86,7 @@ const SideFilter = () => {
                         <hr/>
                         <div className="d-flex mt-3">
                             <FormLabel>
-                                <FormCheckInput onChange={handleClickBrand} type="checkbox" value={0}/> All
+                                <FormCheckInput onChange={handleClickBrand} type="checkbox" value={''}/> All
                             </FormLabel>
                         </div>
                         {brand ? renderBrandOptions() : <h6>No brands found</h6>}

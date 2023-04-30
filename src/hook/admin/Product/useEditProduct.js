@@ -7,19 +7,20 @@ import {updateProduct} from '../../../redux/actions/productActions';
 import {getSubcategoriesOfCategory} from "../../../redux/actions/SubcategoryActions";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import validator from "validator/es";
 
 const useEditProduct = (id) => {
     const navigate = useNavigate();
     const [options, setOptions] = useState([]);
-    const [images, setImages] = useState([]);
-    const [prodName, setProdName] = useState('');
-    const [prodDescription, setProdDescription] = useState('');
-    const [priceBefore, setPriceBefore] = useState(0);
-    const [priceAfter, setPriceAfter] = useState(0);
+    const [images, setImages] = useState({});
+    const [productName, setProductName] = useState('');
+    const [productDescription, setProductDescription] = useState('');
+    const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
+    const [priceAfterDiscount, setPriceAfterDiscount] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [CatID, setCatID] = useState('');
-    const [BrandID, setBrandID] = useState('');
-    const [selectedSubID, setSelectedSubID] = useState([]);
+    const [categoryId, setCategoryId] = useState('');
+    const [brandId, setBrandId] = useState('');
+    const [selectedSubcategoryId, setSelectedSubcategoryId] = useState([]);
     const [showColor, setShowColor] = useState(false);
     const [colors, setColors] = useState([]);
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const useEditProduct = (id) => {
 
         fetchData();
 
-    }, [id])
+    }, [id, dispatch])
 
     const item = useSelector(state => state.productReducer.product);
     const category = useSelector(state => state.categoryReducer.categories);
@@ -47,50 +48,50 @@ const useEditProduct = (id) => {
     useEffect(() => {
         if (item?.data?.data) {
             setImages(item?.data?.data?.images);
-            setProdName(item?.data?.data?.title);
-            setProdDescription(item?.data?.data?.description);
-            setPriceBefore(item?.data?.data?.price);
-            setPriceAfter(item?.data?.data?.priceAfterDiscount);
+            setProductName(item?.data?.data?.title);
+            setProductDescription(item?.data?.data?.description);
+            setPriceBeforeDiscount(item?.data?.data?.price);
+            setPriceAfterDiscount(item?.data?.data?.priceAfterDiscount);
             setQuantity(item?.data?.data?.quantity);
-            setCatID(item?.data?.data?.category?._id);
-            setBrandID(item?.data?.data?.brand?._id);
+            setCategoryId(item?.data?.data?.category?._id);
+            setBrandId(item?.data?.data?.brand?._id);
             setColors(item?.data?.data?.colors);
-            setSelectedSubID(item?.data?.data?.subcategories)
+            setSelectedSubcategoryId(item?.data?.data?.subcategories)
         }
     }, [item]);
 
     const handleChangeCategory = async (e) => {
         if (e.target.value || e.target.value.trim() !== '') {
             setLoadingFetchData(true)
-            setCatID(e.target.value);
+            setCategoryId(e.target.value);
             await dispatch(getSubcategoriesOfCategory(e.target.value));
             setLoadingFetchData(false)
         }
     };
 
     useEffect(() => {
-        if (CatID) {
-            dispatch(getSubcategoriesOfCategory(CatID));
+        if (categoryId) {
+            dispatch(getSubcategoriesOfCategory(categoryId));
         }
-    }, [CatID, dispatch]);
+    }, [categoryId, dispatch]);
 
     const subcategories = useSelector((state) => state.subcategoryReducer.subcategories);
 
     useEffect(() => {
-        if (CatID) {
+        if (categoryId) {
             setOptions(subcategories?.data?.data);
         }
-    }, [subcategories, CatID]);
+    }, [subcategories, categoryId]);
 
-    const onSelect = (selectedList) => setSelectedSubID(selectedList);
-    const onRemove = (selectedList) => setSelectedSubID(selectedList);
+    const onSelect = (selectedList) => setSelectedSubcategoryId(selectedList);
+    const onRemove = (selectedList) => setSelectedSubcategoryId(selectedList);
 
     const handleChangeProductName = (event) => {
-        setProdName(event.target.value);
+        setProductName(event.target.value);
     };
 
     const handleChangeDescription = (event) => {
-        setProdDescription(event.target.value);
+        setProductDescription(event.target.value);
     };
 
     const handleAddColor = (color) => {
@@ -104,11 +105,11 @@ const useEditProduct = (id) => {
     };
 
     const handleChangePrice = (event) => {
-        setPriceBefore(event.target.value);
+        setPriceBeforeDiscount(event.target.value);
     };
 
     const handleChangePriceAfterDiscount = (event) => {
-        setPriceAfter(event.target.value);
+        setPriceAfterDiscount(event.target.value);
     };
 
     const handleChangeQuantity = (event) => {
@@ -120,7 +121,7 @@ const useEditProduct = (id) => {
     };
 
     const handleChangeBrand = (e) => {
-        setBrandID(e.target.value);
+        setBrandId(e.target.value);
     };
 
     //to convert base 64 to file
@@ -150,16 +151,40 @@ const useEditProduct = (id) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (
-            !CatID ||
-            !prodName ||
-            prodName.trim() === "" ||
-            !prodDescription ||
-            prodDescription.trim() === "" ||
-            images?.length <= 0 ||
-            priceBefore <= 0
-        ) {
-            return toast("Please fill in all information", {type: 'error'});
+        if (Object.keys(images).length === 0) {
+            return toast("Product images are required", {type: 'error'});
+        }
+
+        if (!productName || productName.trim() === "") {
+            return toast("Product name is required", {type: 'error'});
+        }
+
+        if (!productDescription || productDescription.trim() === "") {
+            return toast("Product description is required", {type: 'error'});
+        }
+
+        if(productDescription.length < 20 || productDescription.length > 2000) {
+            return toast("Product description must be between 20 and 2000 characters", {type: 'error'});
+        }
+
+        if (priceBeforeDiscount <= 0) {
+            return toast("Product price is not valid", {type: 'error'});
+        }
+
+        if (priceAfterDiscount >= 0 && (priceAfterDiscount > priceBeforeDiscount)) {
+            return toast("Price before discount must be greater that price after discount", {type: 'error'});
+        }
+
+        if (quantity <= 0) {
+            return toast("Available quantity must be greater than 0", {type: 'error'});
+        }
+
+        if (!validator.isMongoId(categoryId)) {
+            return toast("Please select a category", {type: 'error'});
+        }
+
+        if (!validator.isMongoId(brandId)) {
+            return toast("Please select a brand", {type: 'error'});
         }
 
         const itemImagesPromises = Array.from(Array(Object.keys(images).length).keys()).map((image, index) => {
@@ -184,14 +209,14 @@ const useEditProduct = (id) => {
         ]);
 
         const formData = new FormData();
-        formData.append("title", prodName);
-        formData.append("description", prodDescription);
+        formData.append("title", productName);
+        formData.append("description", productDescription);
         formData.append("quantity", quantity);
-        formData.append("price", priceBefore);
-        formData.append("category", CatID);
-        formData.append("brand", BrandID);
-        if (priceAfter) formData.append("priceAfterDiscount", priceAfter);
-        if (selectedSubID?.length > 0) selectedSubID?.forEach((subcategory) => formData.append("subcategories[]", subcategory._id));
+        formData.append("price", priceBeforeDiscount);
+        formData.append("category", categoryId);
+        formData.append("brand", brandId);
+        if (priceAfterDiscount) formData.append("priceAfterDiscount", priceAfterDiscount);
+        if (selectedSubcategoryId?.length > 0) selectedSubcategoryId?.forEach((subcategory) => formData.append("subcategories[]", subcategory._id));
         if (colors?.length > 0) colors.forEach((color) => formData.append("colors[]", color));
 
         formData.append("cover", imgCover);
@@ -219,11 +244,11 @@ const useEditProduct = (id) => {
                 });
             }
         }
-    }, [loading, updateProductRes]);
+    }, [loading, updateProductRes, navigate]);
 
     return {
-        CatID,
-        BrandID,
+        categoryId,
+        brandId,
         handleChangeDescription,
         handleChangeQuantity,
         handleChangeColor,
@@ -233,7 +258,7 @@ const useEditProduct = (id) => {
         showColor,
         category,
         brand,
-        priceAfter,
+        priceAfterDiscount,
         images,
         setImages,
         onSelect,
@@ -245,14 +270,14 @@ const useEditProduct = (id) => {
         handleSubmit,
         handleChangeBrand,
         colors,
-        priceBefore,
+        priceBeforeDiscount,
         quantity,
-        prodDescription,
-        prodName,
+        productDescription,
+        productName,
         loading,
         isSubmitted,
         loadingFetchData,
-        selectedSubID,
+        selectedSubcategoryId,
         currentProductName: item?.data?.data?.title
     }
 }

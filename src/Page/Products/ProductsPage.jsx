@@ -8,7 +8,7 @@ import {Backdrop, CircularProgress} from "@mui/material";
 
 const ProductsPage = () => {
 
-    const {items, pagination, handleChangePage, getProducts, error, loading} = useSearch();
+    const {items, pagination, handleChangePage, error, loading} = useSearch();
 
     return (
         <div style={{minHeight: "80vh"}}>
@@ -26,7 +26,8 @@ const ProductsPage = () => {
                         <SideFilter/>
                     </Col>
                     <Col sm="11" xs="10" md="8" lg={9}>
-                        <ProductsContainer products={items} loading={loading} error={error} xSmall={12} small={8} medium={6} large={4}/>
+                        <ProductsContainer products={items} loading={loading} error={error} xSmall={12} small={8}
+                                           medium={6} large={4}/>
                     </Col>
                 </Row>
                 {pagination > 1 && <Pagination pageCount={pagination} handleChangePage={handleChangePage}/>}

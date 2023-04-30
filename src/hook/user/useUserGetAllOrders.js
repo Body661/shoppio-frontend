@@ -31,7 +31,7 @@ const useUserGetAllOrders = () => {
 
     useEffect(() => {
         if (!loading) {
-            if (orders?.data?.paginationRes) setPaginate(orders.data.paginationRes);
+            if (orders?.data?.pagination) setPaginate(orders.data.pagination);
             if (orders?.data?.data) setOrdersData(orders.data.data);
         }
     }, [loading, orders]);

@@ -7,16 +7,19 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Favorite, Person, ShoppingCart} from "@mui/icons-material";
 import useSearch from "../../hook/products/useSearch";
+import {useJwt} from "react-jwt";
 
 const NavBar = ({isUser}) => {
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState(null);
     const {handleSearchWord, getSearchParams} = useSearch()
     const {searchWord} = getSearchParams()
+    const {decodedToken, isExpired} = useJwt(localStorage.getItem("user"));
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) setUser(JSON.parse(storedUser));
-    }, []);
+        if (decodedToken && !isExpired) {
+            setUser(decodedToken?.user)
+        }
+    }, [decodedToken, isExpired]);
 
     const logOut = () => {
         localStorage.removeItem('user');

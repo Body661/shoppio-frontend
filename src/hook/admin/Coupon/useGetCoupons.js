@@ -47,7 +47,7 @@ export const useGetCoupons = () => {
         coupons: coupons?.data?.data,
         loading,
         error,
-        pageCount: coupons?.data?.paginationRes?.pages || 0,
+        pageCount: coupons?.data?.pagination?.pages || 0,
         handleChangePage,
         handleSearch
     };

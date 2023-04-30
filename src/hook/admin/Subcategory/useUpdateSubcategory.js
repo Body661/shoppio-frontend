@@ -78,7 +78,7 @@ const useUpdateSubcategory = (id) => {
                 });
             }
         }
-    }, [loadingUpdate, subcategoryUpdateRes]);
+    }, [loadingUpdate, subcategoryUpdateRes, navigate]);
 
     return {categoryId, name, loading, categories, handleChangeCategory, handleSubmit, handleChangeName, isSubmitted, loadingUpdate};
 };

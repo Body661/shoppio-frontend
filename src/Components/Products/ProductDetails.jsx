@@ -2,7 +2,7 @@ import {Row, Col, Button} from 'react-bootstrap'
 import ImageGallery from "react-image-gallery";
 import RightButton from "./Gallery/RightButton";
 import LeftButton from "./Gallery/LeftButton";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import UseAddToCart from "../../hook/user/cart/useAddToCart";
 import {Rating} from "@mui/material";
 import {ShoppingCart} from "@mui/icons-material";
@@ -16,7 +16,6 @@ const ProductDetails = ({product, images}) => {
 
     const {isFav, favImg, handleFav} = UseWishlist(product, isFavProduct)
 
-    const {id} = useParams();
     const {colorClick, indexColor, addToCartHandle} = UseAddToCart(product);
 
     return (<div className="product-details">
@@ -44,7 +43,8 @@ const ProductDetails = ({product, images}) => {
                     {product?.title}
                 </h4>
 
-                <Link to={`/brands/${product?.brand?._id}`} className="xs-black-text d-block mt-2"> Brand: {product?.brand?.name ?? 'unknown'}</Link>
+                <Link to={`/brands/${product?.brand?._id}`}
+                      className="xs-black-text d-block mt-2"> Brand: {product?.brand?.name ?? 'unknown'}</Link>
 
                 <div>
                     {product?.priceAfterDiscount >= 1 ? (<>
@@ -98,7 +98,8 @@ const ProductDetails = ({product, images}) => {
                         <Button onClick={handleFav}
                                 className="btn-outline-dark btn-light b-radius-20 fw-bold flex-grow-1"
                                 style={{transition: "0.5s"}}>
-                            <img src={favImg} width="25px"/> {!isFav ? "Add to wishlist" : "Remove from wishlist"}
+                            <img src={favImg} width="25px"
+                                 alt="Favorite icon"/> {!isFav ? "Add to wishlist" : "Remove from wishlist"}
                         </Button>
                     </Col>
 

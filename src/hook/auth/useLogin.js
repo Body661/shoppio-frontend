@@ -27,7 +27,9 @@ const useLogin = () => {
 
         if (!isEmail(email)) {
             return toast("Please enter a valid email", {type: "error"})
-        } else if (password.trim() === "") {
+        }
+
+        if (password.trim() === "") {
             return toast("Please enter your password", {type: "error"})
         }
 
@@ -45,7 +47,7 @@ const useLogin = () => {
 
                 if (token) {
                     localStorage.setItem('token', token);
-                    localStorage.setItem('user', JSON.stringify(data));
+                    localStorage.setItem('user', data);
                     toast("Logged in successfully", {type: 'success'})
                     setTimeout(() => {
                         window.location.href = '/';

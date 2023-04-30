@@ -41,6 +41,30 @@ const useEditAddress = (address) => {
             return;
         }
 
+        if(addressInfo.alias.trim() === ''){
+            return  toast("Please fill in your address alias", {type: 'error'});
+        }
+
+        if(addressInfo.street.trim() === ''){
+            return toast("Please fill in your street and house number", {type: 'error'});
+        }
+
+        if(!validator.isPostalCode(addressInfo.postalCode, 'NL')){
+            return  toast("Postal code is wrong", {type: 'error'});
+        }
+
+        if(!validator.isMobilePhone(addressInfo.phone)){
+            return toast("Mobile phone is wrong", {type: 'error'});
+        }
+
+        if(addressInfo.city.trim() === ''){
+            return toast("Please enter your city", {type: 'error'});
+        }
+
+        if(addressInfo.country.trim() === ''){
+            return  toast("Please enter your country", {type: 'error'});
+        }
+
         setLoadingUpdateAddress(true);
         setIsSubmittedUpdateAddress(true);
         await dispatch(editUserAddress(address?._id, addressInfo));

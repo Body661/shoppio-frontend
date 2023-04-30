@@ -1,6 +1,5 @@
 import {Button, Col, Modal} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import useDeleteCategory from "../../../hook/admin/Category/useDeleteCategory";
 import {Backdrop, CircularProgress} from "@mui/material";
 import {Delete, Edit} from "@mui/icons-material";
 import useDeleteSubcategory from "../../../hook/admin/Subcategory/useDeleteSubcategory";

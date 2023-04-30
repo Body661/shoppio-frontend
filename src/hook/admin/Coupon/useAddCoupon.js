@@ -26,13 +26,18 @@ const useAddCoupon = () => {
     };
 
     const handleSubmit = async () => {
-        if (couponName.trim() === '' || couponDate.trim() === '' || discount <= 0) {
-            toast('Please fill in all information!', {type: 'error'});
+        if (couponName.trim() === '') {
+            toast('Coupon name is required', {type: 'error'});
             return;
         }
 
-        if (discount > 100) {
-            toast('Discount value is invalid!', {type: 'error'});
+        if ( couponDate.trim() === '' ) {
+            toast('Expiration date is required', {type: 'error'});
+            return;
+        }
+
+        if (discount > 100 || discount <= 0) {
+            toast('Discount value must be between 1 and 100!', {type: 'error'});
             return;
         }
 
@@ -63,7 +68,7 @@ const useAddCoupon = () => {
             }
         }
 
-    }, [loading, addCouponRes])
+    }, [loading, addCouponRes, navigate])
 
     return {
         couponName,

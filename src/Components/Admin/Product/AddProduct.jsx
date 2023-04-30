@@ -18,7 +18,7 @@ const AddProduct = () => {
         showColor,
         category,
         brand,
-        priceAfter,
+        priceAfterDiscount,
         images,
         setImages,
         onSelect,
@@ -30,10 +30,10 @@ const AddProduct = () => {
         handleSubmit,
         handleChangeBrand,
         colors,
-        priceBefore,
+        priceBeforeDiscount,
         quantity,
-        prodDescription,
-        prodName,
+        productDescription,
+        productName,
         loading,
         loadingFetchData,
         isSubmitted
@@ -67,7 +67,7 @@ const AddProduct = () => {
                         />
 
                         <FormControl
-                            value={prodName}
+                            value={productName}
                             onChange={handleChangeProductName}
                             type="text"
                             className="input-form d-block mt-3 px-3 b-radius-10"
@@ -80,21 +80,21 @@ const AddProduct = () => {
                             rows="4"
                             cols="50"
                             placeholder="Product description"
-                            value={prodDescription}
+                            value={productDescription}
                             onChange={handleChangeDescription}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Price before discount"
-                            value={priceBefore}
+                            value={priceBeforeDiscount}
                             onChange={handleChangePrice}
                         />
                         <FormControl
                             type="number"
                             className="input-form d-block mt-3 px-3 b-radius-10"
                             placeholder="Price after discount"
-                            value={priceAfter}
+                            value={priceAfterDiscount}
                             onChange={handleChangePriceAfterDiscount}
                         />
                         <FormControl

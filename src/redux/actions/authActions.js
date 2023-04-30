@@ -42,9 +42,9 @@ export const getLoggedUser = () => async (dispatch) => {
     }
 }
 
-export const forgetPassword = (data) => async (dispatch) => {
+export const forgotPassword = (data) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/auth/forgetpassword`, data);
+        const response = await useInsertData(`/auth/forgot-password`, data);
         dispatch({ type: FORGET_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: FORGET_PASSWORD, payload: error.response  })
@@ -53,7 +53,7 @@ export const forgetPassword = (data) => async (dispatch) => {
 
 export const verifyPassword = (data) => async (dispatch) => {
     try {
-        const response = await useInsertData(`/auth/verifyPassResetCode`, data);
+        const response = await useInsertData(`/auth/verify-password-reset-code`, data);
         dispatch({ type: VERIFY_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: VERIFY_PASSWORD, payload: error.response  })
@@ -62,7 +62,7 @@ export const verifyPassword = (data) => async (dispatch) => {
 
 export const resetPassword = (data) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/auth/resetPassword`, data);
+        const response = await useUpdateData(`/auth/reset-password`, data);
         dispatch({ type: RESET_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: RESET_PASSWORD, payload: error.response  })
@@ -80,7 +80,7 @@ export const updateUserProfileData = (body) => async (dispatch) => {
 
 export const updateUserPassword = (body) => async (dispatch) => {
     try {
-        const response = await useUpdateData(`/users/updateMyPassword`, body);
+        const response = await useUpdateData(`/users/my-password`, body);
         dispatch({ type: UPDATE_USER_PASSWORD, payload: response })
     } catch (error) {
         dispatch({ type: UPDATE_USER_PASSWORD, payload: error.response  })

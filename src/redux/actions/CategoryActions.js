@@ -22,7 +22,7 @@ export const getAllCategories = (limit, searchTerm) => async (dispatch) => {
 
 export const getAllCategoriesPage = (page, searchTerm) => async (dispatch) => {
     try {
-        const response = await useGetData(`/categories?limit=6&page=${page}&${searchTerm}`)
+        const response = await useGetData(`/categories?limit=50&page=${page}&${searchTerm}`)
 
         dispatch({
             type: GET_ALL_CATEGORIES,

@@ -1,4 +1,4 @@
-import {Button, Col, Modal, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const AdminUserCard = ({user}) => {

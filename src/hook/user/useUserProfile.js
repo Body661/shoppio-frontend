@@ -62,7 +62,7 @@ const useUserProfile = () => {
         if (!loadingUpdateProfile) {
             if (updateProfileRes && updateProfileRes.status === 200) {
                 toast('Profile updated successfully', {type: 'success'});
-                localStorage.setItem('user', JSON.stringify(updateProfileRes?.data));
+                localStorage.setItem('user', updateProfileRes?.data);
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);

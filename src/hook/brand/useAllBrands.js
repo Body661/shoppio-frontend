@@ -23,7 +23,7 @@ export const useAllBrands = () => {
     }
 
     const brands = useSelector((state) => state.brandReducer.brands);
-    const pageCount = brands?.data?.paginationRes?.pages || 0;
+    const pageCount = brands?.data?.pagination?.pages || 0;
 
     useEffect(() => {
         if (brands && brands?.status !== 200 && !loading) {

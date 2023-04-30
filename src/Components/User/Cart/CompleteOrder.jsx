@@ -9,7 +9,7 @@ const CompleteOrder = ({totalCartPrice, totalCartPriceAfterDiscount, AppliedCoup
         if (AppliedCouponName) {
             handleChangeCoupon(AppliedCouponName);
         }
-    }, [AppliedCouponName]);
+    }, [AppliedCouponName, handleChangeCoupon]);
 
     return (
         <Row className='my-1 d-flex justify-content-center p-2'>

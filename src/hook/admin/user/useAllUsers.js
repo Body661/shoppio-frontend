@@ -59,7 +59,7 @@ export const useAllUsers = () => {
         users: users?.data?.data,
         loading,
         error,
-        pageCount: users?.data?.paginationRes?.pages,
+        pageCount: users?.data?.pagination?.pages,
         handleChangePage,
         handleChooseRole,
         handleSearchByMail

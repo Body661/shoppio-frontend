@@ -1,4 +1,4 @@
-import {Button, Col, FormControl, FormText, Row} from 'react-bootstrap';
+import {Button, Col, FormControl, Row} from 'react-bootstrap';
 import useAddReview from '../../../hook/products/review/useAddReview';
 import {useParams} from 'react-router-dom';
 import {Rating} from "@mui/material";
@@ -6,7 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 const AddReview = () => {
     const {id} = useParams();
-    const {handleSubmit, handleChangeRate, formData,handleChangeReview, onSubmit} = useAddReview(id);
+    const {handleSubmit, handleChangeRate, formData, handleChangeReview} = useAddReview(id);
 
     return (
         <div className="mt-2">
