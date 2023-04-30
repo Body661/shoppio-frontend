@@ -16,7 +16,7 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                 loading && !error && !products && <Spinner animation="border" variant="primary"/>
             }
             {
-                !loading && !error && products && (products?.length > 0 ? (
+                !loading && !error && products && products?.length > 0 && (
                     <Swiper
                         modules={[Scrollbar, A11y]}
                         // navigation
@@ -47,8 +47,10 @@ const HomeProducts = ({title, btnTitle, pathText, products, loading, error}) => 
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                ) : <h4 className="notFound">No Products found</h4>)
-
+                )
+            }
+            {
+                !loading && !error && (!products || products?.length > 0) && <h4 className="notFound">No Products found</h4>
             }
             {
                 !loading && error && !products && <h4 className="error">Something went wrong</h4>

@@ -12,7 +12,7 @@ const BrandsContainer = ({brands, loading, error, isAll}) => {
             <CubeCard key={brand?._id} img={brand?.img} id={brand?._id} title={brand?.name} url="brands"/>
         ));
 
-    } else if (!loading && !error && (brands && brands?.length <= 0)) {
+    } else if (!loading && !error && (!brands || brands?.length <= 0)) {
         content = <h4 className="notFound">No brands found</h4>;
 
     } else if (!loading && error && (!brands || brands?.length <= 0)) {

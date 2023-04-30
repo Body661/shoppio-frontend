@@ -26,7 +26,7 @@ const ProductsContainer = ({
             </Col>
         ))
 
-    } else if (!loading && !error && (products && products?.length <= 0)) {
+    } else if (!loading && !error && (!products || products?.length <= 0)) {
         content = <h4 className="notFound">No products found</h4>;
 
     } else if (!loading && error && !products) {
