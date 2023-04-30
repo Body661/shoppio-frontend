@@ -35,9 +35,14 @@ const UseAddToCart = (product) => {
         if (loading === false && res) {
             if (res?.status === 200) {
                 toast('Product added to Cart successfully', {type: 'success', toastId: "addProductToCartSuccess"})
-            }else if (res?.status === 401) {
+            } else if (res?.status === 403) {
+                toast("Admins are not allowed to add products to cart", {
+                    type: 'error',
+                    toastId: 'addToCartAdmin'
+                })
+            } else if (res?.status === 401) {
                 toast("You are not logged in, please login first", {type: 'error', toastId: 'addToCartLogin'})
-            }  else if (res?.data?.error?.name === 'JsonWebTokenError') {
+            } else if (res?.data?.error?.name === 'JsonWebTokenError') {
                 toast("You are not logged in, please login first", {
                     type: 'error',
                     toastId: 'addToCartLogin',
